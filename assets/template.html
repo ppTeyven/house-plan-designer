@@ -13832,7 +13832,7 @@ window.__FURNFX = { groups: new Set(), apply: null };
                 var __rs = (E.rooms && E.rooms.regions || []).filter(function (r) { return r && r.interior; }).sort(function (a, b) { return (b.area || 0) - (a.area || 0); });
                 if (__rs.length) { __tc.position.set(__rs[0].interior.x / 1e3, 1.6, __rs[0].interior.y / 1e3); __tc.lookAt(__tc.position.x + 1, 1.4, __tc.position.z); }
               } catch (e) { }
-              try { jt.compile(pt, __tc); } catch (e) { }
+              try { if (jt.compileAsync) jt.compileAsync(pt, __tc).catch(function () { }); else jt.compile(pt, __tc); } catch (e) { }
             }
           } catch (e) { }
         },
@@ -13862,6 +13862,12 @@ window.__FURNFX = { groups: new Set(), apply: null };
     function __next() {
       try {
         if (__i >= __steps.length) return;
+        try { if ((typeof E !== "undefined" && (E.view !== "2d" || E.transitioning)) || (typeof document !== "undefined" && document.hidden)) { setTimeout(__next, 900); return; } } catch (_g) { }
+        try {
+          if (window.requestIdleCallback) window.requestIdleCallback(function () { try { __steps[__i++](); } catch (e) { } if (__i < __steps.length) __next(); }, { timeout: 2500 });
+          else setTimeout(function () { try { __steps[__i++](); } catch (e) { } if (__i < __steps.length) __next(); }, 200);
+          return;
+        } catch (_s) { }
         try { __steps[__i++](); } catch (e) { }
         try {
           if (window.requestIdleCallback) window.requestIdleCallback(function (dl) { try { var n = 1; try { n = Math.max(1, Math.min(3, Math.floor(((dl && dl.timeRemaining()) || 8) / 8))); } catch (e) { } for (var k = 0; k < n && __i < __steps.length; k++) { try { __steps[__i++](); } catch (e) { } } if (__i < __steps.length) __next(); } catch (e) { __next(); } }, { timeout: 2500 });
@@ -13869,7 +13875,7 @@ window.__FURNFX = { groups: new Set(), apply: null };
         } catch (e) { setTimeout(__next, 200); }
       } catch (e) { }
     }
-    try { setTimeout(__next, 900); } catch (e) { }
+    try { setTimeout(__next, 3500); } catch (e) { }
   } catch (e) { }
 })();
 
