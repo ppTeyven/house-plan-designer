@@ -1,0 +1,11 @@
+node_modules/
+__pycache__/
+*_analysis/
+*_check/
+*_design/
+.DS_Store
+
+assets/template.backup.html
+scripts/dev/transition-rec/
+scripts/dev/transition-rec2/
+

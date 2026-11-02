@@ -1,0 +1,79 @@
+arInterval(iv);
+    }, 1000);
+  } catch (e) { }
+})();
+
+/* ===== 鸟瞰↔漫游切换过渡: 黑场快遮→重建→淡出 (消除切换闪屏) + 天空平滑渐显 + 按钮涟漪 (事件委托, 零常驻开销) ===== */
+var __fadeEl = null;
+function __fade() {
+  if (__fadeEl) return __fadeEl;
+  var host = document.querySelector("#pane3d") || document.body;
+  __fadeEl = document.createElement("div");
+  __fadeEl.id = "modeFade";
+  host.appendChild(__fadeEl);
+  return __fadeEl;
+}
+function __walkSwitch(work) {
+  try {
+    var f = __fade();
+    f.style.transitionDuration = "120ms";
+    f.style.opacity = .95;
+    setTimeout(function () {
+      try { work(); } catch (e) { }
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          f.style.transitionDuration = "280ms";
+          f.style.opacity = 0;
+        });
+      });
+    }, 140);
+  } catch (e) {
+    try { work(); } catch (e2) { }
+  }
+}
+/* 鸟瞰→漫游: 黑屏在"落地前"就开始(飞行末尾), 落地瞬间已完成遮黑, 重建完成后快速淡出 */
+function __walkPre(flightMs) {
+  try {
+    var f = __fade();
+    setTimeout(function () {
+      f.style.transitionDuration = "150ms";
+      f.style.opacity = .95;
+    }, Math.max(0, flightMs - 180));
+  } catch (e) { }
+}
+function __walkFinish(work) {
+  try { work(); } catch (e) { }
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      var f = __fade();
+      f.style.transitionDuration = "280ms";
+      f.style.opacity = 0;
+    });
+  });
+}
+function skyDim() {
+  try {
+    for (var s of [Iu, Nu, Ou]) {
+      if (!s || !s.material) continue;
+      var m = s.material;
+      if (m.transparent !== !0) { m.transparent = !0; m.needsUpdate = !0; }
+      m.opacity = 0;
+    }
+  } catch (e) { }
+}
+function skyFade(to) {
+  try {
+    var list = [Iu, Nu, Ou].filter(function (s) { return s && s.material; });
+    if (!list.length) return;
+    var t0 = performance.now();
+    (function step() {
+      var k = Math.min(1, (performance.now() - t0) / 800);
+      var v = k * k * (3 - 2 * k);
+      for (var s of list) s.material.opacity = to === 0 ? 1 - v : v;
+      if (k < 1) requestAnimationFrame(step);
+    })();
+  } catch (e) { }
+}
+(function () {
+  try {
+    document.addEventLi

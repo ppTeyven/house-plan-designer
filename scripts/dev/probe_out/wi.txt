@@ -1,0 +1,44 @@
+--- idx 1404154 ---
+n!==Z.cur&&Zr(n),Ga(e?"cut":"one"),Te(`单独查看「${Z.floors[Z.cur].name}」· 点上方「整栋」回到整栋楼`)}let Pp=()=>{};function Gv(n){Pp=n}function Ga(n){Z.view3d=n;try{localStorage.setItem("hd-floors3d",n)}catch{}Pp(),m0&&(gs(),re.active||wi(Dn().style==="diorama"?af():uo(),900))}function Xh(n,e){let t=n;for(const i of e){const s=[];for(const o of t){const a=Math.max(o.x,i.x),r=Math.max(o.y,i.y),l=Math.min(o.x+o.w,i.x+i.w),c=Math.min(o.y+o.h,i.y+i.h);if(l<=a||c<=r){s.push(o);continue}r>o.y&&s.push({x:o.x,y:o.y,w:o.w,h:r-o.y}),c<o.y+o.h&&s.push({x:o.x,y:
+
+--- idx 1452102 ---
+new z(i/1e3,0,s/1e3),r:o/2/Math.tan(Ze.fov*je/2),p:6e-4,t:0}}function ao(n){Ze.position.copy(n.target).add(new z().setFromSpherical(new qr(n.r,n.p,n.t))),Tt.target.copy(n.target),Ze.lookAt(n.target),Tt.update()}function wi(n,e,t){const i=Ze.position.clone().sub(Tt.target),s=new qr().setFromVector3(i);let o=n.t-s.theta;for(;o>Math.PI;)o-=2*Math.PI;for(;o<-Math.PI;)o+=2*Math.PI;Bi={t0:performance.now(),dur:e,fromT:Tt.target.clone(),s0:{r:s.radius,p:s.phi,t:s.theta},to:n,dt:o,done:t},Tt.enabled=!1}const ZL=n=>n<.5?4*n*n*n:1-Math.pow(-2*n
+
+--- idx 1462803 ---
+l.area-r.area)[0];a&&(re.x=a.interior.x,re.y=a.interior.y)}}re.pitch=-.05,nI();const e=Hp(),t=Wp(),i=e.clone().add(t.clone().multiplyScalar(.01)),s=new qr().setFromVector3(t.clone().multiplyScalar(-.01));__walkPre(1300);wi({target:i,r:.01,p:s.phi,t:s.theta},1300,()=>{__walkFinish(()=>{re.active=!0,Tt.enabled=!1,C0.visible=!0;try{skyDim()}catch(e){}$e()&&gs(),Yc();try{skyFade(1)}catch(e){}})})}function Ns(n=!1){if(!re.active)return;__walkSwitch(()=>{rt.ride&&(re.z=0,re.ez=0,rt.ride=null),re.active=!1,C0.visible=!1,$e()&&gs(),sc=0,gx()}
+
+--- idx 1463256 ---
+rt.ride&&(re.z=0,re.ez=0,rt.ride=null),re.active=!1,C0.visible=!1,$e()&&gs(),sc=0,gx()});const e=Hp(),t=Wp();Tt.target.copy(e.clone().add(t.clone().multiplyScalar(.01)));const i=uo();i.t=Math.atan2(-t.x,-t.z),n?ao(uo()):wi({...i,r:i.r*.8},1200),Yc()}const rt={car:null,carDoors:[],doorK:0,ride:null,panel:null,panelSig:""},aI=1,Gu=n=>n.furniture.find(e=>e.type==="elevator");function rI(){const n=Gu(E.plan);return!n||!$e()?[]:Z.floors.map((e,t)=>t).filter(e=>{const t=Gu(Z.floors[e].plan);return!!t&&Math.hypot(t.x-n.x,t.y-n.y)<400})}funct
+
+--- idx 1886267 ---
+else{lt.on=!1,Ps.on=!1,Qc(!0),N0.classList.remove("show"),document.body.classList.remove("smart-mode"),od.classList.remove("smart");const{controls:e}=hn();e.autoRotate=!1,qd(0,0),$e()&&Ga(Z.view3d==="tile"?"tile":"all"),wi(Hv(0,0),1100),ts.particles&&(ts.particles.visible=!1),_w(!1);for(const t of H1.values())t.g.visible=!1;FB()}}function g8(){const n=N0.querySelector("#smFloors");if(!$e()){n.innerHTML="",n.style.display="none";return}n.style.display="",n.innerHTML=[...Z.floors.map((e,t)=>({f:e,i:t}))].reverse().map(({f:e,i:t})=>`<but
+
+--- idx 1887182 ---
+controls:n}=hn(),e=E.geo.bounds;let t=0,i=0;Z.floors.forEach((o,a)=>{const r=(si(a)-si(Z.cur))/1e3+3.2*(a-Z.cur);t=Math.min(t,r),i=Math.max(i,r+o.plan.height/1e3)});const s=new z((e.x+e.w/2)/1e3,(t+i)/2,(e.y+e.h/2)/1e3);wi({target:s,r:Math.max(20,Math.max(e.w/1e3,e.h/1e3,i-t)*2.3),p:.86,t:-.75},1500,()=>{lt.on&&lt.all&&(n.autoRotate=!0,n.autoRotateSpeed=.35)}),g8(),xw(),lt.sig=""}function vw(){const n=E.geo.bounds,{controls:e,camera:t}=hn(),i=t.position.clone().sub(e.target),s=Math.atan2(i.x,i.z);return{target:new z((n.x+n.w/2)/1e3,0,
+
+--- idx 1887709 ---
+n.w/2)/1e3,0,(n.y+n.h/2)/1e3),r:Math.max(14,Math.hypot(n.w,n.h)/1e3*1.45),p:.72,t:isFinite(s)?s:-.7}}function rd(n,e=!1){Qc(!0);const{controls:t}=hn();t.autoRotate=!1,lt.all=!1,$e()&&(n!==Z.cur&&Zr(n),Ga("all"),qd(0,1)),wi(vw(),e?1100:1300),g8(),xw(),lt.sig=""}function xw(){N0.querySelector("#smTabs").classList.toggle("hide",lt.all)}function x4(n,e=!1){lt.tab=n,lt.sig="";const t=N0.querySelector("#smTabs"),i=[...t.querySelectorAll("[data-tab]")],s=i.find(a=>a.dataset.tab===n);i.forEach(a=>a.classList.toggle("on",a===s));const o=t.quer
+
+--- idx 1893502 ---
+.target),s=Math.atan2(i.x,i.z),o={x:n.at.x*1e3,y:n.at.z*1e3},a=Ye(E.rooms,o)||ww(o),r=a?{x:a.bb.x+a.bb.w/2,y:a.bb.y+a.bb.h/2}:o,l=a?Math.hypot(a.bb.w,a.bb.h)/1e3:4,c=new z((r.x*.55+o.x*.45)/1e3,.4,(r.y*.55+o.y*.45)/1e3);wi({target:c,r:Math.min(11,Math.max(6.5,l*1.9)),p:.5,t:s},1300),Xi(),Cn.classList.add("show")}function Qc(n=!1){lt.card&&(lt.card=null,Cn.classList.remove("show"),!n&&lt.on&&!lt.all&&wi(vw(),1100))}const s5=(n,e,t,i)=>`<button class="${n?"sel":""}" ${e}="${t}">${i}</button>`;function Xi(){const n=lt.card;if(!n)return;l
+
+--- idx 1893685 ---
+x*.45)/1e3,.4,(r.y*.55+o.y*.45)/1e3);wi({target:c,r:Math.min(11,Math.max(6.5,l*1.9)),p:.5,t:s},1300),Xi(),Cn.classList.add("show")}function Qc(n=!1){lt.card&&(lt.card=null,Cn.classList.remove("show"),!n&&lt.on&&!lt.all&&wi(vw(),1100))}const s5=(n,e,t,i)=>`<button class="${n?"sel":""}" ${e}="${t}">${i}</button>`;function Xi(){const n=lt.card;if(!n)return;let e='<button class="x" data-act="close">×</button>';if(n.kind==="light"){const t=cd(n),i=Mw(n),s=t>0;e+=`<div class="c-h"><b>${n.name}</b><span>${s?"已开启":"已关闭"}</span><button class="
+
+--- idx 1918376 ---
+").forEach(n=>n.onclick=()=>Ua(n.dataset.view));document.querySelectorAll("#camSeg button").forEach(n=>n.onclick=()=>{!m0||Xc()||(n.dataset.cam==="fp"?Vp():Ns())});he("#camReset").onclick=()=>{!m0||Xc()||(re.active?Ns():wi(uo(),900))};he("#undoBtn").onclick=()=>dp()&&Te("已撤销");he("#redoBtn").onclick=()=>jb()&&Te("已重做");const Ew=()=>{$c(!1)||Te(R5==="full"?"保存失败：浏览器本地存储空间已满（本机双击打开的设计器共用约 5MB）。可以「导出 → 分享文件」备份方案，或在浏览器设置里清除本地文件的网站数据":"保存失败：浏览器禁用了本地存储（无痕模式或禁用了网站数据）")};he("#saveBtn").onclick=Ew;he("#zoomIn").onclick=()=>Kp(1.25);he("#zoomOu
+
+--- idx 1922884 ---
+es(); })()}); await wait(60); } }else{ const st=W2.getBoundingClientRect(); if(n==="3d"&&e==="split"){ const fit={s:0,ox:0,oy:0}; try{P1(fit,E.geo.bounds,st.width,st.height,60)}catch(_){} W2.dataset.view=n;E.view=n; try{wi(L1(fit,st.width,st.height),650)}catch(_){} await wait(700); }else if(n==="split"&&e==="3d"){ const hw=Math.max(50,st.width/2); try{P1(Se,E.geo.bounds,hw,st.height,60)}catch(_){} try{Je()}catch(_){} W2.dataset.view=n;E.view=n; try{wi(L1(Se,hw,st.height),650)}catch(_){} await wait(700); }else{ W2.dataset.view=n;E.view
+
+--- idx 1923117 ---
+width,st.height),650)}catch(_){} await wait(700); }else if(n==="split"&&e==="3d"){ const hw=Math.max(50,st.width/2); try{P1(Se,E.geo.bounds,hw,st.height,60)}catch(_){} try{Je()}catch(_){} W2.dataset.view=n;E.view=n; try{wi(L1(Se,hw,st.height),650)}catch(_){} await wait(700); }else{ W2.dataset.view=n;E.view=n; await wait(700); } } }catch(_){} stopGlue=!0; try{Gh()}catch(_){} try{_x()}catch(_){} try{Je()}catch(_){} try{Zc()}catch(_){} E.transitioning=!1; try{bt("view")}catch(_){} try{Je()}catch(_){} if(E.__pend){const p=E.__pend;E.__pen
+
+--- idx 1930377 ---
+ked?"屏幕反射：已开启（仅高画质档生效）":"屏幕反射：已关闭")}}document.querySelectorAll("#lookStyle button").forEach(n=>n.onclick=()=>{const e=Dn().style,t=n.dataset.style;e!==t&&(zu({style:t}),vc(),t==="diorama"&&e==="real"&&!re.active&&!Xc()&&wi(af(),1100))});document.querySelectorAll("#lookOpts input").forEach(n=>n.onchange=()=>{zu({[n.dataset.opt]:n.checked})});he("#lookPose").onclick=()=>{!m0||Xc()||(re.active&&Ns(!0),wi(af(),1100))};r0("commit",()=>{x8.classList.contains("open")&&vc()});zB({setView:n=>Ua(n)});he("#smartBtn").onclick=()=>rh(!0);he("#rend
+
+--- idx 1930559 ---
+rama"&&e==="real"&&!re.active&&!Xc()&&wi(af(),1100))});document.querySelectorAll("#lookOpts input").forEach(n=>n.onchange=()=>{zu({[n.dataset.opt]:n.checked})});he("#lookPose").onclick=()=>{!m0||Xc()||(re.active&&Ns(!0),wi(af(),1100))};r0("commit",()=>{x8.classList.contains("open")&&vc()});zB({setView:n=>Ua(n)});he("#smartBtn").onclick=()=>rh(!0);he("#renderBtn").onclick=async()=>{if(!m0)return;const[n,e]=he("#resIn").value.split("x").map(Number);if(he("#rendMode").value==="pt"&&!Wd()){const i=he("#ptProg"),s=i.querySelector(".bar i")
+
+--- idx 1976893 ---
+;     if (!isFinite(s1) || (Math.abs(s1 - s0) < 1e-6 && Math.abs(ox1 - ox0) < 2 && Math.abs(oy1 - oy0) < 2)) return;     if (syncCam) {       try {         var r3 = b8.getBoundingClientRect();         if (r3.width > 10) wi(L1({ s: s1, ox: ox1, oy: oy1 }, r3.width, r3.height), 400);       } catch (e) { }     }     Se.s = s0; Se.ox = ox0; Se.oy = oy0;     var t0 = performance.now(), dur = 380;     (function step() {       var k = Math.min(1, (performance.now() - t0) / dur);       var v = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) 

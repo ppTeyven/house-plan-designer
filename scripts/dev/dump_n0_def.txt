@@ -1,0 +1,8 @@
+bw=()=>{};const Oc=n=>{let e=ju.get(n);return e||(e={on:!0,set:26,mode:"cool",fan:"auto",swing:"off",cur:26.8,k:Fi(0)},ju.set(n,e)),e};function zB(n){bw=n.setView,od=document.getElementById("pane3d"),N0=document.createElement("div"),N0.className="smart-ui",od.appendChild(N0),N0.innerHTML=`
+    <div class="sm-left">
+      <div class="sm-hello" id="smHello"></div>
+      <div class="sm-date" id="smDate"></div>
+      <div class="sm-weather" id="smWeather"></div>
+      <div class="sm-count"><span class="ic">${bc.light}</span><b>灯光</b><em id="smCntL">0</em><i id="smCntLt">/0</i></div>
+      <div class="sm-count"><span class="ic">${bc.ac}</span><b>空调</b><em id="smCntA">0</em><i id="smCntAt">/0</i></div>
+      <div class="sm-count"><span class="ic">${bc.curtain}</span><b>窗帘</b><em id="smCntC">0</e

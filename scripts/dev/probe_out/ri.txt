@@ -1,0 +1,103 @@
+function __riSmooth(syncCam) {
+  try {
+    var s0 = Se.s, ox0 = Se.ox, oy0 = Se.oy;
+    ri();
+    var s1 = Se.s, ox1 = Se.ox, oy1 = Se.oy;
+    if (!isFinite(s1) || (Math.abs(s1 - s0) < 1e-6 && Math.abs(ox1 - ox0) < 2 && Math.abs(oy1 - oy0) < 2)) return;
+    if (syncCam) {
+      try {
+        var r3 = b8.getBoundingClientRect();
+        if (r3.width > 10) wi(L1({ s: s1, ox: ox1, oy: oy1 }, r3.width, r3.height), 400);
+      } catch (e) { }
+    }
+    Se.s = s0; Se.ox = ox0; Se.oy = oy0;
+    var t0 = performance.now(), dur = 380;
+    (function step() {
+      var k = Math.min(1, (performance.now() - t0) / dur);
+      var v = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      Se.s = s0 + (s1 - s0) * v;
+      Se.ox = ox0 + (ox1 - ox0) * v;
+      Se.oy = oy0 + (oy1 - oy0) * v;
+      try { Je(); } catch (e) { }
+      if (k < 1) requestAnimationFrame(step);
+    })();
+  } catch (e) { try { ri(); } catch (e2) { } }
+}
+/* 分屏: 3D 俯视相机按 2D 的缩放/位置同步, 保证两侧模型大小一致 */
+function __syncCam3d() {
+  try {
+    var r = b8.getBoundingClientRect();
+    if (r.width < 10) return;
+    ao(L1(Se, r.width, r.height));
+  } catch (e) { }
+}
+/* 分屏→2D: 等面板滑完, 再平滑推镜放大到整屏适配(原来是瞬间放大) */
+function __riToFull(){try{W2.dataset.view="2d";E.view="2d";try{Je()}catch(e){}const st=W2.getBoundingClientRect();const s0={s:Se.s,ox:Se.ox,oy:Se.oy};const s1={s:0,ox:0,oy:0};try{P1(s1,E.geo.bounds,st.width,st.height)}catch(e){}const t0=performance.now(),D=650;(function step(){const k=Math.min(1,(performance.now()-t0)/D);const v=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;Se.s=s0.s+(s1.s-s0.s)*v;Se.ox=s0.ox+(s1.ox-s0.ox)*v;Se.oy=s0.oy+(s1.oy-s0.oy)*v;try{Je()}catch(e){}if(k<1)requestAnimationFrame(step);else E.transitioning=!1})()}catch(e){try{W2.dataset.view="2d";E.view="2d";ri();Je();E.transitioning=!1}catch(e2){}}}(function () {
+  try {
+    var was = !1;
+    function watch() {
+      try {
+        if (E.transitioning) was = !0;
+        else if (was) {
+          was = !1;
+          var skip2d = !1;
+          try {
+            var rr = Y5.getBoundingClientRect();
+            skip2d = !window.__x2snap && J0 && Math.round(rr.width * tc) === J0.width && Math.round(rr.height * tc) === J0.height && Math.abs((Se.W || 0) - rr.width) < .6 && Math.abs((Se.H || 0) - rr.height) < .6;
+          } catch (e) { skip2d = !1; }
+          try { window.__x2snap = null; } catch (e) { }
+          try { Gh(); } catch (e) { }
+          try { if (!skip2d) _x(); } catch (e) { }
+          try { if (!skip2d) Je(); } catch (e) { }
+        }
+      } catch (e) { }
+      requestAnimationFrame(watch);
+    }
+    requestAnimationFrame(watch);
+  } catch (e) { }
+})();
+/* ===== 空闲时预热 3D 渲染器, 让第一次切到 3D/分屏不再现场初始化造成卡闪 ===== */
+(function () {
+  try {
+    setTimeout(function () {
+      try { if (!m0) Aw(); } catch (e) { }
+    }, 1800);
+  } catch (e) { }
+})();
+/* ===== 3D/分屏 非锁定状态下, 鼠标悬停可编辑家具: 在物体周围显示虚线包围框 ===== */
+(function () {
+  var timer = setInterval(function () {
+    try {
+      if (!O0) return;
+      clearInterval(timer);
+      __bindHover();
+    } catch (e) { clearInterval(timer); }
+  }, 400);
+  function __bindHover() {
+    try {
+      if (!O0) return;
+    var geo = new Ut();
+    var mat = new Q4({ color: 0x2f6fed, transparent: !0, opacity: .95, depthTest: !1 });
+    var lines = new Kk(geo, mat);
+    lines.visible = !1;
+    lines.renderOrder = 999;
+    lines.frustumCulled = !1;
+    pt.add(lines);
+    function dashedBox(min, max) {
+      var pos = [], dash = .05, gap = .03;
+      function edge(ax, ay, az, bx, by, bz) {
+        var dx = bx - ax, dy = by - ay, dz = bz - az;
+        var len = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (len < 1e-4) return;
+        var ux = dx / len, uy = dy / len, uz = dz / len, t = 0;
+        while (t < len) {
+          var t2 = Math.min(len, t + dash);
+          pos.push(ax + ux * t, ay + uy * t, az + uz * t, ax + ux * t2, ay + uy * t2, az + uz * t2);
+          t = t2 + gap;
+        }
+      }
+      var x0 = min.x, y0 = min.y, z0 = min.z, x1 = max.x, y1 = max.y, z1 = max.z;
+      edge(x0, y0, z0, x1, y0, z0); edge(x0, y1, z0, x1, y1, z0);
+      edge(x0, y0, z1, x1, y0, z1); edge(x0, y1, z1, x1, y1, z1);
+      edge(x0, y0, z0, x0, y1, z0); edge(x1, y0, z0, x1, y1, z0);
+      edge(x0

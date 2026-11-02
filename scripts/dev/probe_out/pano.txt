@@ -1,0 +1,121 @@
+1 : 0;
+            u.envOnly.value = walking ? 1 : 0;
+            u.camW.value.copy(Ze.matrixWorld);
+            if (ready) {
+              u.tE0.value = rtF[0].texture; u.tE1.value = rtF[1].texture; u.tE2.value = rtF[2].texture;
+              u.tE3.value = rtF[3].texture; u.tE4.value = rtF[4].texture; u.tE5.value = rtF[5].texture;
+            }
+          }
+        }
+      } catch (e) { }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  } catch (e) { }
+})();
+
+/* ===== 定格实景漫游(CSS 全景立方体) ===== */
+(function () {
+  try {
+    var btn = null;
+    function findAnchorBtn() {
+      var bs = document.querySelectorAll("button");
+      for (var i = 0; i < bs.length; i++) {
+        var t = (bs[i].textContent || "").trim();
+        if (t === "720° 全景") return bs[i];
+      }
+      return null;
+    }
+    var ST = { open: false, nodes: null, adj: null, cur: null, yaw: 0, pitch: 0, wrap: null, cubeA: null, cubeB: null, showA: true, tex: {} };
+    var FACES = [{ R: 0, key: "px" }, { R: 90, key: "ny" }, { R: 180, key: "nx" }, { R: 270, key: "py" }];
+
+    function el(tag, css) { var d = document.createElement(tag); if (css) d.style.cssText = css; return d; }
+
+    function ensureWrap() {
+      if (ST.wrap) return;
+      var wrap = el("div", "position:fixed;inset:0;z-index:120;background:#0a0c0f;display:none;overflow:hidden;cursor:grab");
+      ST.wrap = wrap;
+      ST.sceneA = el("div", "position:absolute;inset:0;transform-style:preserve-3d;transition:opacity .28s linear");
+      ST.sceneB = el("div", "position:absolute;inset:0;transform-style:preserve-3d;transition:opacity .28s linear;opacity:0");
+      wrap.appendChild(ST.sceneA); wrap.appendChild(ST.sceneB);
+      ST.cubes = {};
+      ST.layers = [{ scene: ST.sceneA, faces: null }, { scene: ST.sceneB, faces: null }];
+      var hud = el("div", "position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:121;padding:8px 16px;border-radius:22px;background:rgba(16,20,26,.66);color:#dfe7f2;font:12px/1.5 'PingFang SC','Microsoft YaHei',sans-serif;pointer-events:none;white-space:nowrap");
+      hud.textContent = "单击画面锁定鼠标环视 · W/A/S/D 在节点间移动 · Esc 退出";
+      wrap.appendChild(hud);
+      var close = el("div", "position:fixed;right:18px;top:16px;z-index:121;width:34px;height:34px;border-radius:50%;background:rgba(16,20,26,.66);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px");
+      close.textContent = "✕";
+      close.addEventListener("click", function (e) { e.stopPropagation(); closePano(); });
+      wrap.appendChild(close);
+      var toast = el("div", "position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:121;padding:6px 14px;border-radius:16px;background:rgba(16,20,26,.66);color:#fff;font:12px/1.5 'PingFang SC','Microsoft YaHei',sans-serif;display:none;pointer-events:none");
+      ST.toast = toast; wrap.appendChild(toast);
+      wrap.addEventListener("pointerdown", function (n) {
+        if (n.target === ST.wrap || (n.target.parentNode && n.target.parentNode.getAttribute && n.target.parentNode.getAttribute("data-xrface"))) {
+          if (document.pointerLockElement !== wrap) { try { wrap.requestPointerLock(); } catch (e) { } }
+        }
+      });
+      wrap.addEventListener("pointermove", function (n) {
+        if (document.pointerLockElement !== wrap) return;
+        var mx = n.movementX || 0, my = n.movementY || 0;
+        if (Math.abs(mx) > 420 || Math.abs(my) > 420) return;
+        mx = Math.max(-120, Math.min(120, mx));
+        my = Math.max(-120, Math.min(120, my));
+        ST.yaw += mx * 0.0026;
+        ST.pitch += my * 0.0026;
+        ST.pitch = Math.max(-0.72, Math.min(0.72, ST.pitch));
+        applyPose();
+      });
+      document.body.appendChild(wrap);
+    }
+
+    function layout() {
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var p = Math.max(vw, vh) / 1.5;
+      ST.wrap.style.perspective = p + "px";
+      var size = 2 * p;
+      for (var li = 0; li < 2; li++) {
+        var sc = ST.layers[li].scene;
+        sc.style.position = "absolute";
+        sc.style.left = "50%"; sc.style.top = "50%";
+        sc.style.width = "0"; sc.style.height = "0";
+        var faces = sc.querySelectorAll("[data-xrface]");
+        for (var f = 0; f < faces.length; f++) {
+          var d = faces[f];
+          d.style.width = size + "px"; d.style.height = size + "px";
+          d.style.left = (-size / 2) + "px"; d.style.top = (-size / 2) + "px";
+          d.style.transform = "rotateY(" + d.getAttribute("data-rot") + "deg) translateZ(" + (-p) + "px)";
+        }
+      }
+    }
+
+    function makeCube(scene) {
+      for (var i = 0; i < FACES.length; i++) {
+        var f = el("div", "position:absolute;background-size:cover;background-position:center");
+        f.setAttribute("data-xrface", FACES[i].key);
+        f.setAttribute("data-rot", FACES[i].R);
+        scene.appendChild(f);
+      }
+    }
+
+    function applyPose() {
+      var yawDeg = ST.yaw * 180 / Math.PI, pitchDeg = ST.pitch * 180 / Math.PI;
+      var tr = "rotateX(" + pitchDeg.toFixed(2) + "deg) rotateY(" + yawDeg.toFixed(2) + "deg)";
+      ST.sceneA.style.transform = tr;
+      ST.sceneB.style.transform = tr;
+    }
+
+    function texReady(i) {
+      return ST.tex[i] && ST.tex[i].done;
+    }
+
+    function loadNode(i, cb) {
+      if (ST.tex[i]) { if (ST.tex[i].done && cb) cb(); else if (cb) ST.tex[i].wait.push(cb); return; }
+      var rec = { done: false, wait: cb ? [cb] : [] };
+      ST.tex[i] = rec;
+      var cnt = 0;
+      FACES.forEach(function (face) {
+        var img = new Image();
+        img.onload = img.onerror = function () {
+          cnt++;
+          if (cnt === FACES.length) {
+            rec.done 

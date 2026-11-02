@@ -1,0 +1,91 @@
+async function Ua(n){/*__viewTransV2*/
+if(n===E.view)return;
+if(E.transitioning){E.__pend=n;return}
+const e=E.view;
+try{document.querySelectorAll("#viewSeg button").forEach(t=>t.classList.toggle("on",t.dataset.view===n))}catch(_){}
+if(n!=="2d")try{Aw()}catch(_){}
+E.transitioning=!0;
+const DUR=680,T0=performance.now();
+let stopGlue=!1;
+(function glue(){
+if(stopGlue)return;
+try{_x()}catch(_){}
+try{Gh()}catch(_){}
+if(performance.now()-T0<DUR+150)requestAnimationFrame(glue);
+})();
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const ease=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+try{
+if(e==="2d"){
+try{Ns(!0)}catch(_){}
+if(n==="3d"){
+const t=M4.getBoundingClientRect();
+try{ao(L1(Se,t.width,t.height))}catch(_){}
+try{Zc()}catch(_){}
+try{Zc()}catch(_){}
+W2.dataset.view=n;E.view=n;
+await wait(700);
+}else{
+const st=W2.getBoundingClientRect(),hw=st.width/2;
+const fit={s:0,ox:0,oy:0};
+try{P1(fit,E.geo.bounds,hw,st.height,60)}catch(_){}
+try{ao(L1(fit,hw,st.height))}catch(_){}
+try{P1(Se,E.geo.bounds,hw,st.height,60)}catch(_){}
+try{Je()}catch(_){}
+try{Zc()}catch(_){}
+W2.dataset.view=n;E.view=n;
+await wait(700);
+}
+}else if(n==="2d"){
+try{Ns(!0)}catch(_){}
+if(e==="3d"){
+const st=W2.getBoundingClientRect();
+try{P1(Se,E.geo.bounds,st.width,st.height)}catch(_){}
+try{Je()}catch(_){}
+W2.dataset.view=n;E.view=n;
+await wait(520);
+}else{
+const st=W2.getBoundingClientRect();
+const s0={s:Se.s,ox:Se.ox,oy:Se.oy};
+const s1={s:0,ox:0,oy:0};
+try{P1(s1,E.geo.bounds,st.width,st.height)}catch(_){}
+W2.dataset.view=n;E.view=n;
+const t0=performance.now(),D=650;
+await new Promise(res=>{(function step(){
+const k=Math.min(1,(performance.now()-t0)/D),v=ease(k);
+Se.s=s0.s+(s1.s-s0.s)*v;Se.ox=s0.ox+(s1.ox-s0.ox)*v;Se.oy=s0.oy+(s1.oy-s0.oy)*v;
+try{Je()}catch(_){}
+if(k<1)requestAnimationFrame(step);else res();
+})()});
+await wait(60);
+}
+}else{
+const st=W2.getBoundingClientRect();
+if(n==="3d"&&e==="split"){
+const fit={s:0,ox:0,oy:0};
+try{P1(fit,E.geo.bounds,st.width,st.height,60)}catch(_){}
+W2.dataset.view=n;E.view=n;
+try{wi(L1(fit,st.width,st.height),650)}catch(_){}
+await wait(700);
+}else if(n==="split"&&e==="3d"){
+const hw=Math.max(50,st.width/2);
+try{P1(Se,E.geo.bounds,hw,st.height,60)}catch(_){}
+try{Je()}catch(_){}
+W2.dataset.view=n;E.view=n;
+try{wi(L1(Se,hw,st.height),650)}catch(_){}
+await wait(700);
+}else{
+W2.dataset.view=n;E.view=n;
+await wait(700);
+}
+}
+}catch(_){}
+stopGlue=!0;
+try{Gh()}catch(_){}
+try{_x()}catch(_){}
+try{Je()}catch(_){}
+try{Zc()}catch(_){}
+E.transitioning=!1;
+try{bt("view")}catch(_){}
+try{Je()}catch(_){}
+if(E.__pend){const p=E.__pend;E.__pend=null;if(p!==E.view)Ua(p)}}

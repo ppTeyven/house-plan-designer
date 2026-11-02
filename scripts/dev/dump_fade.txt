@@ -1,0 +1,33 @@
+function __fade() {
+  if (__fadeEl) return __fadeEl;
+  var host = document.querySelector("#pane3d") || document.body;
+  __fadeEl = document.createElement("div");
+  __fadeEl.id = "modeFade";
+  host.appendChild(__fadeEl);
+  return __fadeEl;
+}
+function __walkSwitch(work) {
+  try {
+    var f = __fade();
+    f.style.transitionDuration = "120ms";
+    f.style.opacity = .95;
+    setTimeout(function () {
+      try { work(); } catch (e) { }
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          f.style.transitionDuration = "280ms";
+          f.style.opacity = 0;
+        });
+      });
+    }, 140);
+  } catch (e) {
+    try { work(); } catch (e2) { }
+  }
+}
+/* 鸟瞰→漫游: 黑屏在"落地前"就开始(飞行末尾), 落地瞬间已完成遮黑, 重建完成后快速淡出 */
+function __walkPre(flightMs) {
+  try {
+    var f = __fade();
+    setTimeout(function () {
+      f.style.transitionDuration = "150ms";
+      f.style.opacity

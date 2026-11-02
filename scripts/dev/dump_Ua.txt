@@ -1,0 +1,90 @@
+async function Ua(n){/*__viewTransV2*/
+if(n===E.view)return;
+if(E.transitioning){E.__pend=n;return}
+const e=E.view;
+try{document.querySelectorAll("#viewSeg button").forEach(t=>t.classList.toggle("on",t.dataset.view===n))}catch(_){}
+if(n!=="2d")try{Aw()}catch(_){}
+E.transitioning=!0;
+const DUR=680,T0=performance.now();
+let stopGlue=!1;
+(function glue(){
+if(stopGlue)return;
+try{_x()}catch(_){}
+try{Gh()}catch(_){}
+if(performance.now()-T0<DUR+150)requestAnimationFrame(glue);
+})();
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const ease=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+try{
+if(e==="2d"){
+try{Ns(!0)}catch(_){}
+if(n==="3d"){
+const t=M4.getBoundingClientRect();
+try{ao(L1(Se,t.width,t.height))}catch(_){}
+try{Zc()}catch(_){}
+try{Zc()}catch(_){}
+W2.dataset.view=n;E.view=n;
+await wait(700);
+}else{
+const st=W2.getBoundingClientRect(),hw=st.width/2;
+const fit={s:0,ox:0,oy:0};
+try{P1(fit,E.geo.bounds,hw,st.height,60)}catch(_){}
+try{ao(L1(fit,hw,st.height))}catch(_){}
+try{P1(Se,E.geo.bounds,hw,st.height,60)}catch(_){}
+try{Je()}catch(_){}
+try{Zc()}catch(_){}
+W2.dataset.view=n;E.view=n;
+await wait(700);
+}
+}else if(n==="2d"){
+try{Ns(!0)}catch(_){}
+if(e==="3d"){
+const st=W2.getBoundingClientRect();
+try{P1(Se,E.geo.bounds,st.width,st.height)}catch(_){}
+try{Je()}catch(_){}
+W2.dataset.view=n;E.view=n;
+await wait(520);
+}else{
+const st=W2.getBoundingClientRect();
+const s0={s:Se.s,ox:Se.ox,oy:Se.oy};
+const s1={s:0,ox:0,oy:0};
+try{P1(s1,E.geo.bounds,st.width,st.height)}catch(_){}
+W2.dataset.view=n;E.view=n;
+const t0=performance.now(),D=650;
+await new Promise(res=>{(function step(){
+const k=Math.min(1,(performance.now()-t0)/D),v=ease(k);
+Se.s=s0.s+(s1.s-s0.s)*v;Se.ox=s0.ox+(s1.ox-s0.ox)*v;Se.oy=s0.oy+(s1.oy-s0.oy)*v;
+try{Je()}catch(_){}
+if(k<1)requestAnimationFrame(step);else res();
+})()});
+await wait(60);
+}
+}else{try{Ns(!0)}catch(_){}const st=W2.getBoundingClientRect();if(n==="3d"&&e==="split"){
+const fit={s:0,ox:0,oy:0};
+try{P1(fit,E.geo.bounds,st.width,st.height,60)}catch(_){}
+W2.dataset.view=n;E.view=n;
+try{wi(L1(fit,st.width,st.height),650)}catch(_){}
+await wait(700);
+}else if(n==="split"&&e==="3d"){
+const hw=Math.max(50,st.width/2);
+try{P1(Se,E.geo.bounds,hw,st.height,60)}catch(_){}
+try{Je()}catch(_){}
+W2.dataset.view=n;E.view=n;
+try{wi(L1(Se,hw,st.height),650)}catch(_){}
+await wait(700);
+}else{
+W2.dataset.view=n;E.view=n;
+await wait(700);
+}
+}
+}catch(_){}
+stopGlue=!0;try{Bi=null;Tt.enabled=!re.active;try{Tt.update()}catch(_){}}catch(_){}try{if(E.view==="split"){var p2=M4.getBoundingClientRect(),p3=b8.getBoundingClientRect();if(p2.width>10){try{P1(Se,E.geo.bounds,p2.width,p2.height,60)}catch(_){}Se.W=p2.width;Se.H=p2.height;try{Je()}catch(_){}}if(p3.width>10){try{ao(L1(Se,p3.width,p3.height))}catch(_){}}try{Ir()}catch(_){}try{Zc()}catch(_){}}}catch(_){}
+try{Gh()}catch(_){}
+try{_x()}catch(_){}
+try{Je()}catch(_){}
+try{Zc()}catch(_){}
+try{Ir()}catch(_){}
+E.transitioning=!1;
+try{bt("view")}catch(_){}
+try{Je()}catch(_){}
+if(E.__pend){const p=E.__pend;E.__pend=null;if(p!==E.view)Ua(p)}}window.addEventListener("keydown",n=>{var o;const e=(o=document.activeElement)==null?void 0:o.tagName;if(e==="INPUT"||e==="SELECT"||e==="TEXTAREA"||document.querySelector(".modal"))return;const t=n.key.toLowerCase(),i=n.ctrlKey||n.metaKey;if(re.active&&E.view!=="2d"){if(["KeyW","KeyA","KeyS","KeyD","KeyQ","KeyE","ArrowUp","ArrowDown","ArrowLeft","ArrowRight","ShiftLeft","ShiftRight"].includes(n.code)){re.keys[n.code]=!0,n.preventDefault();return}if(n.key==="Escape"){Ns();return}if(n.code==="KeyR"||n.code==="KeyF"){n.preventDefault(),Ko({eyeH:sn.eyeH+(n.code==="KeyR"?100:-100)});return}if(n.code==="Space"||n.code==="Enter"){if(n.preventDefault(),n.repeat)return;const a=zn.on?h8():null;if(a){i3(a);return}const r=he("#c3d").getBoundingClientRect();cx(r.left+r.width/2,r.top+r.height/2)||Te("准星对着的地方没有能操作的东西（开关、灯、电视、窗帘、门）");return}if(n.code==="KeyT"){zn.on=!zn.on,f8(),l3(),Te(zn.on?"已显示点位标记（开关 / 插座 / 小物件）":"已隐藏点位标记");return}}if(!i&&tN(n)){n.preventDefault();return}if(i&&t==="z"&&!n.shiftKey){n.preventDefault(),dp();return}if(i&&(t==="y"||t==="z"&&n.shiftKey)){n.preventDefault(),jb();return}if(i&&t==="s"){n.preventDefault(),Ew();return}if(i&&t==="d"){n.preventDefault();const a=E.sel.kind==="furn"&&E.plan.furniture.find(r=>r.id===E.sel.id);if(a){const r={...a,id:Math.random().toString(36).slice(2,10),x:a.x+300,y:a.y+300};E.plan.furniture.push(r),Mt("furn",r.id),ke()}return}if(i)return;if(n.code==="Space"){e8(!0),n.preventDefault();return}if($e()&&(n.key==="PageUp"||n.key==="PageDown")){n.preventDefault(),Nc(Z.cur+(n.key==="PageUp"?1:-1));return}const s={v:"select",w:"wall",b:"rect",m:"measure",d:"demolish",e:"elec",c:"comment"};if(s[t]){$0(E.tool===s[t]&&t!=="v"?"select":s[t]);return}if(t==="f")ri();else if(t==="1")Ua("2d");else if(t==="2")Ua("split");else if(t==="3")Ua("3d");else if(n.code.startsWith("F")&&/^F[5-9]$/.test(n.key))n.preventDefault(),Da(["layout","mep","ceiling","floor","demolition"][+n.key.slice(1)-5]);else if(t==="r"){const a=E.sel.kind==="furn"?E.plan.furniture.find(r=>r.id===E.sel.id):E.sel.kind==="struct"?E.plan.structs.find(r=>r.id===E.sel.id):null;a&&(a.rot=(a.rot+(n.shiftKey?270:90))%360,ke())}else if(n.key==="Delete"||n.key==="Backspace")gr();else if(n.key==="Escape")E.tool!=="select"?$0("select"):Mt(null);else if(n.key.startsWith("Arrow")){const a=n.shiftKey?100:10,r={ArrowLeft:[-a,0],ArrowRight:[a,0],ArrowUp:[0,-a],ArrowDown:[0,a]}[n.key];iN(r[0],r[1])&&n.preventDefault()}});window.addEventListener("keyup",n=>{re.keys[n.code]=!1,n.code==="Space"&&e8(!1)});window.addEventListener("blur",()=>{re.keys={},e8(!1)});window.addEventListener("beforeunload",()=>{E.saved||$c(!0)});_x();ri();Se.base=Se.s;gc();n8();el();is();v8();E.loadedFromLocal&&setTimeout(()=>Te("已载入上次保存的方案"),300);E.geo.active.length||setTimeout(()=>Te("空白户型：导入户型图描图，或直接用“画墙”开始"),400);const r5=location.hash.slice(1);r5==="3d"||r5==="split"?setTimeout(()=>Ua(r5),300):setTimeout(()=>{if(!m0)try{Aw()}catch(n){console.error(n)}},800);he("#schemeBtn").onclick=()=>zN();const kw=he("#lightPop");he("#lightBtn").onclick=()=>kw.classList.toggle("open");const V2=n=>`${Math.floor(n)%24}:${String(Math.round(n%1*60)%60).padStart(2,"0")}`,cy=n=>["北","东北","东","东南","南","西南","西","西北"][Math.round((n%360+360)%360/45)%8];he("#cityIn").innerHTML=up.map(n=>`<option value="${n.name}">${n.name}（北纬 ${n.lat}°）</option>`).join("");function Rw(){const n=rf(),e=n.s;he("#cityIn").value=e.city,he("#monthIn").value=String(e.month),he("#monthOut").textContent=e.month+" 月",he("#timeIn").value=String(qn.time),he("#timeOut").textContent=V2(qn.time),he("#northIn").value=String(E.plan.north||0),he("#northOut").textContent=(E.plan.north||0)+"°";let t=NaN,i=NaN;for(let s=0;s<24;s+=.05){const o=Pc(e.lat,e.month,s).el;isNaN(t)&&o>0&&(t=s),!isNaN(t)&&isNaN(i)&&o<0&&s>t&&(i=s)}he("#sunInfo").innerHTML=n.night?`夜晚 · 月亮在<b>${cy(n.moon.az)}</b>方 · 日出 <b>${V2(t)}</b>`:`太阳在<b>${cy(n.sp.az)}</b>方，高度 <b>${Math.round(n.sp.el)}°</b> · 日出 <b>${V2(t)}</b> · 日落 <b>${V2(i)}</b>`}const Pw=n=>{E.plan.site={...Yd(),...n},ja()};he("#cityIn").onchange=n=>{const e=up.find(t=>t.name===n.target.value);Pw({city:e.name,lat:e.lat}),ke()};he("#monthIn").oninput=n=>Pw({month:+n.target.value});he("#monthIn").onchange=()=>ke();he("#timeIn").oninput=n=>{ix(),qn.time=+n.target.value,ja()};he("#lampIn").onchange=n=>{qn.lightsOn=n.target.checked,ja()};he("#northIn").oninput=n=>{E.plan.north=+n.target.value,ja(),Je()};he("#northIn").onchange=()=>ke();he("#sunDemo").onclick=()=>{m0&&(nx(),Te("日照演
