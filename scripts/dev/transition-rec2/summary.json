@@ -1,9 +1,0 @@
-{
- "frames": 1155,
- "seconds": 20.6,
- "fps": 56,
- "errors": [
-  "console: Failed to load resource: the server responded with a status of 404 (File not found)",
-  "console: JSHandle@error"
- ]
-}
