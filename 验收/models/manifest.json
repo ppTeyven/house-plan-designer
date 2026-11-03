@@ -1,0 +1,457 @@
+{
+ "generated": "2026-11-03T11:16:16",
+ "items": [
+  {
+   "key": "sofa",
+   "name": "沙发",
+   "cat": "sofa",
+   "file": "sofa.glb",
+   "tris": 359756,
+   "verts": 430720,
+   "materials": [
+    "U_brass",
+    "U_dark",
+    "U_fabric",
+    "U_thread",
+    "U_upholstery",
+    "U_upholsterydk",
+    "U_wood",
+    "accent_sage",
+    "accent_terracotta"
+   ],
+   "status": "ok",
+   "checks": [
+    {
+     "level": "ok",
+     "text": "宽度在现实区间",
+     "value": "2240mm / 1800~2600"
+    },
+    {
+     "level": "ok",
+     "text": "深度在现实区间",
+     "value": "900mm / 850~1100"
+    },
+    {
+     "level": "ok",
+     "text": "高度在现实区间",
+     "value": "874mm / 650~950"
+    },
+    {
+     "level": "ok",
+     "text": "三角面达到细分阈值",
+     "value": "359,756 / ≥60,000"
+    },
+    {
+     "level": "ok",
+     "text": "材质分区数",
+     "value": "9 个 / ≥3"
+    },
+    {
+     "level": "ok",
+     "text": "U_<role> 规范材质",
+     "value": "7 个主题材质"
+    },
+    {
+     "level": "ok",
+     "text": "落地贴合(底面 z=0)",
+     "value": "z=-0.000"
+    }
+   ],
+   "ref": "refs/sofa_william_spec.png",
+   "refTitle": "Zanotta William 官方图纸",
+   "refNote": "Zanotta 官方 2D 规格图（William 1330.pdf）。设计：Damian Williamson，2010。1330/302 三人位 L224 × W90 × H87 cm；座高 43 cm。官方结构语言：薄层软包框架 + 铝合金脚 + 鹅绒坐靠包。本模型实测 2240 × 900 × 874.5 mm，坐垫厚 146 mm。来源：zanotta.com/ContentsFiles/William 1330.pdf（2026-11-03 查证）",
+   "bytes": 16943680
+  },
+  {
+   "key": "bed",
+   "name": "双人床",
+   "cat": "bed18",
+   "file": "bed.glb",
+   "tris": 296992,
+   "verts": 153542,
+   "materials": [
+    "U_brass",
+    "U_dark",
+    "U_fabric",
+    "U_thread",
+    "U_upholstery",
+    "U_upholsterydk"
+   ],
+   "status": "ok",
+   "checks": [
+    {
+     "level": "ok",
+     "text": "宽度在现实区间",
+     "value": "1812mm / 1400~2000"
+    },
+    {
+     "level": "ok",
+     "text": "深度在现实区间",
+     "value": "2016mm / 1900~2300"
+    },
+    {
+     "level": "ok",
+     "text": "高度在现实区间",
+     "value": "1120mm / 900~1400"
+    },
+    {
+     "level": "ok",
+     "text": "三角面达到细分阈值",
+     "value": "296,992 / ≥60,000"
+    },
+    {
+     "level": "ok",
+     "text": "材质分区数",
+     "value": "6 个 / ≥3"
+    },
+    {
+     "level": "ok",
+     "text": "U_<role> 规范材质",
+     "value": "6 个主题材质"
+    },
+    {
+     "level": "ok",
+     "text": "落地贴合(底面 z=0)",
+     "value": "z=-0.010"
+    }
+   ],
+   "ref": "refs/bed_porro_iro_spec.png",
+   "refTitle": "Porro Iro 官方技术图纸",
+   "refNote": "Porro 官方 Iro 床技术图纸（设计 GamFratesi 2024）。W180 × D210 版本：床体总宽 1970、总深 2430，床网净宽 1810 / 净深 2110（适配 1800×2000 床垫）。结构语言：实木车削框架 + 大幅软包床头靠垫。本模型实测 1812 × 2016 × 1120 mm。来源：porro.com（2026-11-03 查证）",
+   "bytes": 6982072
+  },
+  {
+   "key": "chair",
+   "name": "餐椅",
+   "cat": "chair",
+   "file": "chair.glb",
+   "tris": 42572,
+   "verts": 22852,
+   "materials": [
+    "U_dark",
+    "U_metal",
+    "U_thread",
+    "U_upholstery",
+    "U_wood"
+   ],
+   "status": "ok",
+   "checks": [
+    {
+     "level": "ok",
+     "text": "宽度在现实区间",
+     "value": "442mm / 400~560"
+    },
+    {
+     "level": "ok",
+     "text": "深度在现实区间",
+     "value": "563mm / 400~600"
+    },
+    {
+     "level": "ok",
+     "text": "高度在现实区间",
+     "value": "881mm / 780~1050"
+    },
+    {
+     "level": "ok",
+     "text": "三角面达到细分阈值",
+     "value": "42,572 / ≥15,000"
+    },
+    {
+     "level": "ok",
+     "text": "材质分区数",
+     "value": "5 个 / ≥3"
+    },
+    {
+     "level": "ok",
+     "text": "U_<role> 规范材质",
+     "value": "5 个主题材质"
+    },
+    {
+     "level": "ok",
+     "text": "落地贴合(底面 z=0)",
+     "value": "z=-0.002"
+    }
+   ],
+   "ref": "refs/chair_ch24_spec.png",
+   "refTitle": "Carl Hansen CH24 官方规格书",
+   "refNote": "Carl Hansen & Søn 官方 CH24 Wishbone Chair 规格书（Hans J. Wegner，1950）。椅 W55 × D51 × H76 cm，坐垫 W49 × D39 × H3 cm。结构语言：蒸汽弯曲橡木 Y 形靠背 + 纸绳编织座面。本模型实测 442 × 563 × 881 mm。来源：carlhansen.com（2026-11-03 查证）",
+   "bytes": 1057268
+  },
+  {
+   "key": "diningTable",
+   "name": "餐桌",
+   "cat": "diningTable",
+   "file": "diningTable.glb",
+   "tris": 17392,
+   "verts": 10752,
+   "materials": [
+    "U_brass",
+    "U_metal",
+    "U_wood",
+    "U_wooddk"
+   ],
+   "status": "ok",
+   "checks": [
+    {
+     "level": "ok",
+     "text": "宽度在现实区间",
+     "value": "1800mm / 1100~2200"
+    },
+    {
+     "level": "ok",
+     "text": "深度在现实区间",
+     "value": "900mm / 700~1000"
+    },
+    {
+     "level": "ok",
+     "text": "高度在现实区间",
+     "value": "730mm / 700~800"
+    },
+    {
+     "level": "ok",
+     "text": "三角面达到细分阈值",
+     "value": "17,392 / ≥12,000"
+    },
+    {
+     "level": "ok",
+     "text": "材质分区数",
+     "value": "4 个 / ≥3"
+    },
+    {
+     "level": "ok",
+     "text": "U_<role> 规范材质",
+     "value": "4 个主题材质"
+    },
+    {
+     "level": "ok",
+     "text": "落地贴合(底面 z=0)",
+     "value": "z=0.000"
+    }
+   ],
+   "ref": "refs/diningTable_benson_spec.png",
+   "refTitle": "Didier Benson 官方规格表",
+   "refNote": "Didier Benson Tables Collection 官方规格表（设计 Ross Didier）。BN-TB.180x90 = 1800 W × 900 D × 730 H mm，美国白橡木/胡桃木可选，嵌板横撑 + 外角齐平锥形腿。本模型实测 1800 × 900 × 730 mm。来源：Didier Benson Spec Sheet（2026-11-03 查证）",
+   "bytes": 459644
+  },
+  {
+   "key": "coffeeTable",
+   "name": "茶几",
+   "cat": "coffeeTable",
+   "file": "coffeeTable.glb",
+   "tris": 62800,
+   "verts": 32208,
+   "materials": [
+    "U_brass",
+    "U_wood",
+    "U_wooddk"
+   ],
+   "status": "ok",
+   "checks": [
+    {
+     "level": "ok",
+     "text": "宽度在现实区间",
+     "value": "1200mm / 800~1400"
+    },
+    {
+     "level": "ok",
+     "text": "深度在现实区间",
+     "value": "600mm / 400~700"
+    },
+    {
+     "level": "ok",
+     "text": "高度在现实区间",
+     "value": "382mm / 330~480"
+    },
+    {
+     "level": "ok",
+     "text": "三角面达到细分阈值",
+     "value": "62,800 / ≥15,000"
+    },
+    {
+     "level": "ok",
+     "text": "材质分区数",
+     "value": "3 个 / ≥3"
+    },
+    {
+     "level": "ok",
+     "text": "U_<role> 规范材质",
+     "value": "3 个主题材质"
+    },
+    {
+     "level": "ok",
+     "text": "落地贴合(底面 z=0)",
+     "value": "z=-0.000"
+    }
+   ],
+   "ref": "refs/coffeeTable_mo_spec.png",
+   "refTitle": "MO Table 官方技术表",
+   "refNote": "MO TABLE 系列官方技术表（设计 Shinsaku Miyamoto，2016）。胡桃木台面 + 橡木腿，油饰/哑光聚氨酯多种饰面，圆形台面配圆润桌腿。本模型实测 1200 × 600 × 382 mm。来源：galerie46.com MO TABLE 技术表（2026-11-03 查证）",
+   "bytes": 1415144
+  },
+  {
+   "key": "tvCabinet",
+   "name": "电视柜",
+   "cat": "tvCabinet",
+   "file": "tvCabinet.glb",
+   "tris": 49576,
+   "verts": 25630,
+   "materials": [
+    "U_metal",
+    "U_wood",
+    "U_wooddk"
+   ],
+   "status": "ok",
+   "checks": [
+    {
+     "level": "ok",
+     "text": "宽度在现实区间",
+     "value": "1820mm / 1200~2200"
+    },
+    {
+     "level": "ok",
+     "text": "深度在现实区间",
+     "value": "456mm / 350~500"
+    },
+    {
+     "level": "ok",
+     "text": "高度在现实区间",
+     "value": "500mm / 350~650"
+    },
+    {
+     "level": "ok",
+     "text": "三角面达到细分阈值",
+     "value": "49,576 / ≥12,000"
+    },
+    {
+     "level": "ok",
+     "text": "材质分区数",
+     "value": "3 个 / ≥3"
+    },
+    {
+     "level": "ok",
+     "text": "U_<role> 规范材质",
+     "value": "3 个主题材质"
+    },
+    {
+     "level": "ok",
+     "text": "落地贴合(底面 z=0)",
+     "value": "z=-0.000"
+    }
+   ],
+   "ref": "refs/tvCabinet_poliform_technical.png",
+   "refTitle": "Poliform 官方技术说明",
+   "refNote": "Poliform 官方技术说明表。夜柜/斗柜结构：木质饰面板材 + 哑光聚氨酯台面 + 烤漆金属脚，抽屉为三聚氰胺板。本模型实测 1820 × 456 × 500 mm，胡桃木配色。来源：poliform.store 官方 Technical Sheet（2026-11-03 查证）",
+   "bytes": 1127812
+  },
+  {
+   "key": "wardrobe",
+   "name": "衣柜",
+   "cat": "wardrobe",
+   "file": "wardrobe.glb",
+   "tris": 49824,
+   "verts": 25889,
+   "materials": [
+    "U_metal",
+    "U_wood",
+    "U_wooddk"
+   ],
+   "status": "ok",
+   "checks": [
+    {
+     "level": "ok",
+     "text": "宽度在现实区间",
+     "value": "1630mm / 1000~2400"
+    },
+    {
+     "level": "ok",
+     "text": "深度在现实区间",
+     "value": "643mm / 550~700"
+    },
+    {
+     "level": "ok",
+     "text": "高度在现实区间",
+     "value": "2200mm / 1800~2400"
+    },
+    {
+     "level": "ok",
+     "text": "三角面达到细分阈值",
+     "value": "49,824 / ≥15,000"
+    },
+    {
+     "level": "ok",
+     "text": "材质分区数",
+     "value": "3 个 / ≥3"
+    },
+    {
+     "level": "ok",
+     "text": "U_<role> 规范材质",
+     "value": "3 个主题材质"
+    },
+    {
+     "level": "ok",
+     "text": "落地贴合(底面 z=0)",
+     "value": "z=-0.000"
+    }
+   ],
+   "ref": "refs/wardrobe_bosco_spec.png",
+   "refTitle": "Bosco 三门衣柜官方规格书",
+   "refNote": "Bosco 3 Door Wardrobe 官方技术规格书（含技术图纸）。W160 × D61 × H198 cm，实橡木 + 橡木饰面，哑光清漆，底部 3 抽屉 + 双挂衣区，顶部弧形指接细节。本模型实测 1630 × 643 × 2200 mm。来源：Carter's Furniture 官方 PDF（2026-11-03 查证）",
+   "bytes": 1137728
+  },
+  {
+   "key": "nightstand",
+   "name": "床头柜",
+   "cat": "nightstand",
+   "file": "nightstand.glb",
+   "tris": 37172,
+   "verts": 19285,
+   "materials": [
+    "U_brass",
+    "U_wood",
+    "U_wooddk"
+   ],
+   "status": "ok",
+   "checks": [
+    {
+     "level": "ok",
+     "text": "宽度在现实区间",
+     "value": "466mm / 380~620"
+    },
+    {
+     "level": "ok",
+     "text": "深度在现实区间",
+     "value": "434mm / 350~500"
+    },
+    {
+     "level": "ok",
+     "text": "高度在现实区间",
+     "value": "520mm / 450~700"
+    },
+    {
+     "level": "ok",
+     "text": "三角面达到细分阈值",
+     "value": "37,172 / ≥12,000"
+    },
+    {
+     "level": "ok",
+     "text": "材质分区数",
+     "value": "3 个 / ≥3"
+    },
+    {
+     "level": "ok",
+     "text": "U_<role> 规范材质",
+     "value": "3 个主题材质"
+    },
+    {
+     "level": "ok",
+     "text": "落地贴合(底面 z=0)",
+     "value": "z=0.000"
+    }
+   ],
+   "ref": "refs/nightstand_poliform_gentleman.png",
+   "refTitle": "Poliform Gentleman 官方目录",
+   "refNote": "Poliform Gentleman Night Collection 官方目录（设计 Marcel Wanders，2020）。Night table W590 × D450 × H535 mm，木皮饰面结构 + 哑光漆台面 + 烤漆金属脚，抽屉内衬三聚氰胺板。本模型实测 466 × 434 × 520 mm。来源：poliform.com（2026-11-03 查证）",
+   "bytes": 847388
+  }
+ ]
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>验收 · 家具建模验收台</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <div class="brand">
+      <span class="logo">▣</span>
+      <h1>验收</h1>
+      <span class="sub">家具建模验收台 · 每件家具独立预览空间</span>
+    </div>
+    <div class="topstats" id="topstats"></div>
+  </header>
+
+  <aside id="left">
+    <div class="lefthead">
+      <span>家具清单</span>
+      <button id="btnReload" class="mini">重载模型</button>
+    </div>
+    <input id="q" class="qbox" type="search" placeholder="搜索款式：沙发 / 衣柜 / 1.8 床 …" autocomplete="off">
+    <div id="list"></div>
+    <div class="legend">
+      <div><i class="dot ok"></i>达到验收标准</div>
+      <div><i class="dot warn"></i>有偏差项</div>
+      <div><i class="dot bad"></i>未达标</div>
+      <div><i class="dot none"></i>未建模</div>
+    </div>
+  </aside>
+
+  <main id="stage">
+    <div id="viewport"></div>
+
+    <div id="viewbar">
+      <div class="vgroup" id="spaceTabs"></div>
+      <div class="vgroup">
+        <button class="mini" data-act="wire">线框</button>
+        <button class="mini" data-act="spin">转盘</button>
+        <button class="mini" data-act="reset">复位</button>
+        <button class="mini" data-act="shot">截图</button>
+      </div>
+    </div>
+
+    <div id="hud">
+      <div class="hudrow"><span>选中</span><b id="hName">—</b></div>
+      <div class="hudrow"><span>尺寸 mm</span><b id="hDims">—</b></div>
+      <div class="hudrow"><span>三角面</span><b id="hTris">—</b></div>
+      <div class="hudrow"><span>顶点</span><b id="hVerts">—</b></div>
+    </div>
+
+    <div id="checks">
+      <div class="chead">
+        <span>验收自检</span>
+        <b id="cScore">—</b>
+      </div>
+      <div id="cList"></div>
+    </div>
+
+    <div id="refpane">
+      <div class="chead"><span>参考素材</span><b id="refName">—</b></div>
+      <div id="refBox">
+        <div class="refempty">未选参考图</div>
+      </div>
+      <div class="refnote" id="refNote"></div>
+    </div>
+
+    <div id="diag"></div>
+  </main>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

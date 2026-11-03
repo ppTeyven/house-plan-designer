@@ -1,0 +1,42 @@
+{
+ "sofa": {
+  "file": "refs/sofa_william_spec.png",
+  "title": "Zanotta William 官方图纸",
+  "note": "Zanotta 官方 2D 规格图（William 1330.pdf）。设计：Damian Williamson，2010。1330/302 三人位 L224 × W90 × H87 cm；座高 43 cm。官方结构语言：薄层软包框架 + 铝合金脚 + 鹅绒坐靠包。本模型实测 2240 × 900 × 874.5 mm，坐垫厚 146 mm。来源：zanotta.com/ContentsFiles/William 1330.pdf（2026-11-03 查证）"
+ },
+ "bed": {
+  "file": "refs/bed_porro_iro_spec.png",
+  "title": "Porro Iro 官方技术图纸",
+  "note": "Porro 官方 Iro 床技术图纸（设计 GamFratesi 2024）。W180 × D210 版本：床体总宽 1970、总深 2430，床网净宽 1810 / 净深 2110（适配 1800×2000 床垫）。结构语言：实木车削框架 + 大幅软包床头靠垫。本模型实测 1812 × 2016 × 1120 mm。来源：porro.com（2026-11-03 查证）"
+ },
+ "chair": {
+  "file": "refs/chair_ch24_spec.png",
+  "title": "Carl Hansen CH24 官方规格书",
+  "note": "Carl Hansen & Søn 官方 CH24 Wishbone Chair 规格书（Hans J. Wegner，1950）。椅 W55 × D51 × H76 cm，坐垫 W49 × D39 × H3 cm。结构语言：蒸汽弯曲橡木 Y 形靠背 + 纸绳编织座面。本模型实测 442 × 563 × 881 mm。来源：carlhansen.com（2026-11-03 查证）"
+ },
+ "diningTable": {
+  "file": "refs/diningTable_benson_spec.png",
+  "title": "Didier Benson 官方规格表",
+  "note": "Didier Benson Tables Collection 官方规格表（设计 Ross Didier）。BN-TB.180x90 = 1800 W × 900 D × 730 H mm，美国白橡木/胡桃木可选，嵌板横撑 + 外角齐平锥形腿。本模型实测 1800 × 900 × 730 mm。来源：Didier Benson Spec Sheet（2026-11-03 查证）"
+ },
+ "coffeeTable": {
+  "file": "refs/coffeeTable_mo_spec.png",
+  "title": "MO Table 官方技术表",
+  "note": "MO TABLE 系列官方技术表（设计 Shinsaku Miyamoto，2016）。胡桃木台面 + 橡木腿，油饰/哑光聚氨酯多种饰面，圆形台面配圆润桌腿。本模型实测 1200 × 600 × 382 mm。来源：galerie46.com MO TABLE 技术表（2026-11-03 查证）"
+ },
+ "tvCabinet": {
+  "file": "refs/tvCabinet_poliform_technical.png",
+  "title": "Poliform 官方技术说明",
+  "note": "Poliform 官方技术说明表。夜柜/斗柜结构：木质饰面板材 + 哑光聚氨酯台面 + 烤漆金属脚，抽屉为三聚氰胺板。本模型实测 1820 × 456 × 500 mm，胡桃木配色。来源：poliform.store 官方 Technical Sheet（2026-11-03 查证）"
+ },
+ "wardrobe": {
+  "file": "refs/wardrobe_bosco_spec.png",
+  "title": "Bosco 三门衣柜官方规格书",
+  "note": "Bosco 3 Door Wardrobe 官方技术规格书（含技术图纸）。W160 × D61 × H198 cm，实橡木 + 橡木饰面，哑光清漆，底部 3 抽屉 + 双挂衣区，顶部弧形指接细节。本模型实测 1630 × 643 × 2200 mm。来源：Carter's Furniture 官方 PDF（2026-11-03 查证）"
+ },
+ "nightstand": {
+  "file": "refs/nightstand_poliform_gentleman.png",
+  "title": "Poliform Gentleman 官方目录",
+  "note": "Poliform Gentleman Night Collection 官方目录（设计 Marcel Wanders，2020）。Night table W590 × D450 × H535 mm，木皮饰面结构 + 哑光漆台面 + 烤漆金属脚，抽屉内衬三聚氰胺板。本模型实测 466 × 434 × 520 mm。来源：poliform.com（2026-11-03 查证）"
+ }
+}
