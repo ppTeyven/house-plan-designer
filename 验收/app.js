@@ -121,7 +121,69 @@ const state = {
   size: new THREE.Vector3(),
   groups: [],
   query: '',
+  roadmap: null,
+  batch: '',        // 当前批次筛选（'' = 全部）
 };
+
+/* ---------------- 建模批次（roadmap.json） ----------------
+ * 251 款不是一次做完的 —— roadmap.json 把它们排成 P0~P4 五个批次，
+ * 每批说明目标与款式 key。验收站左侧的 chip 显示每批实时进度，
+ * 点一下就只看该批款式，方便按批次推进与验收。
+ */
+async function loadRoadmap() {
+  const rm = await loadJSON('models/roadmap.json').catch(() => null);
+  if (!rm) return null;
+  // 建立 key → batch 映射
+  const key2batch = new Map();
+  for (const b of rm.batches || []) {
+    for (const k of b.items || []) key2batch.set(k, b.id);
+  }
+  rm._key2batch = key2batch;
+  return rm;
+}
+
+function batchProgress(b) {
+  const keys = new Set(b.items || []);
+  let ok = 0, total = 0;
+  for (const it of state.items) {
+    if (!keys.has(it.key)) continue;
+    total++;
+    if (it.status === 'ok') ok++;
+  }
+  return { ok, total };
+}
+
+function renderBatches() {
+  const box = $('batches');
+  if (!box) return;
+  if (!state.roadmap) { box.innerHTML = ''; return; }
+  const chips = [];
+  // 全部
+  const allOk = state.items.filter((i) => i.status === 'ok').length;
+  chips.push(
+    `<button class="bchip${state.batch === '' ? ' on' : ''}" data-b="">` +
+    `全部<span class="bp">${allOk}/${state.items.length}</span></button>`);
+
+  for (const b of state.roadmap.batches || []) {
+    const { ok, total } = batchProgress(b);
+    const pct = total ? Math.round((ok / total) * 100) : 0;
+    const cls = ['bchip'];
+    if (state.batch === b.id) cls.push('on');
+    if (b.status === 'done') cls.push('done');
+    chips.push(
+      `<button class="${cls.join(' ')}" data-b="${b.id}" title="${b.name} — ${b.goal}">` +
+      `${b.id}<span class="bp">${ok}/${total}</span>` +
+      `<span class="bar"><i style="width:${pct}%"></i></span></button>`);
+  }
+  box.innerHTML = chips.join('');
+  box.querySelectorAll('.bchip').forEach((c) => {
+    c.onclick = () => {
+      state.batch = c.dataset.b;
+      renderBatches();
+      renderList();
+    };
+  });
+}
 
 /* ---------------- 加载清单 ----------------
  * catalog.json  = 全屋完整目录（251 款，按组分类，含建模状态）
@@ -163,15 +225,24 @@ async function loadManifest() {
   }
   return { items: cat.groups.flatMap((g) => g.items), groups: cat.groups, total: cat.total };
 }
-/* ---------------- 渲染清单（分组 + 搜索 + 状态徽章） ---------------- */
+/* ---------------- 渲染清单（分组 + 搜索 + 批次 + 状态徽章） ---------------- */
 function renderList() {
   const box = $('list');
   box.innerHTML = '';
   const q = (state.query || '').trim().toLowerCase();
+  const rm = state.roadmap;
+  const k2b = rm ? rm._key2batch : null;
 
   for (const g of state.groups) {
-    const items = g.items.filter(
-      (it) => !q || it.name.toLowerCase().includes(q) || it.type.toLowerCase().includes(q));
+    const items = g.items.filter((it) => {
+      if (q && !(it.name.toLowerCase().includes(q) || it.type.toLowerCase().includes(q)))
+        return false;
+      // 批次筛选：只显示属于当前批次的款式
+      if (state.batch && k2b) {
+        if (k2b.get(it.key) !== state.batch) return false;
+      }
+      return true;
+    });
     if (!items.length) continue;
 
     const hd = document.createElement('div');
@@ -475,6 +546,8 @@ window.addEventListener('error', (e) => {
     state.manifest = man;
     state.items = man.items || [];
     state.groups = man.groups || [{ name: '全部', items: state.items }];
+    state.roadmap = await loadRoadmap();
+    renderBatches();
     renderList();
     buildTabs();
     // 默认选中第一个「已建模」的款式（没建的就选第一个）

@@ -1,0 +1,56 @@
+{
+  "note": "251 款家具/构件的建模批次计划。items 用的是【目录 key】（catalog.json 的 key），不是模型类型名 —— 例如床是 bed18/bed15/kingBed，不是 bed。P0=已达标并已入库主程序；P1=核心软装（决定整套观感）；P2=配套硬装（柜/桌/椅/灯具）；P3=功能设备（电器/厨电/卫浴）；P4=场景与自由体。每款都必须走 William 流程。",
+  "flow": [
+    "① 找官方参考图（厂商产品页 / 官方 PDF 规格书 / 官方实拍），存进 验收/refs/ 并写进 refs/manifest.json",
+    "② 描蓝图比例：按官方尺寸建骨架，尺寸误差 ≤ 5mm",
+    "③ 材质与曲面：软包走超椭球 + 布料解算位移场，木/金属走 PBR + 程序纹理",
+    "④ 缝制细节：滚边用 pipe_on_surface 贴合曲面（防穿模），针脚为独立几何短线段",
+    "⑤ 配色：所有颜色取自 scripts/dev/blender/palette.py，禁止各自定义",
+    "⑥ 验收：Blender 棚拍三视角渲染 + 7 项自动体检 + 与参考图并排对照",
+    "⑦ 入库：sync_furnlib.py 同步到 assets/furnlib/ 并更新 index.json"
+  ],
+  "styleGuide": {
+    "paletteSource": "scripts/dev/blender/palette.py",
+    "wood": "胡桃木 #6B4A2D（主）+ 白橡 #B08D5F（次），全屋不混用第三种木色",
+    "fabric": "燕麦米 #C9BBA6 为主色系，点缀色仅陶土橙/灰绿/靛蓝三选二",
+    "metal": "哑光黑 #22252A（柜门拉手/脚）+ 黄铜 #A8843E（装饰件）",
+    "note": "所有建模脚本必须从 palette 取色；每个家具的 ROLES 映射声明它用哪几个角色"
+  },
+  "batches": [
+    {
+      "id": "P0",
+      "name": "核心 8 件（已达标并入库）",
+      "status": "done",
+      "items": ["sofa", "bed18", "chair", "diningTable", "coffeeTable", "tvCabinet", "wardrobe", "nightstand"],
+      "goal": "沙发/床/餐桌/餐椅/茶几/电视柜/衣柜/床头柜 —— 全屋软装与柜体的配色基准"
+    },
+    {
+      "id": "P1",
+      "name": "沙发组 + 椅凳组 + 床组补齐",
+      "status": "next",
+      "items": ["lSofa", "loveseat", "uSofa", "curvedSofa", "bendSofa", "armchair", "chaise", "lounge", "beanbag", "ottoman", "rockingChair", "hangingChair", "theaterSofa", "booth", "fourSofa", "singleSofa", "chaiseSofa", "readingChair", "dayBed", "officeSofa", "officeChair", "gamingChair", "barStool", "stool", "entryBench", "trainingChair", "armDiningChair", "shoeBench", "bed15", "bed12", "bed20", "roundBed", "kingBed", "kidsBed", "bunkBed", "crib", "tatami", "bedBench", "bayCushion", "diningBench"],
+      "goal": "软装体量最大、决定整套观感。L/U/弧形沙发由 sofa v14 的模块化骨架派生；扶手椅/休闲椅复用同一软包体系但换骨架"
+    },
+    {
+      "id": "P2",
+      "name": "桌组 + 柜组 + 灯具",
+      "status": "planned",
+      "items": ["desk", "lDesk", "kidsDesk", "standingDesk", "officeDesk", "deskBench2", "deskBench4", "bossDesk", "roundMeeting", "conferenceTable", "reception", "trainingTable", "curveTrainingTable", "longTable", "roundTable", "ovalTable", "roundTable10", "diningTable4", "diningTable6", "sideTable", "consoleTable", "kitchenIsland", "island", "teaTable", "barCounter", "barTable", "lectern", "nestTables", "roundCoffee", "ovalCoffee", "chest", "dresser", "fileCabinet", "bookshelf", "bookshelfLow", "sideboard", "wineCabinet", "displayCabinet", "shoeCabinet", "hallCabinet", "cabWardrobe", "cabSlide", "cabCorner", "cabShoe", "cabSideboard", "cabTall", "cabBase", "cabWall", "cabTV", "coatRack", "wardrobe2", "wardrobe3", "toyCabinet", "lockers", "kitchenTrolley", "bathShelf", "plantShelf", "floorLamp", "deskLamp", "lawnLamp", "chandelier", "arcLamp"],
+      "goal": "沿用 P0 的胡桃木/白橡木 + 哑光黑/黄铜体系，尺寸按款式差异化（不是复制拉伸）"
+    },
+    {
+      "id": "P3",
+      "name": "电器 + 厨电 + 卫浴",
+      "status": "planned",
+      "items": ["fireplace", "wallTV", "projScreen", "speaker", "fridge", "fridgeDouble", "fridgeFrench", "freezer", "dishwasher", "tallOven", "hood", "microwave", "coffeeMachine", "wineFridge", "waterDispenser", "purifier", "washer", "dryer", "airPurifier", "robotVac", "acWall", "acFloor", "waterHeater", "miniHeater", "gasHeater", "boiler", "manifold", "waterSoftener", "toilet", "wallToilet", "squatToilet", "vanity", "doubleVanity", "mirrorCabinet", "pedestalSink", "freeTub", "bathtub", "shower", "showerScreen", "showerSet", "towelWarmer", "bathHeater", "laundrySink", "urinal", "serviceSink", "pantryCounter", "counter", "lCounter", "uCounter"],
+      "goal": "白色/不锈钢/哑光黑为主，克制用色；需带可交互件（柜门开合、电器发光）"
+    },
+    {
+      "id": "P4",
+      "name": "软装 + 自由体 + 建筑 + 庭院 + 娱乐 + 其他",
+      "status": "planned",
+      "items": ["rug", "roundRug", "doormat", "playMat", "curtain", "sheer", "screenDivider", "wallPanel", "wallArt", "wallArt3", "wallClock", "plant", "bigPlant", "smallPlant", "hangingPlant", "floorVase", "freeBox", "freeRoundBox", "freePlatform", "freeWallBlock", "freeCeilBlock", "freeCyl", "freeRoundStage", "freeHalfCyl", "freeTube", "freeSphere", "freeHemi", "freeCone", "freePyramid", "freeWedge", "freeArch", "freeArcWall", "freeSlats", "freeGlassScreen", "freeSteps", "freeTorus", "freeLightBox", "freeMirror", "freeVase", "freeColumn", "freeExtrude", "stairU", "stairRun", "stairLanding", "elevator", "slidingBoard", "wifiAP", "ceilingSpeaker", "supplyVent", "returnVent", "evCharger", "garageShelf", "workbench", "stage", "whiteboard", "mobileDisplay", "printer", "piano", "grandPiano", "treadmill", "billiards", "mahjong", "sauna", "bike", "yogaMat", "fishTank", "outdoorSet", "parasol", "sunLounger", "swing", "bbq", "waterFeature", "fence", "gate", "gazebo", "tree", "shrub", "lawn", "pool", "stepStones", "carport", "carport2", "car", "suv", "bicycle", "mirror", "fan", "radiator", "trashBin", "clothesRack", "catTree", "petBed"],
+      "goal": "自由体（25 款）走参数化拉伸/旋转体生成器，不用硬编码几何；庭院与建筑体量按真实规范"
+    }
+  ]
+}
