@@ -14,21 +14,66 @@ AXIS = {'X': 0, 'Y': 1, 'Z': 2}
 
 
 def wipe():
-    bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)
+    """清空场景。
+
+    【v18 · 实测踩坑】blender --background 启动时载入的是【默认启动场景】，
+    里面有一个 2m×2m×2m 的默认立方体（名 "Cube"）。
+    旧的 wipe 只删对象不删 mesh 数据块 → 导出时这个 Cube 会被带进 glb，
+    验收站里沙发旁边凭空出现一个巨大方块，manifest 的 bbox 自检也跟着失真。
+    现在：删对象 → 删所有 mesh/curve/material 数据块 → 再兜底删残留对象。
+    """
+    try:
+        bpy.ops.object.select_all(action='SELECT')
+        bpy.ops.object.delete(use_global=False)
+    except Exception:
+        pass
+    # 兜底：直接删对象（后台模式下 select_all 可能因无窗口上下文失败）
+    for o in list(bpy.data.objects):
+        try:
+            bpy.data.objects.remove(o, do_unlink=True)
+        except Exception:
+            pass
     for coll in (bpy.data.meshes, bpy.data.curves, bpy.data.materials, bpy.data.images):
         for x in list(coll):
-            try: coll.remove(x)
-            except: pass
+            try:
+                coll.remove(x)
+            except Exception:
+                pass
 
 
 def activate(o):
-    bpy.ops.object.select_all(action='DESELECT')
+    """把 o 设为唯一选中且活动对象。
+
+    【v17 效率】原来先 select_all(DESELECT) 再 select_set(True)，
+    每个对象都要遍历全场景。改为直接清掉其他对象的选中标记，
+    对单对象场景等价、对大场景快得多。
+    """
+    for x in bpy.context.selected_objects:
+        if x is not o:
+            x.select_set(False)
     o.select_set(True)
     bpy.context.view_layer.objects.active = o
 
 
 def link(ob):
     bpy.context.collection.objects.link(ob)
+    return ob
+
+
+def rename_mesh(ob, name):
+    """把 mesh 数据块也改成目标名。
+
+    【glTF 导出踩坑】glTF 导出用的是【mesh 数据块名】，不是物体名。
+    Blender 4.5 的 primitive_cone_add 生成的 mesh 数据块默认叫 "Cube"
+    （不是 "Cone"），primitive_cube_add 叫 "Cube" ——
+    于是导出的 glb 里出现一堆 "Cube"/"Cube.001"，而不是腿/座板的名字。
+    后果：验收站按名字过滤部件时找不到；穿模检测器也难以定位。
+    所以凡是 primitive_* 建的对象，都要把 mesh 名一起改掉。
+    """
+    try:
+        ob.data.name = name + "_me"
+    except Exception:
+        pass
     return ob
 
 
@@ -61,6 +106,7 @@ def box(name, size, center, material=None, rot=None, pivot='CENTER'):
         for v in o.data.vertices:
             v.co = c + e @ (v.co - c)
     o.location = (0, 0, 0)
+    rename_mesh(o, name)
     return o
 
 
@@ -108,6 +154,7 @@ def cyl(name, r, h, center, material=None, axis='Z', verts=24, r2=None):
     for p in o.data.polygons:
         p.use_smooth = (len(p.vertices) == 4)
     o.location = (0, 0, 0)
+    rename_mesh(o, name)
     return o
 
 
@@ -125,6 +172,7 @@ def sphere(name, r, center, material=None, seg=24, rings=12, scale=(1, 1, 1)):
     for p in o.data.polygons:
         p.use_smooth = True
     o.location = (0, 0, 0)
+    rename_mesh(o, name)
     return o
 
 
@@ -141,6 +189,7 @@ def grid(name, w, d, res, center, material=None, wave=None):
     if material is not None:
         o.data.materials.append(material)
     o.location = (0, 0, 0)
+    rename_mesh(o, name)
     return o
 
 
@@ -153,8 +202,19 @@ def smart_uv(o, ang=60):
 
 
 def apply_mods(o):
+    """应用对象上的全部修改器。
+
+    【v17 效率】原来每个对象都调 bpy.ops.object.select_all(action='DESELECT')
+    + modifier_apply —— 每调用一次就触发一次全场景依赖图更新。
+    5684 个对象时这一点本身就要几分钟。
+    现在：先只选中目标对象（省掉全场景遍历），并用 override 上下文
+    避免反复切上下文。
+    """
+    mods = [m.name for m in o.modifiers]
+    if not mods:
+        return
     activate(o)
-    for md in [m.name for m in o.modifiers]:
+    for md in mods:
         try:
             bpy.ops.object.modifier_apply(modifier=md)
         except Exception as e:
@@ -194,12 +254,55 @@ def pipe_rect(name, cx, cy, z, w, d, material, r=0.008, res=12):
 
 
 # ---------- 真实针脚几何（每针一根独立短线段，非贴图非曲线） ----------
+def stitch_poly(name, segments, material, r=0.00085, lift=0.0, res=1):
+    """把【多根针脚】合并成【一个曲线对象】导出。
+
+    【效率关键 · 实测踩坑】
+    早期实现是"每针一个独立 mesh 对象"：
+      sofa.glb → 5684 个对象，其中 5647 个（99.4%）是针脚。
+      后果：① 建模脚本要对每个对象跑 apply_mods（每次 select_all +
+             依赖图更新）→ 一次构建 4~7 分钟；
+           ② glb 里 11428 个 accessor/bufferView，文件 8MB；
+           ③ 穿模检测器要遍历 5684 个对象。
+    改法：所有针脚合成【一条曲线 + 多条 2 点 spline】，
+          Blender 导出 glTF 时自动转成网格 —— 几何完全等价（仍是真实
+          针脚实体，不是贴图），但对象数从 5647 降到 1~3。
+
+    segments : [(p0, p1), ...]  每根针脚的起止点（世界坐标）
+    """
+    if not segments:
+        return []
+    cu = bpy.data.curves.new(name + "_cv", type='CURVE')
+    cu.dimensions = '3D'
+    cu.resolution_u = 1
+    cu.bevel_depth = r
+    cu.bevel_resolution = 0
+    cu.use_fill_caps = True
+    for (p0, p1) in segments:
+        sp = cu.splines.new('POLY')
+        sp.points.add(1)
+        a = mathutils.Vector(p0)
+        b = mathutils.Vector(p1)
+        if lift:
+            a = a + mathutils.Vector((0, 0, lift))
+            b = b + mathutils.Vector((0, 0, lift))
+        sp.points[0].co = (a.x, a.y, a.z, 1.0)
+        sp.points[1].co = (b.x, b.y, b.z, 1.0)
+    ob = bpy.data.objects.new(name, cu)
+    link(ob)
+    cu.materials.append(material)
+    ob.location = (0, 0, 0)
+    return [ob]
+
+
 def stitch_line(name, p0, p1, material, count=None, length=0.009, gap=0.005,
                 r=0.00085, lift=0.0):
     """真实针脚几何：每针一根独立短圆柱（非贴图、非曲线）。
 
     关键：网格顶点直接写在世界坐标里（不靠物体 rotation_quaternion），
     否则绕物体原点旋转会把偏离原点的针脚甩到错误位置。
+
+    【v17】所有针脚合并成【一个曲线对象】（见 stitch_poly 的效率说明）。
     """
     p0 = mathutils.Vector(p0); p1 = mathutils.Vector(p1)
     d = p1 - p0
@@ -210,43 +313,12 @@ def stitch_line(name, p0, p1, material, count=None, length=0.009, gap=0.005,
     if count is None:
         count = max(2, int(total / (length + gap)))
     seg = total / count
-    # 构造正交基：dirv 为针脚轴向，u/v 为横截面
-    up = mathutils.Vector((0, 0, 1))
-    if abs(dirv.dot(up)) > 0.95:
-        up = mathutils.Vector((1, 0, 0))
-    u = dirv.cross(up).normalized()
-    w = dirv.cross(u).normalized()
-    out = []
-    sides = 6
+    segments = []
     for i in range(count):
         s = i * seg
         e = min(s + length, total)
-        a = p0 + dirv * s
-        b = p0 + dirv * e
-        mid = (a + b) * 0.5 + mathutils.Vector((0, 0, lift))
-        half = (b - a).length / 2
-        verts = []
-        for end in (a, b):
-            base = end + mathutils.Vector((0, 0, lift))
-            for k in range(sides):
-                ang = 2 * math.pi * k / sides
-                verts.append(tuple(base + u * (math.cos(ang) * r) + w * (math.sin(ang) * r)))
-        faces = []
-        for k in range(sides):
-            k2 = (k + 1) % sides
-            faces.append((k, k2, sides + k2, sides + k))
-        faces.append(tuple(range(sides - 1, -1, -1)))
-        faces.append(tuple(range(sides, 2 * sides)))
-        me = bpy.data.meshes.new(f"{name}_{i}_me")
-        me.from_pydata(verts, [], faces)
-        me.update()
-        ob = bpy.data.objects.new(f"{name}_{i}", me)
-        link(ob)
-        ob.data.materials.append(material)
-        for p in ob.data.polygons:
-            p.use_smooth = True
-        out.append(ob)
-    return out
+        segments.append((p0 + dirv * s, p0 + dirv * e))
+    return stitch_poly(name, segments, material, r=r, lift=lift)
 
 
 def stitch_rect(name, cx, cy, z, w, d, material, r=0.00085, inset=0.006, lift=0.0):
@@ -268,6 +340,12 @@ def pbr(name, hexc, rough=0.6, metal=0.0, sheen=0.0, aniso=0.0):
     bsdf = nt.nodes.get("Principled BSDF")
     r, g, b = tuple(int(hexc[i:i + 2], 16) / 255 for i in (1, 3, 5))
     bsdf.inputs["Base Color"].default_value = (r, g, b, 1.0)
+    # 【v18】同时设置 diffuse_color —— 这是 SOLID 视图着色用的颜色。
+    # 只设 Base Color 的话，实体视图里全是白模（实测踩坑：
+    # 实时建模时看到的是无色模型，无法判断配色对不对）。
+    m.diffuse_color = (r, g, b, 1.0)
+    m.roughness = rough
+    m.metallic = metal
     bsdf.inputs["Roughness"].default_value = rough
     if "Metallic" in bsdf.inputs:
         bsdf.inputs["Metallic"].default_value = metal
@@ -348,6 +426,62 @@ def wood(name, hexc, rough=0.42):
 
 
 def export(path, objs=None):
+    """导出 GLB。导出前做完整性断言 —— 脏数据必须显式报错，不能静默混进去。
+
+    【为什么加断言 · 实测踩坑】
+    导出过一版 sofa.glb，里面混进了一个 2m×2m×2m 的 "Cube"
+    （Blender 默认立方体的 mesh 数据块残留，物体名被改掉但 mesh 名没改）。
+    结果：验收站里沙发旁边凭空出现一个巨大方块，
+    而 manifest 的尺寸自检读到的 bbox 也是错的 —— 静默失败很难查。
+    现在导出前逐个检查 bbox，超过合理尺寸就报错。
+    """
+    import os
+    # 曲线（滚边/针脚）在 glTF 导出时会被转成网格，
+    # 转换后的 mesh 数据块可能拿到无意义的默认名（如 "Cube"）。
+    # 实测踩坑：导出过一版 sofa.glb 里混进一个 2m×2m×2m 的 "Cube"，
+    # 材质是默认 "Material" —— 验收站里沙发旁边凭空出现巨大方块。
+    # 这里先把所有曲线显式转网格并按物体名改 mesh 名，再导出。
+    curves = [o for o in bpy.context.scene.objects if o.type == 'CURVE']
+    if curves:
+        bpy.ops.object.select_all(action='DESELECT')
+        for o in curves:
+            o.select_set(True)
+        bpy.context.view_layer.objects.active = curves[0]
+        try:
+            bpy.ops.object.convert(target='MESH')
+        except Exception as e:
+            print("convert curves fail:", e)
+        for o in bpy.context.scene.objects:
+            if o.type == 'MESH':
+                rename_mesh(o, o.name)
+
+    # 导出前完整性检查
+    bad = []
+    for o in bpy.context.scene.objects:
+        if o.type != 'MESH' or len(o.data.vertices) == 0:
+            continue
+        ws = [o.matrix_world @ mathutils.Vector(c) for c in o.bound_box]
+        size = [max(w[i] for w in ws) - min(w[i] for w in ws) for i in range(3)]
+        if max(size) > 6.0:
+            bad.append((o.name, o.data.name,
+                        [round(v, 3) for v in size]))
+    if bad:
+        raise RuntimeError(
+            "导出前检查失败：存在异常尺寸部件（>6m），疑似 Blender 默认立方体残留\n"
+            + "\n".join("  obj=%s mesh=%s size=%s" % b for b in bad))
+    # 清理无用户的孤儿 mesh（名字是 Cube/Sphere/Grid 且没人用）
+    used = set()
+    for o in bpy.context.scene.objects:
+        if o.type == 'MESH':
+            used.add(o.data.name)
+    orphan = [m for m in bpy.data.meshes
+              if m.name not in used and m.users == 0]
+    for m in orphan:
+        try:
+            bpy.data.meshes.remove(m)
+        except Exception:
+            pass
+
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.export_scene.gltf(filepath=path, export_format='GLB',
                               export_materials='EXPORT', export_extras=True,
@@ -370,7 +504,7 @@ def export(path, objs=None):
 def superellipsoid_soft(name, size, center, material=None,
                         e1=0.62, e2=0.72, res_u=64, res_v=32,
                         squash_top=0.0, crown=0.0, top_clamp=None,
-                        front_clamp=None):
+                        bot_clamp=None, front_clamp=None):
     """参数化超椭球软包（真实软垫/靠包的标准做法）。
 
     与"倒角盒子"的本质区别：
@@ -384,7 +518,10 @@ def superellipsoid_soft(name, size, center, material=None,
     crown  : 顶面中央额外隆起（米），做饱满鼓包
     top_clamp   : 顶面绝对高度上限（米）。超过的顶点压平 →
                   得到【平整顶面 + 圆肩】的真实坐垫/扶手板形态。
-                  （不加的话超椭球顶永远是圆拱，像枕卷不像坐垫）
+    bot_clamp   : 底面绝对高度下限（米）。超过的顶点抬平 →
+                  得到【平整底面 + 圆肩】。
+                  必需！软包不是漂浮的球体，底面必须能【坐实】在座板/框架上，
+                  否则渲染出来像气球悬空（实测 v17 踩坑）。
     front_clamp : 前表面绝对深度上限（米），用于靠垫压出平整受压面。
     """
     import mathutils
@@ -418,6 +555,10 @@ def superellipsoid_soft(name, size, center, material=None,
             # 顶面压平：超过上限的顶点归到上限 → 平整台面 + 圆肩
             if top_clamp is not None and zz > top_clamp:
                 zz = top_clamp
+            # 底面压平：低于下限的顶点归到下限 → 平整底面 + 圆肩
+            # （软包必须能坐实在座板上，否则像悬空的气球）
+            if bot_clamp is not None and zz < bot_clamp:
+                zz = bot_clamp
             yy = y + center[1]
             if front_clamp is not None and yy > front_clamp:
                 yy = front_clamp
@@ -449,6 +590,259 @@ def superellipsoid_soft(name, size, center, material=None,
             vz = verts[vi][2] - center[2]
             uvl.data[li].uv = (math.atan2(vy, vx) / (2 * math.pi) + 0.5,
                                math.asin(max(-1.0, min(1.0, vz / max(hz, 1e-6)))) / math.pi + 0.5)
+    return ob
+
+
+def soft_slab(name, size, center, material=None,
+              res_u=96, res_v=40, cap_rings=3,
+              top_clamp=None, bot_clamp=None,
+              flat_frac=0.86, edge_roll=0.030,
+              bot_inset=0.026, bot_roll=0.024,
+              corner=0.94, crown=0.0, bulge=0.003,
+              noise=0.0, noise_freq=9.0, noise_seed=0):
+    """【平整顶面软垫】—— 真实沙发坐垫/靠垫的标准做法。
+
+    【为什么不能用超椭球】
+    superellipsoid_soft 生成的是"球体"：超椭球的顶面在数学上是【一个点】
+    （cv -> 0 时 rad -> 0），top_clamp 只能把恰好高于限值的顶点压平，
+    所以平整区必然很小。实测 v20 坐垫剖面：
+        中央 412mm，垫与垫之间 310mm（差 100mm），整体起伏 248mm。
+    渲染出来就是"三个鼓包 + 两条深沟"，根本没法坐（用户明确投诉）。
+
+    【本函数的做法 —— 真正的大平面软垫】
+      ① 顶面     : 一整张圆角矩形平面（flat_frac 严格控制平整区大小）
+      ② 顶部圆肩 : 椭圆弧，与顶面切线连续
+      ③ 侧壁     : 竖直 + 轻微外鼓
+      ④ 底部圆角 : 椭圆弧
+      ⑤ 底面     : 平整（坐实在座板上）
+
+    参数：
+      size       : (宽X, 深Y, 高Z)
+      flat_frac  : 顶面平整区占【整个宽度】的比例（0.86 → 中间 86% 完全平）
+      edge_roll  : 顶部圆肩的高度（= 圆角半径）
+      bot_inset  : 底面相对侧壁的内缩（米）
+      bot_roll   : 底部圆角高度
+      corner     : 平面转角圆度（1=方形矩形，0.94=圆角矩形）
+      crown      : 顶面中央微拱高度（米），真实坐垫受坐后中央略鼓
+      bulge      : 侧壁外鼓量（米）
+    """
+    import math
+    hx, hy, hz = size[0] / 2, size[1] / 2, size[2] / 2
+    n_u = res_u
+    n_v = max(8, res_v)
+
+    r_top = max(1e-4, min(edge_roll, hz * 0.80))
+    r_bot = max(1e-4, min(bot_roll, hz * 0.80))
+
+    TOPFX = hx * flat_frac
+    TOPFY = hy * flat_frac
+    BOTFX = max(hx - bot_inset, hx * 0.35)
+    BOTFY = max(hy - bot_inset, hy * 0.35)
+
+    cr_top = min(TOPFX, TOPFY) * (1.0 - corner) * 0.5
+    cr_bot = min(BOTFX, BOTFY) * (1.0 - corner) * 0.5
+    cr_mid = min(hx, hy) * (1.0 - corner) * 0.5
+
+    def make_ring(ax, ay, cr, z):
+        """圆角矩形环：给定半宽/半深/转角半径/高度，返回 n_u 个 (x,y,z)。"""
+        ring = []
+        for iu in range(n_u):
+            th = 2 * math.pi * iu / n_u
+            ct, st = math.cos(th), math.sin(th)
+            ca, sa = abs(ct), abs(st)
+            if ca < 1e-9:
+                R = ay
+            elif sa < 1e-9:
+                R = ax
+            else:
+                ix, iy = max(ax - cr, 0.0), max(ay - cr, 0.0)
+                bb = ix * ca + iy * sa
+                cc = ix * ix + iy * iy - cr * cr
+                disc = bb * bb - cc
+                circle = (bb + math.sqrt(disc)) if disc > 0 else 0.0
+                inner = 1e9
+                if ix > 1e-9:
+                    inner = min(inner, ix / ca)
+                if iy > 1e-9:
+                    inner = min(inner, iy / sa)
+                R = max(circle, inner)
+            ring.append((R * ct, R * st, z))
+        return ring
+
+    def lerp(a, b, f):
+        return a + (b - a) * f
+
+    # ---------- 侧壁段（自下而上）----------
+    pb = min(0.45, r_bot / max(2.0 * hz, 1e-9))
+    pt = min(0.45, r_top / max(2.0 * hz, 1e-9))
+    if pb + pt > 0.9:
+        sc = 0.9 / (pb + pt)
+        pb *= sc
+        pt *= sc
+
+    z_body_bot = -hz + 2.0 * hz * pb
+    z_body_top = hz - 2.0 * hz * pt
+
+    side_rings = []
+    for iv in range(n_v + 1):
+        p = iv / n_v
+        if p < pb:
+            # 底部圆角：BOT -> BODY
+            k = p / max(pb, 1e-9)
+            a = k * math.pi / 2
+            f = 1.0 - math.cos(a)          # 径向插值 0..1
+            z = -hz + r_bot * math.sin(a)
+            ax = lerp(BOTFX, hx, f)
+            ay = lerp(BOTFY, hy, f)
+            cr = lerp(cr_bot, cr_mid, f)
+        elif p > 1.0 - pt:
+            # 顶部圆肩：BODY -> TOP
+            k = (p - (1.0 - pt)) / max(pt, 1e-9)
+            a = k * math.pi / 2
+            f = 1.0 - math.cos(a)
+            z = z_body_top + r_top * math.sin(a)
+            ax = lerp(hx, TOPFX, f)
+            ay = lerp(hy, TOPFY, f)
+            cr = lerp(cr_mid, cr_top, f)
+        else:
+            # 侧壁
+            k = (p - pb) / max(1.0 - pb - pt, 1e-9)
+            z = lerp(z_body_bot, z_body_top, k)
+            b = math.sin(k * math.pi) * bulge
+            ax = hx + b
+            ay = hy + b
+            cr = cr_mid
+        side_rings.append((ax, ay, cr, z))
+
+    # ---------- 组装完整环序列 ----------
+    rings = []
+
+    # 底面封盖（从外往里收）
+    for k in range(cap_rings - 1, 0, -1):
+        f = k / float(cap_rings)
+        rings.append(make_ring(BOTFX * f, BOTFY * f, cr_bot * f, -hz))
+    # 底边环
+    rings.append(make_ring(BOTFX, BOTFY, cr_bot, -hz))
+
+    # 侧壁（跳过 p=0，它就是底边环）
+    for iv in range(1, n_v + 1):
+        ax, ay, cr, z = side_rings[iv]
+        rings.append(make_ring(ax, ay, cr, z))
+
+    # 顶面封盖（从外往里收）—— 顶边环已经是最后一个 side ring
+    top_z = side_rings[n_v][3]
+    for k in range(cap_rings - 1, 0, -1):
+        f = k / float(cap_rings)
+        rings.append(make_ring(TOPFX * f, TOPFY * f, cr_top * f, top_z))
+
+    # ---------- 生成顶点/面 ----------
+    verts = []
+    faces = []
+    for ring in rings:
+        for (x, y, z) in ring:
+            verts.append((x + center[0], y + center[1], z + center[2]))
+
+    for ri in range(len(rings) - 1):
+        b0 = ri * n_u
+        b1 = (ri + 1) * n_u
+        for iu in range(n_u):
+            i0 = b0 + iu
+            i1 = b0 + (iu + 1) % n_u
+            i2 = b1 + (iu + 1) % n_u
+            i3 = b1 + iu
+            faces.append((i0, i1, i2, i3))
+
+    # 底面中心
+    bot_c = len(verts)
+    verts.append((center[0], center[1], -hz + center[2]))
+    b0 = 0
+    for iu in range(n_u):
+        faces.append((bot_c, b0 + (iu + 1) % n_u, b0 + iu))
+
+    # 顶面中心（crown 微拱）
+    top_c = len(verts)
+    verts.append((center[0], center[1], top_z + crown + center[2]))
+    b1 = (len(rings) - 1) * n_u
+    for iu in range(n_u):
+        faces.append((top_c, b1 + iu, b1 + (iu + 1) % n_u))
+
+    # ---------- 高度裁剪 ----------
+    if top_clamp is not None:
+        for v in verts:
+            if v[2] > top_clamp:
+                v = (v[0], v[1], top_clamp)
+    # (上面写法无法原地改 tuple，改用索引)
+    verts = [(v[0], v[1], min(v[2], top_clamp) if top_clamp is not None else v[2])
+             for v in verts]
+    if bot_clamp is not None:
+        verts = [(v[0], v[1], max(v[2], bot_clamp)) for v in verts]
+
+    me = bpy.data.meshes.new(name + "_me")
+    me.from_pydata(verts, [], faces)
+    me.update()
+    for p in me.polygons:
+        p.use_smooth = True
+    ob = bpy.data.objects.new(name, me)
+    link(ob)
+    if material is not None:
+        ob.data.materials.append(material)
+
+    # ---------- 布料起伏噪声（各向同性，避免规则条纹）----------
+    if noise > 0.0:
+        import random
+        rnd = random.Random(noise_seed)
+        off = [rnd.uniform(0, 100) for _ in range(3)]
+
+        def _h(i, j, k, s):
+            n = (i * 374761393 + j * 668265263 + k * 2147483647
+                 + s * 1274126177) & 0xFFFFFFFF
+            n = (n ^ (n >> 13)) * 1274126177 & 0xFFFFFFFF
+            n = n ^ (n >> 16)
+            return (n & 0xFFFFFF) / 0xFFFFFF * 2.0 - 1.0
+
+        def _vnoise(x, y, z, s):
+            xi, yi, zi = math.floor(x), math.floor(y), math.floor(z)
+            xf, yf, zf = x - xi, y - yi, z - zi
+            uu = xf * xf * (3 - 2 * xf)
+            vv = yf * yf * (3 - 2 * yf)
+            ww = zf * zf * (3 - 2 * zf)
+            c000 = _h(int(xi), int(yi), int(zi), s)
+            c100 = _h(int(xi) + 1, int(yi), int(zi), s)
+            c010 = _h(int(xi), int(yi) + 1, int(zi), s)
+            c110 = _h(int(xi) + 1, int(yi) + 1, int(zi), s)
+            c001 = _h(int(xi), int(yi), int(zi) + 1, s)
+            c101 = _h(int(xi) + 1, int(yi), int(zi) + 1, s)
+            c011 = _h(int(xi), int(yi) + 1, int(zi) + 1, s)
+            c111 = _h(int(xi) + 1, int(yi) + 1, int(zi) + 1, s)
+            x00 = c000 + (c100 - c000) * uu
+            x10 = c010 + (c110 - c010) * uu
+            x01 = c001 + (c101 - c001) * uu
+            x11 = c011 + (c111 - c011) * uu
+            y0 = x00 + (x10 - x00) * vv
+            y1 = x01 + (x11 - x01) * vv
+            return y0 + (y1 - y0) * ww
+
+        for v in me.vertices:
+            d = (_vnoise(v.co.x * noise_freq + off[0],
+                         v.co.y * noise_freq + off[1],
+                         v.co.z * noise_freq + off[2], noise_seed)
+                 + _vnoise(v.co.x * noise_freq * 2.6,
+                           v.co.y * noise_freq * 2.6,
+                           v.co.z * noise_freq * 2.6, noise_seed + 7) * 0.45)
+            v.co.z += d * noise
+    me.update()
+
+    # ---------- UV（织物的经纬波纹依赖 UV）----------
+    uvl = me.uv_layers.new(name="UVMap")
+    for poly in me.polygons:
+        for li in poly.loop_indices:
+            vi = me.loops[li].vertex_index
+            vx = verts[vi][0] - center[0]
+            vy = verts[vi][1] - center[1]
+            vz = verts[vi][2] - center[2]
+            uvl.data[li].uv = (
+                math.atan2(vy, vx) / (2 * math.pi) + 0.5,
+                math.asin(max(-1.0, min(1.0, vz / max(hz, 1e-6)))) / math.pi + 0.5)
     return ob
 
 

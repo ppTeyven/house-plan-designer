@@ -5,19 +5,24 @@
 """
 import bpy, os, sys, math, mathutils
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import glb_clean
+
 path = os.environ.get("BL_IN") or (sys.argv[sys.argv.index("--") + 1] if "--" in sys.argv else "")
-out = os.environ.get("BL_OUT") or (sys.argv[sys.argv.index("--") + 2] if "--" in sys.argv and len(sys.argv) > sys.argv.index("--") + 2 else "")
+out = os.environ.get("BL_OUT") or (sys.argv[sys.argv.index("--") + 2] if "--" in sys.argv and len(sys.argv) > 2 else "")
 if not path or not out:
     print("NEED_ARGS BL_IN/BL_OUT")
     raise SystemExit(1)
 
 bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)
 
-bpy.ops.import_scene.gltf(filepath=path)
+# 【v19】导入后清掉 Blender 默认 Cube —— 它会罩住整个模型、
+# 参与包围盒计算，把相机取景和正视图彻底搞坏（实测多次误判"部件消失"）
+model = glb_clean.import_clean(path)
 
 # 归一化：落地 + 居中
 mn = [1e9] * 3; mx = [-1e9] * 3
-for o in bpy.context.scene.objects:
+for o in model:
     if o.type != 'MESH':
         continue
     for c in o.bound_box:
@@ -26,7 +31,7 @@ for o in bpy.context.scene.objects:
             mn[i] = min(mn[i], w[i]); mx[i] = max(mx[i], w[i])
 size = [mx[i] - mn[i] for i in range(3)]
 cx = (mn[0] + mx[0]) / 2; cy = (mn[1] + mx[1]) / 2
-for o in bpy.context.scene.objects:
+for o in model:
     if o.type == 'MESH':
         o.location.x -= cx; o.location.y -= cy; o.location.z -= mn[2]
 
@@ -92,9 +97,15 @@ center = mathutils.Vector((cx, cy, cz))
 radius = max(size) * 0.62
 
 # 灯（固定世界位置，固定功率）
-area("key", (cx + 2.6, cy - 3.0, cz + 2.4), 190, 2.6, (1.0, 0.985, 0.96))
-area("fill", (cx - 3.2, cy - 1.6, cz + 1.2), 80, 3.0, (0.90, 0.94, 1.0))
-area("rim", (cx + 0.6, cy + 3.4, cz + 2.0), 130, 2.4, (1.0, 0.99, 0.97))
+# 【v18 关键修正 · 灯位方向】
+# 原来主灯放在 cy-3.0（-Y 侧），而【沙发正面在 +Y】
+# （靠背在 -Y，坐垫延伸到 +0.40，座板前缘 +0.372），
+# 于是主灯全程照的是沙发【背面】，正面全在背光里，
+# 渲染出来"部件看不见"，被反复误判成几何/法线问题（实测踩坑）。
+# 现在：主灯/补光都放在 +Y 侧，轮廓光留在 -Y 勾边。
+area("key", (cx + 2.8, cy + 2.9, cz + 2.6), 190, 2.6, (1.0, 0.985, 0.96))
+area("fill", (cx - 3.2, cy + 1.8, cz + 1.3), 95, 3.0, (0.90, 0.94, 1.0))
+area("rim", (cx + 0.6, cy - 3.4, cz + 2.1), 150, 2.4, (1.0, 0.99, 0.97))
 area("top", (cx, cy, cz + 3.4), 90, 3.4, (1.0, 1.0, 1.0))
 
 # 相机
@@ -104,10 +115,12 @@ bpy.context.collection.objects.link(cam)
 bpy.context.scene.camera = cam
 
 VIEW = os.environ.get("BL_VIEW", "studio")
+# 【v18】相机统一放在【+Y 侧】—— 沙发正面在 +Y（靠背在 -Y）。
+# 原先相机在 -Y，一直拍的是沙发背面。
 if VIEW == "front":
     cam.data.lens = 60
     d = radius / math.tan(2 * math.atan(18.0 / 60) / 2) * 1.12
-    cam.location = center + mathutils.Vector((0, -d, 0))
+    cam.location = center + mathutils.Vector((0, d, 0))
     aim(cam, center)
 elif VIEW == "side":
     cam.data.lens = 60
@@ -123,14 +136,14 @@ elif VIEW == "detail":
     # 细节特写：靠近前沿，看滚边/针脚/拼缝
     lens = 85
     cam.data.lens = lens
-    target = mathutils.Vector((cx, cy - size[1] * 0.42, cz + size[2] * 0.10))
-    cam.location = target + mathutils.Vector((size[0] * 0.14, -radius * 1.9, size[2] * 0.34))
+    target = mathutils.Vector((cx, cy + size[1] * 0.42, cz + size[2] * 0.10))
+    cam.location = target + mathutils.Vector((size[0] * 0.14, radius * 1.9, size[2] * 0.34))
     aim(cam, target)
 else:  # studio 三分之四
     lens = 55
     cam.data.lens = lens
     d = radius / math.tan(2 * math.atan(18.0 / lens) / 2) * 1.15
-    cam.location = center + mathutils.Vector((d * 0.62, -d * 0.80, d * 0.42))
+    cam.location = center + mathutils.Vector((d * 0.62, d * 0.80, d * 0.42))
     aim(cam, center)
 
 sc = bpy.context.scene

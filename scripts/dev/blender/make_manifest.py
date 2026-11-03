@@ -124,7 +124,6 @@ def main():
                 "checks": checks,
             })
         items.append(entry)
-
     # 参考素材：从 refs/manifest.json 读（由采集脚本写入）
     refman = os.path.join(ACC, "refs", "manifest.json")
     refs = {}

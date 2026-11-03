@@ -1,14 +1,17 @@
 {
- "generated": "2026-11-03T13:17:12",
+ "generated": "2026-11-03T17:27:38",
  "items": [
   {
    "key": "sofa",
    "name": "沙发",
    "cat": "sofa",
    "file": "sofa.glb",
-   "tris": 273276,
-   "verts": 151936,
+   "tris": 451338,
+   "verts": 311977,
    "materials": [
+    "U_accent1",
+    "U_accent2",
+    "U_cream",
     "U_dark",
     "U_metal",
     "U_thread",
@@ -20,43 +23,48 @@
     {
      "level": "ok",
      "text": "宽度在现实区间",
-     "value": "2265mm / 1800~2600"
+     "value": "2268mm / 1800~2600"
     },
     {
      "level": "ok",
      "text": "深度在现实区间",
-     "value": "874mm / 850~1100"
+     "value": "904mm / 850~1100"
     },
     {
      "level": "ok",
      "text": "高度在现实区间",
-     "value": "875mm / 650~950"
+     "value": "841mm / 650~950"
     },
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "273,276 / ≥60,000"
+     "value": "451,338 / ≥60,000"
     },
     {
      "level": "ok",
      "text": "材质分区数",
-     "value": "5 个 / ≥3"
+     "value": "8 个 / ≥3"
     },
     {
      "level": "ok",
      "text": "U_<role> 规范材质",
-     "value": "5 个主题材质"
+     "value": "8 个主题材质"
     },
     {
      "level": "ok",
      "text": "落地贴合(底面 z=0)",
-     "value": "z=-0.000"
+     "value": "z=0.000"
+    },
+    {
+     "level": "ok",
+     "text": "部件无互相穿模",
+     "value": "0 处互侵"
     }
    ],
    "ref": "refs/sofa_william_photo.jpg",
    "refTitle": "Zanotta William 原版实拍",
    "refNote": "Zanotta William 1330/302 官方产品实拍图（Damian Williamson，2010）。L224 × W90 × H87 cm，座高 43 cm。结构语言：薄层软包框架 + 可见抛光铝脚 + 扁平坐垫 + 两级扶手（侧板+独立扶手垫）+ 独立鹅绒靠垫。本模型实测 2265 × 874 × 875 mm，坐垫厚 178 mm，坐垫顶面压平至 43 cm。来源：zanotta.com 官方产品页 + dieter-horn.de 官方实拍（2026-11-03 查证）",
-   "bytes": 7989460
+   "bytes": 12337752
   },
   {
    "key": "bed",
@@ -109,6 +117,11 @@
      "level": "ok",
      "text": "落地贴合(底面 z=0)",
      "value": "z=-0.010"
+    },
+    {
+     "level": "ok",
+     "text": "部件无互相穿模",
+     "value": "0 处互侵"
     }
    ],
    "ref": "refs/bed_porro_iro_spec.png",
@@ -166,6 +179,11 @@
      "level": "ok",
      "text": "落地贴合(底面 z=0)",
      "value": "z=-0.002"
+    },
+    {
+     "level": "ok",
+     "text": "部件无互相穿模",
+     "value": "0 处互侵"
     }
    ],
    "ref": "refs/chair_ch24_spec.png",
@@ -222,6 +240,11 @@
      "level": "ok",
      "text": "落地贴合(底面 z=0)",
      "value": "z=0.000"
+    },
+    {
+     "level": "ok",
+     "text": "部件无互相穿模",
+     "value": "0 处互侵"
     }
    ],
    "ref": "refs/diningTable_benson_spec.png",
@@ -277,6 +300,11 @@
      "level": "ok",
      "text": "落地贴合(底面 z=0)",
      "value": "z=-0.000"
+    },
+    {
+     "level": "ok",
+     "text": "部件无互相穿模",
+     "value": "0 处互侵"
     }
    ],
    "ref": "refs/coffeeTable_mo_spec.png",
@@ -332,6 +360,11 @@
      "level": "ok",
      "text": "落地贴合(底面 z=0)",
      "value": "z=-0.000"
+    },
+    {
+     "level": "ok",
+     "text": "部件无互相穿模",
+     "value": "0 处互侵"
     }
    ],
    "ref": "refs/tvCabinet_poliform_technical.png",
@@ -387,6 +420,11 @@
      "level": "ok",
      "text": "落地贴合(底面 z=0)",
      "value": "z=-0.000"
+    },
+    {
+     "level": "ok",
+     "text": "部件无互相穿模",
+     "value": "0 处互侵"
     }
    ],
    "ref": "refs/wardrobe_bosco_spec.png",
@@ -442,6 +480,11 @@
      "level": "ok",
      "text": "落地贴合(底面 z=0)",
      "value": "z=0.000"
+    },
+    {
+     "level": "ok",
+     "text": "部件无互相穿模",
+     "value": "0 处互侵"
     }
    ],
    "ref": "refs/nightstand_poliform_gentleman.png",
