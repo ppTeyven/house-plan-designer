@@ -302,7 +302,12 @@ for k in range(SEAT_N - 1):
     g = B.soft_slab(
         "seat_seam_%d" % k, (SEAT_GAP + 0.012, SEAT_D - 0.010, 0.030),
         (gx, cy, gz), M_UP,
-        res_u=52, res_v=26,
+        # 【v23 · 网格密度下调 —— 修 482 处法线反向】
+        # 这条软条只有 20mm 宽 × 30mm 高，却用了 res_u=52 / res_v=26：
+        # 顶点密度远超尺寸需要 → 环与环之间产生大量被压扁的碎面
+        # （实测 seat_seam_0 有 482 处反向边，面积极小 0.000000 m²）。
+        # 改成 28/18：环间距 ~0.7mm，仍足够圆润，但不再有碎面。
+        res_u=28, res_v=18,
         top_clamp=SEAT_TOP + 0.001, bot_clamp=SEAT_TOP - 0.030,
         flat_frac=0.62, edge_roll=0.010, bot_inset=0.006, bot_roll=0.008,
         corner=0.97,

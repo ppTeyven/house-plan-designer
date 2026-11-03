@@ -35,42 +35,74 @@ os.makedirs(os.path.dirname(OUT), exist_ok=True)
 B.wipe()
 
 R = ROLES["sofa"]
-M_UP = B.fabric("U_upholstery", PAL[R["main"]])
-M_UPDK = B.fabric("U_upholsterydk", PAL[R["dark"]])
-M_WELT = B.pbr("U_dark", "#4A4438", 0.78)
-M_ALU = B.pbr("U_metal", "#C9CCD0", 0.18, 1.0)
-M_THREAD = B.pbr("U_thread", "#8A7E68", 0.85)
+# =====================================================================
+# 【v21 · 配色方案】
+# ---------------------------------------------------------------------
+# 之前整件沙发只有一种米色（fabric_oat），
+# 渲染出来像"未上色的白模"，用户明确投诉"没有上色"。
+#
+# v21 采用【家具业经典的双色分区 + 点缀】：
+#   · 主体（外壳/座板/底座）  fabric_oat_d  深燕麦 —— 压住底座、显厚重
+#   · 坐垫/靠垫              fabric_oat    浅燕麦 —— 主体视觉面，最亮
+#   · 扶手垫                 fabric_cream  米白 —— 与坐垫区分，形成层次
+#   · 滚边/缝线              thread_dark   深色 —— 勾出所有分割线
+#   · 抱枕（2 只）           accent_terracotta / accent_sage —— 点缀色
+#
+# 关键原则：坐垫必须是【最亮】的色，视线自然落在可坐的地方。
+# =====================================================================
+M_UP = B.fabric("U_upholstery", PAL[R["main"]])            # 浅燕麦（坐垫/靠垫）
+M_BODY = B.fabric("U_upholsterydk", PAL[R["dark"]])        # 深燕麦（外壳/座板）
+M_PAD = B.fabric("U_cream", PAL["fabric_oat_d"])           # 深燕麦（扶手垫）
+M_WELT = B.pbr("U_dark", "#4A4438", 0.78)                  # 滚边
+M_ALU = B.pbr("U_metal", "#C9CCD0", 0.18, 1.0)             # 铝脚
+M_THREAD = B.pbr("U_thread", "#7C7263", 0.85)              # 缝线（深色才看得见）
+M_ACC1 = B.fabric("U_accent1", PAL["accent_terracotta"])   # 陶土橙抱枕
+M_ACC2 = B.fabric("U_accent2", PAL["accent_sage"])         # 灰绿抱枕
 
 # ============================ 尺寸 ============================
-W, D = 2.24, 0.90
+# 【v19 · 按真实三人沙发比例重构】
+# 参照现代简约三人位（意大利/北欧款）的实测尺寸：
+#   总宽 2.24 / 总深 0.92 / 总高 0.82 / 坐高 0.42 / 座深 0.58
+#   扶手高 0.62 / 扶手厚 0.22 / 靠背板厚 0.14
+# v18 的实测毛病（渲染 + 分色图确认）：
+#   1. 扶手只有 0.49 高（外壳段 0.39），相对 0.87 的靠背显得又矮又瘦
+#   2. 扶手垫浮在扶手段顶，像块搁板
+#   3. 靠垫过大且压在靠背最前沿，遮住整面靠背
+#   4. 整体观感"高瘦"，不符合三人位沙发比例
+W, D = 2.24, 0.92
 
-FRAME_Z0 = 0.112          # 底部框架下沿
+FRAME_Z0 = 0.105          # 底部框架下沿
 FRAME_X = 1.030          # 底部框架外沿（半宽）
-FRAME_Y = 0.372          # 底部框架外沿（半深）
+FRAME_Y = 0.380          # 底部框架外沿（半深）
 
-DECK_TOP = 0.150
+DECK_TOP = 0.145
 SEAT_DECK_TOP = DECK_TOP + 0.024
 
-SEAT_TOP = 0.430
+SEAT_TOP = 0.420         # 坐面高
 
-ARM_TOP = 0.490          # 扶手顶（软包垫顶）
-ARM_PAD_T = 0.100
-ARM_BOARD_TOP = ARM_TOP - ARM_PAD_T   # 0.390 外壳扶手段顶
-BACK_TOP = 0.870
+ARM_TOP = 0.620          # 扶手顶（含扶手垫）
+ARM_PAD_T = 0.115        # 扶手垫厚（软包层）
+ARM_BOARD_TOP = ARM_TOP - ARM_PAD_T   # 0.505 外壳扶手段顶
+BACK_TOP = 0.820         # 靠背顶
+# 【v20】靠背板加厚 0.140 → 0.200。
+# 侧视图实测：0.14 的靠背像"一块薄板"贴在后面，不符合真实软包沙发
+# （靠背是 18~22cm 厚的软包体）。加厚后侧视比例立刻对。
+BACK_T = 0.200
+ARM_W = 0.220            # 扶手厚
 
-BACK_T = 0.130
-ARM_W = 0.205
+ARM_X = W / 2 - ARM_W / 2           # 1.010 扶手中心
+ARM_IN = ARM_X - ARM_W / 2          # 0.900 扶手内表面
+ARM_FRONT = 0.450
 
-ARM_X = W / 2 - ARM_W / 2           # 1.0175 扶手中心
-ARM_IN = ARM_X - ARM_W / 2          # 0.915 扶手内表面
-ARM_FRONT = 0.436
+BACK_OUT = -0.440                   # 靠背外表面
+BACK_CY = BACK_OUT + BACK_T / 2     # -0.340 靠背板中心
+BACK_IN = BACK_OUT + BACK_T         # -0.240 靠背内表面
 
-BACK_OUT = -0.420                   # 靠背外表面
-BACK_CY = BACK_OUT + BACK_T / 2     # -0.355 靠背板中心
-BACK_IN = BACK_OUT + BACK_T         # -0.290 靠背内表面
-
-SEAT_BACK = -0.160
-SEAT_FRONT = 0.400
+# 【v20】坐垫后缘顶到靠背内表面，消除"坐垫与靠背之间能看到背景"的缝。
+# v19: SEAT_BACK=-0.170，靠背内表面 -0.290 → 中间 120mm 空档（侧视图可见）。
+# 现在靠背内表面 -0.240，坐垫后缘 -0.230，留 10mm 装配缝。
+SEAT_BACK = -0.230
+SEAT_FRONT = 0.410
 
 CORNER_R = 0.160
 
@@ -82,7 +114,7 @@ objs = []
 # 跨段共享的变量放在 ns 字典里（避免闭包提前绑定问题）
 # =====================================================================
 NS = {}
-for _k in ['ARM_PAD_W', 'ARM_PAD_Y0', 'ARM_PAD_Y1', 'ARM_SHELL_T', 'BC_CY', 'BC_CZ', 'BC_GAP', 'BC_H', 'BC_N', 'BC_T', 'BC_W', 'BC_X0', 'FD', 'FW', 'LEG_H', 'LEG_R', 'OUTLINE', 'PATH', 'PIPE_LIFT', 'PIPE_R', 'RADII', 'RAIL', 'SEAT_BOT', 'SEAT_D', 'SEAT_DECK_CY', 'SEAT_DECK_D', 'SEAT_DECK_W', 'SEAT_GAP', 'SEAT_N', 'SEAT_SIDE', 'SEAT_T', 'SEAT_W', 'SEAT_X0', 'SHOULDER', 'STATES', 'S_LEFT', 'S_RIGHT', '_al', '_total', 'arm_pad_objs', 'backc_objs', 'foot_x', 'foot_y', 'seat_deck', 'seat_objs', 'shell', 'shell_frames', 'shell_params', 'shell_sects']:
+for _k in ['ARM_PAD_W', 'ARM_PAD_Y0', 'ARM_PAD_Y1', 'ARM_SHELL_T', 'BC_CY', 'BC_CZ', 'BC_GAP', 'BC_H', 'BC_N', 'BC_PIVOT_Z', 'BC_T', 'BC_TILT', 'BC_W', 'BC_X0', 'FD', 'FW', 'LEG_H', 'LEG_R', 'OUTLINE', 'PATH', 'PIL_CZ', 'PIL_H', 'PIL_T', 'PIL_TILT', 'PIL_W', 'PIPE_LIFT', 'PIPE_R', 'RADII', 'RAIL', 'SEAT_BOT', 'SEAT_D', 'SEAT_DECK_CY', 'SEAT_DECK_D', 'SEAT_DECK_W', 'SEAT_GAP', 'SEAT_N', 'SEAT_SIDE', 'SEAT_T', 'SEAT_W', 'SEAT_X0', 'SHOULDER', 'SHOULDER_TOP', 'STATES', 'S_LEFT', 'S_RIGHT', '_al', '_total', 'arm_pad_objs', 'backc_objs', 'foot_x', 'foot_y', 'pillow_specs', 'seat_deck', 'seat_objs', 'shell', 'shell_frames', 'shell_params', 'shell_sects']:
     NS[_k] = None
 NS['objs'] = []          # 共享的对象列表，各段往里 append
 objs = NS['objs']
@@ -126,32 +158,35 @@ def build_00_step0():
     NS['S_RIGHT'] = _s_at(ARM_X + ARM_W / 2, BACK_OUT)
 
     # 断面状态：(s, T进深, z_bot, z_wall, z_top)
-    #   扶手段：T=ARM_W(0.205) 顶=0.390
-    #   靠背段：T=BACK_T(0.130) 顶=0.870
+    #   扶手段：T=NS['ARM_SHELL_T'] 顶=ARM_BOARD_TOP(0.505)
+    #   靠背段：T=BACK_T(0.140) 顶=BACK_TOP(0.820)
     #   斜肩：两者之间连续插值
-    # 【v18】扶手段 T 加宽到 ARM_W+0.016，让扶手垫（NS['ARM_PAD_W']=ARM_W+0.014）
-    #        能完整坐在壳体扶手面上而不是边缘悬空
-    NS['SHOULDER'] = 0.052
+    # 【v19】扶手段 T 加宽到 ARM_W+0.016，让扶手垫能完整坐在壳体扶手面上
+    #        而不是边缘悬空；斜肩高度改为在【扶手段顶 0.505】与
+    #        【靠背顶 0.820】之间平滑过渡（v18 的 +0.185 会冲到 0.69，
+    #        比扶手顶 0.62 还高，斜肩反而比扶手高，比例错误）。
+    NS['SHOULDER'] = 0.058
     NS['ARM_SHELL_T'] = ARM_W + 0.016
+    NS['SHOULDER_TOP'] = ARM_BOARD_TOP + (BACK_TOP - ARM_BOARD_TOP) * 0.52
     NS['STATES'] = [
         (0.000, NS['ARM_SHELL_T'], DECK_TOP, ARM_BOARD_TOP, ARM_BOARD_TOP),
         (NS['S_LEFT'] - 0.060, NS['ARM_SHELL_T'], DECK_TOP, ARM_BOARD_TOP, ARM_BOARD_TOP),
         (NS['S_LEFT'] - NS['SHOULDER'] * 0.50, NS['ARM_SHELL_T'] * 0.93, DECK_TOP,
-         ARM_BOARD_TOP, ARM_BOARD_TOP + 0.185),
-        (NS['S_LEFT'] + NS['SHOULDER'] * 0.22, BACK_T * 1.20, DECK_TOP,
-         BACK_TOP - 0.075, BACK_TOP - 0.020),
+         ARM_BOARD_TOP, NS['SHOULDER_TOP']),
+        (NS['S_LEFT'] + NS['SHOULDER'] * 0.22, BACK_T * 1.22, DECK_TOP,
+         BACK_TOP - 0.090, BACK_TOP - 0.030),
         (NS['S_LEFT'] + 0.062, BACK_T, DECK_TOP, BACK_TOP - 0.010, BACK_TOP),
         (NS['S_RIGHT'] - 0.062, BACK_T, DECK_TOP, BACK_TOP - 0.010, BACK_TOP),
-        (NS['S_RIGHT'] - NS['SHOULDER'] * 0.22, BACK_T * 1.20, DECK_TOP,
-         BACK_TOP - 0.075, BACK_TOP - 0.020),
+        (NS['S_RIGHT'] - NS['SHOULDER'] * 0.22, BACK_T * 1.22, DECK_TOP,
+         BACK_TOP - 0.090, BACK_TOP - 0.030),
         (NS['S_RIGHT'] + NS['SHOULDER'] * 0.50, NS['ARM_SHELL_T'] * 0.93, DECK_TOP,
-         ARM_BOARD_TOP, ARM_BOARD_TOP + 0.185),
+         ARM_BOARD_TOP, NS['SHOULDER_TOP']),
         (NS['S_RIGHT'] + 0.060, NS['ARM_SHELL_T'], DECK_TOP, ARM_BOARD_TOP, ARM_BOARD_TOP),
         (1.000, NS['ARM_SHELL_T'], DECK_TOP, ARM_BOARD_TOP, ARM_BOARD_TOP),
     ]
 
     NS['shell'], NS['shell_params'], NS['shell_sects'], NS['shell_frames'] = SH.build_shell(
-        "shell", NS['PATH'], NS['STATES'], M_UP, cap_len=0.050)
+        "shell", NS['PATH'], NS['STATES'], M_BODY, cap_len=0.050)
     SH.cloth_relax(NS['shell'], amp=0.0030, freq=12.0, seed=3, down_weight=0.30)
     objs.append(NS['shell'])
 
@@ -193,7 +228,15 @@ def build_00_step0():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -226,6 +269,26 @@ def build_00_step0():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -293,6 +356,10 @@ def build_00_step0():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -326,6 +393,10 @@ def build_00_step0():
         pass
     try:
         NS['foot_y'] = foot_y
+    except NameError:
+        pass
+    try:
+        NS['pillow_specs'] = pillow_specs
     except NameError:
         pass
     try:
@@ -366,7 +437,7 @@ def build_01_step1():
 
 
     def frame_bar(name, size, center, bev=0.008, sub=2):
-        b = B.box(name, size, center, M_UPDK)
+        b = B.box(name, size, center, M_BODY)
         B.bevel(b, bev, 3)
         if sub:
             B.subsurf(b, sub)
@@ -419,7 +490,15 @@ def build_01_step1():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -452,6 +531,26 @@ def build_01_step1():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -519,6 +618,10 @@ def build_01_step1():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -552,6 +655,10 @@ def build_01_step1():
         pass
     try:
         NS['foot_y'] = foot_y
+    except NameError:
+        pass
+    try:
+        NS['pillow_specs'] = pillow_specs
     except NameError:
         pass
     try:
@@ -601,7 +708,7 @@ def build_02_step2():
                                (fx + ox, fy + oy, NS['LEG_H'] / 2), M_ALU, verts=20,
                                r2=NS['LEG_R'] * 1.22))
             objs.append(B.cyl("leg_cup_%d_%d" % (ix, iy), NS['LEG_R'] * 1.34, 0.011,
-                               (fx, fy, NS['LEG_H'] - 0.004), M_UPDK, verts=16))
+                               (fx, fy, NS['LEG_H'] - 0.004), M_BODY, verts=16))
 
     # --- 回写共享变量到 NS ---
     try:
@@ -641,7 +748,15 @@ def build_02_step2():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -674,6 +789,26 @@ def build_02_step2():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -741,6 +876,10 @@ def build_02_step2():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -777,6 +916,10 @@ def build_02_step2():
     except NameError:
         pass
     try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
         NS['seat_deck'] = seat_deck
     except NameError:
         pass
@@ -809,10 +952,14 @@ def build_03_step3():
     # 4. 座板（坐垫支撑面）—— 按【扶手内表面】全宽，不再只占中间
     # =====================================================================
     NS['SEAT_DECK_W'] = ARM_IN * 2 - 0.014      # 1.816
-    NS['SEAT_DECK_D'] = 0.690
-    NS['SEAT_DECK_CY'] = -0.020
+    # 【v20】座板必须【完整覆盖坐垫】。
+    # 坐垫 y[-0.230, 0.410] → 座板覆盖 [-0.250, 0.430]
+    #   深 = 0.680，中心 = 0.090
+    # v19 的座板覆盖 y[-0.365, 0.325]，前缘比坐垫短 85mm（正视图可见悬空）。
+    NS['SEAT_DECK_D'] = 0.680
+    NS['SEAT_DECK_CY'] = 0.090
     NS['seat_deck'] = B.box("seat_deck", (NS['SEAT_DECK_W'], NS['SEAT_DECK_D'], 0.024),
-                      (0, NS['SEAT_DECK_CY'], DECK_TOP + 0.012), M_UPDK)
+                      (0, NS['SEAT_DECK_CY'], DECK_TOP + 0.012), M_BODY)
     B.bevel(NS['seat_deck'], 0.009, 3)
     objs.append(NS['seat_deck'])
 
@@ -854,7 +1001,15 @@ def build_03_step3():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -887,6 +1042,26 @@ def build_03_step3():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -954,6 +1129,10 @@ def build_03_step3():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -990,6 +1169,10 @@ def build_03_step3():
     except NameError:
         pass
     try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
         NS['seat_deck'] = seat_deck
     except NameError:
         pass
@@ -1022,10 +1205,25 @@ def build_04_step4():
     # 5. 坐垫（铺满座板；顶面中央平整）
     # =====================================================================
     NS['SEAT_N'] = 3
-    # 【v18】缝隙从 18mm 收到 9mm、两侧边距从 18mm 收到 8mm ——
-    # v17 的 18mm 缝 + 18mm 边让深色座板大面积露出，画面上像"拼凑"而不是整块软包。
-    NS['SEAT_GAP'] = 0.009
-    NS['SEAT_SIDE'] = 0.008
+    # =====================================================================
+    # 【v21 · 坐垫重做 —— 一整块连续坐面，而不是三个鼓包】
+    # ---------------------------------------------------------------------
+    # v20 的实测剖面（profile_probe.py）：
+    #   中央 412mm，垫与垫之间 310mm（深 100mm 的沟），整体起伏 248mm。
+    #   渲染出来 = 三个气球坐在坑里（用户投诉："坐垫都不平的3个突起"）。
+    #
+    # 真实高档沙发的做法：坐面是【一整块连续的软包】，
+    # 分区靠【压线 + 滚边】做视觉划分，几何上不挖深沟。
+    #
+    # v21 做法：
+    #   1) 坐垫仍然分 3 块（每块之间留 3mm 极细缝，真实缝线宽度），
+    #      但每块的顶面用 soft_slab 做成【大平面】，
+    #      圆肩只在【最外侧 30mm】内过渡 → 顶面 90% 是平的；
+    #   2) 每块坐垫之间塞一条【压缝软条 + 滚边】，把沟填平；
+    #   3) 三个坐垫共用一条【贯穿的通长滚边】，坐面视觉上连成一体。
+    # =====================================================================
+    NS['SEAT_GAP'] = 0.004          # 极细缝（4mm）—— 真实缝线宽度
+    NS['SEAT_SIDE'] = 0.006
     NS['SEAT_W'] = (NS['SEAT_DECK_W'] - 2 * NS['SEAT_SIDE'] - NS['SEAT_GAP'] * (NS['SEAT_N'] - 1)) / NS['SEAT_N']
     NS['SEAT_D'] = SEAT_FRONT - SEAT_BACK
     NS['SEAT_X0'] = -NS['SEAT_DECK_W'] / 2 + NS['SEAT_SIDE'] + NS['SEAT_W'] / 2
@@ -1036,20 +1234,22 @@ def build_04_step4():
     for k in range(NS['SEAT_N']):
         cx = NS['SEAT_X0'] + k * (NS['SEAT_W'] + NS['SEAT_GAP'])
         cy = (SEAT_BACK + SEAT_FRONT) / 2
-        c = B.superellipsoid_soft(
-            "seat_%d" % k, (NS['SEAT_W'], NS['SEAT_D'], NS['SEAT_T']), (cx, cy, NS['SEAT_BOT'] + NS['SEAT_T'] / 2), M_UP,
-            e1=0.87, e2=0.92, res_u=104, res_v=52,
-            squash_top=0.004, crown=0.007, top_clamp=SEAT_TOP - 0.002,
-            bot_clamp=NS['SEAT_BOT'] + 0.004)
+        # flat_frac=0.74 → 顶面 74% 高度范围都是平面；edge_roll=0.026 →
+        # 只有最外圈 26mm 做圆肩，其余完全是平的。
+        c = B.soft_slab(
+            "seat_%d" % k, (NS['SEAT_W'], NS['SEAT_D'], NS['SEAT_T']), (cx, cy, NS['SEAT_BOT'] + NS['SEAT_T'] / 2),
+            M_UP,
+            res_u=128, res_v=40,
+            top_clamp=SEAT_TOP, bot_clamp=NS['SEAT_BOT'] + 0.002,
+            flat_frac=0.86, edge_roll=0.026, bot_inset=0.024, bot_roll=0.022,
+            corner=0.95, crown=0.004, bulge=0.003,
+            noise=0.0016, noise_freq=11.0, noise_seed=k * 13 + 3)
+        # 顶面几乎不塌：只做极轻的"被坐过"凹陷（2mm），保持平整
         for v in c.data.vertices:
-            if v.co.z > SEAT_TOP - 0.014:
+            if v.co.z > SEAT_TOP - 0.010:
                 rr = min(1.0, math.hypot((v.co.x - cx) / (NS['SEAT_W'] / 2),
                                           (v.co.y - cy) / (NS['SEAT_D'] / 2)))
-                v.co.z -= 0.006 * math.cos(rr * math.pi / 2)
-        # 顶面中央平整、褶皱集中在边缘
-        SH.cloth_relax(c, amp=0.0032, freq=15.0, seed=k * 7 + 3,
-                       edge_bias=0.72, down_weight=0.25,
-                       center=(cx, cy), radial=(NS['SEAT_W'] / 2, NS['SEAT_D'] / 2))
+                v.co.z -= 0.002 * math.cos(rr * math.pi / 2)
         objs.append(c)
         NS['seat_objs'].append((c, cx, cy))
 
@@ -1091,7 +1291,15 @@ def build_04_step4():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -1124,6 +1332,26 @@ def build_04_step4():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -1191,6 +1419,10 @@ def build_04_step4():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -1227,6 +1459,10 @@ def build_04_step4():
     except NameError:
         pass
     try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
         NS['seat_deck'] = seat_deck
     except NameError:
         pass
@@ -1252,46 +1488,37 @@ def build_04_step4():
         pass
 
 
-def build_05_d():
+def build_05_d_4mm():
     global objs
 
-    # =====================================================================
-    # 6. 靠垫（完整外露，背面贴外壳内表面，留 4mm 缝）
-    # =====================================================================
-    NS['BC_N'] = 3
-    NS['BC_GAP'] = 0.016
-    NS['BC_W'] = (NS['SEAT_DECK_W'] - 0.026 - NS['BC_GAP'] * (NS['BC_N'] - 1)) / NS['BC_N']
-    NS['BC_H'] = 0.430
-    NS['BC_T'] = 0.170
-    NS['BC_CZ'] = SEAT_TOP + NS['BC_H'] / 2 - 0.010
-    # 【v18 关键修正】v17/v18 初版靠垫位置算错：
-    #   NS['BC_CY'] = BACK_IN + 0.016 + NS['BC_T']/2 = -0.2015
-    #   靠垫占 y ∈ [-0.274, -0.129]，而坐垫只到 y = SEAT_BACK = -0.160
-    #   → 靠垫有 134mm 藏在坐垫后面，实际只露出 31mm 的一条边（画面证实）。
-    # 正确：靠垫【压在坐垫上】，前缘略微搭到坐垫上方，
-    #   底面坐在坐垫顶面（SEAT_TOP），背面贴外壳内表面并留缝。
-    NS['BC_CY'] = -0.086
-    NS['BC_X0'] = -NS['SEAT_DECK_W'] / 2 + 0.013 + NS['BC_W'] / 2
-
-    NS['backc_objs'] = []
-    for k in range(NS['BC_N']):
-        cx = NS['BC_X0'] + k * (NS['BC_W'] + NS['BC_GAP'])
-        bc = B.superellipsoid_soft(
-            "backc_%d" % k, (NS['BC_W'], NS['BC_T'], NS['BC_H']), (cx, NS['BC_CY'], NS['BC_CZ']), M_UP,
-            e1=0.82, e2=0.90, res_u=76, res_v=46,
-            squash_top=0.006, crown=0.012, front_clamp=NS['BC_CY'] + NS['BC_T'] * 0.30,
-            bot_clamp=SEAT_TOP + 0.004)
-        for v in bc.data.vertices:
-            dy = v.co.y - NS['BC_CY']
-            dz = v.co.z - NS['BC_CZ']
-            a = math.radians(-11)
-            v.co.y = NS['BC_CY'] + dy * math.cos(a) - dz * math.sin(a)
-            v.co.z = NS['BC_CZ'] + dy * math.sin(a) + dz * math.cos(a)
-        SH.cloth_relax(bc, amp=0.0028, freq=14.0, seed=k * 11 + 5,
-                       edge_bias=0.70, down_weight=0.25,
-                       center=(cx, NS['BC_CY']), radial=(NS['BC_W'] / 2, NS['BC_T'] / 2))
-        objs.append(bc)
-        NS['backc_objs'].append((bc, cx))
+    # ---- 坐垫之间的【压缝软条 + 滚边】—— 把 4mm 细缝填成一条圆背脊 ----
+    # 这就是真实沙发"分块坐垫"的做法：几何连续，视觉靠滚边分区。
+    for k in range(NS['SEAT_N'] - 1):
+        gx = NS['SEAT_X0'] + NS['SEAT_W'] / 2 + NS['SEAT_GAP'] / 2 + k * (NS['SEAT_W'] + NS['SEAT_GAP'])
+        gz = SEAT_TOP - 0.012
+        # 软条：一根小圆角长条，填住缝隙并略微高出顶面
+        g = B.soft_slab(
+            "seat_seam_%d" % k, (NS['SEAT_GAP'] + 0.012, NS['SEAT_D'] - 0.010, 0.030),
+            (gx, cy, gz), M_UP,
+            # 【v23 · 网格密度下调 —— 修 482 处法线反向】
+            # 这条软条只有 20mm 宽 × 30mm 高，却用了 res_u=52 / res_v=26：
+            # 顶点密度远超尺寸需要 → 环与环之间产生大量被压扁的碎面
+            # （实测 seat_seam_0 有 482 处反向边，面积极小 0.000000 m²）。
+            # 改成 28/18：环间距 ~0.7mm，仍足够圆润，但不再有碎面。
+            res_u=28, res_v=18,
+            top_clamp=SEAT_TOP + 0.001, bot_clamp=SEAT_TOP - 0.030,
+            flat_frac=0.62, edge_roll=0.010, bot_inset=0.006, bot_roll=0.008,
+            corner=0.97,
+            noise=0.0008, noise_freq=13.0, noise_seed=k * 29 + 11)
+        objs.append(g)
+        # 缝上的滚边（沿分缝走一条）
+        pts = []
+        for i in range(31):
+            t = i / 30
+            yy = SEAT_BACK + 0.020 + (NS['SEAT_D'] - 0.040) * t
+            pts.append((gx, yy, SEAT_TOP - 0.004))
+        objs.append(B.pipe_on_surface("seat_seam_pipe_%d" % k, pts, g, M_WELT,
+                                       r=0.0055, res=10, lift=0.0022))
 
     # --- 回写共享变量到 NS ---
     try:
@@ -1331,7 +1558,15 @@ def build_05_d():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -1364,6 +1599,26 @@ def build_05_d():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -1431,6 +1686,10 @@ def build_05_d():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -1467,6 +1726,10 @@ def build_05_d():
     except NameError:
         pass
     try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
         NS['seat_deck'] = seat_deck
     except NameError:
         pass
@@ -1492,19 +1755,333 @@ def build_05_d():
         pass
 
 
-def build_06_d_11():
+def build_06_b():
+    global objs
+
+    # =====================================================================
+    # 6. 靠垫（完整外露，背面贴外壳内表面，留 4mm 缝）
+    # =====================================================================
+    NS['BC_N'] = 3
+    NS['BC_GAP'] = 0.006
+    NS['BC_W'] = (NS['SEAT_DECK_W'] - 0.030 - NS['BC_GAP'] * (NS['BC_N'] - 1)) / NS['BC_N']
+    NS['BC_H'] = 0.400
+    NS['BC_T'] = 0.165
+    # 【v22 · 修穿模】
+    #   v21 靠垫下缘 z = SEAT_TOP - 0.010 = 0.410，而坐垫顶面在 0.421
+    #   → 靠垫下缘插进坐垫 11mm（实测穿模检测：穿入 73~83% 顶点、最深 18mm）。
+    #   真实沙发：靠垫是【立在坐垫后方】的，下缘正好落在坐垫顶面高度上，
+    #   靠自身重量贴着坐垫后沿，不是插进去。
+    #   修正：下缘抬到 SEAT_TOP + 0.002（贴合坐垫顶面，不穿入）。
+    NS['BC_CZ'] = SEAT_TOP + 0.002 + NS['BC_H'] / 2
+    # 【v21】靠垫同样改成【大平面软包】（soft_slab），
+    #   顶面/正面平整、圆肩只在边缘 —— 不再是球。
+    #   靠垫之间也是 6mm 细缝 + 压缝条，不再是深沟。
+    # 【v22】靠垫整体再后移 12mm：前缘不越过坐垫后沿（-0.233），
+    #   坐垫与靠垫之间留出真实的高档沙发的"坐深"落差。
+    NS['BC_CY'] = -0.107
+    NS['BC_TILT'] = math.radians(-16.0)
+    NS['BC_X0'] = -NS['SEAT_DECK_W'] / 2 + 0.015 + NS['BC_W'] / 2
+
+    NS['backc_objs'] = []
+    # 【v22 · 靠垫后仰的旋转中心】
+    #   原代码绕【靠垫自身中心】旋转 → 下缘绕着中心往后甩，
+    #   下缘 z 反而升高/前移，底缘插进坐垫（实测残留 5.3mm 穿模）。
+    #   真实靠垫是【立在坐垫上、向后倒】—— 旋转中心在【下缘】。
+    #   绕下缘转后：下缘 z 不变（稳稳落在坐垫顶面），上缘往后靠。
+    NS['BC_PIVOT_Z'] = NS['BC_CZ'] - NS['BC_H'] / 2
+
+    for k in range(NS['BC_N']):
+        cx = NS['BC_X0'] + k * (NS['BC_W'] + NS['BC_GAP'])
+        bc = B.soft_slab(
+            "backc_%d" % k, (NS['BC_W'], NS['BC_T'], NS['BC_H']), (cx, NS['BC_CY'], NS['BC_CZ']), M_UP,
+            res_u=104, res_v=38,
+            top_clamp=NS['BC_CZ'] + NS['BC_H'] / 2, bot_clamp=NS['BC_CZ'] - NS['BC_H'] / 2,
+            flat_frac=0.78, edge_roll=0.030, bot_inset=0.026, bot_roll=0.024,
+            corner=0.93, crown=0.003, bulge=0.004,
+            noise=0.0022, noise_freq=10.0, noise_seed=k * 11 + 5)
+        # 后仰 16°：绕【下缘】旋转 —— 下缘稳落坐垫顶面，上缘贴靠背
+        ct, st = math.cos(NS['BC_TILT']), math.sin(NS['BC_TILT'])
+        for v in bc.data.vertices:
+            dy = v.co.y - NS['BC_CY']
+            dz = v.co.z - NS['BC_PIVOT_Z']
+            v.co.y = NS['BC_CY'] + dy * ct - dz * st
+            v.co.z = NS['BC_PIVOT_Z'] + dy * st + dz * ct
+        # 【v22】把靠垫下缘【顶到坐垫顶面之上】—— 后仰后下缘会略微下沉，
+        #   这里统一抬到 SEAT_TOP + 0.001，保证只"贴着"不"插进去"。
+        lift = (SEAT_TOP + 0.001) - min(v.co.z for v in bc.data.vertices)
+        if lift > 0:
+            for v in bc.data.vertices:
+                v.co.z += lift
+        objs.append(bc)
+        NS['backc_objs'].append((bc, cx))
+
+    # ---- 靠垫之间的【压缝条】—— 消除靠垫间的深缝 ----
+    for k in range(NS['BC_N'] - 1):
+        gx = NS['BC_X0'] + NS['BC_W'] / 2 + NS['BC_GAP'] / 2 + k * (NS['BC_W'] + NS['BC_GAP'])
+        g = B.soft_slab(
+            "backc_seam_%d" % k, (NS['BC_GAP'] + 0.014, NS['BC_T'] - 0.010, NS['BC_H'] - 0.020),
+            (gx, NS['BC_CY'], NS['BC_CZ']), M_UP,
+            res_u=52, res_v=26,
+            top_clamp=NS['BC_CZ'] + NS['BC_H'] / 2, bot_clamp=NS['BC_CZ'] - NS['BC_H'] / 2,
+            flat_frac=0.64, edge_roll=0.014, bot_inset=0.008, bot_roll=0.010,
+            corner=0.97,
+            noise=0.0010, noise_freq=12.0, noise_seed=k * 31 + 13)
+        # 压缝条与靠垫同姿态：绕下缘旋转
+        ct2, st2 = math.cos(NS['BC_TILT']), math.sin(NS['BC_TILT'])
+        for v in g.data.vertices:
+            dy = v.co.y - NS['BC_CY']
+            dz = v.co.z - NS['BC_PIVOT_Z']
+            v.co.y = NS['BC_CY'] + dy * ct2 - dz * st2
+            v.co.z = NS['BC_PIVOT_Z'] + dy * st2 + dz * ct2
+        objs.append(g)
+
+    # --- 回写共享变量到 NS ---
+    try:
+        NS['ARM_PAD_W'] = ARM_PAD_W
+    except NameError:
+        pass
+    try:
+        NS['ARM_PAD_Y0'] = ARM_PAD_Y0
+    except NameError:
+        pass
+    try:
+        NS['ARM_PAD_Y1'] = ARM_PAD_Y1
+    except NameError:
+        pass
+    try:
+        NS['ARM_SHELL_T'] = ARM_SHELL_T
+    except NameError:
+        pass
+    try:
+        NS['BC_CY'] = BC_CY
+    except NameError:
+        pass
+    try:
+        NS['BC_CZ'] = BC_CZ
+    except NameError:
+        pass
+    try:
+        NS['BC_GAP'] = BC_GAP
+    except NameError:
+        pass
+    try:
+        NS['BC_H'] = BC_H
+    except NameError:
+        pass
+    try:
+        NS['BC_N'] = BC_N
+    except NameError:
+        pass
+    try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
+        NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
+    except NameError:
+        pass
+    try:
+        NS['BC_W'] = BC_W
+    except NameError:
+        pass
+    try:
+        NS['BC_X0'] = BC_X0
+    except NameError:
+        pass
+    try:
+        NS['FD'] = FD
+    except NameError:
+        pass
+    try:
+        NS['FW'] = FW
+    except NameError:
+        pass
+    try:
+        NS['LEG_H'] = LEG_H
+    except NameError:
+        pass
+    try:
+        NS['LEG_R'] = LEG_R
+    except NameError:
+        pass
+    try:
+        NS['OUTLINE'] = OUTLINE
+    except NameError:
+        pass
+    try:
+        NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
+    except NameError:
+        pass
+    try:
+        NS['PIPE_LIFT'] = PIPE_LIFT
+    except NameError:
+        pass
+    try:
+        NS['PIPE_R'] = PIPE_R
+    except NameError:
+        pass
+    try:
+        NS['RADII'] = RADII
+    except NameError:
+        pass
+    try:
+        NS['RAIL'] = RAIL
+    except NameError:
+        pass
+    try:
+        NS['SEAT_BOT'] = SEAT_BOT
+    except NameError:
+        pass
+    try:
+        NS['SEAT_D'] = SEAT_D
+    except NameError:
+        pass
+    try:
+        NS['SEAT_DECK_CY'] = SEAT_DECK_CY
+    except NameError:
+        pass
+    try:
+        NS['SEAT_DECK_D'] = SEAT_DECK_D
+    except NameError:
+        pass
+    try:
+        NS['SEAT_DECK_W'] = SEAT_DECK_W
+    except NameError:
+        pass
+    try:
+        NS['SEAT_GAP'] = SEAT_GAP
+    except NameError:
+        pass
+    try:
+        NS['SEAT_N'] = SEAT_N
+    except NameError:
+        pass
+    try:
+        NS['SEAT_SIDE'] = SEAT_SIDE
+    except NameError:
+        pass
+    try:
+        NS['SEAT_T'] = SEAT_T
+    except NameError:
+        pass
+    try:
+        NS['SEAT_W'] = SEAT_W
+    except NameError:
+        pass
+    try:
+        NS['SEAT_X0'] = SEAT_X0
+    except NameError:
+        pass
+    try:
+        NS['SHOULDER'] = SHOULDER
+    except NameError:
+        pass
+    try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
+        NS['STATES'] = STATES
+    except NameError:
+        pass
+    try:
+        NS['S_LEFT'] = S_LEFT
+    except NameError:
+        pass
+    try:
+        NS['S_RIGHT'] = S_RIGHT
+    except NameError:
+        pass
+    try:
+        NS['_al'] = _al
+    except NameError:
+        pass
+    try:
+        NS['_total'] = _total
+    except NameError:
+        pass
+    try:
+        NS['arm_pad_objs'] = arm_pad_objs
+    except NameError:
+        pass
+    try:
+        NS['backc_objs'] = backc_objs
+    except NameError:
+        pass
+    try:
+        NS['foot_x'] = foot_x
+    except NameError:
+        pass
+    try:
+        NS['foot_y'] = foot_y
+    except NameError:
+        pass
+    try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
+        NS['seat_deck'] = seat_deck
+    except NameError:
+        pass
+    try:
+        NS['seat_objs'] = seat_objs
+    except NameError:
+        pass
+    try:
+        NS['shell'] = shell
+    except NameError:
+        pass
+    try:
+        NS['shell_frames'] = shell_frames
+    except NameError:
+        pass
+    try:
+        NS['shell_params'] = shell_params
+    except NameError:
+        pass
+    try:
+        NS['shell_sects'] = shell_sects
+    except NameError:
+        pass
+
+
+def build_07_d():
     global objs
 
     # =====================================================================
     # 7. 扶手垫（坐在外壳扶手段顶 0.390 上）
     # =====================================================================
-    NS['ARM_PAD_W'] = ARM_W + 0.014
-    # 【v18】扶手垫改为【完整覆盖扶手段顶】——
-    # v17 初版 NS['ARM_PAD_Y0'] = BACK_CY+0.115 = -0.24，起点在后靠背里侧，
-    # 于是靠垫后方留出一段空扶手面，画面上看起来像"孤零零一块垫子"。
-    # 现在从靠背内表面附近起、到扶手前端收口，整条扶手都有软包。
+    NS['ARM_PAD_W'] = ARM_W + 0.016
+    # 【v19】扶手垫完整覆盖扶手段顶。
+    # v18 的 NS['ARM_PAD_Y0'] = -0.300（起点在后靠背里侧）→ 靠垫后方留一段空扶手面，
+    # 画面上像"孤零零一块垫子"。现在从靠背内表面起、到扶手前端收口。
     NS['ARM_PAD_Y0'] = -0.300
-    NS['ARM_PAD_Y1'] = ARM_FRONT - 0.030
+    NS['ARM_PAD_Y1'] = ARM_FRONT - 0.028
 
     NS['arm_pad_objs'] = []
     for sx in (-1, 1):
@@ -1512,23 +2089,34 @@ def build_06_d_11():
         ax = sx * ARM_X
         d = NS['ARM_PAD_Y1'] - NS['ARM_PAD_Y0']
         cy = (NS['ARM_PAD_Y0'] + NS['ARM_PAD_Y1']) / 2
-        pad = B.superellipsoid_soft(
+        # 【v19】垫子【嵌入】扶手段顶 12mm —— 不是浮在上面。
+        # 之前垫底正好落在段顶（ARM_BOARD_TOP），加上 top_clamp 的圆肩，
+        # 视觉上像一块搁在板上的独立垫子。嵌入后与扶手壳体连成一体。
+        # 【v21】扶手垫同样改成【大平面软包】——
+        #   v20 用超椭球，扶手垫是个鼓包，顶面不平。
+        #   现在 flat_frac=0.70 → 顶面 70% 是平的；
+        #   前端收口（前端 12% 收窄下沉），模拟软包前端翻边。
+        # 【v22】扶手垫配色修正：
+        #   原来用 fabric_cream（#F2EDE2 米白），渲染出来【发灰发脏】——
+        #   米白在深色棚拍环境里失去了亮度，反而不如米色显眼。
+        #   改为 fabric_oat_d（#9D8F7A 深燕麦），与外壳同色系但更暖，
+        #   和浅燕麦坐垫形成【明确的明暗分层】，靠垫最浅、坐垫次之、
+        #   扶手垫最深 —— 视觉层次自然，扶手也不会"抢戏"。
+        pad = B.soft_slab(
             "arm_pad_%s" % nm, (NS['ARM_PAD_W'], d, ARM_PAD_T),
-            (ax, cy, ARM_BOARD_TOP + ARM_PAD_T / 2 - 0.002), M_UP,
-            e1=0.88, e2=0.94, res_u=88, res_v=38,
-            squash_top=0.003, crown=0.005,
-            top_clamp=ARM_TOP,
-            front_clamp=NS['ARM_PAD_Y1'] - 0.014,
-            bot_clamp=ARM_BOARD_TOP + 0.003)
+            (ax, cy, ARM_BOARD_TOP + ARM_PAD_T / 2 - 0.012), M_PAD,
+            res_u=120, res_v=36,
+            top_clamp=ARM_TOP, bot_clamp=ARM_BOARD_TOP - 0.010,
+            flat_frac=0.74, edge_roll=0.030, bot_inset=0.022, bot_roll=0.020,
+            corner=0.93, crown=0.010, bulge=0.006,
+            noise=0.0016, noise_freq=11.0, noise_seed=7 if sx < 0 else 19)
+        # 前端收口：最后 12% 收窄并微微下沉
         for v in pad.data.vertices:
             t = (v.co.y - NS['ARM_PAD_Y0']) / d
             if t > 0.88:
                 k2 = (t - 0.88) / 0.12
-                v.co.x = ax + (v.co.x - ax) * (1 - 0.09 * k2)
-                v.co.z -= 0.007 * k2
-        SH.cloth_relax(pad, amp=0.0022, freq=12.0, seed=7 if sx < 0 else 19,
-                       edge_bias=0.65, down_weight=0.25,
-                       center=(ax, cy), radial=(NS['ARM_PAD_W'] / 2, d / 2))
+                v.co.x = ax + (v.co.x - ax) * (1 - 0.10 * k2)
+                v.co.z -= 0.006 * k2
         objs.append(pad)
         NS['arm_pad_objs'].append((pad, ax, cy, NS['ARM_PAD_W'], d))
 
@@ -1570,7 +2158,15 @@ def build_06_d_11():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -1603,6 +2199,26 @@ def build_06_d_11():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -1670,6 +2286,10 @@ def build_06_d_11():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -1706,6 +2326,10 @@ def build_06_d_11():
     except NameError:
         pass
     try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
         NS['seat_deck'] = seat_deck
     except NameError:
         pass
@@ -1731,7 +2355,324 @@ def build_06_d_11():
         pass
 
 
-def build_07_2():
+def build_08_2():
+    global objs
+
+    # =====================================================================
+    # 7b. 装饰抱枕（点缀色）—— 让整件家具"有配色"，不再是一片米色
+    # =====================================================================
+    # 【v21】之前整件只有一种米色，渲染出来像没上色的白模。
+    # 现在加两只小抱枕（陶土橙 / 灰绿），
+    # 放在左右两端靠垫前侧，斜靠在扶手与靠垫之间。
+    NS['PIL_W'], NS['PIL_H'], NS['PIL_T'] = 0.270, 0.280, 0.110
+    # 【v22】抱枕位置修正：
+    #   v21 把抱枕放在 x = ±(NS['SEAT_DECK_W']/2 - 0.230) = ±0.638，
+    #   而扶手内沿在 ±0.889 → 抱枕在扶手【里面】，
+    #   从正面/45° 都被扶手外侧挡住（实测渲染里只剩一小条颜色，
+    #   find_color 在正面图只找到 2262px、在 3q 图 2088px）。
+    #   修正：抱枕挪到【紧贴扶手内沿】(±0.770)、前移到 y=0.240，
+    #   并把宽度收到 270mm —— 保证抱枕边缘不会穿进扶手内沿(0.889)。
+    # 【v22】抱枕高度：
+    #   抱枕高 280mm。真实摆法是【斜靠在一号靠垫与扶手之间】，
+    #   下缘落在坐垫面(0.42)附近，上缘到 0.66 左右 —— 不能高过靠背顶(0.82)。
+    #   中心 ≈ (0.42 + 0.66)/2 = 0.54。
+    #   v22 第 1 轮把它抬到 0.615 → 顶部到 0.786，快跟靠背一样高，明显失真。
+    NS['PIL_CZ'] = 0.545
+    NS['PIL_TILT'] = math.radians(-24.0)
+
+    NS['pillow_specs'] = [
+        ("pillow_L", -0.700, 0.055, M_ACC1, 0),
+        ("pillow_R", 0.700, 0.055, M_ACC2, 1),
+    ]
+    for nm, px, py, mat, sd in NS['pillow_specs']:
+        pil = B.soft_slab(
+            nm, (NS['PIL_W'], NS['PIL_T'], NS['PIL_H']), (px, py, NS['PIL_CZ']), mat,
+            res_u=88, res_v=32,
+            top_clamp=NS['PIL_CZ'] + NS['PIL_H'] / 2, bot_clamp=NS['PIL_CZ'] - NS['PIL_H'] / 2,
+            flat_frac=0.56, edge_roll=0.044, bot_inset=0.032, bot_roll=0.030,
+            corner=0.82, crown=0.010, bulge=0.010,
+            noise=0.0030, noise_freq=13.0, noise_seed=101 + sd * 17)
+        # 【v22 · 抱枕姿态重做】
+        #   v21 的抱枕是"立着靠"（绕 X 后仰 26°、绕 Z 歪 9°），
+        #   但它的中心在 x=±0.750、扶手内壁在 ±0.889 —— 抱枕整体缩在扶手内侧，
+        #   而扶手是全高实体（0.505~0.620），
+        #   所以从正面/45° 只能看到一条 20~30px 宽的色边（实测 find_color）。
+        #
+        #   修正（实测踩坑两轮）：
+        #     第 1 轮 把它挪到 x=±0.845（扶手内沿）想"骑在扶手上"
+        #            → part_audit 显示 pillow_R x 到 1.011，
+        #              即 125mm 的抱枕直接插进了扶手实体里（埋了）。
+        #     第 2 轮 改回 x=±0.700，并【去掉绕 Y 的向内倒角】
+        #            （绕 Y 倒角会让抱枕下半截朝扶手方向倾 → 插进扶手）。
+        #            现在靠【后仰 + 侧歪】两个轴完成斜靠，绕 Y 角保持 0。
+        ay = math.radians(-30.0)           # 绕 X：向后仰（顶边往后）
+        az = math.radians(14.0 if sd == 0 else -14.0)   # 绕 Z：侧歪
+        ay2 = 0.0                          # 绕 Y：不倒（否则插进扶手）
+        for v in pil.data.vertices:
+            dx = v.co.x - px
+            dy = v.co.y - py
+            dz = v.co.z - NS['PIL_CZ']
+            # 绕 X
+            y1 = dy * math.cos(ay) - dz * math.sin(ay)
+            z1 = dy * math.sin(ay) + dz * math.cos(ay)
+            # 绕 Z
+            x2 = dx * math.cos(az) - y1 * math.sin(az)
+            y2 = dx * math.sin(az) + y1 * math.cos(az)
+            # 绕 Y
+            x3 = x2 * math.cos(ay2) + z1 * math.sin(ay2)
+            z3 = -x2 * math.sin(ay2) + z1 * math.cos(ay2)
+            v.co.x = px + x3
+            v.co.y = py + y2
+            v.co.z = NS['PIL_CZ'] + z3
+        # 【v22】把抱枕下半部"埋进"扶手垫一点（形成斜搭的接触感），
+        #   上半部保持在外 —— 所以整体中心抬到扶手垫顶附近。
+        objs.append(pil)
+        # 抱枕正面滚边（点缀色的深色边，勾出轮廓）
+        pts = []
+        for i in range(73):
+            a = 2 * math.pi * i / 72
+            pts.append((px + (NS['PIL_W'] / 2 - 0.012) * math.cos(a),
+                        py - NS['PIL_T'] / 2 + 0.006,
+                        NS['PIL_CZ'] + (NS['PIL_H'] / 2 - 0.014) * math.sin(a)))
+        objs.append(B.pipe_on_surface("%s_pipe" % nm, pts, pil, M_WELT,
+                                       r=0.0055, res=9, lift=0.0020))
+
+    # --- 回写共享变量到 NS ---
+    try:
+        NS['ARM_PAD_W'] = ARM_PAD_W
+    except NameError:
+        pass
+    try:
+        NS['ARM_PAD_Y0'] = ARM_PAD_Y0
+    except NameError:
+        pass
+    try:
+        NS['ARM_PAD_Y1'] = ARM_PAD_Y1
+    except NameError:
+        pass
+    try:
+        NS['ARM_SHELL_T'] = ARM_SHELL_T
+    except NameError:
+        pass
+    try:
+        NS['BC_CY'] = BC_CY
+    except NameError:
+        pass
+    try:
+        NS['BC_CZ'] = BC_CZ
+    except NameError:
+        pass
+    try:
+        NS['BC_GAP'] = BC_GAP
+    except NameError:
+        pass
+    try:
+        NS['BC_H'] = BC_H
+    except NameError:
+        pass
+    try:
+        NS['BC_N'] = BC_N
+    except NameError:
+        pass
+    try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
+        NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
+    except NameError:
+        pass
+    try:
+        NS['BC_W'] = BC_W
+    except NameError:
+        pass
+    try:
+        NS['BC_X0'] = BC_X0
+    except NameError:
+        pass
+    try:
+        NS['FD'] = FD
+    except NameError:
+        pass
+    try:
+        NS['FW'] = FW
+    except NameError:
+        pass
+    try:
+        NS['LEG_H'] = LEG_H
+    except NameError:
+        pass
+    try:
+        NS['LEG_R'] = LEG_R
+    except NameError:
+        pass
+    try:
+        NS['OUTLINE'] = OUTLINE
+    except NameError:
+        pass
+    try:
+        NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
+    except NameError:
+        pass
+    try:
+        NS['PIPE_LIFT'] = PIPE_LIFT
+    except NameError:
+        pass
+    try:
+        NS['PIPE_R'] = PIPE_R
+    except NameError:
+        pass
+    try:
+        NS['RADII'] = RADII
+    except NameError:
+        pass
+    try:
+        NS['RAIL'] = RAIL
+    except NameError:
+        pass
+    try:
+        NS['SEAT_BOT'] = SEAT_BOT
+    except NameError:
+        pass
+    try:
+        NS['SEAT_D'] = SEAT_D
+    except NameError:
+        pass
+    try:
+        NS['SEAT_DECK_CY'] = SEAT_DECK_CY
+    except NameError:
+        pass
+    try:
+        NS['SEAT_DECK_D'] = SEAT_DECK_D
+    except NameError:
+        pass
+    try:
+        NS['SEAT_DECK_W'] = SEAT_DECK_W
+    except NameError:
+        pass
+    try:
+        NS['SEAT_GAP'] = SEAT_GAP
+    except NameError:
+        pass
+    try:
+        NS['SEAT_N'] = SEAT_N
+    except NameError:
+        pass
+    try:
+        NS['SEAT_SIDE'] = SEAT_SIDE
+    except NameError:
+        pass
+    try:
+        NS['SEAT_T'] = SEAT_T
+    except NameError:
+        pass
+    try:
+        NS['SEAT_W'] = SEAT_W
+    except NameError:
+        pass
+    try:
+        NS['SEAT_X0'] = SEAT_X0
+    except NameError:
+        pass
+    try:
+        NS['SHOULDER'] = SHOULDER
+    except NameError:
+        pass
+    try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
+        NS['STATES'] = STATES
+    except NameError:
+        pass
+    try:
+        NS['S_LEFT'] = S_LEFT
+    except NameError:
+        pass
+    try:
+        NS['S_RIGHT'] = S_RIGHT
+    except NameError:
+        pass
+    try:
+        NS['_al'] = _al
+    except NameError:
+        pass
+    try:
+        NS['_total'] = _total
+    except NameError:
+        pass
+    try:
+        NS['arm_pad_objs'] = arm_pad_objs
+    except NameError:
+        pass
+    try:
+        NS['backc_objs'] = backc_objs
+    except NameError:
+        pass
+    try:
+        NS['foot_x'] = foot_x
+    except NameError:
+        pass
+    try:
+        NS['foot_y'] = foot_y
+    except NameError:
+        pass
+    try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
+        NS['seat_deck'] = seat_deck
+    except NameError:
+        pass
+    try:
+        NS['seat_objs'] = seat_objs
+    except NameError:
+        pass
+    try:
+        NS['shell'] = shell
+    except NameError:
+        pass
+    try:
+        NS['shell_frames'] = shell_frames
+    except NameError:
+        pass
+    try:
+        NS['shell_params'] = shell_params
+    except NameError:
+        pass
+    try:
+        NS['shell_sects'] = shell_sects
+    except NameError:
+        pass
+
+
+def build_09_b_2():
     global objs
 
     # =====================================================================
@@ -1740,25 +2681,41 @@ def build_07_2():
     NS['PIPE_R'] = 0.0100
     NS['PIPE_LIFT'] = 0.0036
 
-    # 8.1 坐垫赤道滚边
+    # 8.1 坐垫【顶面周边】滚边
+    # 【v21】v20 的滚边走"赤道"（z = SEAT_TOP-0.034），
+    # 在超椭球坐垫上是对的；但 v21 坐垫改成大平面软包后，
+    # 赤道正好在圆肩上，看不到。
+    # 改成沿【顶面边缘】走一圈 —— 真实软包坐垫的做法：
+    # 顶面平整区与圆肩的交界处压一道滚边，既勾边又强化"平面"的印象。
     for k, (c, cx, cy) in enumerate(NS['seat_objs']):
         pts = []
-        for i in range(73):
-            a = 2 * math.pi * i / 72
-            pts.append((cx + (NS['SEAT_W'] / 2 + 0.001) * math.cos(a),
-                        cy + (NS['SEAT_D'] / 2 + 0.001) * math.sin(a),
-                        SEAT_TOP - 0.034))
+        for i in range(89):
+            a = 2 * math.pi * i / 88
+            # 矩形周边（带圆角），落在顶面外沿
+            cs, sn = math.cos(a), math.sin(a)
+            px = (NS['SEAT_W'] / 2 - 0.016) * math.copysign(abs(cs) ** 0.62, cs)
+            py = (NS['SEAT_D'] / 2 - 0.016) * math.copysign(abs(sn) ** 0.62, sn)
+            pts.append((cx + px, cy + py, SEAT_TOP - 0.020))
         objs.append(B.pipe_on_surface("seat_pipe_%d" % k, pts, c, M_WELT,
                                       r=NS['PIPE_R'], lift=NS['PIPE_LIFT']))
 
-    # 8.2 靠垫底沿滚边
+    # 8.2 靠垫【正面周边】滚边
+    # 【v21】同上：靠垫改成大平面软包后，底沿滚边会跑到圆肩上。
+    # 改成沿【正面边缘】走一圈（真实靠垫的做法：正面压线）。
     for k, (bc, cx) in enumerate(NS['backc_objs']):
         pts = []
-        for i in range(37):
-            a = math.pi * i / 36 - math.pi / 2
-            pts.append((cx + (NS['BC_W'] / 2 - 0.004) * math.cos(a),
-                        NS['BC_CY'] - NS['BC_T'] / 2 - 0.008,
-                        NS['BC_CZ'] - NS['BC_H'] / 2 + 0.038 + 0.038 * math.cos(a)))
+        for i in range(89):
+            a = 2 * math.pi * i / 88
+            cs, sn = math.cos(a), math.sin(a)
+            px = (NS['BC_W'] / 2 - 0.018) * math.copysign(abs(cs) ** 0.62, cs)
+            pz = (NS['BC_H'] / 2 - 0.018) * math.copysign(abs(sn) ** 0.62, sn)
+            # 正面位置（沿法线朝前），并按后仰角变换
+            yy = NS['BC_CY'] + NS['BC_T'] / 2 - 0.010
+            dz = pz
+            dy = 0.0
+            ry = NS['BC_CY'] + dy * math.cos(NS['BC_TILT']) - dz * math.sin(NS['BC_TILT'])
+            rz = NS['BC_CZ'] + dy * math.sin(NS['BC_TILT']) + dz * math.cos(NS['BC_TILT'])
+            pts.append((cx + px, ry, rz))
         objs.append(B.pipe_on_surface("backc_pipe_%d" % k, pts, bc, M_WELT,
                                       r=0.0088, lift=0.0032))
 
@@ -1843,7 +2800,15 @@ def build_07_2():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -1876,6 +2841,26 @@ def build_07_2():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -1943,6 +2928,10 @@ def build_07_2():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -1979,6 +2968,10 @@ def build_07_2():
     except NameError:
         pass
     try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
         NS['seat_deck'] = seat_deck
     except NameError:
         pass
@@ -2004,7 +2997,7 @@ def build_07_2():
         pass
 
 
-def build_08_step8():
+def build_10_step10():
     global objs
 
     # =====================================================================
@@ -2128,7 +3121,15 @@ def build_08_step8():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -2161,6 +3162,26 @@ def build_08_step8():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -2228,6 +3249,10 @@ def build_08_step8():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -2264,6 +3289,10 @@ def build_08_step8():
     except NameError:
         pass
     try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
         NS['seat_deck'] = seat_deck
     except NameError:
         pass
@@ -2289,7 +3318,7 @@ def build_08_step8():
         pass
 
 
-def build_09_step9():
+def build_11_step11():
     global objs
 
     # =====================================================================
@@ -2340,7 +3369,15 @@ def build_09_step9():
     except NameError:
         pass
     try:
+        NS['BC_PIVOT_Z'] = BC_PIVOT_Z
+    except NameError:
+        pass
+    try:
         NS['BC_T'] = BC_T
+    except NameError:
+        pass
+    try:
+        NS['BC_TILT'] = BC_TILT
     except NameError:
         pass
     try:
@@ -2373,6 +3410,26 @@ def build_09_step9():
         pass
     try:
         NS['PATH'] = PATH
+    except NameError:
+        pass
+    try:
+        NS['PIL_CZ'] = PIL_CZ
+    except NameError:
+        pass
+    try:
+        NS['PIL_H'] = PIL_H
+    except NameError:
+        pass
+    try:
+        NS['PIL_T'] = PIL_T
+    except NameError:
+        pass
+    try:
+        NS['PIL_TILT'] = PIL_TILT
+    except NameError:
+        pass
+    try:
+        NS['PIL_W'] = PIL_W
     except NameError:
         pass
     try:
@@ -2440,6 +3497,10 @@ def build_09_step9():
     except NameError:
         pass
     try:
+        NS['SHOULDER_TOP'] = SHOULDER_TOP
+    except NameError:
+        pass
+    try:
         NS['STATES'] = STATES
     except NameError:
         pass
@@ -2476,6 +3537,10 @@ def build_09_step9():
     except NameError:
         pass
     try:
+        NS['pillow_specs'] = pillow_specs
+    except NameError:
+        pass
+    try:
         NS['seat_deck'] = seat_deck
     except NameError:
         pass
@@ -2507,11 +3572,13 @@ STEPS = [
     ('② 底座框', build_02_step2),
     ('③ 抛光铝脚', build_03_step3),
     ('④ 座板', build_04_step4),
-    ('⑤ 坐垫 ×%d（超椭球软包，底面压平坐实）', build_05_d),
-    ('⑥ 靠垫 ×%d（前移压在坐垫上，后仰 11°）', build_06_d_11),
-    ('⑦ 扶手垫 ×2', build_07_2),
-    ('⑧ 滚边（投射到曲面的半嵌包边）', build_08_step8),
-    ('⑨ 真实针脚（每针独立几何，合并为单曲线对象）', build_09_step9),
+    ('⑤ 坐垫 ×%d（大平面顶面，4mm 细缝，无深沟）', build_05_d_4mm),
+    ('⑤b 坐垫分缝压条 + 滚边（消除深沟）', build_06_b),
+    ('⑥ 靠垫 ×%d（大平面软包 + 压缝条）', build_07_d),
+    ('⑦ 扶手垫 ×2（大平面软包，嵌入扶手段顶）', build_08_2),
+    ('⑦b 装饰抱枕 ×2（陶土橙 / 灰绿，斜搭扶手上沿）', build_09_b_2),
+    ('⑧ 滚边（投射到曲面的半嵌包边）', build_10_step10),
+    ('⑨ 真实针脚（每针独立几何，合并为单曲线对象）', build_11_step11),
 ]
 
 

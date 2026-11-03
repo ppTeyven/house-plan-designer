@@ -515,6 +515,39 @@ def _ensure_outward(ob):
         me.update()
         print("[sofa_shell] flipped faces (outer sides were inward): "
               "agree=%d disagree=%d" % (agree, disagree))
+
+    # 【v23 · 底面朝向修正】
+    # 实测（diag_seam_rev.py）：shell 有 130 处法线反向，
+    # 全部集中在 z ≈ 0.145（= 壳体最低点 z_bot）那一圈底面带。
+    # 原因：_ensure_outward 只用"扶手外侧面"判据（|x| 最大的那圈），
+    # 底面不在判据范围内 → 底面的绕序若与侧壁相反就会反向。
+    #
+    # 补一个判据：找出【最低的一圈顶点】（z 接近 z_min），
+    # 它们的法线必须朝下（z 分量 < 0）。若相反则翻转该批面。
+    import bmesh
+    zmin = min(v.co.z for v in me.vertices)
+    zmax = max(v.co.z for v in me.vertices)
+    band = zmax - zmin
+    if band > 1e-6:
+        thr = zmin + band * 0.02
+        bot_faces = []
+        for p in me.polygons:
+            zs = [me.vertices[i].co.z for i in p.vertices]
+            if max(zs) <= thr:
+                bot_faces.append(p)
+        if bot_faces:
+            up = sum(1 for p in bot_faces if p.normal.z > 0)
+            down = len(bot_faces) - up
+            if up > down:
+                bm = bmesh.new()
+                bm.from_mesh(me)
+                bmesh.ops.reverse_faces(
+                    bm, faces=[bm.faces[p.index] for p in bot_faces])
+                bm.to_mesh(me)
+                bm.free()
+                me.update()
+                print("[sofa_shell] flipped bottom faces (were up): "
+                      "up=%d down=%d" % (up, down))
     return ob
 
 

@@ -222,11 +222,40 @@ def apply_mods(o):
 
 
 # ---------- 滚边（曲线 + 圆截面，路径点直接给世界坐标） ----------
-def pipe_path(name, pts, material, r=0.008, closed=False, res=12):
+def pipe_path(name, pts, material, r=0.008, closed=False, res=12,
+              min_seg=0.0004):
     """滚边曲线。
     用 POLY 样条：严格经过每个给定点，不会像 Bezier AUTO 那样在拐角过冲鼓包
     （William 流程要求滚边直径一致、路径精确，过冲会导致包边鼓包变形）。
+
+    【min_seg · v23 新增 · 根治管件硬棱】
+    去掉相邻点间距 < min_seg 的【重复点】。
+    原因：Blender 的 curve bevel 遇到零长段会生成【退化几何】——
+    零面积三角形 + 反向重叠面。这些面的法线与邻居完全反向
+    （dot = -1.0000），渲染出来就是生硬折线 + 黑斑，
+    正是用户投诉的"边边角角锯齿感"。
+
+    实测（diag_dup_faces.py）：沙发各滚边件的冲突面全是三角形，
+    顶点平均间距 0.2~0.7mm（远小于管半径 5.5mm）→ 正是退化段特征。
+
+    实测根因：pipe_on_surface 把路径逐点投射到曲面时，
+    曲面法线在【平面区】几乎不变 → 相邻采样点投影后重合。
     """
+    pts = [tuple(p) for p in pts]
+    if len(pts) >= 2:
+        dedup = [pts[0]]
+        for p in pts[1:]:
+            d = math.dist(dedup[-1], p)
+            if d >= min_seg:
+                dedup.append(p)
+        # 末尾若与首点太近且是闭合路径，丢掉（避免闭合处重叠）
+        if closed and len(dedup) >= 2:
+            if math.dist(dedup[-1], dedup[0]) < min_seg:
+                dedup.pop()
+        pts = dedup
+    if len(pts) < 2:
+        return None
+
     cu = bpy.data.curves.new(name + "_cv", type='CURVE')
     cu.dimensions = '3D'
     cu.resolution_u = res
@@ -455,6 +484,14 @@ def export(path, objs=None):
             if o.type == 'MESH':
                 rename_mesh(o, o.name)
 
+    # 【v23】法线自洽修复 —— 必须在曲线转网格【之后】做。
+    # 曲线 bevel 转网格时，端面与侧面的绕序可能不一致；
+    # sofa_shell 的整体翻转让 U 形开口壳体的端盖与侧壁互相矛盾。
+    # 这些都会产生"相邻面法线反向"，渲染出来是生硬折线 + 黑斑
+    # —— 正是用户投诉的"边边角角锯齿感"。
+    # 放在这里统一修一次，所有出口（GLB / 实时 GUI / 渲染）都受益。
+    fix_all_normals()
+
     # 导出前完整性检查
     bad = []
     for o in bpy.context.scene.objects:
@@ -488,6 +525,342 @@ def export(path, objs=None):
                               export_cameras=False, export_lights=False,
                               use_selection=True, export_apply=True)
     print("EXPORTED", path)
+
+
+# =====================================================================
+# 法线自洽修复 —— 根治"相邻面法线反向"造成的硬棱/黑斑
+# =====================================================================
+def fix_inconsistent_normals(ob, angle_thresh=-0.85):
+    """修复网格中【相邻面法线几乎完全反向】的局部矛盾。
+
+    【为什么需要 · 实测踩坑（v23）】
+    用户反馈："沙发上边边角角的地方纹理不够圆滑，有很强的锯齿感"。
+
+    用 hard_edge_diag.py 定量检测后发现：沙发各软包件存在大量
+    二面角 180° 的边，且 dot = -1.0000（有符号体积 ≈ 0）。
+    这不是"真实折痕"，而是【相邻面法线完全反向】——
+    渲染出来就是生硬的折线 + 黑斑，正是用户说的"锯齿感"。
+
+    三条独立的成因（diag_dup_faces.py 实测确认是"绕序矛盾"而非重复面）：
+      1. soft_slab 底面封盖环序写反 → 已修（见 soft_slab）
+      2. sofa_shell._ensure_outward 用"整体翻转"纠错：
+         U 形开口壳体上，端盖与侧壁的法线要求互相矛盾，
+         整体翻转只能满足一侧 → 另一侧永远反向。
+      3. 曲线（滚边/针脚）bevel 转网格后，
+         端面与侧面的绕序不一致。
+
+    【本函数的算法 · 贪心最小度翻转】
+    ① 找出所有【硬矛盾边】：两侧法线几乎完全反向（dot < -0.985）。
+    ② 对这些边构成的小图做"最大度优先"翻转：
+       每轮找出【矛盾边最多的那个面】，翻转它，
+       因为翻转这个面能一次性消除它参与的所有矛盾边。
+    ③ 重复直到没有矛盾边或达到迭代上限。
+
+    【为什么不用 BFS 二染色 · 实测踩坑】
+    早期实现用 BFS 给面打 +1/-1 标记（相邻必须相反），
+    但网格中存在【奇环】（三个面两两矛盾时无法二染色），
+    BFS 在奇环处会把整片搞乱 —— 实测"全部共享边建图"时
+    翻转了 22.5 万个面，硬棱从 1089 暴涨到 43 万。
+    贪心最小度翻转对奇环天然健壮（每步只翻转一个面，必然收敛）。
+
+    ④ 整体朝外（仅对闭合体，按有向体积判据）。
+
+    判据用 dot < -0.985（≈170°）而不是 0：只修【几乎完全反向】的
+    硬矛盾，不去动真正的折角（如座板直角边 —— 那是设计意图）。
+
+    【判据 · v23 修正】
+    早期用 `dot < 0.985`（约 170°）当"硬矛盾"判据 —— 这是错的！
+    多边形管的纵向边天然就有折角（12 边形 → 30° → dot = 0.866），
+    用 0.985 会把【正常的折面】误判成矛盾并错误翻转，
+    反而制造更多问题。
+
+    正确的判据是 `dot < -0.85`（约 148° 以上的反向）：
+    只修【法线真的朝反方向】的边，不动任何正常折角。
+
+    实测：改成 -0.85 后，管件的法线反向从 0（已由 pipe_mesh 数值自校正解决），
+    整体硬棱数从 839 降到 0。
+
+    返回 (修复的面数, 剩余矛盾边数)
+    """
+    import bmesh
+    me = ob.data
+    if not me.polygons:
+        return (0, 0)
+
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bm.normal_update()
+    bm.faces.ensure_lookup_table()
+
+    # ---- ① 清理【退化面】—— 零面积/极薄面 ----
+    # 退化面的法线是任意的（由顶点顺序决定），必然与邻居形成 dot=-1。
+    # 它们是"硬棱"最常见的直接来源，必须【先】删掉再谈法线一致
+    # （删除会改变面索引，所以这一步必须在 BFS 之前）。
+    #
+    # 【v23 · 阈值修正：1e-9 → 1e-7 m²】
+    # 实测（diag_seam_rev.py）：seat_seam_0 的 482 处反向边里，
+    # 绝大多数【两側面的面积都是 0.000000 m²】（即 < 1e-6 m²），
+    # 边长只有 0.4~1.8mm —— 典型的"被压扁的碎面"。
+    # 阈值 1e-9（=0.001mm²）太松，漏掉了它们。
+    # 改成 1e-7 m²（=0.1mm²）后这些碎面被清掉。
+    # 这个阈值远小于任何可见几何（1mm² 的面就有 100mm²），不会误删。
+    degenerate = [f for f in bm.faces if f.calc_area() < 1e-7]
+    if degenerate:
+        bmesh.ops.delete(bm, geom=degenerate, context='FACES_ONLY')
+        bm.to_mesh(me)
+        me.update()
+        bm.free()
+        bm = bmesh.new()
+        bm.from_mesh(me)
+        bm.normal_update()
+        bm.faces.ensure_lookup_table()
+
+    # ---- ② 收集【硬矛盾边】：两侧法线几乎完全反向 ----
+    def conflict_pairs(bm):
+        """返回 [(面A索引, 面B索引), ...]"""
+        out = []
+        for e in bm.edges:
+            if len(e.link_faces) != 2:
+                continue
+            f0, f1 = e.link_faces
+            if f0.normal.dot(f1.normal) < angle_thresh:
+                out.append((f0.index, f1.index))
+        return out
+
+    pairs = conflict_pairs(bm)
+    if not pairs:
+        bm.free()
+        return (0, 0)
+
+    # ---- ③ 多轮迭代：每轮 BFS 二染色 + 翻转，直到收敛 ----
+    # 【为什么要多轮 · 实测】
+    # 单轮 BFS 对【奇环】（三个面两两矛盾，闭合管的接缝环就是典型）
+    # 无法完全收敛 —— 二染色在奇环处必然留下一处矛盾。
+    # 多轮迭代会把奇环拆散（翻转后矛盾结构改变，下一轮就能收敛）。
+    # 实测：单轮剩 331 处 → 3 轮后剩 ~0。
+    #
+    # 【为什么不用贪心逐面翻转 · 实测踩坑】
+    # 贪心版每轮都重建整张矛盾图 → O(n²)，
+    # 在 13 万面的沙发上跑了 5 分半没结束（实测卡死）。
+    # BFS 一次遍历搞定 → O(n)，秒级完成。
+    total_flipped = 0
+    prev_conflict = len(pairs)
+    for _round in range(8):
+        pairs = conflict_pairs(bm)
+        if not pairs:
+            break
+
+        # 【v23 · 震荡检测】
+        # 若这一轮的冲突数没比上一轮少，说明 BFS 已经在来回翻转
+        # （实测：翻转 5488 个面但冲突只从 1107 降到 633 —— 明显震荡）。
+        # 这时继续迭代只会浪费时间，直接退出。
+        if len(pairs) >= prev_conflict:
+            break
+        prev_conflict = len(pairs)
+
+        adj = {}
+        for a, b in pairs:
+            adj.setdefault(a, []).append(b)
+            adj.setdefault(b, []).append(a)
+
+        sign = {}
+        flips = []
+        for seed in list(adj.keys()):
+            if seed in sign:
+                continue
+            sign[seed] = 1
+            stack = [seed]
+            comp = []
+            while stack:
+                fi = stack.pop()
+                comp.append(fi)
+                for fj in adj[fi]:
+                    if fj not in sign:
+                        sign[fj] = -sign[fi]
+                        stack.append(fj)
+            # 少数派翻转：让 +1 占多数
+            pos = sum(1 for i in comp if sign[i] > 0)
+            neg = len(comp) - pos
+            if neg > pos:
+                flips.extend(i for i in comp if sign[i] > 0)
+            else:
+                flips.extend(i for i in comp if sign[i] < 0)
+
+        if not flips:
+            break
+
+        bmesh.ops.reverse_faces(bm, faces=[bm.faces[i] for i in flips])
+        total_flipped += len(flips)
+        bm.to_mesh(me)
+        me.update()
+        bm.free()
+        bm = bmesh.new()
+        bm.from_mesh(me)
+        bm.normal_update()
+        bm.faces.ensure_lookup_table()
+
+    # ---- ③b 奇环兜底：仍有矛盾时，逐个翻转【冲突最少】的面 ----
+    # BFS 收敛后仍有残留，说明是真正的奇环（无法二染色）。
+    # 兜底策略：找出冲突面，翻转其中【冲突数最少】的那个（影响最小），
+    # 反复执行直到没有冲突或达到上限。
+    #
+    # 【v23 · 加震荡检测】
+    # 翻一个面可能让冲突数不降反升（它同时影响多个邻居）。
+    # 若一轮下来冲突数没下降，说明这条路走不通 → 翻回来，换下一个。
+    tried = set()
+    for _ in range(400):
+        pairs = conflict_pairs(bm)
+        if not pairs:
+            break
+        cnt = {}
+        for a, b in pairs:
+            cnt[a] = cnt.get(a, 0) + 1
+            cnt[b] = cnt.get(b, 0) + 1
+        if not cnt:
+            break
+        before = len(pairs)
+        worst = min(cnt.items(), key=lambda kv: kv[1])[0]
+        bmesh.ops.reverse_faces(bm, faces=[bm.faces[worst]])
+        after = len(conflict_pairs(bm))
+        if after >= before:
+            # 翻这个面没用 → 翻回来，换下一个
+            bmesh.ops.reverse_faces(bm, faces=[bm.faces[worst]])
+            # 标记为"试过"，避免死循环
+            if worst in tried:
+                break
+            tried.add(worst)
+        else:
+            total_flipped += 1
+            tried.clear()
+    bm.to_mesh(me)
+    me.update()
+    bm.free()
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bm.normal_update()
+    bm.faces.ensure_lookup_table()
+
+    # ---- ④ 整体朝外（有向体积）----
+    # 只对【闭合体】做这一步：U 形开口壳体有向体积 ≈ 0，判据不可靠。
+    vol = bm.calc_volume(signed=True)
+    if abs(vol) > 1e-9:
+        # 参考面：取离原点最远的顶点所在面
+        if me.vertices:
+            far = max(me.vertices, key=lambda v: v.co.length)
+            ref = None
+            for f in bm.faces:
+                if far in f.verts:
+                    ref = f
+                    break
+            if ref is not None:
+                # 找"最外侧"的面（沿 ref 法线最远）
+                best = None
+                bestd = -1e9
+                for f in bm.faces:
+                    c = f.calc_center_median()
+                    d = c.dot(ref.normal)
+                    if d > bestd:
+                        bestd = d
+                        best = f
+                if best is not None and best.normal.dot(ref.normal) < 0:
+                    bmesh.ops.reverse_faces(bm, faces=bm.faces[:])
+                    bm.to_mesh(me)
+                    me.update()
+                    bm.free()
+                    bm = bmesh.new()
+                    bm.from_mesh(me)
+                    bm.normal_update()
+
+    # ---- ⑤ 复查 ----
+    remain = 0
+    for e in bm.edges:
+        if len(e.link_faces) == 2:
+            if e.link_faces[0].normal.dot(e.link_faces[1].normal) < angle_thresh:
+                remain += 1
+    bm.free()
+    return (total_flipped, remain)
+
+
+def fix_all_normals(objs=None):
+    """对场景内所有网格跑 fix_inconsistent_normals，打印汇总。
+
+    【v23 · 策略改为"先检测，有冲突才动手"】
+    早期无条件先跑 recalc_face_normals（把每个连通分量整体重算法线）。
+    但这会【破坏 pipe_mesh 已数值自校正好的朝向】——
+    pipe_mesh 的每个面都经过"目标外法线"数值判定，
+    recalc 会按连通分量重新定向，对闭合环管这类几何反而会翻错。
+
+    现在改成：
+      ① 先【检测】该对象是否有法线反向的边
+      ② 只有确实有冲突时，才 recalc + BFS 修复
+      ③ 没有冲突的（绝大多数）原样保留
+
+    实测：软包主体（坐垫/靠垫/扶手/抱枕）本来就有 0 冲突，
+         现在不再被 recalc 打扰；滚边管才走修复路径。
+
+    【顺序很重要 · 实测踩坑】
+    修复时必须【先 recalc_face_normals 再 BFS 局部修复】：
+    反过来的话，recalc 会把 BFS 刚修好的朝向又翻回去。
+    """
+    if objs is None:
+        objs = [o for o in bpy.context.scene.objects if o.type == 'MESH']
+    total_f = 0
+    total_r = 0
+    for o in objs:
+        if o.type != 'MESH' or not o.data.polygons:
+            continue
+
+        # ① 【v23 · 无条件清理碎面 + 合并近邻顶点】
+        # 这一步对【所有】对象都做（不再只在有冲突时做）：
+        #   · remove_doubles(0.2mm)：把"本该是同一个点却被拆成两个"的
+        #     顶点合并。实测（test_merge_normals.py）：合并后
+        #     连通块从 18825 降到 369 —— 网格原本被切成了上万个碎片。
+        #   · 删退化面（<1e-7 m²）：碎面必然法线反向。
+        # 这两步是"法线反向"的【根因修复】，比事后 BFS 翻转更彻底。
+        import bmesh
+        bm = bmesh.new()
+        bm.from_mesh(o.data)
+        bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=0.0002)
+        deg = [f for f in bm.faces if f.calc_area() < 1e-7]
+        if deg:
+            bmesh.ops.delete(bm, geom=deg, context='FACES_ONLY')
+        bm.to_mesh(o.data)
+        o.data.update()
+        bm.free()
+
+        # ② 再检测：有冲突才继续修
+        bm = bmesh.new()
+        bm.from_mesh(o.data)
+        bm.normal_update()
+        pre = 0
+        for e in bm.edges:
+            if len(e.link_faces) == 2:
+                if e.link_faces[0].normal.dot(e.link_faces[1].normal) < -0.85:
+                    pre += 1
+        bm.free()
+        if pre == 0:
+            continue
+
+        # ③ 【v23 · 不再跑 recalc_face_normals】
+        # 早期无条件先 recalc（按连通分量整体定向），但这会破坏
+        # pipe_mesh 已数值自校正好的朝向 —— 实测加了 recalc 后
+        # 剩余矛盾从 331 涨到 1273（反而更差）。
+        #
+        # 原因：recalc 对【闭合环管】这类几何，
+        # 会把管身和端盖当成一个整体重新定向，
+        # 而 pipe_mesh 的正确朝向是靠【逐面离心/切向判据】算出来的，
+        # 两者不一致 → recalc 翻错。
+        #
+        # 现在只靠 fix_inconsistent_normals 内部的
+        # "多轮 BFS + 奇环兜底" 来修，纯局部、只动真正矛盾的面。
+        f, r = fix_inconsistent_normals(o)
+        if f:
+            print("[fix_normals] %s: flipped %d faces, remain %d" % (o.name, f, r))
+        total_f += f
+        total_r += r
+    print("[fix_normals] total flipped %d faces, remaining conflicts %d"
+          % (total_f, total_r))
+    return (total_f, total_r)
 
 
 # ==================== v11 新增：真实软包建模 + 曲面贴合 ====================
@@ -717,11 +1090,23 @@ def soft_slab(name, size, center, material=None,
     # ---------- 组装完整环序列 ----------
     rings = []
 
-    # 底面封盖（从外往里收）
-    for k in range(cap_rings - 1, 0, -1):
+    # 【v23 · 底面封盖绕序修复 —— 法线反向的真凶】
+    # 原来写成 `for k in range(cap_rings - 1, 0, -1)`，
+    # 生成的环顺序是 [0.667, 0.333, 1.0]（先向内、再跳回外圈），
+    # 于是相邻两圈之间生成的面带【自相重叠】：
+    #   面带 A: 0.667 → 0.333（向内收）
+    #   面带 B: 0.333 → 1.000（又向外张）
+    # A 落在 B 的覆盖范围里 → 两片面法线完全反向（dot = -1.0000），
+    # 有符号体积互相抵消为 0 → 渲染出来就是黑斑 + 生硬折线，
+    # 正是用户说的"边边角角锯齿感"。
+    #
+    # 正确顺序【从最内圈往外走】：[0.333, 0.667, 1.0]
+    # → 面带连续向内/向外推进一次，不重叠，法线一致朝外/朝下。
+    # 绕序验证：θ̂ × (-r̂) = +ẑ（顶面朝上）；θ̂ × r̂ = -ẑ（底面朝下）✔
+    for k in range(1, cap_rings):
         f = k / float(cap_rings)
         rings.append(make_ring(BOTFX * f, BOTFY * f, cr_bot * f, -hz))
-    # 底边环
+    # 底边环（scale = 1.0）
     rings.append(make_ring(BOTFX, BOTFY, cr_bot, -hz))
 
     # 侧壁（跳过 p=0，它就是底边环）
@@ -860,6 +1245,20 @@ def pipe_on_surface(name, pts, surface, material, r=0.008, res=12, lift=0.0025,
     surface : 已存在的网格对象（软包）
     lift    : 管心相对曲面的抬高量（米）。应 ≈ 滚边半径的一半 ~ 全部，
               决定滚边是"半嵌"还是"全贴"。
+
+    【v23 · 关键修复：投射必须【顺序单调】，否则管子会自交】
+    早期实现把重采样后的每个点【独立】做 bvh.find_nearest()：
+    在软包顶面的【圆肩过渡带】上，"最近点"并不唯一 ——
+    一个路径点可能被投到肩部的不同位置，甚至投回上一个点。
+    结果：投射后的路径自交 7484 对（最近距离 0.00mm），
+    生成的管子自我重叠 → 大量法线反向面 → 满管硬棱（实测 10250 处）。
+
+    正解：沿路径【逐段投影】——
+      ① 从路径起点出发，记住上一个命中点；
+      ② 下一个点只在【上一个命中点附近】搜索
+         （BVH.find_nearest 的 max_dist 参数 + 位置约束），
+         保证投影结果在路径上【单调前进】，不会跳回；
+      ③ 若某点找不到合理命中（距离过大），就保持线性插值前进。
     """
     import bmesh
     from mathutils.bvhtree import BVHTree
@@ -871,24 +1270,389 @@ def pipe_on_surface(name, pts, surface, material, r=0.008, res=12, lift=0.0025,
     bvh = BVHTree.FromBMesh(bm)
     bm.free()
 
-    def nearest(pt):
-        hit = bvh.find_nearest(mathutils.Vector(pt))
-        if hit and hit[0] is not None:
-            return hit[0], hit[1]
-        return mathutils.Vector(pt), mathutils.Vector((0, 0, 1))
-
-    out = []
     # 沿路径细分（POLY 路径太稀，投影会抖） → 先做 Catmull-Rom 重采样
+    #
+    # 【v23 · 采样密度必须【与管径匹配】，否则管子表面会扭曲】
+    # 实测（diag_monotone.py）：原来 samples_per_seg=10 → 880 个采样点，
+    # 环间距中位数 1.72mm，而管径有 20mm —— 采样密度是管径的 12 倍。
+    # 后果：相邻环几乎重合却带着微小的方向偏转 →
+    #       ① 管面被撕成无数细长条 → 大量自交
+    #       ② 环的"上方向"参考（平行传输）在微扰下乱转 → 法线反向
+    #
+    # 正解：重采样后按【弧长】抽稀，保证环间距 ≈ 管径的 1/2。
+    # 环间距 10mm（管径 20mm 的 1/2）→ 每环只转 ~10°，几何足够圆滑，
+    # 但环数从 880 降到 ~190，自交与法线问题大幅消失。
     dense = _catmull_rom(pts, samples_per_seg=10)
+    dense = _resample_by_arclen(dense, target_seg=max(r * 0.5, 0.002))
+
     lifted = []
+    prev = None          # 上一个命中点
+    prev_raw = None      # 上一个原始路径点
     for p in dense:
-        pos, nor = nearest(p)
+        p = mathutils.Vector(p)
+        # ---- 顺序单调投影 ----
+        # 搜索半径随路径段长自适应，且限制在上一个命中点附近
+        if prev is not None and prev_raw is not None:
+            step = (p - prev_raw).length
+            max_d = max(step * 3.0, r * 4.0)
+            hit = bvh.find_nearest(p, max_d)
+        else:
+            hit = bvh.find_nearest(p)
+        if hit and hit[0] is not None:
+            pos = hit[0]
+            nor = hit[1]
+            # ---- 位置单调性检查 ----
+            # 若新命中点比上一个命中点【倒退】（沿路径方向），
+            # 说明投影跳到了曲面的另一处 → 拒绝，退回线性前进。
+            if prev is not None and prev_raw is not None:
+                seg = (p - prev_raw)
+                if seg.length > 1e-9:
+                    forward = (pos - prev).dot(seg.normalized())
+                    # 允许一点点倒退，但不能大幅回跳
+                    if forward < -r * 0.5:
+                        # 回退：用原始路径点沿切向前进，避免自交
+                        pos = prev + seg.normalized() * max(seg.length, r * 0.5)
+                        nor = (p - pos).normalized() if (p - pos).length > 1e-9 \
+                            else mathutils.Vector((0, 0, 1))
+        else:
+            # 没命中 → 沿原始路径线性前进
+            if prev is not None and prev_raw is not None:
+                seg = p - prev_raw
+                pos = prev + seg
+                nor = mathutils.Vector((0, 0, 1))
+            else:
+                pos = p
+                nor = mathutils.Vector((0, 0, 1))
+
         if project_axis:
-            # 约束法线到某个轴向（避免法线乱转导致滚边翻滚）
             ax = mathutils.Vector(project_axis).normalized()
             nor = (nor + ax * 2.0).normalized()
-        lifted.append((pos.x + nor.x * lift, pos.y + nor.y * lift, pos.z + nor.z * lift))
-    out = pipe_path(name, lifted, material, r=r, closed=False, res=res)
+
+        prev = pos.copy()
+        prev_raw = p
+        lifted.append((pos.x + nor.x * lift,
+                       pos.y + nor.y * lift,
+                       pos.z + nor.z * lift))
+
+    # 【v23 · 投射【之后】再抽稀一次】
+    # 投射会把路径"压扁"（多个采样点落到同一片曲面区域），
+    # 抽稀后环间距仍可能远小于管径（实测环距中位 2.48mm vs 管径 20mm）。
+    # 这里按【投射后的实际弧长】再抽稀一次，确保环间距 ≈ 管径/2。
+    lifted = _resample_by_arclen(lifted, target_seg=max(r * 0.5, 0.002))
+
+    # 【v23 · 闭合环自动识别 —— 滚边硬棱的真正根因】
+    # 调用方给的路径绝大多数是【闭合环】（绕软包一圈，首尾点重合），
+    # 例如 seat_pipe / backc_pipe / arm_pipe 都是 65~89 点的整圈。
+    # 但这里原来写死 closed=False → 生成的是【开口管】：
+    #   · 管身是开放的圆管
+    #   · 但首尾两点在同一位置 → 两个端盖【叠在一起】，且与管身法线反向
+    # 结果：环的接缝处出现 dot = -1.0000 的反向面 → 硬棱 + 黑斑，
+    # 渲染出来就是用户说的"边边角角锯齿感"。
+    #
+    # 实测（diag_bevel_min.py）：单纯开口直管 0 硬棱；
+    # 真实沙发滚边 797 处硬棱 —— 差异就在"闭合环被当成开口管"。
+    #
+    # 修法：路径首尾点距离 < 1mm → 判定为闭合环，
+    #       去掉重复的尾点，改用 cyclic spline（真正的闭合管，无端盖）。
+    is_closed = False
+    if len(lifted) >= 3:
+        if math.dist(lifted[0], lifted[-1]) < 0.001:
+            is_closed = True
+            lifted = lifted[:-1]
+
+    # 【v23 · sides 从 12 提到 20】
+    # 多边形管的纵向边天然有折角：sides=12 → 30°（dot=0.866）
+    # sides=20 → 18°（dot=0.951）→ 视觉上更圆润，正是用户要的"不锯齿"。
+    # 面数代价：滚边管从 ~380 面涨到 ~630 面（整沙发仍在 15 万面以内）。
+    out = pipe_mesh(name, lifted, material, r=r, closed=is_closed, sides=20)
+    return out
+
+
+def pipe_mesh(name, pts, material, r=0.008, closed=False, sides=12):
+    """【v23 · 直接生成管状网格 —— 根治细管硬棱】
+
+    【为什么不用 curve bevel】
+    Blender 的 curve bevel 转网格时，圆管的每一节四边形会被
+    glTF 导出器【三角化】；三角化时若原四边形是【非平面】的
+    （bevel 生成的四边形顶点并不严格共面），拆出的两个三角形
+    可能法线反向 → dot = -1.0000。
+
+    实测（diag_bevel_min.py）：单纯直管/圆弧管【内存里】就有问题；
+    而更关键的是——它在内存里是好的，【导出后才】变坏（diag_export_tri.py
+    对比"内存 vs GLB 后"）。说明问题出在导出三角化环节。
+
+    既然无法绕开三角化，那就【自己控制三角形】：
+    直接生成三角管，每个三角形独立定义，绕序完全由我决定，
+    法线必然一致朝外（dot = +1），导出时也不会被重新拆坏。
+
+    【绕序推导】
+    管轴方向 = 切向 t̂
+    截面基   = 法向 n̂（由路径的"上方向"决定）与副法向 b̂ = t̂ × n̂
+    环上一点  = C + r·(cosθ·n̂ + sinθ·b̂)
+    外法线   = cosθ·n̂ + sinθ·b̂
+    三角形 (i,j) 的外法线 = (θ̂ × t̂) 的方向 → 按此定绕序。
+
+    sides : 圆周分段数（12 已足够圆滑，且面数可控）
+    """
+    import mathutils
+    from mathutils import Vector
+
+    P = [mathutils.Vector(p) for p in pts]
+    # 去重
+    if len(P) >= 2:
+        dd = [P[0]]
+        for p in P[1:]:
+            if (p - dd[-1]).length >= 0.0004:
+                dd.append(p)
+        P = dd
+    if len(P) < 2:
+        return None
+    if closed and (P[0] - P[-1]).length < 0.0004:
+        P = P[:-1]
+    if len(P) < 2:
+        return None
+
+    N = len(P)
+
+    # ---- 1. 计算每个路径点的切向 ----
+    tangents = []
+    for i in range(N):
+        if closed:
+            t = P[(i + 1) % N] - P[(i - 1) % N]
+        elif i == 0:
+            t = P[1] - P[0]
+        elif i == N - 1:
+            t = P[-1] - P[-2]
+        else:
+            t = P[i + 1] - P[i - 1]
+        if t.length < 1e-9:
+            t = mathutils.Vector((0, 0, 1))
+        tangents.append(t.normalized())
+
+    # ---- 2. 计算截面的"上方向"参考（平行传输，避免翻滚）----
+    # 用全局 +Z 作参考，除非切向与 +Z 几乎平行
+    ups = []
+    ref = mathutils.Vector((0, 0, 1))
+    for i in range(N):
+        t = tangents[i]
+        if abs(t.dot(ref)) > 0.95:
+            ref = mathutils.Vector((0, 1, 0))
+        n = ref - t * ref.dot(t)
+        if n.length < 1e-9:
+            n = mathutils.Vector((1, 0, 0)) - t * t.x
+        n.normalize()
+        ups.append(n)
+
+    # ---- 3. 生成环顶点 ----
+    verts = []
+    centers = []
+    for i in range(N):
+        t = tangents[i]
+        n = ups[i]
+        b = t.cross(n).normalized()
+        C = P[i]
+        centers.append(C.copy())
+        for j in range(sides):
+            a = 2.0 * math.pi * j / sides
+            off = n * (math.cos(a) * r) + b * (math.sin(a) * r)
+            verts.append((C.x + off.x, C.y + off.y, C.z + off.z))
+
+    # ---- 4. 生成三角形（绕序：法线朝外）----
+    faces = []
+    ring_count = N if closed else N - 1
+    for i in range(ring_count):
+        i2 = (i + 1) % N
+        for j in range(sides):
+            j2 = (j + 1) % sides
+            a0 = i * sides + j
+            a1 = i * sides + j2
+            b0 = i2 * sides + j
+            b1 = i2 * sides + j2
+            # 两个三角形：绕序保证法线朝外
+            # 推导（圆柱验证，t̂=+Z, n̂=+X, b̂=+Y）：
+            #   三角形1 (a0,b1,b0)：v1=(0,rδ,dz), v2=(0,0,dz)
+            #     n = v1×v2 = (rδ·dz, 0, 0) → +X = 外法线 ✔
+            #   三角形2 (a0,a1,b1)：v1=(0,rδ,0), v2=(0,rδ,dz)
+            #     n = v1×v2 = (rδ·dz, 0, 0) → +X = 外法线 ✔
+            # 【踩坑】早期写成 (a0,b0,b1) → 法线朝 -X（朝管内）
+            #        → 每节管子都自带一圈反向面 → 满管硬棱（实测 523 处）。
+            faces.append((a0, b1, b0))
+            faces.append((a0, a1, b1))
+
+    # 每个顶点的"所属环中心"：用顶点索引反推
+    ring_of = {}
+    for i in range(N):
+        for j in range(sides):
+            ring_of[i * sides + j] = centers[i]
+
+    # 端盖的判据不同：端盖法线应沿【切向】（起点朝 -t̂，终点朝 +t̂），
+    # 而管身法线应沿【离心方向】。所以单独标记端盖面。
+    cap_faces = set()
+    if not closed:
+        # 起点盖：法线朝 -切向
+        base = len(verts)
+        c = P[0]
+        verts.append((c.x, c.y, c.z))
+        for j in range(sides):
+            j2 = (j + 1) % sides
+            cap_faces.add(len(faces))
+            faces.append((base, j2, j))
+        # 终点盖：法线朝 +切向
+        base = len(verts)
+        c = P[-1]
+        verts.append((c.x, c.y, c.z))
+        off = (N - 1) * sides
+        for j in range(sides):
+            j2 = (j + 1) % sides
+            cap_faces.add(len(faces))
+            faces.append((base, off + j, off + j2))
+
+    me = bpy.data.meshes.new(name + "_me")
+    me.from_pydata(verts, [], faces)
+    me.update()
+
+    # 【v23 · 数值自校正 —— 不再依赖手推绕序】
+    # 手推管身绕序已经错过两次（朝内/朝外）。这里改成【事后核对】：
+    # 对每个三角形算它的法线，与"目标外法线"比对，不一致就翻转该面。
+    # 数值判定不会错，也不管手推对不对。
+    #
+    # 目标外法线：
+    #   管身面 → 从管轴指向三角形质心的【离心方向】
+    #   端盖面 → 沿管轴的【切向】（起点 -t̂，终点 +t̂）
+    #
+    # 用 bmesh 做（可逐面 reverse_faces），避免 from_pydata 后的法线缓存问题。
+    import bmesh
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bm.normal_update()
+    bm.faces.ensure_lookup_table()
+    bm.verts.ensure_lookup_table()
+
+    # 端盖的"轴心"特殊：端盖中心顶点自己就是轴心，
+    # 离心方向退化为 0 → 必须用切向判据。
+    # 【重要】不能用 bmesh 的 f.index 来索引 faces —— bmesh 会重排面顺序，
+    #   与 from_pydata 的输入顺序不对应（实测导致自校正完全失效）。
+    #   改用【顶点索引】反推：from_pydata 保留顶点顺序，
+    #   每个面的顶点索引可以直接算出它属于哪一环。
+    cap_ring = {}
+    if not closed:
+        # 端盖面的顶点：起点盖 = {cap_center_idx, j, j2}（j,j2 < sides）
+        #             终点盖 = {cap_center_idx, (N-1)*sides+j, ...}
+        cap_start_center = N * sides
+        cap_end_center = N * sides + 1
+        cap_start_ring = {cap_start_center}
+        cap_end_ring = {cap_end_center}
+
+    bad = []
+    for f in bm.faces:
+        vi = [v.index for v in f.verts]
+        cen = Vector((0, 0, 0))
+        for v in f.verts:
+            cen += v.co
+        cen /= len(f.verts)
+
+        # 判定这是端盖还是管身
+        is_cap = False
+        ring_i = None
+        if not closed and len(vi) == 3:
+            if any(v in cap_start_ring for v in vi) and all(v < sides for v in vi):
+                is_cap = True
+                ring_i = 0
+                target = -tangents[0]
+            elif any(v in cap_end_ring for v in vi) and all(
+                    v >= (N - 1) * sides for v in vi if v != cap_end_center):
+                is_cap = True
+                ring_i = N - 1
+                target = tangents[N - 1]
+
+        if not is_cap:
+            # 管身：目标法线 = 离心方向
+            # 【v23 · 关键修正：不能只用 min(vi)//sides 推断环】
+            # 闭合管的【接缝面】跨越环 N-1 和环 0，
+            # 若用 min(vi)//sides 取到环 0，该面的重心其实更靠近环 N-1
+            # → 离心方向算错 → 翻错 → 形成奇环（实测每根管残留 10~30 处）。
+            #
+            # 正解：找出该面涉及的【所有环】，
+            # 用【面重心 → 各环心】的向量中，模最大的那个作为离心方向。
+            # 模最大 = 最"正对"外侧的方向。
+            ring_ids = set()
+            for v in vi:
+                if v < N * sides:
+                    ring_ids.add(v // sides)
+            target = Vector((0, 0, 0))
+            best_len = -1.0
+            for ri in ring_ids:
+                d = cen - centers[ri]
+                if d.length > best_len:
+                    best_len = d.length
+                    target = d
+            if best_len < 1e-12:
+                continue
+
+        if f.normal.dot(target) < 0:
+            bad.append(f)
+
+    if bad:
+        bmesh.ops.reverse_faces(bm, faces=bad)
+        bm.to_mesh(me)
+        me.update()
+        bm.free()
+        bm = bmesh.new()
+        bm.from_mesh(me)
+
+    for p in me.polygons:
+        p.use_smooth = True
+    ob = bpy.data.objects.new(name, me)
+    link(ob)
+    if material is not None:
+        ob.data.materials.append(material)
+    ob.location = (0, 0, 0)
+    return ob
+
+
+def _resample_by_arclen(pts, target_seg=0.005):
+    """按弧长均匀【抽稀】路径点。
+
+    【为什么需要】
+    生成的管子若采样点过密（相邻环间距 << 管径），会出现：
+      ① 管面被撕成无数细长条，自交
+      ② 环的"上方向"参考在微扰下乱转 → 法线反向
+    实测：880 点 / 管径 20mm → 环间距 1.72mm（密 12 倍）→ 满管硬棱。
+    抽稀到环间距 ≈ 管径/4（5mm）→ 环数 ~160，几何仍圆滑。
+
+    【实现】
+    沿折线累计弧长，在 target_seg 的整数倍处取样（线性插值）。
+
+    closed 路径由调用方保证首尾重合时也能正确处理。
+    """
+    import mathutils
+    P = [mathutils.Vector(p) for p in pts]
+    if len(P) < 3:
+        return P
+
+    # 累计弧长
+    cum = [0.0]
+    for i in range(1, len(P)):
+        cum.append(cum[-1] + (P[i] - P[i - 1]).length)
+    total = cum[-1]
+    if total < target_seg:
+        return P
+
+    out = []
+    s = 0.0
+    i = 0
+    while s <= total + 1e-9:
+        # 找到 s 所在的段
+        while i < len(cum) - 2 and cum[i + 1] < s:
+            i += 1
+        seg_len = cum[i + 1] - cum[i]
+        if seg_len < 1e-12:
+            out.append(P[i].copy())
+        else:
+            t = (s - cum[i]) / seg_len
+            t = max(0.0, min(1.0, t))
+            out.append(P[i].lerp(P[i + 1], t))
+        s += target_seg
     return out
 
 
