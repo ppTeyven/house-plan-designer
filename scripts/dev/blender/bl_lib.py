@@ -282,7 +282,13 @@ def pbr(name, hexc, rough=0.6, metal=0.0, sheen=0.0, aniso=0.0):
 
 
 def fabric(name, hexc, rough=0.93, sheen=0.85, scale=240.0, strength=0.3):
-    """织物：经纬双 Wave + Sheen 绒感"""
+    """织物：经纬双 Wave + Sheen 绒感
+
+    【重要】Wave 纹理依赖 UV。超椭球软包等程序化生成的网格若没有 UV，
+    经纬波纹会失效 → 布料看起来像素色塑料（实测踩坑）。
+    因此这里同时挂一条【不依赖 UV 的三维噪声】作为底噪，
+    即使 UV 缺失，织物仍有细腻的颗粒感。
+    """
     m = pbr(name, hexc, rough, 0.0, sheen, 0.35)
     nt = m.node_tree
     bsdf = nt.nodes.get("Principled BSDF")
@@ -306,7 +312,18 @@ def fabric(name, hexc, rough=0.93, sheen=0.85, scale=240.0, strength=0.3):
     nt.links.new(warp.outputs["Fac"], mix.inputs[2])
     nt.links.new(weft.outputs["Fac"], mix.inputs[3])
     nt.links.new(mix.outputs[0], bump.inputs["Height"])
-    nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    # ---- 不依赖 UV 的三维细颗粒（保证无 UV 网格也有织物质感） ----
+    nz = nt.nodes.new("ShaderNodeTexNoise")
+    nz.inputs["Scale"].default_value = 420.0
+    nz.inputs["Detail"].default_value = 4.0
+    nz.inputs["Roughness"].default_value = 0.75
+    nz2 = nt.nodes.new("ShaderNodeBump")
+    nz2.inputs["Strength"].default_value = 0.22
+    nz2.inputs["Distance"].default_value = 0.00045
+    nt.links.new(tx.outputs["Object"], nz.inputs["Vector"])
+    nt.links.new(nz.outputs["Fac"], nz2.inputs["Height"])
+    nt.links.new(bump.outputs["Normal"], nz2.inputs["Normal"])
+    nt.links.new(nz2.outputs["Normal"], bsdf.inputs["Normal"])
     return m
 
 
@@ -337,3 +354,221 @@ def export(path, objs=None):
                               export_cameras=False, export_lights=False,
                               use_selection=True, export_apply=True)
     print("EXPORTED", path)
+
+
+# ==================== v11 新增：真实软包建模 + 曲面贴合 ====================
+# 背景（实测踩坑）：
+#  · v10 的坐垫/靠垫是"倒角盒子 + 顶点微调" → 渲染出来就是"简陋几何体拼凑"，
+#    因为倒角盒子的棱线是直的、鼓包是手搓的，没有软包该有的连续曲率。
+#  · v10 的滚边按【平面路径】走，而软包表面是【变形后的曲面】，
+#    于是滚边直接切进布里 → 用户看到的"明显穿模"。
+# 本节提供两个根治手段：
+#   1. superellipsoid_soft()  —— 参数化超椭球软包，真实软包的连续曲率
+#   2. pipe_on_surface()      —— 滚边逐点投射到曲面外侧（法线方向抬升），
+#                                 从根本上消灭"平面路径 vs 变形曲面"的穿模
+
+def superellipsoid_soft(name, size, center, material=None,
+                        e1=0.62, e2=0.72, res_u=64, res_v=32,
+                        squash_top=0.0, crown=0.0, top_clamp=None,
+                        front_clamp=None):
+    """参数化超椭球软包（真实软垫/靠包的标准做法）。
+
+    与"倒角盒子"的本质区别：
+      · 倒角盒子 = 直棱 + 平面顶 → 轮廓有硬折角，看起来像塑料件
+      · 超椭球   = 全曲面连续曲率 → 有软包的"饱满但松弛"的形体感
+
+    size   : (宽X, 深Y, 高Z)
+    e1     : 上下方向的指数（<1 圆钝，=1 椭球，>1 趋方）
+    e2     : 水平截面指数（<1 圆钝，=1 椭圆）
+    squash_top: 顶面额外下压量（米），做"被压过"的松软感
+    crown  : 顶面中央额外隆起（米），做饱满鼓包
+    top_clamp   : 顶面绝对高度上限（米）。超过的顶点压平 →
+                  得到【平整顶面 + 圆肩】的真实坐垫/扶手板形态。
+                  （不加的话超椭球顶永远是圆拱，像枕卷不像坐垫）
+    front_clamp : 前表面绝对深度上限（米），用于靠垫压出平整受压面。
+    """
+    import mathutils
+    hx, hy, hz = size[0] / 2, size[1] / 2, size[2] / 2
+    verts = []
+    faces = []
+    n_u = res_u
+    n_v = res_v
+
+    def sgnpow(x, e):
+        return math.copysign(abs(x) ** e, x) if abs(x) > 1e-12 else 0.0
+
+    # 经线：纬度 -pi/2 .. pi/2
+    for iv in range(n_v + 1):
+        v = -math.pi / 2 + math.pi * iv / n_v
+        cv = math.cos(v)
+        sv = math.sin(v)
+        for iu in range(n_u):
+            u = 2 * math.pi * iu / n_u
+            cu = math.cos(u)
+            su = math.sin(u)
+            x = hx * sgnpow(cv, e1) * sgnpow(cu, e2)
+            y = hy * sgnpow(cv, e1) * sgnpow(su, e2)
+            z = hz * sgnpow(sv, e1)
+            # 顶面中央隆起 / 压扁：按到中心的归一化距离
+            if cv > 0.25:
+                rr = min(1.0, math.hypot(x / hx, y / hy))
+                t = (cv - 0.25) / 0.75
+                z += (crown - squash_top) * math.cos(rr * math.pi / 2) * t
+            zz = z + center[2]
+            # 顶面压平：超过上限的顶点归到上限 → 平整台面 + 圆肩
+            if top_clamp is not None and zz > top_clamp:
+                zz = top_clamp
+            yy = y + center[1]
+            if front_clamp is not None and yy > front_clamp:
+                yy = front_clamp
+            verts.append((x + center[0], yy, zz))
+    for iv in range(n_v):
+        for iu in range(n_u):
+            i0 = iv * n_u + iu
+            i1 = iv * n_u + (iu + 1) % n_u
+            i2 = (iv + 1) * n_u + (iu + 1) % n_u
+            i3 = (iv + 1) * n_u + iu
+            faces.append((i0, i1, i2, i3))
+    me = bpy.data.meshes.new(name + "_me")
+    me.from_pydata(verts, [], faces)
+    me.update()
+    for p in me.polygons:
+        p.use_smooth = True
+    ob = bpy.data.objects.new(name, me)
+    link(ob)
+    if material is not None:
+        ob.data.materials.append(material)
+    ob.location = (0, 0, 0)
+    # 【关键】生成球面 UV —— 织物的经纬波纹依赖 UV，缺 UV 会变成素色塑料
+    uvl = me.uv_layers.new(name="UVMap")
+    for poly in me.polygons:
+        for li in poly.loop_indices:
+            vi = me.loops[li].vertex_index
+            vx = verts[vi][0] - center[0]
+            vy = verts[vi][1] - center[1]
+            vz = verts[vi][2] - center[2]
+            uvl.data[li].uv = (math.atan2(vy, vx) / (2 * math.pi) + 0.5,
+                               math.asin(max(-1.0, min(1.0, vz / max(hz, 1e-6)))) / math.pi + 0.5)
+    return ob
+
+
+def pipe_on_surface(name, pts, surface, material, r=0.008, res=12, lift=0.0025,
+                    project_axis=None):
+    """【穿模根治】把滚边路径逐点投射到软包曲面外侧。
+
+    之前 v10 的做法：滚边按平面矩形路径走 → 软包表面是变形后的曲面
+    → 滚边半径 8mm 有一半陷进布里 → 用户看到"明显穿模"。
+
+    本函数：对路径上每个采样点，沿 surface 的最近表面法线方向抬升，
+    使滚边管心正好落在曲面外侧 lift 处，管体刚好贴着表面走，
+    永远不会切进布面。
+
+    surface : 已存在的网格对象（软包）
+    lift    : 管心相对曲面的抬高量（米）。应 ≈ 滚边半径的一半 ~ 全部，
+              决定滚边是"半嵌"还是"全贴"。
+    """
+    import bmesh
+    from mathutils.bvhtree import BVHTree
+    import mathutils
+
+    # 建立 BVH
+    bm = bmesh.new()
+    bm.from_mesh(surface.data)
+    bvh = BVHTree.FromBMesh(bm)
+    bm.free()
+
+    def nearest(pt):
+        hit = bvh.find_nearest(mathutils.Vector(pt))
+        if hit and hit[0] is not None:
+            return hit[0], hit[1]
+        return mathutils.Vector(pt), mathutils.Vector((0, 0, 1))
+
+    out = []
+    # 沿路径细分（POLY 路径太稀，投影会抖） → 先做 Catmull-Rom 重采样
+    dense = _catmull_rom(pts, samples_per_seg=10)
+    lifted = []
+    for p in dense:
+        pos, nor = nearest(p)
+        if project_axis:
+            # 约束法线到某个轴向（避免法线乱转导致滚边翻滚）
+            ax = mathutils.Vector(project_axis).normalized()
+            nor = (nor + ax * 2.0).normalized()
+        lifted.append((pos.x + nor.x * lift, pos.y + nor.y * lift, pos.z + nor.z * lift))
+    out = pipe_path(name, lifted, material, r=r, closed=False, res=res)
+    return out
+
+
+def _catmull_rom(pts, samples_per_seg=10):
+    """Catmull-Rom 插值重采样（让滚边路径在投影前足够平滑）"""
+    import mathutils
+    P = [mathutils.Vector(p) for p in pts]
+    if len(P) < 2:
+        return P
+    ext = [P[0] + (P[0] - P[1])] + P + [P[-1] + (P[-1] - P[-2])]
+    out = []
+    for i in range(len(P) - 1):
+        p0, p1, p2, p3 = ext[i], ext[i + 1], ext[i + 2], ext[i + 3]
+        for s in range(samples_per_seg):
+            t = s / samples_per_seg
+            t2 = t * t
+            t3 = t2 * t
+            pt = 0.5 * ((2 * p1) + (-p0 + p2) * t +
+                        (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 +
+                        (-p0 + 3 * p1 - 3 * p2 + p3) * t3)
+            out.append(pt)
+    out.append(P[-1])
+    return out
+
+
+def cloth_displace_field(name, w, d, thick, center, material=None, res=64,
+                         pin_bottom=True, settle_frames=40, seed=0):
+    """【William 流程 Part2】布料解算生成位移场，用于塑造软包形变。
+
+    真实做一整块 cloth 物体成本高且不可控；这里做的是一个【解算后的形变场】：
+    1. 建高密平面网格
+    2. 加 Cloth + pressure_factor 从内部吹鼓
+    3. 解算若干帧
+    4. 读取解算后的顶点 z 作为"鼓包高度场"
+    5. 把高度场叠到软包的超椭球顶面上
+
+    返回 (网格对象, 高度场 list[(x,y,z)] 或 None)
+    """
+    import random
+    o = grid(name, w, d, res, (center[0], center[1], center[2]), material)
+    cl = o.modifiers.new("Cloth", 'CLOTH')
+    s = cl.settings
+    s.quality = 6
+    s.mass = 0.30
+    s.tension_stiffness = 22.0
+    s.compression_stiffness = 22.0
+    s.shear_stiffness = 12.0
+    s.bending_stiffness = 0.6
+    s.air_damping = 2.0
+    s.use_pressure = True
+    s.pressure_factor = 55.0
+    s.use_pressure_volume = True
+    s.collider_friction = 6.0
+    cs = cl.collision_settings
+    cs.use_collision = False
+    if pin_bottom:
+        # 底部圈钉死（模拟坐垫底部被框架压住）
+        vg = o.vertex_groups.new(name="pin")
+        for v in o.data.vertices:
+            if abs(v.co.z - center[2]) < 1e-6:
+                vg.add([v.index], 1.0, 'REPLACE')
+        vg = o.vertex_groups["pin"]
+        cl.settings.vertex_group_mass = "pin"
+
+    for f in range(settle_frames):
+        bpy.context.scene.frame_set(f + 1)
+
+    # 读取解算结果
+    dg = bpy.context.evaluated_depsgraph_get()
+    ev = o.evaluated_get(dg)
+    me = ev.to_mesh()
+    field = []
+    for v in me.vertices:
+        field.append((v.co.x, v.co.y, v.co.z))
+    ev.to_mesh_clear()
+    bpy.data.objects.remove(o, do_unlink=True)
+    return field

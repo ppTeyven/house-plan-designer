@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-03T11:16:16",
+ "generated": "2026-11-03T13:17:12",
  "total": 251,
  "groups": [
   {
@@ -2659,37 +2659,37 @@
      "group": "沙发组",
      "file": "sofa.glb",
      "status": "ok",
-     "tris": 359756,
+     "tris": 273276,
      "checks": [
       {
        "level": "ok",
        "text": "宽度在现实区间",
-       "value": "2240mm / 1800~2600"
+       "value": "2265mm / 1800~2600"
       },
       {
        "level": "ok",
        "text": "深度在现实区间",
-       "value": "900mm / 850~1100"
+       "value": "874mm / 850~1100"
       },
       {
        "level": "ok",
        "text": "高度在现实区间",
-       "value": "874mm / 650~950"
+       "value": "875mm / 650~950"
       },
       {
        "level": "ok",
        "text": "三角面达到细分阈值",
-       "value": "359,756 / ≥60,000"
+       "value": "273,276 / ≥60,000"
       },
       {
        "level": "ok",
        "text": "材质分区数",
-       "value": "9 个 / ≥3"
+       "value": "5 个 / ≥3"
       },
       {
        "level": "ok",
        "text": "U_<role> 规范材质",
-       "value": "7 个主题材质"
+       "value": "5 个主题材质"
       },
       {
        "level": "ok",
@@ -2697,9 +2697,9 @@
        "value": "z=-0.000"
       }
      ],
-     "ref": "refs/sofa_william_spec.png",
-     "refTitle": "Zanotta William 官方图纸",
-     "refNote": "Zanotta 官方 2D 规格图（William 1330.pdf）。设计：Damian Williamson，2010。1330/302 三人位 L224 × W90 × H87 cm；座高 43 cm。官方结构语言：薄层软包框架 + 铝合金脚 + 鹅绒坐靠包。本模型实测 2240 × 900 × 874.5 mm，坐垫厚 146 mm。来源：zanotta.com/ContentsFiles/William 1330.pdf（2026-11-03 查证）"
+     "ref": "refs/sofa_william_photo.jpg",
+     "refTitle": "Zanotta William 原版实拍",
+     "refNote": "Zanotta William 1330/302 官方产品实拍图（Damian Williamson，2010）。L224 × W90 × H87 cm，座高 43 cm。结构语言：薄层软包框架 + 可见抛光铝脚 + 扁平坐垫 + 两级扶手（侧板+独立扶手垫）+ 独立鹅绒靠垫。本模型实测 2265 × 874 × 875 mm，坐垫厚 178 mm，坐垫顶面压平至 43 cm。来源：zanotta.com 官方产品页 + dieter-horn.de 官方实拍（2026-11-03 查证）"
     },
     {
      "key": "lSofa",

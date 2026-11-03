@@ -1,0 +1,26 @@
+{
+ "sofa": {
+  "file": "sofa.glb"
+ },
+ "bed": {
+  "file": "bed.glb"
+ },
+ "chair": {
+  "file": "chair.glb"
+ },
+ "diningTable": {
+  "file": "diningTable.glb"
+ },
+ "coffeeTable": {
+  "file": "coffeeTable.glb"
+ },
+ "tvCabinet": {
+  "file": "tvCabinet.glb"
+ },
+ "wardrobe": {
+  "file": "wardrobe.glb"
+ },
+ "nightstand": {
+  "file": "nightstand.glb"
+ }
+}

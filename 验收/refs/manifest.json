@@ -1,8 +1,8 @@
 {
  "sofa": {
-  "file": "refs/sofa_william_spec.png",
-  "title": "Zanotta William 官方图纸",
-  "note": "Zanotta 官方 2D 规格图（William 1330.pdf）。设计：Damian Williamson，2010。1330/302 三人位 L224 × W90 × H87 cm；座高 43 cm。官方结构语言：薄层软包框架 + 铝合金脚 + 鹅绒坐靠包。本模型实测 2240 × 900 × 874.5 mm，坐垫厚 146 mm。来源：zanotta.com/ContentsFiles/William 1330.pdf（2026-11-03 查证）"
+  "file": "refs/sofa_william_photo.jpg",
+  "title": "Zanotta William 原版实拍",
+  "note": "Zanotta William 1330/302 官方产品实拍图（Damian Williamson，2010）。L224 × W90 × H87 cm，座高 43 cm。结构语言：薄层软包框架 + 可见抛光铝脚 + 扁平坐垫 + 两级扶手（侧板+独立扶手垫）+ 独立鹅绒靠垫。本模型实测 2265 × 874 × 875 mm，坐垫厚 178 mm，坐垫顶面压平至 43 cm。来源：zanotta.com 官方产品页 + dieter-horn.de 官方实拍（2026-11-03 查证）"
  },
  "bed": {
   "file": "refs/bed_porro_iro_spec.png",
