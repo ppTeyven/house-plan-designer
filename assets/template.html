@@ -14442,62 +14442,69 @@ window.__FURNFX = { groups: new Set(), apply: null };
 
 /* ===== 整屋统一光照 v3: 属性级接管 + 性能优化 ===== */
 (function () {
-  try {
-    while (su.length < 5) {
-      const e = new ro(16769976, 0, 7, 1.6);
-      e.castShadow = true; e.shadow.mapSize.set(2048, 2048);
-      e.shadow.bias = -.006; e.shadow.normalBias = .05; e.shadow.radius = 3;
-      e.shadow.camera.near = .05; e.shadow.camera.far = 9;
-      e.shadow.autoUpdate = false; pt.add(e); su.push(e);
-    }
-  } catch (e) { }
+  /*【时序修复】本模块原本在脚本加载时同步执行，但它依赖的对象全是稍后才有的：
+       场景 pt / 半球光 Tn / 补光 Oa / 渲染器 jt 在 Aw() -> Bv() 里才创建，
+       window.__D3 也是那时才挂上。
+     于是脚本加载时执行 `window.__D3.probe2 = ...` 直接抛 TypeError，
+     把整个 IIFE 打断 —— 连 requestAnimationFrame(tick) 都没能注册，
+     这套"统一光照"其实一次都没跑成功过：
+       · 影子灯池永远只有引擎自带的 3 盏，大户型角落没有补光
+       · 半球光 / 补光 / 环境强度 / 曝光 的锁定全都没生效
+     现在改成：等 pt/Tn/Oa/jt/__D3 全部就绪后再初始化并启动 tick（只做一次）。 */
+  var inited = false;
   const S = { lock: false, hemi: 0.18, fill: 0.08, env: null, envI: 0.28, exp: 1.0 };
-  try { S.env = pt.environment; } catch (e) { }
-  function lockGetSet(obj, key, getter, onEngineWrite) {
-    try {
-      Object.defineProperty(obj, key, {
-        configurable: true,
-        get: function () { return S.lock ? getter() : realV; },
-        set: function (v) { if (!S.lock) realV = v; else if (onEngineWrite) onEngineWrite(v); }
-      });
-      var realV = obj[key];
-    } catch (e) { }
-  }
-  try {
-    var realHemi = Tn.intensity, realFill = Oa.intensity, realEnv = pt.environment, realEnvI = pt.environmentIntensity, realExp = jt.toneMappingExposure;
-    Object.defineProperty(Tn, "intensity", { configurable: true, get: function () { return S.lock ? S.hemi : realHemi; }, set: function (v) { if (!S.lock) realHemi = v; } });
-    Object.defineProperty(Oa, "intensity", { configurable: true, get: function () { return S.lock ? S.fill : realFill; }, set: function (v) { if (!S.lock) realFill = v; } });
-    Object.defineProperty(pt, "environment", { configurable: true, get: function () { return S.lock ? S.env : realEnv; }, set: function (v) { if (!S.lock) realEnv = v; } });
-    Object.defineProperty(pt, "environmentIntensity", { configurable: true, get: function () { return S.lock ? S.envI : realEnvI; }, set: function (v) { if (!S.lock) realEnvI = v; } });
-    Object.defineProperty(jt, "toneMappingExposure", { configurable: true, get: function () { return S.lock ? S.exp : realExp; }, set: function (v) { if (!S.lock) realExp = v; } });
-    // 半球光颜色: 引擎写入在锁定期一律忽略
-    var oSet = Be.prototype.set, oCopy = Be.prototype.copy;
-    var dispC = Tn.color.clone();
-    dispC.set = function () { if (!S.lock) oSet.apply(this, arguments); return this; };
-    dispC.copy = function () { if (!S.lock) oCopy.apply(this, arguments); return this; };
-    Object.defineProperty(Tn, "color", { configurable: true, get: function () { return dispC; }, set: function () { } });
-    Tn.__setFake = function (h) { oSet.call(dispC, h); };
-  } catch (e) { }
-  // 影子灯池: 引擎写目标值, 我们输出平滑值
   var suWant = [], suCur = [];
-  try {
-    for (var i = 0; i < su.length; i++) {
-      (function (i2) {
-        suWant[i2] = su[i2].intensity; suCur[i2] = su[i2].intensity;
-        var rv = su[i2].intensity;
-        Object.defineProperty(su[i2], "intensity", {
-          configurable: true,
-          get: function () { return S.lock ? suCur[i2] : rv; },
-          set: function (v) { if (!S.lock) rv = v; else suWant[i2] = v; }
-        });
-      })(i);
-    }
-  } catch (e) { }
   var camL = null;
-  try { camL = new ro(16773596, 0, 0, 2); camL.castShadow = false; camL.intensity = 0; pt.add(camL); } catch (e) { camL = null; }
   var dirty = false, lampChk = 0, anyLamp = false;
+
+  function initLights() {
+    /* 影子灯池：引擎自带 3 盏（NL()），这里补到 5 盏，
+       让大户型四个角落 + 中心都有补光，避免远处房间发死。 */
+    try {
+      while (su.length < 5) {
+        const e = new ro(16769976, 0, 7, 1.6);
+        e.castShadow = true; e.shadow.mapSize.set(2048, 2048);
+        e.shadow.bias = -.006; e.shadow.normalBias = .05; e.shadow.radius = 3;
+        e.shadow.camera.near = .05; e.shadow.camera.far = 9;
+        e.shadow.autoUpdate = false; pt.add(e); su.push(e);
+      }
+    } catch (e) { try{window.__BOOT_ERR=String(e&&e.stack||e);}catch(_x){} }
+    try { S.env = pt.environment; } catch (e) { }
+    try {
+      var realHemi = Tn.intensity, realFill = Oa.intensity, realEnv = pt.environment, realEnvI = pt.environmentIntensity, realExp = jt.toneMappingExposure;
+      Object.defineProperty(Tn, "intensity", { configurable: true, get: function () { return S.lock ? S.hemi : realHemi; }, set: function (v) { if (!S.lock) realHemi = v; } });
+      Object.defineProperty(Oa, "intensity", { configurable: true, get: function () { return S.lock ? S.fill : realFill; }, set: function (v) { if (!S.lock) realFill = v; } });
+      Object.defineProperty(pt, "environment", { configurable: true, get: function () { return S.lock ? S.env : realEnv; }, set: function (v) { if (!S.lock) realEnv = v; } });
+      Object.defineProperty(pt, "environmentIntensity", { configurable: true, get: function () { return S.lock ? S.envI : realEnvI; }, set: function (v) { if (!S.lock) realEnvI = v; } });
+      Object.defineProperty(jt, "toneMappingExposure", { configurable: true, get: function () { return S.lock ? S.exp : realExp; }, set: function (v) { if (!S.lock) realExp = v; } });
+      // 半球光颜色: 引擎写入在锁定期一律忽略
+      var oSet = Be.prototype.set, oCopy = Be.prototype.copy;
+      var dispC = Tn.color.clone();
+      dispC.set = function () { if (!S.lock) oSet.apply(this, arguments); return this; };
+      dispC.copy = function () { if (!S.lock) oCopy.apply(this, arguments); return this; };
+      Object.defineProperty(Tn, "color", { configurable: true, get: function () { return dispC; }, set: function () { } });
+      Tn.__setFake = function (h) { oSet.call(dispC, h); };
+    } catch (e) { }
+    // 影子灯池: 引擎写目标值, 我们输出平滑值
+    try {
+      for (var i = 0; i < su.length; i++) {
+        (function (i2) {
+          suWant[i2] = su[i2].intensity; suCur[i2] = su[i2].intensity;
+          var rv = su[i2].intensity;
+          Object.defineProperty(su[i2], "intensity", {
+            configurable: true,
+            get: function () { return S.lock ? suCur[i2] : rv; },
+            set: function (v) { if (!S.lock) rv = v; else suWant[i2] = v; }
+          });
+        })(i);
+      }
+    } catch (e) { }
+    try { camL = new ro(16773596, 0, 0, 2); camL.castShadow = false; camL.intensity = 0; pt.add(camL); } catch (e) { camL = null; }
+    dirty = true;
+  }
   window.__LIGHTDBG = function () { return { hemi: S.lock ? S.hemi : -1, fill: S.fill, active: !!re.active, lock: S.lock, env: !!(S.env && S.lock) }; };
   window.__CAMDBG = function () { try { return { active: !!re.active, view: E.view, pos: Array.from(Ze.position.toArray()), tgt: Array.from(Tt.target.toArray()), ceil: !!C0.visible, suI: su.map(function (f) { return +(f.intensity || 0).toFixed(3); }), S0k: (S0 && S0.__k) || null, warm: !!window.__WARMREF, iu: !!iu }; } catch (e) { return { err: String(e).slice(0, 300) }; } };
+
   function tick(now) {
     try {
       var walking = true; /* CONST-LIGHT: 鸟瞰/漫游同一套,进屋前后不变 */
@@ -14508,14 +14515,11 @@ window.__FURNFX = { groups: new Set(), apply: null };
       } else {
         var night = false;
         try { night = rf().night; } catch (e) { }
-        S.hemi = Ai.hemi; if(!S.env)S.env = Ai.env || pt.environment; /* CONST-LIGHT */
+        S.hemi = Ai.hemi; if (!S.env) S.env = Ai.env || pt.environment; /* CONST-LIGHT */
         S.fill = Ai.fill; /* CONST-LIGHT */
-        S.envI = (function(){try{return rf().night?0.2:0.42;}catch(e){return 0.42;}})(); /* CONST-LIGHT */
+        S.envI = (function () { try { return rf().night ? 0.2 : 0.42; } catch (e) { return 0.42; } })(); /* CONST-LIGHT */
         S.exp = 1.08; /* CONST-LIGHT */
         if (Tn.__setFake) Tn.__setFake("#ffffff"); /* CONST-LIGHT */
-        try {
-          var sun = pt.getObjectByName("sun"); /* CONST-LIGHT: 太阳保持鸟瞰值 */
-        } catch (e) { }
         for (var zi = 0; zi < Zh.length; zi++) { try { if (Zh[zi].__lk) { delete Zh[zi].intensity; Zh[zi].__lk = false; } } catch (e) { } }
         if (camL) {
           camL.position.set(re.x / 1000, (re.ez + sn.eyeH) / 1000, re.y / 1000);
@@ -14532,7 +14536,7 @@ window.__FURNFX = { groups: new Set(), apply: null };
         }
         for (var si = 0; si < su.length; si++) {
           var want = suWant[si]; /* CONST-LIGHT */
-          var d = (want - suCur[si]);/* CONST-LIGHT: 影子灯瞬时同步 */
+          var d = (want - suCur[si]); /* CONST-LIGHT: 影子灯瞬时同步 */
           if (Math.abs(d) > 1e-3) { suCur[si] += d; dirty = true; }
           else if (suCur[si] !== want) { suCur[si] = want; }
         }
@@ -14557,7 +14561,24 @@ window.__FURNFX = { groups: new Set(), apply: null };
     } catch (e) { }
     requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+
+  /* 等场景就绪后再启动（轮询式，代价极低） */
+  function boot() {
+    if (inited) return;
+    try {
+      if (typeof m0 === "undefined" || !m0) { requestAnimationFrame(boot); return; }
+      if (typeof pt === "undefined" || !pt || typeof Tn === "undefined" || !Tn ||
+          typeof Oa === "undefined" || !Oa || typeof jt === "undefined" || !jt ||
+          typeof su === "undefined" || !su || typeof os === "undefined" || !os) {
+        requestAnimationFrame(boot); return;
+      }
+      inited = true;
+    } catch (e) { requestAnimationFrame(boot); return; }
+    try { initLights(); } catch (e) { try{window.__LIGHT_INIT_ERR=String(e&&e.stack||e);}catch(_x){} }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(boot);
+
   window.addEventListener("mousemove", function (e) {
     try {
       if (re.active && (Math.abs(e.movementX) > 260 || Math.abs(e.movementY) > 260)) e.stopImmediatePropagation();
