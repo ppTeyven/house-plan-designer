@@ -5,7 +5,17 @@ __pycache__/
 *_design/
 .DS_Store
 
+# 历史备份（归档在 scripts/dev/blender/_backups/）
 assets/template.backup.html
+assets/template*.bak*
+assets/template_orig.html
+assets/template_perfbase.html
+scripts/dev/blender/_backups/
+scripts/dev/blender/_archive/
+
+# 构建中间产物 / 调试截图
+assets/_asset_cache/
+assets/_shots/
+scripts/dev/blender/_shots/
 scripts/dev/transition-rec/
 scripts/dev/transition-rec2/
-
