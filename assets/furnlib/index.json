@@ -1,26 +1,755 @@
 {
- "sofa": {
-  "file": "sofa.glb"
+ "mirror": {
+  "file": "mirror.glb"
  },
- "bed": {
-  "file": "bed.glb"
+ "fan": {
+  "file": "fan.glb"
  },
- "chair": {
-  "file": "chair.glb"
+ "radiator": {
+  "file": "radiator.glb"
  },
- "diningTable": {
-  "file": "diningTable.glb"
+ "trashBin": {
+  "file": "trashBin.glb"
  },
- "coffeeTable": {
-  "file": "coffeeTable.glb"
+ "clothesRack": {
+  "file": "clothesRack.glb"
  },
- "tvCabinet": {
-  "file": "tvCabinet.glb"
+ "catTree": {
+  "file": "catTree.glb"
+ },
+ "petBed": {
+  "file": "petBed.glb"
+ },
+ "mobileDisplay": {
+  "file": "mobileDisplay.glb"
+ },
+ "printer": {
+  "file": "printer.glb"
+ },
+ "counter": {
+  "file": "counter.glb"
+ },
+ "lCounter": {
+  "file": "lCounter.glb"
+ },
+ "uCounter": {
+  "file": "uCounter.glb"
+ },
+ "toilet": {
+  "file": "toilet.glb"
+ },
+ "wallToilet": {
+  "file": "wallToilet.glb"
+ },
+ "squatToilet": {
+  "file": "squatToilet.glb"
+ },
+ "vanity": {
+  "file": "vanity.glb"
+ },
+ "mirrorCabinet": {
+  "file": "mirrorCabinet.glb"
+ },
+ "doubleVanity": {
+  "file": "doubleVanity.glb"
+ },
+ "pedestalSink": {
+  "file": "pedestalSink.glb"
+ },
+ "freeTub": {
+  "file": "freeTub.glb"
+ },
+ "shower": {
+  "file": "shower.glb"
+ },
+ "showerScreen": {
+  "file": "showerScreen.glb"
+ },
+ "bathtub": {
+  "file": "bathtub.glb"
+ },
+ "showerSet": {
+  "file": "showerSet.glb"
+ },
+ "towelWarmer": {
+  "file": "towelWarmer.glb"
+ },
+ "bathHeater": {
+  "file": "bathHeater.glb"
+ },
+ "laundrySink": {
+  "file": "laundrySink.glb"
+ },
+ "urinal": {
+  "file": "urinal.glb"
+ },
+ "serviceSink": {
+  "file": "serviceSink.glb"
+ },
+ "pantryCounter": {
+  "file": "pantryCounter.glb"
+ },
+ "acWall": {
+  "file": "acWall.glb"
+ },
+ "acFloor": {
+  "file": "acFloor.glb"
+ },
+ "waterHeater": {
+  "file": "waterHeater.glb"
+ },
+ "miniHeater": {
+  "file": "miniHeater.glb"
+ },
+ "gasHeater": {
+  "file": "gasHeater.glb"
+ },
+ "waterDispenser": {
+  "file": "waterDispenser.glb"
+ },
+ "purifier": {
+  "file": "purifier.glb"
+ },
+ "dishwasher": {
+  "file": "dishwasher.glb"
+ },
+ "tallOven": {
+  "file": "tallOven.glb"
+ },
+ "hood": {
+  "file": "hood.glb"
+ },
+ "microwave": {
+  "file": "microwave.glb"
+ },
+ "washer": {
+  "file": "washer.glb"
+ },
+ "dryer": {
+  "file": "dryer.glb"
+ },
+ "airPurifier": {
+  "file": "airPurifier.glb"
+ },
+ "robotVac": {
+  "file": "robotVac.glb"
+ },
+ "fridge": {
+  "file": "fridge.glb"
+ },
+ "fridgeDouble": {
+  "file": "fridgeDouble.glb"
+ },
+ "fridgeFrench": {
+  "file": "fridgeFrench.glb"
+ },
+ "freezer": {
+  "file": "freezer.glb"
+ },
+ "boiler": {
+  "file": "boiler.glb"
+ },
+ "manifold": {
+  "file": "manifold.glb"
+ },
+ "waterSoftener": {
+  "file": "waterSoftener.glb"
+ },
+ "coffeeMachine": {
+  "file": "coffeeMachine.glb"
+ },
+ "wineFridge": {
+  "file": "wineFridge.glb"
+ },
+ "fishTank": {
+  "file": "fishTank.glb"
+ },
+ "piano": {
+  "file": "piano.glb"
+ },
+ "treadmill": {
+  "file": "treadmill.glb"
+ },
+ "billiards": {
+  "file": "billiards.glb"
+ },
+ "mahjong": {
+  "file": "mahjong.glb"
+ },
+ "grandPiano": {
+  "file": "grandPiano.glb"
+ },
+ "sauna": {
+  "file": "sauna.glb"
+ },
+ "bike": {
+  "file": "bike.glb"
+ },
+ "yogaMat": {
+  "file": "yogaMat.glb"
+ },
+ "bed18": {
+  "file": "bed18.glb"
+ },
+ "bed15": {
+  "file": "bed15.glb"
+ },
+ "bed12": {
+  "file": "bed12.glb"
+ },
+ "bed20": {
+  "file": "bed20.glb"
+ },
+ "roundBed": {
+  "file": "roundBed.glb"
+ },
+ "bunkBed": {
+  "file": "bunkBed.glb"
+ },
+ "crib": {
+  "file": "crib.glb"
+ },
+ "tatami": {
+  "file": "tatami.glb"
+ },
+ "nightstand": {
+  "file": "nightstand.glb"
+ },
+ "bedBench": {
+  "file": "bedBench.glb"
+ },
+ "bayCushion": {
+  "file": "bayCushion.glb"
+ },
+ "diningBench": {
+  "file": "diningBench.glb"
+ },
+ "kingBed": {
+  "file": "kingBed.glb"
+ },
+ "kidsBed": {
+  "file": "kidsBed.glb"
+ },
+ "car": {
+  "file": "car.glb"
+ },
+ "suv": {
+  "file": "suv.glb"
+ },
+ "carport": {
+  "file": "carport.glb"
+ },
+ "carport2": {
+  "file": "carport2.glb"
+ },
+ "bicycle": {
+  "file": "bicycle.glb"
+ },
+ "pool": {
+  "file": "pool.glb"
+ },
+ "lawn": {
+  "file": "lawn.glb"
+ },
+ "stepStones": {
+  "file": "stepStones.glb"
+ },
+ "tree": {
+  "file": "tree.glb"
+ },
+ "shrub": {
+  "file": "shrub.glb"
+ },
+ "gazebo": {
+  "file": "gazebo.glb"
+ },
+ "parasol": {
+  "file": "parasol.glb"
+ },
+ "sunLounger": {
+  "file": "sunLounger.glb"
+ },
+ "swing": {
+  "file": "swing.glb"
+ },
+ "bbq": {
+  "file": "bbq.glb"
+ },
+ "waterFeature": {
+  "file": "waterFeature.glb"
+ },
+ "fence": {
+  "file": "fence.glb"
+ },
+ "gate": {
+  "file": "gate.glb"
+ },
+ "outdoorSet": {
+  "file": "outdoorSet.glb"
+ },
+ "stairU": {
+  "file": "stairU.glb"
+ },
+ "stairRun": {
+  "file": "stairRun.glb"
+ },
+ "stairLanding": {
+  "file": "stairLanding.glb"
+ },
+ "elevator": {
+  "file": "elevator.glb"
+ },
+ "evCharger": {
+  "file": "evCharger.glb"
+ },
+ "garageShelf": {
+  "file": "garageShelf.glb"
+ },
+ "workbench": {
+  "file": "workbench.glb"
+ },
+ "stage": {
+  "file": "stage.glb"
+ },
+ "slidingBoard": {
+  "file": "slidingBoard.glb"
+ },
+ "wifiAP": {
+  "file": "wifiAP.glb"
+ },
+ "ceilingSpeaker": {
+  "file": "ceilingSpeaker.glb"
+ },
+ "supplyVent": {
+  "file": "supplyVent.glb"
+ },
+ "returnVent": {
+  "file": "returnVent.glb"
+ },
+ "whiteboard": {
+  "file": "whiteboard.glb"
  },
  "wardrobe": {
   "file": "wardrobe.glb"
  },
- "nightstand": {
-  "file": "nightstand.glb"
+ "chest": {
+  "file": "chest.glb"
+ },
+ "coatRack": {
+  "file": "coatRack.glb"
+ },
+ "dresser": {
+  "file": "dresser.glb"
+ },
+ "fileCabinet": {
+  "file": "fileCabinet.glb"
+ },
+ "bookshelf": {
+  "file": "bookshelf.glb"
+ },
+ "tvCabinet": {
+  "file": "tvCabinet.glb"
+ },
+ "sideboard": {
+  "file": "sideboard.glb"
+ },
+ "wineCabinet": {
+  "file": "wineCabinet.glb"
+ },
+ "displayCabinet": {
+  "file": "displayCabinet.glb"
+ },
+ "shoeCabinet": {
+  "file": "shoeCabinet.glb"
+ },
+ "hallCabinet": {
+  "file": "hallCabinet.glb"
+ },
+ "cabWardrobe": {
+  "file": "cabWardrobe.glb"
+ },
+ "cabSlide": {
+  "file": "cabSlide.glb"
+ },
+ "cabCorner": {
+  "file": "cabCorner.glb"
+ },
+ "cabShoe": {
+  "file": "cabShoe.glb"
+ },
+ "cabSideboard": {
+  "file": "cabSideboard.glb"
+ },
+ "cabTall": {
+  "file": "cabTall.glb"
+ },
+ "cabBase": {
+  "file": "cabBase.glb"
+ },
+ "cabWall": {
+  "file": "cabWall.glb"
+ },
+ "cabTV": {
+  "file": "cabTV.glb"
+ },
+ "bathShelf": {
+  "file": "bathShelf.glb"
+ },
+ "plantShelf": {
+  "file": "plantShelf.glb"
+ },
+ "wardrobe2": {
+  "file": "wardrobe2.glb"
+ },
+ "wardrobe3": {
+  "file": "wardrobe3.glb"
+ },
+ "toyCabinet": {
+  "file": "toyCabinet.glb"
+ },
+ "bookshelfLow": {
+  "file": "bookshelfLow.glb"
+ },
+ "lockers": {
+  "file": "lockers.glb"
+ },
+ "kitchenTrolley": {
+  "file": "kitchenTrolley.glb"
+ },
+ "desk": {
+  "file": "desk.glb"
+ },
+ "lDesk": {
+  "file": "lDesk.glb"
+ },
+ "kidsDesk": {
+  "file": "kidsDesk.glb"
+ },
+ "coffeeTable": {
+  "file": "coffeeTable.glb"
+ },
+ "roundCoffee": {
+  "file": "roundCoffee.glb"
+ },
+ "ovalCoffee": {
+  "file": "ovalCoffee.glb"
+ },
+ "diningTable": {
+  "file": "diningTable.glb"
+ },
+ "longTable": {
+  "file": "longTable.glb"
+ },
+ "roundTable": {
+  "file": "roundTable.glb"
+ },
+ "ovalTable": {
+  "file": "ovalTable.glb"
+ },
+ "consoleTable": {
+  "file": "consoleTable.glb"
+ },
+ "kitchenIsland": {
+  "file": "kitchenIsland.glb"
+ },
+ "sideTable": {
+  "file": "sideTable.glb"
+ },
+ "island": {
+  "file": "island.glb"
+ },
+ "teaTable": {
+  "file": "teaTable.glb"
+ },
+ "barCounter": {
+  "file": "barCounter.glb"
+ },
+ "trainingTable": {
+  "file": "trainingTable.glb"
+ },
+ "curveTrainingTable": {
+  "file": "curveTrainingTable.glb"
+ },
+ "conferenceTable": {
+  "file": "conferenceTable.glb"
+ },
+ "lectern": {
+  "file": "lectern.glb"
+ },
+ "nestTables": {
+  "file": "nestTables.glb"
+ },
+ "diningTable4": {
+  "file": "diningTable4.glb"
+ },
+ "diningTable6": {
+  "file": "diningTable6.glb"
+ },
+ "roundTable10": {
+  "file": "roundTable10.glb"
+ },
+ "barTable": {
+  "file": "barTable.glb"
+ },
+ "standingDesk": {
+  "file": "standingDesk.glb"
+ },
+ "officeDesk": {
+  "file": "officeDesk.glb"
+ },
+ "deskBench2": {
+  "file": "deskBench2.glb"
+ },
+ "deskBench4": {
+  "file": "deskBench4.glb"
+ },
+ "bossDesk": {
+  "file": "bossDesk.glb"
+ },
+ "roundMeeting": {
+  "file": "roundMeeting.glb"
+ },
+ "reception": {
+  "file": "reception.glb"
+ },
+ "stool": {
+  "file": "stool.glb"
+ },
+ "officeChair": {
+  "file": "officeChair.glb"
+ },
+ "gamingChair": {
+  "file": "gamingChair.glb"
+ },
+ "chair": {
+  "file": "chair.glb"
+ },
+ "barStool": {
+  "file": "barStool.glb"
+ },
+ "entryBench": {
+  "file": "entryBench.glb"
+ },
+ "trainingChair": {
+  "file": "trainingChair.glb"
+ },
+ "armDiningChair": {
+  "file": "armDiningChair.glb"
+ },
+ "shoeBench": {
+  "file": "shoeBench.glb"
+ },
+ "sofa": {
+  "file": "sofa.glb"
+ },
+ "lSofa": {
+  "file": "lSofa.glb"
+ },
+ "loveseat": {
+  "file": "loveseat.glb"
+ },
+ "uSofa": {
+  "file": "uSofa.glb"
+ },
+ "curvedSofa": {
+  "file": "curvedSofa.glb"
+ },
+ "bendSofa": {
+  "file": "bendSofa.glb"
+ },
+ "chaise": {
+  "file": "chaise.glb"
+ },
+ "beanbag": {
+  "file": "beanbag.glb"
+ },
+ "ottoman": {
+  "file": "ottoman.glb"
+ },
+ "rockingChair": {
+  "file": "rockingChair.glb"
+ },
+ "hangingChair": {
+  "file": "hangingChair.glb"
+ },
+ "armchair": {
+  "file": "armchair.glb"
+ },
+ "booth": {
+  "file": "booth.glb"
+ },
+ "lounge": {
+  "file": "lounge.glb"
+ },
+ "theaterSofa": {
+  "file": "theaterSofa.glb"
+ },
+ "fourSofa": {
+  "file": "fourSofa.glb"
+ },
+ "singleSofa": {
+  "file": "singleSofa.glb"
+ },
+ "chaiseSofa": {
+  "file": "chaiseSofa.glb"
+ },
+ "readingChair": {
+  "file": "readingChair.glb"
+ },
+ "dayBed": {
+  "file": "dayBed.glb"
+ },
+ "officeSofa": {
+  "file": "officeSofa.glb"
+ },
+ "floorLamp": {
+  "file": "floorLamp.glb"
+ },
+ "deskLamp": {
+  "file": "deskLamp.glb"
+ },
+ "lawnLamp": {
+  "file": "lawnLamp.glb"
+ },
+ "chandelier": {
+  "file": "chandelier.glb"
+ },
+ "arcLamp": {
+  "file": "arcLamp.glb"
+ },
+ "fireplace": {
+  "file": "fireplace.glb"
+ },
+ "projScreen": {
+  "file": "projScreen.glb"
+ },
+ "speaker": {
+  "file": "speaker.glb"
+ },
+ "wallTV": {
+  "file": "wallTV.glb"
+ },
+ "freeBox": {
+  "file": "freeBox.glb"
+ },
+ "freeRoundBox": {
+  "file": "freeRoundBox.glb"
+ },
+ "freePlatform": {
+  "file": "freePlatform.glb"
+ },
+ "freeWallBlock": {
+  "file": "freeWallBlock.glb"
+ },
+ "freeCeilBlock": {
+  "file": "freeCeilBlock.glb"
+ },
+ "freeCyl": {
+  "file": "freeCyl.glb"
+ },
+ "freeRoundStage": {
+  "file": "freeRoundStage.glb"
+ },
+ "freeHalfCyl": {
+  "file": "freeHalfCyl.glb"
+ },
+ "freeTube": {
+  "file": "freeTube.glb"
+ },
+ "freeSphere": {
+  "file": "freeSphere.glb"
+ },
+ "freeHemi": {
+  "file": "freeHemi.glb"
+ },
+ "freeCone": {
+  "file": "freeCone.glb"
+ },
+ "freePyramid": {
+  "file": "freePyramid.glb"
+ },
+ "freeWedge": {
+  "file": "freeWedge.glb"
+ },
+ "freeArch": {
+  "file": "freeArch.glb"
+ },
+ "freeArcWall": {
+  "file": "freeArcWall.glb"
+ },
+ "freeSlats": {
+  "file": "freeSlats.glb"
+ },
+ "freeGlassScreen": {
+  "file": "freeGlassScreen.glb"
+ },
+ "freeSteps": {
+  "file": "freeSteps.glb"
+ },
+ "freeTorus": {
+  "file": "freeTorus.glb"
+ },
+ "freeLightBox": {
+  "file": "freeLightBox.glb"
+ },
+ "freeMirror": {
+  "file": "freeMirror.glb"
+ },
+ "freeVase": {
+  "file": "freeVase.glb"
+ },
+ "freeColumn": {
+  "file": "freeColumn.glb"
+ },
+ "freeExtrude": {
+  "file": "freeExtrude.glb"
+ },
+ "screenDivider": {
+  "file": "screenDivider.glb"
+ },
+ "rug": {
+  "file": "rug.glb"
+ },
+ "plant": {
+  "file": "plant.glb"
+ },
+ "curtain": {
+  "file": "curtain.glb"
+ },
+ "sheer": {
+  "file": "sheer.glb"
+ },
+ "bigPlant": {
+  "file": "bigPlant.glb"
+ },
+ "smallPlant": {
+  "file": "smallPlant.glb"
+ },
+ "hangingPlant": {
+  "file": "hangingPlant.glb"
+ },
+ "floorVase": {
+  "file": "floorVase.glb"
+ },
+ "wallPanel": {
+  "file": "wallPanel.glb"
+ },
+ "wallArt": {
+  "file": "wallArt.glb"
+ },
+ "wallArt3": {
+  "file": "wallArt3.glb"
+ },
+ "wallClock": {
+  "file": "wallClock.glb"
+ },
+ "roundRug": {
+  "file": "roundRug.glb"
+ },
+ "doormat": {
+  "file": "doormat.glb"
+ },
+ "playMat": {
+  "file": "playMat.glb"
  }
 }

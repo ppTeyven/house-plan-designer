@@ -148,7 +148,7 @@ def _frame_camera():
     cam.rotation_euler = (-direction).to_track_quat('-Z', 'Y').to_euler()
 
 
-def _setup_view(do_frame=False):
+def _setup_view(do_frame=False, focus=None):
     """视口：3/4 视角 + 实体着色（材质色）
 
     【实测踩坑】用 bpy.ops.view3d.view_camera() + region_3d.view_perspective
@@ -185,6 +185,14 @@ def _setup_view(do_frame=False):
         sp.shading.background_type = 'VIEWPORT'
         sp.shading.background_color = (0.06, 0.065, 0.075)
         sp.overlay.show_overlays = False
+
+        # ---- 【v23】跟随取景：对准当前正在建模的部位 ----
+        # 用户要求："你得时刻把你正在操作的位置放大展示给我看，
+        #            但是也别让整个物件的大小超过窗口"。
+        if focus is not None:
+            _focus_view(sp, focus[0], focus[1])
+            break
+
         if not do_frame:
             break
         sp.region_3d.view_perspective = 'PERSP'
@@ -206,6 +214,103 @@ def _setup_view(do_frame=False):
                         print("[LIVE] view set warn:", e)
                 break
         break
+
+
+# =====================================================================
+# 【v23】跟随取景 —— 始终对准当前正在建模的部位
+# =====================================================================
+# 用户要求：
+#   "你得时刻把你正在操作的位置放大展示给我看，
+#    但是也别让整个物件的大小超过窗口"
+#
+# 做法：
+#   ① 每步建模后，检测【本步新建的对象】（名字在 step 前后的差集里）
+#   ② 算它的包围盒中心与半径
+#   ③ 相机对准该中心，距离取【刚好框住这个部位】的距离
+#      —— 不是框住整个家具，这样"看细节"而不是"看全貌"
+#
+# 距离公式（球半径 r，视距 d，占画面高度比例 p）：
+#     asin(r/d) = fov_v/2 * p   →   d = r / sin(fov_v/2 * p)
+# p = 0.42 → 部位占画面 ~84% 高度，不会超出窗口。
+_view_state = {'dist': None, 'known': set()}
+
+
+def _focus_view(sp, center, radius):
+    """相机对准 center，距离刚好框住半径 radius。"""
+    import math
+    import mathutils
+
+    r3d = sp.region_3d
+    if r3d is None:
+        return
+    try:
+        lens = sp.lens if hasattr(sp, 'lens') else 50.0
+        sensor = sp.sensor_height if hasattr(sp, 'sensor_height') else 24.0
+        fov_v = 2.0 * math.atan(sensor / (2.0 * lens))
+    except Exception:
+        fov_v = math.radians(39.6)
+
+    p = 0.42
+    d = radius / max(math.sin(fov_v * 0.5 * p), 1e-3)
+    d = max(d, 0.10)
+
+    dirv = mathutils.Vector((0.72, 0.46, 1.0)).normalized()
+    target = mathutils.Vector(center)
+
+    # 平滑跟随（每帧走 30%），避免视角跳变看晕
+    k = 0.30
+    if _view_state['dist'] is None:
+        _view_state['dist'] = d
+    else:
+        _view_state['dist'] = _view_state['dist'] * (1 - k) + d * k
+
+    r3d.view_location = target
+    r3d.view_distance = _view_state['dist']
+    r3d.view_rotation = dirv.to_track_quat('Z', 'Y')
+    r3d.view_perspective = 'PERSP'
+    try:
+        r3d.update()
+    except Exception:
+        pass
+
+
+def _new_objects_focus():
+    """返回本步新建对象的 (中心, 半径)；没有则返回 None。
+
+    判定方式：与上一步的已知对象集合做差集。
+    """
+    try:
+        objs = set(o.name for o in bpy.context.scene.objects
+                   if o.type in ('MESH', 'CURVE'))
+    except Exception:
+        return None
+    new = objs - _view_state['known']
+    _view_state['known'] = objs
+    if not new:
+        return None
+
+    import mathutils
+    mn = mathutils.Vector((1e9, 1e9, 1e9))
+    mx = mathutils.Vector((-1e9, -1e9, -1e9))
+    any_vert = False
+    for o in bpy.context.scene.objects:
+        if o.name not in new:
+            continue
+        try:
+            bb = o.bound_box
+        except Exception:
+            continue
+        for c in bb:
+            w = o.matrix_world @ mathutils.Vector(c)
+            for i in range(3):
+                mn[i] = min(mn[i], w[i])
+                mx[i] = max(mx[i], w[i])
+            any_vert = True
+    if not any_vert:
+        return None
+    ctr = (mn + mx) * 0.5
+    radius = max((mx - mn).length * 0.5, 0.03)
+    return (ctr, radius)
 
 
 def _tick():
@@ -237,7 +342,12 @@ def _tick():
         traceback.print_exc()
     try:
         bpy.context.view_layer.update()
-        _setup_view(do_frame=(_frame <= 3))
+        # 【v23】跟随取景：优先对准本步新建的部位
+        focus = _new_objects_focus()
+        if focus is not None:
+            _setup_view(do_frame=False, focus=focus)
+        else:
+            _setup_view(do_frame=(_frame <= 3))
     except Exception:
         pass
     print("[LIVE] %2d/%-2d  %s" % (_frame, _total, label))

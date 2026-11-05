@@ -125,6 +125,14 @@ const state = {
   batch: '',        // 当前批次筛选（'' = 全部）
 };
 
+/* 【调试出口】把场景状态挂到 window，方便在浏览器控制台/CDP 里
+ * 直接检查"材质到底有没有生效""网格数量对不对"。
+ * 排查"白模"问题时靠肉眼和截图都定位不到根因，
+ * 必须能拿到 scene/model/material 的真实对象状态。
+ * 用法（DevTools）：__APP__.model.traverse(o => console.log(o.name, o.material))
+ */
+window.__APP__ = { state, scene, camera, renderer, THREE };
+
 /* ---------------- 建模批次（roadmap.json） ----------------
  * 251 款不是一次做完的 —— roadmap.json 把它们排成 P0~P4 五个批次，
  * 每批说明目标与款式 key。验收站左侧的 chip 显示每批实时进度，
@@ -345,7 +353,10 @@ function select(key) {
   }
 
   clearModel();
-  loader.load('models/' + it.file, (gltf) => {
+  /* 模型真源是 assets/furnlib/ —— 验收站不再自带一份 66MB 的副本。
+     原来 models/<type>.glb 与 assets/furnlib/<type>.glb 字节完全相同（251/251）,
+     复制两份只会让仓库体积翻倍、且容易两边不同步。 */
+  loader.load('../assets/furnlib/' + it.file, (gltf) => {
     const root = gltf.scene;
     root.traverse((o) => {
       if (o.isMesh) {
@@ -507,10 +518,97 @@ document.querySelectorAll('#viewbar [data-act]').forEach((b) => {
       a.href = renderer.domElement.toDataURL('image/png');
       a.click();
     }
+    else if (act === 'sheet') { openContactSheet(); }
+    else if (act === 'sheetClose') { $('sheetOverlay').hidden = true; }
   };
 });
 
 $('btnReload').onclick = () => { if (state.current) select(state.current); };
+
+/* ---------------- 总览图（一次性看全部款式） ----------------
+ *
+ * 【为什么必须有这个】
+ *   验收站一次只能看一个模型。251 件要一件件点，
+ *   "几乎所有家具都渲染异常"这种【整体性】问题根本看不出来。
+ *   → 一次把当前批次全部渲染成一张联系表，异常一目了然。
+ *
+ * 实现要点：
+ *   复用主渲染器 + 主场景，逐个 select() 后把视口画到 2D canvas 的对应格子里。
+ *   渲染器尺寸会被临时改小，结束��恢复。
+ */
+const SHEET_COLS = 10;
+const SHEET_TILE = 200;
+
+async function openContactSheet() {
+  const overlay = $('sheetOverlay');
+  const body = $('sheetBody');
+  if (!overlay || !body) return;
+  overlay.hidden = false;
+  body.innerHTML = '<div class="sheetloading">正在渲染总览图…</div>';
+
+  // 只渲染当前批次筛选出的款式
+  const k2b = state.roadmap ? state.roadmap._key2batch : null;
+  const items = state.items.filter((it) => {
+    if (!it.file) return false;
+    if (state.batch && k2b && k2b.get(it.key) !== state.batch) return false;
+    return true;
+  });
+  $('sheetTitle').textContent = state.batch || ('全部 ' + items.length);
+
+  const cols = Math.min(SHEET_COLS, Math.max(1, items.length));
+  const rows = Math.ceil(items.length / cols);
+  const W = cols * SHEET_TILE, H = rows * SHEET_TILE;
+  const cv = document.createElement('canvas');
+  cv.width = W; cv.height = H;
+  cv.className = 'sheetcanvas';
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = '#0d0d0f';
+  ctx.fillRect(0, 0, W, H);
+
+  // 临时把渲染器缩到单格大小
+  const oldW = renderer.domElement.width, oldH = renderer.domElement.height;
+  const oldPR = renderer.getPixelRatio();
+  renderer.setPixelRatio(1);
+  renderer.setSize(SHEET_TILE, SHEET_TILE, false);
+
+  const savedCurrent = state.current;
+  let done = 0, failed = [];
+  for (let i = 0; i < items.length; i++) {
+    const it = items[i];
+    try {
+      select(it.key);
+      // 等 GLB 加载 + 渲染一帧
+      await new Promise((res) => setTimeout(res, 380));
+      renderer.render(scene, camera);
+      const c = i % cols, r = Math.floor(i / cols);
+      ctx.drawImage(renderer.domElement, c * SHEET_TILE, r * SHEET_TILE, SHEET_TILE, SHEET_TILE);
+      // 角标：款式 key
+      ctx.font = '11px system-ui, sans-serif';
+      ctx.fillStyle = 'rgba(0,0,0,0.55)';
+      ctx.fillRect(c * SHEET_TILE, r * SHEET_TILE + SHEET_TILE - 16, 96, 16);
+      ctx.fillStyle = '#ffd452';
+      ctx.fillText(it.key, c * SHEET_TILE + 4, r * SHEET_TILE + SHEET_TILE - 4);
+    } catch (e) {
+      failed.push(it.key);
+    }
+    done++;
+    $('sheetStat').textContent = done + ' / ' + items.length;
+    if (done % 20 === 0) await new Promise((res) => setTimeout(res, 0));
+  }
+
+  // 恢复渲染器
+  renderer.setPixelRatio(oldPR);
+  renderer.setSize(oldW, oldH, false);
+  resize();
+
+  body.innerHTML = '';
+  body.appendChild(cv);
+  $('sheetStat').textContent = items.length + ' 件' +
+    (failed.length ? ' · 失败 ' + failed.join(',') : ' · 全部完成');
+
+  // 恢复之前选中的款式
+  if (savedCurrent) select(savedCurrent);
+}
 
 /* ---------------- 主循环 ---------------- */
 function resize() {

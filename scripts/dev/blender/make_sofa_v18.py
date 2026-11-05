@@ -405,6 +405,23 @@ live.MARK("⑥ 靠垫 ×%d（大平面软包 + 压缝条）" % BC_N)
 # 7. 扶手垫（坐在外壳扶手段顶 0.390 上）
 # =====================================================================
 ARM_PAD_W = ARM_W + 0.016
+# 【v23 · 扶手垫与扶手段【中心对齐】—— 修穿模】
+# 实测（probe_defects.py）：扶手垫中心在 x=±1.010，
+#   而扶手段（shell 的扶手部分）实际占据 x ∈ [±0.893, ±1.129]，
+#   中心是 ±1.011 —— 看似一致，但【壳体的扶手内表面会随路径内收】
+#   （STATES 里 ARM_SHELL_T=0.236 沿路径方向是"进深"，不是宽度），
+#   导致扶手垫的【内缘】伸进壳体 12mm（实测穿入 882 个顶点、最深 11.9mm，
+#   集中在 y=-0.30~0 的靠背侧与 y=0.15~0.40 的中前段）。
+#
+#   根因：扶手垫【比扶手段宽】(0.236 vs 0.220)，多出的 16mm
+#   在【内侧】没有依托，悬空插进了靠背板与座板。
+#
+#   修法：扶手垫宽度收敛到与扶手段【一致】(ARM_W)，
+#         并把内缘向内让 3mm（绝不入壳），外缘让 1mm（与壳体共面但不越界）。
+#         → 扶手垫变成【嵌在扶手段顶上的软包】，不穿插、不悬空。
+ARM_PAD_W = ARM_W
+ARM_PAD_INSET = 0.003          # 内缘内缩量（米）
+ARM_PAD_OUTSET = 0.001         # 外缘外扩量（米）
 # 【v19】扶手垫完整覆盖扶手段顶。
 # v18 的 ARM_PAD_Y0 = -0.300（起点在后靠背里侧）→ 靠垫后方留一段空扶手面，
 # 画面上像"孤零零一块垫子"。现在从靠背内表面起、到扶手前端收口。
@@ -438,15 +455,28 @@ for sx in (-1, 1):
         flat_frac=0.74, edge_roll=0.030, bot_inset=0.022, bot_roll=0.020,
         corner=0.93, crown=0.010, bulge=0.006,
         noise=0.0016, noise_freq=11.0, noise_seed=7 if sx < 0 else 19)
+    # 【v23 · 内/外缘【非对称】偏移 —— 根治扶手侧面穿模】
+    # 扶手垫若以 ax 为中心左右对称，它的外缘会越过扶手段外表面，
+    # 内缘又会插进靠背板（实测穿入 882 顶点、最深 11.9mm）。
+    # 这里把垫子整体往【内侧】挪，外缘留 1mm 让出、内缘内收 3mm：
+    #   中心 x = ax + sx * (ARM_PAD_OUTSET - ARM_PAD_INSET) / 2
+    #   即：L 侧往 -X 挪 1mm，R 侧往 +X 挪 1mm？—— 不对，
+    #   内侧是【朝中心】的方向 = -sx，所以应往 -sx 方向挪：
+    #   shift = -sx * (ARM_PAD_INSET - ARM_PAD_OUTSET) / 2
+    #   sx=-1（左）→ shift = +1mm（往 +X 挪 = 往内侧挪）✔
+    #   sx=+1（右）→ shift = -1mm（往 -X 挪 = 往内侧挪）✔
+    shift = -sx * (ARM_PAD_INSET - ARM_PAD_OUTSET) / 2.0
+    for v in pad.data.vertices:
+        v.co.x += shift
     # 前端收口：最后 12% 收窄并微微下沉
     for v in pad.data.vertices:
         t = (v.co.y - ARM_PAD_Y0) / d
         if t > 0.88:
             k2 = (t - 0.88) / 0.12
-            v.co.x = ax + (v.co.x - ax) * (1 - 0.10 * k2)
+            v.co.x = ax + shift + (v.co.x - ax - shift) * (1 - 0.10 * k2)
             v.co.z -= 0.006 * k2
     objs.append(pad)
-    arm_pad_objs.append((pad, ax, cy, ARM_PAD_W, d))
+    arm_pad_objs.append((pad, ax + shift, cy, ARM_PAD_W, d))
 live.MARK("⑦ 扶手垫 ×2（大平面软包，嵌入扶手段顶）")
 
 # =====================================================================
@@ -585,22 +615,61 @@ for pad, ax, cy, w, d in arm_pad_objs:
                                   pts, pad, M_WELT, r=0.0090, lift=0.0032))
 
 # 8.4 外壳：斜肩棱滚边（真实沙发斜肩有明确接缝）+ 端头包边
-# 斜肩棱：位于路径参数 s = S_LEFT - SHOULDER*0.5 附近
-for tag, s_key in (("L", S_LEFT), ("R", S_RIGHT)):
-    # 找最接近该 s 的路径点
-    best = min(range(len(PATH)), key=lambda i: abs(PATH[i][2] - s_key))
-    i = best
-    T, zb, zw, zt = shell_params[i]
-    _, _, nx, ny = shell_frames[i]
-    px, py = PATH[i][0], PATH[i][1]
-    # 断面在 z_wall 处的内表面点
+#
+# 【v23 · 重大修复：斜肩滚边改为【沿斜肩棱线】连续扫掠】
+#
+# 【原来的做法 —— 这就是用户说的"上方那个穿过沙发的线"】
+#   在【单个】路径断面（path index = 最接近 S_LEFT 的那一点）上，
+#   挑出 |b - z_wall| < 0.03 的 5 个点，串成一条"滚边路径"。
+#
+#   实测（probe_shoulder.py）这 5 个点长这样：
+#       a=-0.2385 b=0.6719 → 世界 (-0.911,-0.231, 0.672)
+#       a=-0.2385 b=0.6983 → 世界 (-0.911,-0.231, 0.698)
+#       a= 0.0000 b=0.7068 → 世界 (-1.080,-0.400, 0.707)   ← 跳了 200mm！
+#       a= 0.0000 b=0.6804 → 世界 (-1.080,-0.400, 0.680)
+#       a= 0.0000 b=0.6540 → 世界 (-1.080,-0.400, 0.654)
+#   前两点在扶手【内表面】，后三点在壳体【外表面】——
+#   中间横跨 200mm 的空档，且整条线悬在 z=0.654~0.707 的空中
+#   （扶手段顶才 0.505）→ 渲染出来就是一条"横穿沙发的怪异线条"，
+#   正是用户截图 2 里指的那条。
+#
+#   而且这 5 点是【断面上的离散点】，中间用 Catmull-Rom 连 →
+#   在空档处产生 95.3° 的切向突变 → 管身断断续续（用户红线处）。
+#
+# 【正确的做法】
+#   斜肩是一条【沿路径方向延伸的棱线】，不是某一个断面上的点。
+#   正确做法：沿路径取【一段】(s ∈ [S_LEFT-Δ, S_LEFT+Δ])，
+#   在每个路径点取"该断面上 z_wall 高度处的内表面点"，
+#   连成一条【真正连续】的棱线 —— 几何上天然平滑、无跳变。
+def _shoulder_ridge(tag, s_key, half=0.045, n=41):
+    """沿斜肩区域扫出连续的棱线（世界坐标点列）。"""
     pts = []
-    for (a, b) in shell_sects[i]:
-        if abs(b - zw) < 0.03:
-            pts.append((px + nx * (a - 0.002), py + ny * (a - 0.002), b))
+    for k in range(n):
+        u = k / (n - 1.0)                      # 0..1
+        s = s_key - half + 2 * half * u
+        # 找最接近该 s 的路径点
+        bi = min(range(len(PATH)), key=lambda i: abs(PATH[i][2] - s))
+        T, zb, zw, zt = shell_params[bi]
+        _, _, nx, ny = shell_frames[bi]
+        px, py = PATH[bi][0], PATH[bi][1]
+        # 在该断面上取 z_wall 附近【最靠近内表面】的点
+        # （内表面 = a 最负的一侧，即朝沙发中心）
+        cand = [(a, b) for (a, b) in shell_sects[bi] if abs(b - zw) < 0.045]
+        if not cand:
+            continue
+        a_in = min(cand, key=lambda ab: ab[0])   # a 最负 = 内表面
+        # 沿断面法向往内缩 2mm，让滚边半嵌进布里
+        pts.append((px + nx * (a_in[0] + 0.002),
+                    py + ny * (a_in[0] + 0.002),
+                    a_in[1]))
+    return pts
+
+
+for tag, s_key in (("L", S_LEFT), ("R", S_RIGHT)):
+    pts = _shoulder_ridge(tag, s_key)
     if len(pts) >= 2:
         objs.append(B.pipe_on_surface("shell_shoulder_pipe_%s" % tag, pts, shell,
-                                      M_WELT, r=0.0078, lift=0.0030))
+                                      M_WELT, r=0.0072, lift=0.0028))
 
 # 外壳端头包边（扶手前端的收口）
 for tag, idx in (("L", 0), ("R", len(PATH) - 1)):
@@ -685,20 +754,42 @@ for k, (c, cx, cy) in enumerate(seat_objs):
                                   r=0.00080, length=0.009, gap=0.005)
 
 # 靠背顶针脚
-objs += B.stitch_line("back_stitch",
-                      (-ARM_IN + 0.10, BACK_CY - 0.018, BACK_TOP - 0.060),
-                      (ARM_IN - 0.10, BACK_CY - 0.018, BACK_TOP - 0.060),
-                      M_THREAD, r=0.00095, lift=0.002)
+#
+# 【v23 · 重大修复：这条针脚原本【完全埋在靠背板内部】，是废对象】
+# 实测（probe_defects.py）：
+#   back_stitch 位置 y[-0.359..-0.357]，而靠背板外壳 y ∈ [-0.440, -0.240]
+#   → 这条线在靠背板的【正中间】，从任何角度都看不见（25/25 采样被遮挡）。
+#   而它有 1.595m 长、912 个顶点 → 纯浪费，还会干扰法线统计。
+#
+# 真实沙发靠背【正面】的针脚在靠背内表面 (BACK_IN = -0.240) 稍上方，
+# 沿宽度方向横贯 —— 这才是可见的"靠背顶压线"。
+# 改成投影到 shell 的【内表面】上（stitch_on_surface 会自动贴面）。
+back_stitch_pts = []
+for i in range(81):
+    t = i / 80.0
+    x = (-ARM_IN + 0.10) + (2 * ARM_IN - 0.20) * t
+    back_stitch_pts.append((x, BACK_IN + 0.030, BACK_TOP - 0.060))
+objs += stitch_on_surface("back_stitch", back_stitch_pts, shell, M_THREAD,
+                           r=0.00095, lift=0.0022, length=0.010, gap=0.006)
 
 # 扶手外侧竖向针脚
+# 【v23 · 修复左右不对称】
+# 原来用 `ax + (w/2 + 0.002)` —— 对 R 侧 (ax>0) 是外侧 ✔，
+# 但对 L 侧 (ax<0) 同样加 → 变成【内侧】！
+# 实测：arm_stitch_L 在 x[-0.895..-0.887]（内侧，贴靠背），
+#       arm_stitch_R 在 x[1.125..1.133]（外侧，悬空在壳体外）。
+# → 左右两针脚一个贴内一个浮外，正是截图 2 里那个"小竖条"。
+# 修法：按符号取外缘 x = ax + sx * (w/2 + 0.002)。
 for pad, ax, cy, w, d in arm_pad_objs:
+    sx = 1 if ax > 0 else -1
     pts = []
     for i in range(31):
         t = i / 30
-        pts.append((ax + (w / 2 + 0.002),
+        pts.append((ax + sx * (w / 2 + 0.002),
                     ARM_PAD_Y0 + 0.05 + (d - 0.12) * t,
                     ARM_TOP - 0.052))
-    objs += stitch_on_surface("arm_stitch_%s" % ('L' if ax < 0 else 'R'), pts, pad, M_THREAD)
+    objs += stitch_on_surface("arm_stitch_%s" % ('L' if sx < 0 else 'R'),
+                               pts, pad, M_THREAD)
 live.MARK("⑨ 真实针脚（每针独立几何，合并为单曲线对象）")
 
 # =====================================================================

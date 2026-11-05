@@ -5,7 +5,7 @@ __pycache__/
 *_design/
 .DS_Store
 
-# 历史备份（归档在 scripts/dev/blender/_backups/）
+# temp backups and debug screenshots
 assets/template.backup.html
 assets/template*.bak*
 assets/template_orig.html
@@ -19,3 +19,19 @@ assets/_shots/
 scripts/dev/blender/_shots/
 scripts/dev/transition-rec/
 scripts/dev/transition-rec2/
+
+# 家具模型真源唯一化（2026-11-05）
+# assets/furnlib/ 是模型唯一真源；验收/models/ 下同名 .glb 只是给本地工具链
+# (analyze_*/audit_*/check_*) 用的工作副本，字节与真源相同，重复入库会让仓库多 66MB。
+# 需要同步副本时运行：python scripts/dev/blender/sync_furnlib_to_accept.py
+验收/models/*.glb
+验收/models/*.glb.new
+验收/models/_chk_*
+验收/models/_cmp_*
+验收/models/_render_log.json
+验收/models/sofa_preview.png
+
+# temp backups and debug screenshots
+*.py.bak
+scripts/dev/blender/shot_*.png
+scripts/dev/blender/*_shot*.png

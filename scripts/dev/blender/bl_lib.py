@@ -388,18 +388,65 @@ def pbr(name, hexc, rough=0.6, metal=0.0, sheen=0.0, aniso=0.0):
     return m
 
 
-def fabric(name, hexc, rough=0.93, sheen=0.85, scale=240.0, strength=0.3):
-    """织物：经纬双 Wave + Sheen 绒感
+def fabric(name, hexc, rough=0.93, sheen=0.85, scale=240.0, strength=0.3,
+           fuzz=0.55, velvet=True):
+    """织物：【经纬双 Wave + 三维绒毛 + Sheen 绒感】
 
-    【重要】Wave 纹理依赖 UV。超椭球软包等程序化生成的网格若没有 UV，
-    经纬波纹会失效 → 布料看起来像素色塑料（实测踩坑）。
-    因此这里同时挂一条【不依赖 UV 的三维噪声】作为底噪，
-    即使 UV 缺失，织物仍有细腻的颗粒感。
+    【v23 · 立体毛绒质感 —— 用户要"有一些立体毛绒效果在上面"】
+
+    之前只有两层：
+      ① 经纬 Wave（依赖 UV）→ 织纹
+      ② 三维 Noise 微凸（不依赖 UV）→ 颗粒
+    但缺了【绒毛本身】：
+      · 粗糙度太高（0.93）→ 表面像砂纸，没有布的柔润
+      · 没有【绒毛的方向性高光】→ 布料看起来像塑料
+      · 没有【纤维末端的细碎凸起】→ 近看是一张平板
+
+    现在加【四层】：
+      L1 织纹      : 经纬 Wave（UV）
+      L2 织纹凹凸  : Bump（强度由 strength 控制）
+      L3 绒毛颗粒  : Voronoi F1（细胞状 = 纤维束团）+ 高频 Noise
+                     → 不依赖 UV，任何网格都有
+      L4 绒毛方向  : Noise 驱动的 Roughness 扰动
+                     → 让布面出现"顺毛/逆毛"的明暗变化（真实布料的关键）
+
+    velvet=True 时额外启用【Sheen 绒毛层】：
+      Principled BSDF 的 Sheen Weight/Roughness/Tint —— 这是 Blender 里
+      模拟"绒布边缘透光"的正确做法。Sheen 会在掠射角产生一层柔和的
+      光晕（rim glow），正是绒布/天鹅绒的标志。
+
+    fuzz : 绒毛强度（0~1）。0 = 普通织物，1 = 强绒毛。
     """
     m = pbr(name, hexc, rough, 0.0, sheen, 0.35)
     nt = m.node_tree
-    bsdf = nt.nodes.get("Principled BSDF")
+    bsdf = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+
+    # ---------- Sheen 绒毛层 ----------
+    try:
+        if velvet:
+            if "Sheen Weight" in bsdf.inputs:
+                bsdf.inputs["Sheen Weight"].default_value = max(sheen, 0.35)
+            if "Sheen Roughness" in bsdf.inputs:
+                # 高 Sheen Roughness = 绒毛弥散（不是缎面高光）
+                bsdf.inputs["Sheen Roughness"].default_value = 0.55
+            if "Sheen Tint" in bsdf.inputs:
+                # 绒毛比底色略亮略暖 —— 逆光时的"起绒"感
+                r, g, b = _hex_rgb(hexc)
+                bsdf.inputs["Sheen Tint"].default_value = (
+                    min(1.0, r * 1.15 + 0.04),
+                    min(1.0, g * 1.15 + 0.04),
+                    min(1.0, b * 1.15 + 0.04), 1.0)
+            # 布料本身不该有金属感，也不该像漆面
+            if "Specular IOR Level" in bsdf.inputs:
+                bsdf.inputs["Specular IOR Level"].default_value = 0.22
+            if "Coat Weight" in bsdf.inputs:
+                bsdf.inputs["Coat Weight"].default_value = 0.0
+    except Exception:
+        pass
+
     tx = nt.nodes.new("ShaderNodeTexCoord")
+
+    # ---------- L1: 经纬织纹（依赖 UV）----------
     warp = nt.nodes.new("ShaderNodeTexWave")
     warp.wave_type = 'BANDS'; warp.bands_direction = 'X'
     warp.inputs["Scale"].default_value = scale
@@ -419,19 +466,78 @@ def fabric(name, hexc, rough=0.93, sheen=0.85, scale=240.0, strength=0.3):
     nt.links.new(warp.outputs["Fac"], mix.inputs[2])
     nt.links.new(weft.outputs["Fac"], mix.inputs[3])
     nt.links.new(mix.outputs[0], bump.inputs["Height"])
-    # ---- 不依赖 UV 的三维细颗粒（保证无 UV 网格也有织物质感） ----
-    nz = nt.nodes.new("ShaderNodeTexNoise")
-    nz.inputs["Scale"].default_value = 420.0
-    nz.inputs["Detail"].default_value = 4.0
-    nz.inputs["Roughness"].default_value = 0.75
-    nz2 = nt.nodes.new("ShaderNodeBump")
-    nz2.inputs["Strength"].default_value = 0.22
-    nz2.inputs["Distance"].default_value = 0.00045
-    nt.links.new(tx.outputs["Object"], nz.inputs["Vector"])
-    nt.links.new(nz.outputs["Fac"], nz2.inputs["Height"])
-    nt.links.new(bump.outputs["Normal"], nz2.inputs["Normal"])
-    nt.links.new(nz2.outputs["Normal"], bsdf.inputs["Normal"])
+
+    # ---------- L3: 绒毛团（Voronoi 细胞 + 高频 Noise）----------
+    # 【不依赖 UV】—— 保证任何网格（软包/外壳/扫掠体）都有绒感
+    vor = nt.nodes.new("ShaderNodeTexVoronoi")
+    vor.feature = 'F1'
+    vor.distance = 'EUCLIDEAN'
+    vor.inputs["Scale"].default_value = 620.0
+    if "Randomness" in vor.inputs:
+        vor.inputs["Randomness"].default_value = 0.85
+    fuzz_noise = nt.nodes.new("ShaderNodeTexNoise")
+    fuzz_noise.inputs["Scale"].default_value = 1500.0
+    fuzz_noise.inputs["Detail"].default_value = 6.0
+    fuzz_noise.inputs["Roughness"].default_value = 0.85
+
+    fuzz_mix = nt.nodes.new("ShaderNodeMix")
+    fuzz_mix.data_type = 'FLOAT'; fuzz_mix.blend_type = 'MULTIPLY'
+    fuzz_mix.inputs[0].default_value = 0.72
+    nt.links.new(tx.outputs["Object"], vor.inputs["Vector"])
+    nt.links.new(tx.outputs["Object"], fuzz_noise.inputs["Vector"])
+    nt.links.new(vor.outputs["Distance"], fuzz_mix.inputs[2])
+    nt.links.new(fuzz_noise.outputs["Fac"], fuzz_mix.inputs[3])
+
+    fuzz_bump = nt.nodes.new("ShaderNodeBump")
+    fuzz_bump.inputs["Strength"].default_value = 0.55 * fuzz
+    fuzz_bump.inputs["Distance"].default_value = 0.00035
+    nt.links.new(fuzz_mix.outputs[0], fuzz_bump.inputs["Height"])
+    nt.links.new(bump.outputs["Normal"], fuzz_bump.inputs["Normal"])
+    nt.links.new(fuzz_bump.outputs["Normal"], bsdf.inputs["Normal"])
+
+    # ---------- L4: 顺毛/逆毛的粗糙度扰动 ----------
+    # 真实布料在光下有"云雾状的明暗"（绒毛倒伏方向不同），
+    # 这是布料与塑料最明显的区别之一。
+    if fuzz > 0.01:
+        rgh_noise = nt.nodes.new("ShaderNodeTexNoise")
+        rgh_noise.inputs["Scale"].default_value = 42.0
+        rgh_noise.inputs["Detail"].default_value = 3.0
+        rgh_noise.inputs["Roughness"].default_value = 0.6
+        nt.links.new(tx.outputs["Object"], rgh_noise.inputs["Vector"])
+        rgh_ramp = nt.nodes.new("ShaderNodeValToRGB")
+        rgh_ramp.color_ramp.elements[0].position = 0.30
+        rgh_ramp.color_ramp.elements[0].color = (rough * 0.80, ) * 3 + (1.0, )
+        rgh_ramp.color_ramp.elements[1].position = 0.72
+        rgh_ramp.color_ramp.elements[1].color = (min(1.0, rough * 1.06), ) * 3 + (1.0, )
+        nt.links.new(rgh_noise.outputs["Fac"], rgh_ramp.inputs["Fac"])
+        nt.links.new(rgh_ramp.outputs["Color"], bsdf.inputs["Roughness"])
+
+    # ---------- 底部颜色微变（避免大块死板纯色）----------
+    # 用同一张三维噪声轻微调制底色 —— 真实布料的染色不均匀
+    try:
+        tint_noise = nt.nodes.new("ShaderNodeTexNoise")
+        tint_noise.inputs["Scale"].default_value = 8.0
+        tint_noise.inputs["Detail"].default_value = 2.0
+        nt.links.new(tx.outputs["Object"], tint_noise.inputs["Vector"])
+        tint_ramp = nt.nodes.new("ShaderNodeValToRGB")
+        r, g, b = _hex_rgb(hexc)
+        tint_ramp.color_ramp.elements[0].position = 0.35
+        tint_ramp.color_ramp.elements[0].color = (r * 0.90, g * 0.90, b * 0.90, 1.0)
+        tint_ramp.color_ramp.elements[1].position = 0.68
+        tint_ramp.color_ramp.elements[1].color = (min(1.0, r * 1.06),
+                                                  min(1.0, g * 1.06),
+                                                  min(1.0, b * 1.06), 1.0)
+        nt.links.new(tint_noise.outputs["Fac"], tint_ramp.inputs["Fac"])
+        nt.links.new(tint_ramp.outputs["Color"], bsdf.inputs["Base Color"])
+    except Exception:
+        pass
     return m
+
+
+def _hex_rgb(hexc):
+    """'#RRGGBB' → (r, g, b) 0~1"""
+    h = hexc.lstrip('#')
+    return tuple(int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
 
 
 def wood(name, hexc, rough=0.42):
@@ -1429,17 +1535,53 @@ def pipe_mesh(name, pts, material, r=0.008, closed=False, sides=12):
             t = mathutils.Vector((0, 0, 1))
         tangents.append(t.normalized())
 
-    # ---- 2. 计算截面的"上方向"参考（平行传输，避免翻滚）----
-    # 用全局 +Z 作参考，除非切向与 +Z 几乎平行
+    # ---- 2. 计算截面的"上方向"参考（真·平行传输，避免翻滚）----
+    #
+    # 【v23 · 关键修复：原来的"全局 Z 投影"会在管身绕过头顶时【瞬时跳变】】
+    #
+    # 原实现：
+    #     for i:  ref = Z ; if |t·Z| > 0.95: ref = Y
+    #             n = (ref - t·(ref·t)).normalized()
+    # 问题：当切向 t 掠到竖直（|t·Z|→1）时，ref 从 Z 切到 Y，
+    #      "上方向" n 会【瞬间旋转约 90°】→ 管的截面在那一环【拧了一下】。
+    #      拧过的管身表面会撕成"串珠/搓板"状 —— 这正是用户说的
+    #      "断断续续不够顺滑 / 锯齿感"。
+    #
+    #      沙发滚边正好会掠过头顶（坐垫顶面 → 圆肩 → 侧壁），
+    #      必然经过这个 |t·Z| > 0.95 的区域 → 每次都中招。
+    #
+    # 正解：【平行传输】—— 把上一环的 n 沿最小旋转角转到当前切向，
+    #      并每步重新正交化。这样整条管的"上方向"连续演化，
+    #      不会在任何地方跳变 → 管身始终是光滑的圆管。
+    #
+    # 初始 n：取与 t0 最不平行的世界轴，正交化即可（起点无历史约束）。
     ups = []
+    t0 = tangents[0]
     ref = mathutils.Vector((0, 0, 1))
-    for i in range(N):
-        t = tangents[i]
-        if abs(t.dot(ref)) > 0.95:
-            ref = mathutils.Vector((0, 1, 0))
-        n = ref - t * ref.dot(t)
+    if abs(t0.dot(ref)) > 0.9:
+        ref = mathutils.Vector((0, 1, 0))
+    n = ref - t0 * ref.dot(t0)
+    if n.length < 1e-9:
+        n = mathutils.Vector((1, 0, 0)) - t0 * t0.x
+    n.normalize()
+    ups.append(n)
+
+    for i in range(1, N):
+        t_prev = tangents[i - 1]
+        t_cur = tangents[i]
+        # 最小旋转：把 t_prev 转到 t_cur
+        axis = t_prev.cross(t_cur)
+        if axis.length > 1e-12:
+            ang = t_prev.angle(t_cur)
+            q = mathutils.Quaternion(axis.normalized(), ang)
+            n = q @ n
+        # 重新正交化（消除数值漂移）
+        n = n - t_cur * n.dot(t_cur)
         if n.length < 1e-9:
-            n = mathutils.Vector((1, 0, 0)) - t * t.x
+            alt = mathutils.Vector((0, 0, 1))
+            if abs(t_cur.dot(alt)) > 0.9:
+                alt = mathutils.Vector((0, 1, 0))
+            n = alt - t_cur * alt.dot(t_cur)
         n.normalize()
         ups.append(n)
 

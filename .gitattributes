@@ -1,0 +1,6 @@
+# 大体积二进制资产走 Git LFS，避免仓库无限膨胀。
+# 家具模型与 PBR 贴图合计约 150MB，每个版本都是全新二进制 —— 走 LFS 后
+# git 仓库只存指针，二进制历史由 LFS 单独管理。
+*.glb filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text

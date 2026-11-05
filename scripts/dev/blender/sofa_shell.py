@@ -403,6 +403,18 @@ def build_shell(name, path, states, material, cap_len=0.055, uv=True,
                           (i + 1) * N_SEC + j2, i * N_SEC + j2))
 
     # 端盖：用断面多边形扇形三角化（断面是凸的）
+    #
+    # 【v23 · 关键修复：端盖【复用】侧壁环顶点，不再复制一份】
+    # 原来这里给端盖【新建】了 N_SEC 个顶点（位置与侧壁环完全相同，
+    # 但索引不同）。后果：
+    #   · 扇形三角的"辐条"边 (center, ring_j) 只被 1 个面共享
+    #     → 变成【边界边】= 网格有洞（实测 shell 有 230 条边界边）
+    #   · 后面的 remove_doubles(0.2mm) 会把环顶点合并，
+    #     于是端盖与侧壁共用顶点，但辐条边依旧悬空 → 破洞依旧
+    #   · 破洞处法线朝向不定 → 渲染出来就是"凹进去的一块"（用户原话）
+    #
+    # 现在直接复用侧壁环顶点 i*N_SEC + j：
+    #   端盖与侧壁共用一圈顶点 → 焊死 → 0 边界边、0 破洞。
     def cap(i, flip):
         sec = sects[i]
         _, _, nx, ny = frames[i]
@@ -411,14 +423,13 @@ def build_shell(name, path, states, material, cap_len=0.055, uv=True,
         cb = sum(p[1] for p in sec) / len(sec)
         base = len(verts)
         verts.append((px + nx * ca, py + ny * ca, cb))
-        for (a, b) in sec:
-            verts.append((px + nx * a, py + ny * a, b))
+        ring0 = i * N_SEC            # ← 复用侧壁环顶点（不新建）
         for j in range(len(sec)):
             j2 = (j + 1) % len(sec)
             if flip:
-                faces.append((base, base + 1 + j, base + 1 + j2))
+                faces.append((base, ring0 + j, ring0 + j2))
             else:
-                faces.append((base, base + 1 + j2, base + 1 + j))
+                faces.append((base, ring0 + j2, ring0 + j))
 
     cap(0, True)
     cap(P - 1, False)
