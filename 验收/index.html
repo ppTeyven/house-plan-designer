@@ -43,6 +43,19 @@
         <button class="mini" data-act="spin">转盘</button>
         <button class="mini" data-act="reset">复位</button>
         <button class="mini" data-act="shot">截图</button>
+        <button class="mini" data-act="sheet" id="btnSheet" title="把当前批次的全部款式渲染成一张总览图，一眼看出哪些渲染异常">总览图</button>
+      </div>
+    </div>
+
+    <!-- 总览图覆盖层：一次渲染当前批次的所有款式 -->
+    <div id="sheetOverlay" hidden>
+      <div class="sheethead">
+        <span>总览图 · <b id="sheetTitle">全部</b></span>
+        <span id="sheetStat"></span>
+        <button class="mini" data-act="sheetClose">关闭</button>
+      </div>
+      <div class="sheetbody" id="sheetBody">
+        <div class="sheetloading">正在渲染总览图…</div>
       </div>
     </div>
 

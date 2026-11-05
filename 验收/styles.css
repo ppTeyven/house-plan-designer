@@ -162,3 +162,31 @@ body{
 ::-webkit-scrollbar-thumb{background:#2b333a;border-radius:4px}
 ::-webkit-scrollbar-thumb:hover{background:#384249}
 ::-webkit-scrollbar-track{background:transparent}
+/* ---------------- ◊‹¿¿Õº∏≤∏«≤„ ---------------- */
+#sheetOverlay{
+  position:fixed;inset:0;z-index:50;
+  background:rgba(8,9,11,.96);
+  display:flex;flex-direction:column;
+}
+#sheetOverlay[hidden]{display:none}
+.sheethead{
+  display:flex;align-items:center;gap:14px;
+  padding:11px 16px;border-bottom:1px solid var(--line);
+  background:var(--bg1);font-size:12px;color:var(--fg2);
+}
+.sheethead b{color:var(--fg1)}
+.sheethead span:nth-child(2){
+  margin-left:auto;font-size:11px;color:var(--fg3);
+  font-variant-numeric:tabular-nums;
+}
+.sheetbody{
+  flex:1;overflow:auto;padding:14px;
+  display:flex;justify-content:center;align-items:flex-start;
+}
+.sheetcanvas{
+  max-width:100%;image-rendering:auto;
+  border:1px solid var(--line);border-radius:4px;
+}
+.sheetloading{
+  margin:auto;color:var(--fg3);font-size:12px;padding:40px;
+}

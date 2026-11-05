@@ -35,3 +35,11 @@ scripts/dev/transition-rec2/
 *.py.bak
 scripts/dev/blender/shot_*.png
 scripts/dev/blender/*_shot*.png
+
+# 调试截图与临时参考图（验收证据在 验收/previews/ 下，不在 refs/）
+assets/dev/_shot*.jpg
+assets/dev/_ao_check.jpg
+验收/refs/_ref_*
+验收/refs/_zoom_*
+验收/refs/_sofa_ref_crop.jpg
+assets/dev/_tpl_module_check.mjs
