@@ -14501,6 +14501,14 @@ window.__FURNFX = { groups: new Set(), apply: null };
       }
     } catch (e) { }
     try { camL = new ro(16773596, 0, 0, 2); camL.castShadow = false; camL.intensity = 0; pt.add(camL); } catch (e) { camL = null; }
+    /* 【闪烁修复】原实现把 renderer.shadowMap.autoUpdate 关掉后就不再管,
+       相机一移动,阴影贴图仍是旧的一帧 —— 墙与地/墙与墙的交界处就会闪烁。
+       正确做法:autoUpdate 保持 true(Three.js 内部只重画需要重画的灯),
+       「省性能」应该靠缩小阴影贴图分辨率,而不是让阴影图停止更新。 */
+    try {
+      jt.shadowMap.autoUpdate = true;
+      jt.shadowMap.needsUpdate = true;
+    } catch (e) { }
     // 调试探针（挂到已就绪的 __D3 上）
     try {
       window.__D3 = window.__D3 || {};
@@ -14524,7 +14532,10 @@ window.__FURNFX = { groups: new Set(), apply: null };
       };
       window.__D3.Yv = function () { try { Yv(); } catch (e) { window.__CMP_ERR2 = String(e && e.stack || e); } return { S0: !!S0, eh: !!eh }; };
       /* AO 开关（A/B 视觉对照用）：window.__D3.aoOff() / aoOn() */
-      window.__D3.aoOff = function () { try { if (eh && eh.ao) eh.ao.enabled = false; Yc && Yc(); } catch (e) { } return true; };
+      /* 【调试工具修正】渲染循环实际用的是 S0（它本身就是 composer）,
+         之前 aoOff/aoOn 改的是 eh.ao —— 改错了对象,导致 A/B 对照永远无差异。
+         这里同时处理两个,保证任何一种调用方式都能真正切 AO。 */
+      window.__D3.aoOff = function () { try { if (eh && eh.ao) eh.ao.enabled = false; try { if (typeof S0 !== "undefined" && S0.passes) S0.passes.forEach(function (p) { if (p.blendIntensity !== undefined) p.enabled = false; }); } catch (e0) { } Yc && Yc(); } catch (e) { } return true; };
       window.__D3.aoOn = function () {
         try {
           if (eh && eh.ao) {
@@ -14532,6 +14543,7 @@ window.__FURNFX = { groups: new Set(), apply: null };
             eh.ao.updateGtaoMaterial({ radius: 0.55, distanceExponent: 2.0, thickness: 0.8, scale: 1.0, samples: 24 });
             eh.ao.blendIntensity = 1.45;
           }
+          try { if (typeof S0 !== "undefined" && S0.passes) S0.passes.forEach(function (p) { if (p.blendIntensity !== undefined) { p.enabled = true; p.blendIntensity = 1.45; } }); } catch (e1) { }
           Yc && Yc();
         } catch (e) { }
         return true;
@@ -14553,6 +14565,10 @@ window.__FURNFX = { groups: new Set(), apply: null };
 
   function tick(now) {
     try {
+      /* 【室内真实光照 v4】进屋（漫游）时,房间亮度必须由「屋内的灯」决定:
+         - 室内灯没开 -> 半球光/环境贴图/光照探针/太阳 全部压到 0,未照到的地方真的发暗
+         - 室内灯开了 -> 给一点点天光(0.04)避免纯黑不可读
+         鸟瞰（不 walking）仍走原来的白模预览逻辑,两套互不干扰。 */
       var walking = true; /* CONST-LIGHT: 鸟瞰/漫游同一套,进屋前后不变 */
       if (walking !== S.lock) { S.lock = walking; dirty = true; }
       if (!walking) {
@@ -14561,15 +14577,61 @@ window.__FURNFX = { groups: new Set(), apply: null };
       } else {
         var night = false;
         try { night = rf().night; } catch (e) { }
-        S.hemi = Ai.hemi; if (!S.env) S.env = Ai.env || pt.environment; /* CONST-LIGHT */
-        S.fill = Ai.fill; /* CONST-LIGHT */
-        S.envI = (function () { try { return rf().night ? 0.2 : 0.42; } catch (e) { return 0.42; } })(); /* CONST-LIGHT */
-        S.exp = 1.08; /* CONST-LIGHT */
-        if (Tn.__setFake) Tn.__setFake("#ffffff"); /* CONST-LIGHT */
+        /* 【室内真实光照 v4】不再照抄引擎的白模参数,改为由「屋内灯是否亮」驱动。
+           原实现 S.hemi=Ai.hemi(0.26 白)/S.envI=0.42/S.exp=1.08
+           + 太阳 3.45 + LightProbe 0.38 四路同时打满全屋,
+           这就是「整个房间所有地方都是亮」的根因。
+           现在:室内灯灭 -> 天光/HDRI/光照探针/太阳全部归零,只保留灯本身的照明;
+                 室内灯亮 -> 额外给一点点天光(0.04)避免纯黑不可读。 */
+        var lampsOn = false;
+        try {
+          /* 引擎自己的灯状态表: xi 是「灯 id -> 亮度」, xi 的值 > 0 才算这盏灯开着。
+             这是最准的口径(和 anyLamp 同源),优先用它。 */
+          lampsOn = !!anyLamp;
+          if (!lampsOn) { try { lampsOn = !!qn.lightsOn; } catch (e2) { } }
+        } catch (e4) { lampsOn = false; }
+        if (!lampsOn) {
+          /* 兜底:【判定口径】室内灯的开关由 intensity 控制(visible 常年是 false,
+             但灯仍在照亮场景),所以必须看强度,不能看 visible。
+             su 是影子灯池(补光,不算「屋内的灯」),因此排除 castShadow 的那批。 */
+          var _n = 0;
+          try {
+            pt.traverse(function (o) {
+              if ((o.isPointLight || o.isSpotLight) && !o.castShadow &&
+                  o.intensity > 0.01) { _n++; }
+            });
+          } catch (e3) { }
+          lampsOn = _n > 0;
+        }
+        S.hemi = lampsOn ? 0.04 : 0.0;                    /* 天光: 灯灭时完全关掉 */
+        S.fill = lampsOn ? Math.min(Ai.fill, 0.02) : 0.0; /* 补光同理 */
+        S.envI = lampsOn ? 0.03 : 0.0;                    /* HDRI 环境: 灯灭时完全关掉 */
+        S.exp = lampsOn ? 1.0 : 0.92;                     /* 灯灭时略降曝光,让暗部更沉 */
+        if (Tn.__setFake) Tn.__setFake(lampsOn ? "#e8eef8" : "#000000"); /* CONST-LIGHT */
+        /* 太阳 / 光照探针 / 环境光:室内模式下按「屋内灯」状态联动,
+           否则直射光会从窗户门洞漏进来,靠墙的角落仍然发亮。
+           注意:引擎里的环境光是一个 LightProbe(A5, isLightProbe=true),
+           不是 AmbientLight —— 两者都要处理。
+           太阳保留一小份(0.22):现实里阳光本来就会从窗户进来,
+           全关会让室内彻底不可读,失去参考。 */
+        try {
+          var _sun = null, _probe = null, _amb = null;
+          pt.traverse(function (o) {
+            if (o.isDirectionalLight && (!_sun || o.intensity > _sun.intensity)) _sun = o;
+            if (o.isLightProbe) _probe = o;
+            if (o.isAmbientLight) _amb = o;
+          });
+          if (_sun) { var _si = lampsOn ? 0.22 : 0.18; if (_sun.intensity !== _si) { _sun.intensity = _si; dirty = true; } }
+          if (_probe) { var _pi = lampsOn ? 0.05 : 0.0; if (_probe.intensity !== _pi) { _probe.intensity = _pi; dirty = true; } }
+          if (_amb) { var _ai = lampsOn ? 0.05 : 0.0; if (_amb.intensity !== _ai) { _amb.intensity = _ai; dirty = true; } }
+        } catch (e6) { }
         for (var zi = 0; zi < Zh.length; zi++) { try { if (Zh[zi].__lk) { delete Zh[zi].intensity; Zh[zi].__lk = false; } } catch (e) { } }
         if (camL) {
           camL.position.set(re.x / 1000, (re.ez + sn.eyeH) / 1000, re.y / 1000);
-          var ci = 0; /* CONST-LIGHT: 无跟随补光 */
+          /* 【室内真实光照 v4】跟随相机的小灯:室内灯全灭时给一点点余光(相当于
+             眼睛适应后的微光),让户型轮廓可读;室内灯开着时关掉它,
+             避免多一盏灯把明暗层次冲平。 */
+          var ci = lampsOn ? 0 : 0.12; /* CONST-LIGHT: 无跟随补光 */
           if (Math.abs(camL.intensity - ci) > 1e-3) { camL.intensity = ci; dirty = true; }
         }
         if (now - lampChk > 500) {
@@ -14653,6 +14715,10 @@ window.__FURNFX = { groups: new Set(), apply: null };
 (function () {
   try {
     let init = false, nu = true, lx = NaN, ly = NaN, lz = NaN, tx = NaN, ty = NaN, tz = NaN, last = 0;
+    /* 【闪烁修复 v2】原来只在「太阳移动」时标脏。但漫游时移动的是**相机**,
+       太阳纹丝不动 —— 于是阴影贴图永远停在旧帧,墙与地/墙与墙的交界处就会闪烁。
+       现在把相机位置也纳入判定:相机一动就重绘阴影。 */
+    let cx = NaN, cy = NaN, cz = NaN;
     function tick(now) {
       try {
         if (!init) {
@@ -14681,6 +14747,20 @@ window.__FURNFX = { groups: new Set(), apply: null };
               nu = true; lx = p.x; ly = p.y; lz = p.z; tx = g.x; ty = g.y; tz = g.z;
             }
           }
+          /* 【闪烁修复 v2】相机移动也必须标脏:漫游时动的是相机不是太阳,
+             原来只看太阳位置,阴影贴图永远不重画 → 墙交界处闪烁。
+             注意:相机对象 Ze 是模块闭包内的变量,顶层脚本拿不到(ReferenceError
+             会被下面的 catch 静默吞掉,症状是「改了没反应」)。
+             必须用全局可达的 window.__D3.camera。 */
+          try {
+            var _cam = (window.__D3 && window.__D3.camera) ? window.__D3.camera : null;
+            if (_cam && _cam.position) {
+              var cp = _cam.position;
+              if (Math.abs(cp.x - cx) + Math.abs(cp.y - cy) + Math.abs(cp.z - cz) > 1e-3) {
+                nu = true; cx = cp.x; cy = cp.y; cz = cp.z;
+              }
+            }
+          } catch (e) { }
           /* 【接触阴影修复】补光灯的位置/强度变化时也要重绘阴影贴图,
              否则移动补光灯后阴影仍是旧的。 */
           try {
