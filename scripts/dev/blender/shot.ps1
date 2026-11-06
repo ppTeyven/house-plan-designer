@@ -1,5 +1,5 @@
 ﻿param(
-    [string]$Out = "D:\house planner\house-plan-designer-main\验收\previews\_screen.png",
+    [string]$Out = "D:\house planner\house-plan-designer-main\scripts\dev\_previews\_screen.png",
     [string]$WindowTitleLike = ""
 )
 Add-Type -AssemblyName System.Windows.Forms, System.Drawing

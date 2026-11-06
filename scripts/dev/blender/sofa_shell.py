@@ -3,7 +3,7 @@
 【为什么必须有这个模块】
 用户验收反馈原文："沙发墙有明显的穿模现象，整体依旧是简陋几何体拼凑的，不满意"
 
-对照 William 参考实拍（验收/refs/_ref_arm.jpg、_ref_armback.jpg、_ref_side.jpg）后定位到的根因：
+对照 William 参考实拍（scripts/dev/_refs/_ref_arm.jpg、_ref_armback.jpg、_ref_side.jpg）后定位到的根因：
 
   真实沙发：【靠背 + 扶手 + 转角】是【一件连续的软包实体】——
     · 扶手从靠背端头连续弯下来，中间没有拼缝

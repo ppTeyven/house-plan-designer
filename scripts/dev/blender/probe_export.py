@@ -6,7 +6,7 @@ import bpy, os, sys, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from inspect_glb import stats, read_glb
 
-OUT = r"D:\house planner\house-plan-designer-main\验收\models\_probe4.glb"
+OUT = r"D:\house planner\house-plan-designer-main\assets\furnlib\_probe4.glb"
 bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)
 
 bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 0, 0))

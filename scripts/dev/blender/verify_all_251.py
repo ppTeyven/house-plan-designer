@@ -22,8 +22,8 @@ def load_catalog():
     if not os.path.exists(CATALOG):
         cands = []
         for base in [ROOT, os.path.dirname(ROOT)]:
-            for rel in ["assets/furnlib/index.json", "验收/models/catalog.json",
-                        "assets/models/catalog.json", "验收/assets/models/catalog.json"]:
+            for rel in ["assets/furnlib/index.json", "assets/furnlib/catalog.json",
+                        "assets/models/catalog.json", "assets/models/catalog.json"]:
                 p = os.path.join(base, rel.replace("/", os.sep))
                 if os.path.exists(p):
                     cands.append(p)

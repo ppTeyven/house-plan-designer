@@ -2,13 +2,16 @@
 // 用法：node dev/libshot.mjs 设计器.html 输出目录
 import puppeteer from 'puppeteer-core';
 import { pathToFileURL } from 'url';
+import { pageUrl } from '../lib_serve.mjs';
 const [, , FILE, OUT] = process.argv;
 const b = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: 'new', args: ['--use-angle=d3d11', '--enable-gpu'] });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const pg = await pageUrl(FILE);
 for (const [W, H] of [[1600, 960], [1280, 720]]) {
   const page = await b.newPage(); await page.setViewport({ width: W, height: H });
   await page.evaluateOnNewDocument(() => { for (const k of Object.keys(localStorage)) if (k.startsWith('house-designer') || k.startsWith('hd-')) localStorage.removeItem(k); });
-  await page.goto(pathToFileURL(FILE).href + '?debug'); await page.waitForFunction(() => window.__designer, { timeout: 60000 }); await sleep(1500);
+  await page.goto(pg.url + '?debug'); await page.waitForFunction(() => window.__designer, { timeout: 60000 }); await sleep(1500);
   await page.click('#leftPanel .tabs [data-tab="furn"]'); await sleep(500);
   const m = await page.evaluate(() => { const p = document.querySelector('#leftPanel'); return { P: p.clientHeight, top: p.querySelector('.lib-top').offsetHeight, list: p.querySelector('.lib-list').clientHeight, cols: getComputedStyle(p.querySelector('.cat')).gridTemplateColumns.split(' ').length }; });
   console.log(W + 'x' + H, JSON.stringify(m));
@@ -20,3 +23,4 @@ for (const [W, H] of [[1600, 960], [1280, 720]]) {
   await page.close();
 }
 await b.close();
+await pg.close();

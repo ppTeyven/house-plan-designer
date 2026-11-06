@@ -48,6 +48,7 @@
   python embed_pbr.py --apply --only diningTable
 """
 import argparse
+import hashlib
 import json
 import os
 import shutil
@@ -58,7 +59,7 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 NEW = os.path.join(ROOT, "assets", "furnlib")
 CACHE_RAW = os.path.join(ROOT, "assets", "_asset_cache", "raw")
 AMAP = os.path.join(ROOT, "assets", "_asset_cache", "asset_map.json")
@@ -315,7 +316,13 @@ def load_glb(path):
 
 
 def save_glb(path, js, binchunk):
-    """原子写：先写 .tmp 再 os.replace（Windows 上浏览器可能占着目标文件）。"""
+    """原子写：先写 .tmp 再 os.replace（Windows 上浏览器可能占着目标文件）。
+
+    【注意】写盘前必须删掉 _tex_dedup —— 它是运行期的去重索引，
+    不是 glTF 规范字段，留着会让 glTF 校验器报未知属性。
+    """
+    js = dict(js)
+    js.pop("_tex_dedup", None)
     js_bytes = json.dumps(js, separators=(",", ":")).encode("utf-8")
     js_bytes += b" " * ((4 - len(js_bytes) % 4) % 4)
     bin_bytes = binchunk + b"\x00" * ((4 - len(binchunk) % 4) % 4)
@@ -337,10 +344,25 @@ def save_glb(path, js, binchunk):
 
 
 def append_image(js, binchunk, data, mime="image/jpeg"):
-    """把字节流追加进 GLB 的 BIN chunk，返回 image 下标。"""
+    """把字节流追加进 GLB 的 BIN chunk，返回 image 下标。
+
+    【去重】同 role 的多个材质（如柜体+门板都是 wood_walnut）
+    会内嵌【完全相同】的贴图字节。实测一件 3 材质模型会重复 3 次，
+    体积白白翻三倍。→ 用 data 的 sha1 做 key，已内嵌过就直接复用
+    image 下标，不再追加。
+    """
     if not js.get("buffers"):
         js["buffers"] = [{"byteLength": 0}]
     js.setdefault("bufferViews", [])
+
+    # ---- 去重：同一份字节只内嵌一次 ----
+    key = hashlib.sha1(data).hexdigest()
+    cache = js.setdefault("_tex_dedup", {})
+    if key in cache:
+        idx = cache[key]
+        if idx < len(js.get("images", [])):
+            return js, binchunk, idx
+
     binchunk += b"\x00" * ((-len(binchunk)) % 4)
     off = len(binchunk)
     binchunk += data
@@ -350,6 +372,7 @@ def append_image(js, binchunk, data, mime="image/jpeg"):
     idx = len(js.get("images", []))
     js.setdefault("images", []).append({"bufferView": bv, "mimeType": mime})
     js["buffers"][0]["byteLength"] = len(binchunk)
+    cache[key] = idx
     return js, binchunk, idx
 
 
@@ -506,17 +529,26 @@ def process_one(path, item, orig_mats, dry, route="geo"):
         notes.append("%s->%s" % (old or "?", r))
         changed = True
 
-    # --- B. 内嵌 PBR 四通道 ---
+        # --- B. 内嵌 PBR 四通道 ---
     #
     # 【关键】PH 模型【绝不】覆盖原始扫描贴图。
     #   Poly Haven 资源自带完整的 col/nor/rough/AO 扫描贴图，
     #   是整套资产里质量最高的部分。旧实现对 PH 也跑这一段，
     #   结果把 dining_table 的木质扫描贴图换成了 ambientCG 的布料图
     #   → 餐桌/茶几/衣柜全变成米色布 → 用户看到的"家具全是布"。
-    #   → PH 路线完全跳过本段，只在 C 段做 ORM 通道校正。
+    #   → PH 路线【只填空槽位】：已有贴图的槽位一律不动，
+    #     缺贴图的槽位才用 ambientCG 角色图补上。
+    #   【为什么 PH 也要填空】
+    #     实测 acFloor / fan 两件 PH 模型【一张贴图都没有】——
+    #     它们对应的 Polyhaven 资源本身不带扫描图（工业件/简化件常见）。
+    #     旧实现对 PH 整段跳过 → 这两件永远是白模。
+    #     只填空槽位既不碰原生扫描图，又能救回白模。
+    #
+    # 【注意】alphaMode / baseColorFactor 的修改【必须置 changed】
+    #   否则"材质属性改了但文件没保存"——实测玻璃件改了透明参数
+    #   却因为 added=0 而没写盘，改动丢失。
     added = 0
     if route == "ph":
-        # PH：保留原贴图，只确保物理参数归位（金属/粗糙因子中性化）
         for m in mats:
             nm = m.get("name", "")
             role = nm[2:] if nm.startswith("U_") else nm
@@ -524,14 +556,103 @@ def process_one(path, item, orig_mats, dry, route="geo"):
             if pbr is None:
                 pbr = {}
                 m["pbrMetallicRoughness"] = pbr
+                changed = True
+            # ---- 只填空槽位 ----
+            if role in PP.ROLE_TEX:
+                maps = PP.build_role_maps(role)
+                if maps.get("col") and not has_texture_slot(m, "baseColor"):
+                    js, binchunk, ci = append_image(js, binchunk, maps["col"])
+                    pbr["baseColorTexture"] = {"index": add_texture(js, ci)}
+                    pbr.setdefault("baseColorFactor", [1, 1, 1, 1])
+                    added += 1
+                if maps.get("orm") and not has_texture_slot(m, "mr"):
+                    js, binchunk, ci = append_image(js, binchunk, maps["orm"])
+                    pbr["metallicRoughnessTexture"] = {"index": add_texture(js, ci)}
+                    added += 1
+                if maps.get("nor") and not has_texture_slot(m, "normal"):
+                    js, binchunk, ci = append_image(js, binchunk, maps["nor"])
+                    m["normalTexture"] = {"index": add_texture(js, ci)}
+                    added += 1
+                if maps.get("ao") and not has_texture_slot(m, "occlusion"):
+                    js, binchunk, ci = append_image(js, binchunk, maps["ao"])
+                    m["occlusionTexture"] = {"index": add_texture(js, ci)}
+                    added += 1
+            # 玻璃：补规范 ORM（玻璃不贴扫描图，但 metallicRoughnessTexture
+            # 槽位一旦缺省，金属度会按常量 1.0 渲染 → 玻璃变成金属镜面）
+            elif role in ROLES.NO_TEXTURE_ROLES:
+                if not has_texture_slot(m, "baseColor"):
+                    bc = PP.pack_glass_basecolor()
+                    if bc:
+                        js, binchunk, ci = append_image(js, binchunk, bc)
+                        pbr["baseColorTexture"] = {"index": add_texture(js, ci)}
+                        added += 1
+                if not has_texture_slot(m, "mr"):
+                    orm = PP.pack_glass_orm()
+                    if orm:
+                        js, binchunk, ci = append_image(js, binchunk, orm)
+                        pbr["metallicRoughnessTexture"] = {"index": add_texture(js, ci)}
+                        added += 1
+                # 物理参数 + 透明
+                if m.get("alphaMode") != "BLEND":
+                    m["alphaMode"] = "BLEND"
+                    changed = True
+                    notes.append("玻璃透明")
+                if list(pbr.get("baseColorFactor") or []) != [0.80, 0.78, 0.74, 0.32]:
+                    pbr["baseColorFactor"] = [0.80, 0.78, 0.74, 0.32]
+                    changed = True
+            # 物理参数：金属度/粗糙度由 ORM 的 B/G 通道驱动，
+            # 所以这里的 factor 必须给中性值，否则会二次调暗。
             metal = PP.ROLE_METAL.get(role, 0.0)
-            pbr["metallicFactor"] = 1.0 if metal > 0 else 0.0
-            pbr["roughnessFactor"] = 1.0
+            if pbr.get("metallicFactor") != (1.0 if metal > 0 else 0.0):
+                pbr["metallicFactor"] = 1.0 if metal > 0 else 0.0
+                changed = True
+            if pbr.get("roughnessFactor") != 1.0:
+                pbr["roughnessFactor"] = 1.0
+                changed = True
+                # 【玻璃必须透明】alphaMode=BLEND + alpha=0.32，
+                # 与 template.html 的 __FURN_ROLE.glass.opacity 对齐。
+                # 缺了会渲染成不透明米白板（比白模更像坏件）。
+                m["alphaMode"] = "BLEND"
+                pbr["baseColorFactor"] = [0.80, 0.78, 0.74, 0.32]
     else:
         for m in mats:
             nm = m.get("name", "")
             role = nm[2:] if nm.startswith("U_") else nm
             if role not in PP.ROLE_TEX:
+                # 【玻璃等无扫描图角色】—— 也要给一张规范 ORM。
+                #   玻璃不贴表面扫描图，但 metallicRoughnessTexture 槽位
+                #   缺省时 metallicFactor=1.0 会被当作金属 → 玻璃变镜面。
+                #   → 补 pack_glass_orm()：R=AO=1, G=rough=0.04, B=metal=0
+                if role in ROLES.NO_TEXTURE_ROLES:
+                    pbr = m.get("pbrMetallicRoughness")
+                    if pbr is None:
+                        pbr = {}
+                        m["pbrMetallicRoughness"] = pbr
+                    if not has_texture_slot(m, "baseColor"):
+                        bc = PP.pack_glass_basecolor()
+                        if bc:
+                            js, binchunk, ci = append_image(js, binchunk, bc)
+                            pbr["baseColorTexture"] = {"index": add_texture(js, ci)}
+                            added += 1
+                    if not has_texture_slot(m, "mr"):
+                        orm = PP.pack_glass_orm()
+                        if orm:
+                            js, binchunk, ci = append_image(js, binchunk, orm)
+                            pbr["metallicRoughnessTexture"] = {"index": add_texture(js, ci)}
+                            added += 1
+                    pbr["metallicFactor"] = 0.0
+                    pbr["roughnessFactor"] = 0.05
+                    # 【玻璃必须透明】没有 alphaMode=BLEND 时，
+                    # three.js 按不透明渲染 → 一块不透明的米白板，
+                    # 比白模更像"坏掉的模型"。
+                    # alpha=0.32 与 template.html 的 __FURN_ROLE.glass.opacity 对齐。
+                    if m.get("alphaMode") != "BLEND":
+                        m["alphaMode"] = "BLEND"
+                        changed = True
+                        notes.append("玻璃透明")
+                    if list(pbr.get("baseColorFactor") or []) != [0.80, 0.78, 0.74, 0.32]:
+                        pbr["baseColorFactor"] = [0.80, 0.78, 0.74, 0.32]
+                        changed = True
                 continue
             maps = PP.build_role_maps(role)
             if not maps.get("col"):
@@ -677,19 +798,29 @@ def _is_grayscale_image(js, binchunk, img_index):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--apply", action="store_true")
-    ap.add_argument("--only", default=None)
+    ap.add_argument("--only", default=None,
+                    help="只处理指定 key，逗号分隔（支持多件）")
     args = ap.parse_args()
+    only_set = None
+    if args.only:
+        only_set = set(x.strip() for x in args.only.split(",") if x.strip())
 
     man = json.load(open(os.path.join(ACC, "manifest.json"), encoding="utf-8"))
     items = man["items"]
     amap = json.load(open(AMAP, encoding="utf-8")) if os.path.exists(AMAP) else {}
 
-    # ---- 构建路线 + 真实资源（来自 build_report.json）----
-    # 【为什么必须用 build_report 而不是 asset_map】
-    #   asset_map.json 是【旧快照】，里面 resource 指向的资源与
-    #   实际构建时用的可能不同 → 取到的"原材质名"是错的 →
-    #   角色判错，甚至误报"贴图被覆盖"。
-    #   build_report.json 是 build_all.py 跑完的【结果】，是唯一真源。
+    # ---- 构建路线 + 真实资源 ----
+    #
+    # 【真源优先级：asset_map.source  >  build_report.route】
+    #
+    #   实测（2026-11-06）：build_report.json 只有 6 条结果，
+    #   其余 245 件在旧代码里被【默认当成 geo】。
+    #   但 asset_map.json 里 source='polyhaven' 的有 114 件 —— 其中
+    #   113 件带【PolyHaven 原生扫描贴图】，而 geo 路线的 B 段
+    #   会用 ambientCG 角色图去覆盖它们。
+    #   → 那会把 dining_table 的木质扫描贴图换成 ambientCG 的布料图，
+    #     正是文档里明确警告过的"家具全是布"事故。
+    #   → 所以路线必须按 asset_map.source 判定，build_report 只作补充。
     global ROUTES, BUILD_RES
     ROUTES, BUILD_RES = {}, {}
     rep_path = os.path.join(ROOT, "assets", "_asset_cache", "build_report.json")
@@ -698,9 +829,20 @@ def main():
         for r in rep.get("results", []):
             ROUTES[r["key"]] = r.get("route") or "geo"
             BUILD_RES[r["key"]] = r.get("resource")
-    print("构建路线: geo=%d ph=%d"
+    # asset_map.source 是逐件记录，覆盖 build_report 的稀疏结果
+    for key, v in amap.items():
+        src = (v or {}).get("source")
+        if src == "polyhaven":
+            ROUTES[key] = "ph"
+            BUILD_RES.setdefault(key, (v or {}).get("resource"))
+        elif src in (None, "", "geo"):
+            # 只有在 build_report 没有明确记录时才回退 geo
+            ROUTES.setdefault(key, "geo")
+        else:
+            ROUTES[key] = ROUTES.get(key, "geo")
+    print("构建路线: geo=%d ph=%d (共 %d)"
           % (sum(1 for v in ROUTES.values() if v == "geo"),
-             sum(1 for v in ROUTES.values() if v == "ph")))
+             sum(1 for v in ROUTES.values() if v == "ph"), len(ROUTES)))
 
     if args.apply:
         stamp = time.strftime("%Y%m%d_%H%M%S")
@@ -721,7 +863,7 @@ def main():
     rows = []
     for it in items:
         key = it["key"]
-        if args.only and key != args.only:
+        if only_set and key not in only_set:
             continue
         # ---- 构建路线（geo / ph）—— 决定角色判定的策略 ----
         route = (ROUTES.get(key) or "geo")
@@ -769,7 +911,7 @@ def main():
           % ("APPLY" if args.apply else "DRY", len(items), n_changed))
     print("  角色修正 %d，内嵌 PBR 贴图 %d" % (n_role, n_tex))
     for k, nm, added, n in rows:
-        if args.only or added:
+        if only_set or added:
             print("   %-18s %-22s +%d张 %s" % (k, nm or "", added, n))
 
 

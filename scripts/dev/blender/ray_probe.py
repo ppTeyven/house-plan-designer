@@ -16,7 +16,7 @@ import mathutils
 from mathutils.bvhtree import BVHTree
 
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
-GLB = args[0] if args else r"验收/models/sofa.glb"
+GLB = args[0] if args else r"assets/furnlib/sofa.glb"
 Z = float(args[1]) if len(args) > 1 else 0.60
 X0 = float(args[2]) if len(args) > 2 else -1.0
 X1 = float(args[3]) if len(args) > 3 else 1.0

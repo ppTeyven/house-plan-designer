@@ -16,6 +16,7 @@ import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import { pageUrl } from './lib_serve.mjs';
 
 const [html, routeFile] = process.argv.slice(2);
 if (!html || !routeFile) { console.error('用法：node walktest.mjs 设计器.html 路线.json'); process.exit(1); }
@@ -25,10 +26,12 @@ const exe = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Applicatio
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'].filter(Boolean).find(p => fs.existsSync(p));
 if (!exe) { console.error('找不到 Chrome/Edge，设置 CHROME_PATH'); process.exit(1); }
 const browser = await puppeteer.launch({ executablePath: exe, headless: true, args: ['--enable-unsafe-swiftshader', '--use-angle=swiftshader'] });
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const pg = await pageUrl(html);
 try {
   const page = await browser.newPage();
   page.on('pageerror', e => console.log('页面错误', e.message));
-  await page.goto(pathToFileURL(path.resolve(html)).href + '?debug', { waitUntil: 'load' });
+  await page.goto(pg.url + '?debug', { waitUntil: 'load' });
   await page.waitForFunction(() => window.__designer, { timeout: 15000 });
   await new Promise(r => setTimeout(r, 800));
   const out = await page.evaluate(async route => {
@@ -51,4 +54,4 @@ try {
     return res;
   }, route);
   for (const r of out) console.log(`${r.at.join(', ').padEnd(26)} ${r.label}`);
-} finally { await browser.close(); }
+} finally { await browser.close(); await pg.close(); }

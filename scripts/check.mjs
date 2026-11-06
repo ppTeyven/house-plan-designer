@@ -8,6 +8,7 @@ import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import { pageUrl } from './lib_serve.mjs';
 
 const [, , file, outArg] = process.argv;
 if (!file) { console.error('用法: node check.mjs 户型.html [输出目录]'); process.exit(1); }
@@ -31,14 +32,18 @@ const browser = await puppeteer.launch({
   args: ['--enable-unsafe-swiftshader', '--use-angle=swiftshader', '--hide-scrollbars'],
 });
 const errors = [];
+let closeServer = async () => {};
 try {
   const page = await browser.newPage();
   page.setDefaultTimeout(180000);
   console.log('browser ready');
   page.setDefaultNavigationTimeout(180000);
   page.on('pageerror', e => { errors.push(e.message); console.log('pageerror', e.message); });
-  page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
-  await page.goto(pathToFileURL(path.resolve(file)).href + '?debug', { waitUntil: 'load' });
+  page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text() || '') && !/favicon/.test((m.location() && m.location().url) || '')) errors.push(m.text()); });
+  // 用 http:// 打开：file:// 下 WebGL 会拒绝上传带跨源数据的贴图，PBR 贴图全不生效
+  const pg = await pageUrl(file);
+  closeServer = pg.close;
+  await page.goto(pg.url + '?debug', { waitUntil: 'load' });
   console.log('page loaded');
   await page.waitForFunction(() => window.__designer, { timeout: 15000 });
   await new Promise(r => setTimeout(r, 800));
@@ -124,4 +129,5 @@ try {
   console.log(JSON.stringify(brief, null, 1));
 } finally {
   await browser.close();
+  await closeServer();
 }

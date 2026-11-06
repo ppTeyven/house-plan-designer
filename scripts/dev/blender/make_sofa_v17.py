@@ -24,7 +24,7 @@
   E. 【底座】底座框改成与外壳对齐的深色薄框，腿外露。
 
 【验收】
-  blender --background --python check_interpenetration.py -- 验收/models/sofa.glb 2.0
+  blender --background --python check_interpenetration.py -- assets/furnlib/sofa.glb 2.0
 """
 import bpy
 import math

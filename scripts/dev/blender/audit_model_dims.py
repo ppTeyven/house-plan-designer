@@ -1,4 +1,4 @@
-"""验收：把 验收/models/*.glb 的【实测包围盒】与目录目标尺寸逐项对账。
+"""验收：把 assets/furnlib/*.glb 的【实测包围盒】与目录目标尺寸逐项对账。
 
 【为什么必须做】
   用户要求"不准有任何比例崩坏"。build_report.json 里的 distort 只反映
@@ -20,7 +20,7 @@ import struct
 import sys
 
 ROOT = r'D:\house planner\house-plan-designer-main'
-MODELS = os.path.join(ROOT, "验收", "models")
+MODELS = os.path.join(ROOT, "assets", "furnlib")
 SIZES = os.path.join(ROOT, "reference", "catalog-sizes.json")
 
 

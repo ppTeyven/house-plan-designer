@@ -1,4 +1,4 @@
-"""下载参考素材图（按原版建模找相似图）到 验收/refs/。
+"""下载参考素材图（按原版建模找相似图）到 scripts/dev/_refs/。
 
 用法: python fetch_refs.py <key> <url> [name]
 只接受 http/https，避免意外来源。

@@ -21,7 +21,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 CT_JSON = 0x4E4F534A
 CT_BIN = 0x004E4942
 

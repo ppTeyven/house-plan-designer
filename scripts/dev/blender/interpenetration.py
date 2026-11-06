@@ -17,7 +17,7 @@ d < -tol 表示该点已在对方【内侧】，即穿模。
 
 用法（在 Blender 内）：
     from interpenetration import scan_file
-    res = scan_file("验收/models/sofa.glb", tol_mm=2.0)
+    res = scan_file("assets/furnlib/sofa.glb", tol_mm=2.0)
     res["issues"]  # [(名称A, 名称B, 穿透百分比, 最深mm), ...]
 """
 import bpy

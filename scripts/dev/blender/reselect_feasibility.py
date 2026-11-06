@@ -25,7 +25,7 @@ sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 CACHE = os.path.join(ROOT, "assets", "_asset_cache")
 RAW = os.path.join(CACHE, "raw")
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 
 import fit_item as FI
 import pick_resources_v5 as P5

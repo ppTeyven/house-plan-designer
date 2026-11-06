@@ -19,7 +19,7 @@ asset_map.json 里 114 个条目 source=polyhaven（有现成带贴图资源）�
   2. 用 fit_item.fit_item() 按目标尺寸精确拟合（与正式流水线同一条路径，
      保证尺寸/朝向/比例一致）
   3. 用 normalize_glb.guess_role + 语义表修正材质角色（不靠 fabric 兜底）
-  4. 写入 验收/models/<key>.glb 和 assets/furnlib/<key>.glb
+  4. 写入 assets/furnlib/<key>.glb 和 assets/furnlib/<key>.glb
   5. 重算 manifest 的 tris/verts/materials/dims 并回写
 
 【安全】
@@ -42,7 +42,7 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 NEW = os.path.join(ROOT, "assets", "furnlib")
 CACHE = os.path.join(ROOT, "assets", "_asset_cache")
 RAW = os.path.join(CACHE, "raw")

@@ -301,10 +301,15 @@ def decimate_glb(src_glb, dest_glb, max_tris=120000, tol_ratio=0.0008):
         return orig, orig
 
     # 模型最大边（用 accessor min/max 的并集）
+    # 【BUG 修复】只统计 VEC3 的 POSITION accessor。
+    #   原实现对所有带 min/max 的 accessor 都取 [0..2]，
+    #   而 TEXCOORD_0 是 VEC2（只有 min/max 两项）=> IndexError。
     mn = [1e9] * 3
     mx = [-1e9] * 3
     for acc in js.get("accessors", []):
         if "min" not in acc:
+            continue
+        if acc.get("type") != "VEC3":
             continue
         for i in range(3):
             mn[i] = min(mn[i], acc["min"][i])

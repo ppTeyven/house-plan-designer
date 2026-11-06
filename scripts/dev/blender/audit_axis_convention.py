@@ -22,7 +22,7 @@ from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-MODELS = os.path.join(ROOT, "验收", "models")
+MODELS = os.path.join(ROOT, "assets", "furnlib")
 sys.path.insert(0, HERE)
 
 import normalize_glb as NG

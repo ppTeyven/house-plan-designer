@@ -2,7 +2,7 @@
 
 【主路径（唯一）】
   pick_resources_v5 → asset_map.json → 下载/生成资源 → 逐款式精确拟合
-  → 写入 验收/models/*.glb → 写入 assets/furnlib/*.glb
+  → 写入 assets/furnlib/*.glb → 写入 assets/furnlib/*.glb
   → 更新 manifest.json → 更新 catalog.json 的 file 字段
 
 【关键约束】
@@ -30,7 +30,7 @@ import shutil
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收")
+ACC = os.path.join(ROOT, "scripts", "dev", "_accept")
 MODELS = os.path.join(ACC, "models")
 FURNLIB = os.path.join(ROOT, "assets", "furnlib")
 CACHE = os.path.join(ROOT, "assets", "_asset_cache")

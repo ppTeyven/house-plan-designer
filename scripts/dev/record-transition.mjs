@@ -1,12 +1,27 @@
-// 切换动效录像：自动点 2D→3D→分屏→2D，全程 CDP screencast 录帧，输出帧序列 + 可播放回放页
-// 用法：node scripts/dev/record-transition.mjs [输出目录]
+// 切换动效录像：自动点 2D→3D→分屏→2D→分屏→3D，全程 CDP screencast 录帧，输出帧序列 + 可播放回放页
+// 用法：node record-transition.mjs <设计器.html|httpURL> [输出目录]
+//   例：node record-transition.mjs D:/xxx/客厅-装修设计器.html ./transition-rec
+//       node record-transition.mjs http://127.0.0.1:8899/template.html ./transition-rec  （需先起 python serve.py）
 // 输出：<out>/frames/frame-*.jpg、<out>/metrics.json、<out>/playback.html（浏览器打开按播放看动态）、<out>/summary.json
-// 依赖：puppeteer-core（scripts/package.json 已有）、Chrome、本地 serve.py（8899）在跑。无需 ffmpeg。
+// 依赖：puppeteer-core（本目录 npm install）、Chrome。本地文件会自动起一个临时 http 静态服务（file:// 下 PBR 贴图会被 WebGL 拒绝）；http(s) 地址直接打开。
 import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
+import { pathToFileURL } from 'url';
+import { pageUrl } from '../lib_serve.mjs';
 
-const OUT = path.resolve(process.argv[2] || 'scripts/dev/transition-rec');
+const args = process.argv.slice(2);
+let TARGET = null, OUTARG = null;
+for (const a of args) {
+  if (!TARGET && (/^https?:\/\//.test(a) || /\.html?([?#].*)?$/.test(a))) { TARGET = a; continue; }
+  if (!OUTARG) { OUTARG = a; continue; }
+}
+// 兼容老用法：只给一个目录（设计器仓库内跑，默认打开 serve.py 的 template.html）
+let OUT;
+if (TARGET && OUTARG) OUT = path.resolve(OUTARG);
+else if (TARGET && !OUTARG && !/\.html?([?#].*)?$/.test(TARGET) && !/^https?:\/\//.test(TARGET)) { OUT = path.resolve(TARGET); TARGET = null; }
+else if (TARGET && !OUTARG) { OUT = path.resolve('transition-rec'); }
+else { OUT = path.resolve('transition-rec'); }
 const FRAMES = path.join(OUT, 'frames');
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(FRAMES, { recursive: true });
@@ -14,13 +29,21 @@ fs.mkdirSync(FRAMES, { recursive: true });
 const exe = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find(p => fs.existsSync(p));
 if (!exe) { console.error('ERR: 找不到 Chrome/Edge'); process.exit(1); }
 
-// 先确认 8899 服务在跑
-try {
-  const r = await fetch('http://127.0.0.1:8899/template.html', { method: 'HEAD' });
-  if (!r.ok) throw new Error('HTTP ' + r.status);
-} catch (e) {
-  console.error('ERR: 8899 服务没跑，先起 python serve.py → ' + e.message);
-  process.exit(1);
+// 解析目标地址：本地文件走 http://（file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质全不生效），
+// http(s) 直接用；都没给则回退到 8899 serve.py
+let pageURL, closeServer = async () => {};
+if (TARGET && /^https?:\/\//.test(TARGET)) pageURL = TARGET;
+else if (TARGET) { const pg = await pageUrl(TARGET); pageURL = pg.url; closeServer = pg.close; }
+else pageURL = 'http://127.0.0.1:8899/template.html';
+// 只有没给目标文件时才要求 8899 在跑
+if (!TARGET) {
+  try {
+    const r = await fetch(pageURL, { method: 'HEAD' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+  } catch (e) {
+    console.error('ERR: 8899 服务没跑，先起 python serve.py → ' + e.message);
+    process.exit(1);
+  }
 }
 
 const b = await puppeteer.launch({
@@ -34,7 +57,7 @@ page.on('pageerror', e => errs.push('pageerror: ' + e.message));
 page.on('console', m => { if (m.type() === 'error') errs.push('console: ' + m.text().slice(0, 160)); });
 page.on('dialog', d => d.dismiss());
 
-await page.goto('http://127.0.0.1:8899/template.html?debug', { waitUntil: 'load' });
+await page.goto(pageURL + (pageURL.includes('?') ? '&' : '?') + 'debug', { waitUntil: 'load' });
 await page.waitForFunction(() => window.__designer, { timeout: 60000 });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const ev = (f, ...a) => page.evaluate(f, ...a);
@@ -137,3 +160,4 @@ fs.writeFileSync(path.join(OUT, 'playback.html'), html);
 
 console.log(JSON.stringify(summary));
 await b.close();
+await closeServer();

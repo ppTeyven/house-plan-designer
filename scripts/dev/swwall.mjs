@@ -1,9 +1,12 @@
 import puppeteer from 'puppeteer-core';
 import { pathToFileURL } from 'url';
+import { pageUrl } from '../lib_serve.mjs';
 const [, , FILE, X, Y] = process.argv;
 const b = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: 'new', args: ['--use-angle=d3d11', '--enable-gpu'] });
 const page = await b.newPage();
-await page.goto(pathToFileURL(FILE).href + '?debug'); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const pg = await pageUrl(FILE);
+await page.goto(pg.url + '?debug'); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
 console.log(JSON.stringify(await page.evaluate((X, Y) => {
   const D = __designer, P = D.app.plan;
   const es = P.elec.filter(e => Math.hypot(e.x - X, e.y - Y) < 400).map(e => ({ id: e.id, kind: e.kind, x: e.x, y: e.y, rot: e.rot, h: e.h, links: e.links }));
@@ -11,4 +14,5 @@ console.log(JSON.stringify(await page.evaluate((X, Y) => {
     .map(g => ({ a: g.a, b: g.b, t: g.w.t, ops: g.ops.map(q => ({ type: q.o.type, s0: q.s0, s1: q.s1, hinge: q.o.hinge })) }));
   return { es, ws };
 }, +X, +Y), null, 1));
-await b.close();
+  await b.close();
+  await pg.close();

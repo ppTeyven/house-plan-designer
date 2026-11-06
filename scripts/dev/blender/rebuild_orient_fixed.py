@@ -14,7 +14,7 @@
 【流程】
   1. 用修好的 builder 重新导出到 assets/_asset_cache/_geo_orient/
   2. 校验尺寸（与目录目标一致）+ 三角面数 + 材质角色
-  3. 校验通过才替换 验收/models/ 和 assets/furnlib/
+  3. 校验通过才替换 assets/furnlib/ 和 assets/furnlib/
   4. 旧文件备份到 assets/_asset_cache/glb_backup_orient_<时间戳>/
 
 用法：
@@ -33,7 +33,7 @@ from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 NEW = os.path.join(ROOT, "assets", "furnlib")
 OUT = os.path.join(ROOT, "assets", "_asset_cache", "_geo_orient")
 

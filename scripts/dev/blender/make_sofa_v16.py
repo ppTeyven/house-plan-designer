@@ -3,7 +3,7 @@
 【用户验收反馈原文】
   "沙发墙有明显的穿模现象，整体依旧是简陋几何体拼凑的，不满意"
 
-【对照参考实拍（验收/refs/_ref_arm.jpg、_ref_armback.jpg、_ref_side.jpg）后的根因】
+【对照参考实拍（scripts/dev/_refs/_ref_arm.jpg、_ref_armback.jpg、_ref_side.jpg）后的根因】
 
   真实沙发：【靠背 + 扶手 + 转角】是【一件连续的软包外壳】——
     扶手从靠背端头连续弯下来，中间没有拼缝；
@@ -28,7 +28,7 @@
      v16 补上（v15 的腿藏在壳体里看不见）。
 
 【验收】
-  blender --background --python check_interpenetration.py -- 验收/models/sofa.glb 2.0
+  blender --background --python check_interpenetration.py -- assets/furnlib/sofa.glb 2.0
   → 必须 0 对真实穿模
 """
 import bpy

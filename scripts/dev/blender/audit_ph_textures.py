@@ -19,7 +19,7 @@ from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 CACHE_RAW = os.path.join(ROOT, "assets", "_asset_cache", "raw")
 AMAP = os.path.join(ROOT, "assets", "_asset_cache", "asset_map.json")
 

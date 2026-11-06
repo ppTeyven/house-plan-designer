@@ -1,4 +1,4 @@
-"""把 验收/models/*.glb 同步到主程序的高清家具库 assets/furnlib/（按款式 key）。
+"""把 assets/furnlib/*.glb 同步到主程序的高清家具库 assets/furnlib/（按款式 key）。
 
 【为什么必须做】
   主程序 assets/template.html 里：
@@ -31,7 +31,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-SRC = os.path.join(ROOT, "验收", "models")
+SRC = os.path.join(ROOT, "assets", "furnlib")
 DST = os.path.join(ROOT, "assets", "furnlib")
 TEX_DST = os.path.join(DST, "tex")
 

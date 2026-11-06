@@ -24,8 +24,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import glb_clean
 
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
-GLB = args[0] if args else r"验收/models/sofa.glb"
-OUT = args[1] if len(args) > 1 else r"验收/previews/_color_diag.png"
+GLB = args[0] if args else r"assets/furnlib/sofa.glb"
+OUT = args[1] if len(args) > 1 else r"scripts/dev/_previews/_color_diag.png"
 
 model = glb_clean.import_clean(GLB)
 glb_clean.normalize_floor(model)

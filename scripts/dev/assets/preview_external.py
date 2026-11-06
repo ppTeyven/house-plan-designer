@@ -6,7 +6,7 @@
 本脚本对处理后的 GLB 做：
   ① 三视角渲染（正/侧/3/4）
   ② 落地检查（底面 z=0）
-  ③ 输出到 验收/previews/ext_<slug>.png 供人工比对
+  ③ 输出到 scripts/dev/_previews/ext_<slug>.png 供人工比对
 
 用法：blender --background --python preview_external.py -- [--only slug,slug]
 """
@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.join(ROOT, "scripts", "dev", "blender"))
 # 复用项目既有的棚拍灯光配置
 import render_preview as RP   # noqa
 
-OUTDIR = os.path.join(ROOT, "验收", "previews")
+OUTDIR = os.path.join(ROOT, "scripts", "dev", "_previews")
 SRC = os.path.join(ROOT, "assets", "external", "processed")
 
 

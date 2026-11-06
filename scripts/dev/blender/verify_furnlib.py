@@ -1,7 +1,7 @@
 """核对 assets/furnlib/sofa.glb 是否已经是 v22（含点缀抱枕配色）。
 
 【为什么要查】
-  sync_furnlib.py 会把 验收/models/*.glb 重新导出（Y-up）到 assets/furnlib/。
+  sync_furnlib.py 会把 assets/furnlib/*.glb 重新导出（Y-up）到 assets/furnlib/。
   之前有个后台任务在 16:36 跑过一次 sync + 开 GUI，
   那个时间点 sofa.glb 还是 v20（w=2.257 h=0.823），
   所以它同步过去的、GUI 打开的都是旧模型。

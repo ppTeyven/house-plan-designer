@@ -39,7 +39,7 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 NEW = os.path.join(ROOT, "assets", "furnlib")
 TEX = os.path.join(ROOT, "assets", "furnlib", "tex")
 CACHE_RAW = os.path.join(ROOT, "assets", "_asset_cache", "raw")

@@ -2,7 +2,7 @@
 
 数据来源：
   · 目录与中文名：从 assets/template.html 的家具调色板正则挖出（真实存在的款式）
-  · 状态与体检数据：从 验收/models/manifest.json（真实 GLB 解析）
+  · 状态与体检数据：从 assets/furnlib/manifest.json（真实 GLB 解析）
   · 配色：统一色板 palette.py，保证配套不违和
 """
 import json, os, re, sys, pathlib

@@ -3,8 +3,8 @@
 用于修复前后的对比 —— 手册第 3 条：不凭记忆断言事实，必须查证。
 
 用法：
-  python audit_tex_state.py                 # 报告（验收/models 优先）
-  python audit_tex_state.py --dir 验收/models
+  python audit_tex_state.py                 # 报告（assets/furnlib 优先）
+  python audit_tex_state.py --dir assets/furnlib
   python audit_tex_state.py --json out.json
 """
 import argparse
@@ -81,7 +81,7 @@ def audit(path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--dir", default=os.path.join(ROOT, "验收", "models"))
+    ap.add_argument("--dir", default=os.path.join(ROOT, "assets", "furnlib"))
     ap.add_argument("--json", default=None)
     args = ap.parse_args()
 

@@ -1,4 +1,4 @@
-"""把 验收/models/*.glb 同步到主程序的高清家具库 furnlib/。
+"""把 assets/furnlib/*.glb 同步到主程序的高清家具库 furnlib/。
 
 【为什么必须做这一步】
 git 里 `furnlib/` 从来没有提交过（`git ls-files | grep furnlib` = 0 个文件），
@@ -24,7 +24,7 @@ git 里 `furnlib/` 从来没有提交过（`git ls-files | grep furnlib` = 0 个
 import bpy, os, sys, json, math, shutil
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-SRC = os.path.join(ROOT, "验收", "models")
+SRC = os.path.join(ROOT, "assets", "furnlib")
 # 【关键路径】主程序 assets/template.html 里写的是 fetch("furnlib/index.json")，
 # 相对路径是相对于【页面所在目录 assets/】解析的，不是项目根。
 # 所以 furnlib 必须放在 assets/ 下，否则 fetch('furnlib/sofa.glb') 会 404，

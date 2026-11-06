@@ -3,6 +3,7 @@
 // 用法：node dev/walk_lights.mjs 设计器.html 输出目录 [房间内一点 x y] [时刻 22]
 import puppeteer from 'puppeteer-core';
 import { pathToFileURL } from 'url';
+import { pageUrl } from '../lib_serve.mjs';
 const [, , FILE, OUT, RX = '13600', RY = '27900', HOUR = '22'] = process.argv;
 const room = { x: +RX, y: +RY };
 const b = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: 'new', defaultViewport: { width: 1400, height: 860 },
@@ -10,7 +11,9 @@ const b = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chro
 const page = await b.newPage(); const errs = [];
 page.on('pageerror', e => errs.push(e.message)); page.on('console', m => { if (m.type() === 'error') errs.push(m.text().slice(0, 160)); });
 await page.evaluateOnNewDocument(() => { for (const k of Object.keys(localStorage)) if (k.startsWith('house-designer')) localStorage.removeItem(k); });
-await page.goto(pathToFileURL(FILE).href + '?debug'); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const pg = await pageUrl(FILE);
+await page.goto(pg.url + '?debug'); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const ev = (f, ...a) => page.evaluate(f, ...a);
 await ev(() => __designer.setView('3d')); await sleep(800); await page.waitForFunction(() => !__designer.S3.isAnimating(), { timeout: 30000 }); await sleep(1500);
@@ -38,4 +41,5 @@ const toastTxt = await ev(() => document.querySelector('#toast')?.textContent); 
 const s1 = await st(); await page.screenshot({ path: OUT + '/2_on.png' });
 await page.keyboard.press('KeyT'); await sleep(600); await page.screenshot({ path: OUT + '/3_hud_off.png' }); const s2 = await st(); await page.keyboard.press('KeyT');
 console.log(JSON.stringify({ aim, klog, pre, toastTxt, enterMs: t1 - t0, sw, before: s0, afterSpace: s1, hudOff: s2.hud.length, errs: [...new Set(errs)].slice(0, 6) }, null, 1));
-await b.close();
+  await b.close();
+  await pg.close();

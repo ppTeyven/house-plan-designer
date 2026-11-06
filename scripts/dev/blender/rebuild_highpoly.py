@@ -14,7 +14,7 @@
 【流程】
   1. 用 GM.export(key) 按 catalog-sizes.json 的尺寸逐件重新生成
   2. 校验：尺寸（误差 <2%）、三角面数（不低于旧版）、材质角色（不变）
-  3. 校验通过才替换 assets/furnlib/ 与 验收/models/
+  3. 校验通过才替换 assets/furnlib/ 与 assets/furnlib/
   4. 旧文件备份到 _asset_cache/glb_backup_highpoly_<时间戳>/
 
 【范围】
@@ -39,7 +39,7 @@ from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 FURN = os.path.join(ROOT, "assets", "furnlib")
 OUT = os.path.join(ROOT, "assets", "_asset_cache", "_geo_highpoly")
 

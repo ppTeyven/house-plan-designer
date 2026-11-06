@@ -1,13 +1,16 @@
 // 开发用：生产版 HTML 上点“渲染出图（光线追踪）”，编译完 40 秒后点“提前结束并保存”，抓下载的文件
 import puppeteer from 'puppeteer-core';
 import fs from 'fs';
+import { pageUrl } from '../lib_serve.mjs';
 const [, , file, out] = process.argv;
 const exe = ['C:/Program Files/Google/Chrome/Application/chrome.exe'].find(p => fs.existsSync(p));
 const b = await puppeteer.launch({ executablePath: exe, headless: 'new', protocolTimeout: 1800000, defaultViewport: { width: 1700, height: 1000 }, args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows'] });
 const p = await b.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
 fs.mkdirSync(out, { recursive: true });
 const cdp = await p.createCDPSession(); await cdp.send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: out.split('/').join(String.fromCharCode(92)) });
-await p.goto('file:///' + file + '?debug', { waitUntil: 'load' }); await p.waitForFunction(() => window.__designer, { timeout: 30000 }); await new Promise(r => setTimeout(r, 1500));
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const pg = await pageUrl(file);
+await p.goto(pg.url + '?debug', { waitUntil: 'load' }); await p.waitForFunction(() => window.__designer, { timeout: 30000 }); await new Promise(r => setTimeout(r, 1500));
 const t0 = Date.now();
 await p.evaluate(async () => {
   const d = __designer, S = d.S3; d.setView('3d'); await new Promise(r => setTimeout(r, 2500));
@@ -28,3 +31,4 @@ for (let i = 0; i < 600; i++) {
 await new Promise(r => setTimeout(r, 3000));
 console.log('done', Math.round((Date.now() - t0) / 1000) + 's', 'files:', fs.readdirSync(out).join(','), 'toast:', await p.evaluate(() => document.querySelector('#toast')?.textContent), 'errors:', errs.join(' | '));
 await b.close();
+await pg.close();

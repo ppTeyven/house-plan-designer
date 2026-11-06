@@ -1,7 +1,7 @@
-"""对比 验收/models/*.glb 与 assets/furnlib/*.glb 是否为同一批文件。
+"""对比 assets/furnlib/*.glb 与 assets/furnlib/*.glb 是否为同一批文件。
 
 verify_all_251.py 之前是从 {BASE}/models/ 取文件校验的，
-如果 验收/models 里还是旧模型，那次"251/251 通过"就验错了对象。
+如果 assets/furnlib 里还是旧模型，那次"251/251 通过"就验错了对象。
 
 用法：python compare_models.py
 """
@@ -11,7 +11,7 @@ import os
 import struct
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 NEW = os.path.join(ROOT, "assets", "furnlib")
 
 
@@ -62,7 +62,7 @@ acc_files = {os.path.splitext(f)[0]: os.path.join(ACC, f)
 new_files = {os.path.splitext(f)[0]: os.path.join(NEW, f)
              for f in os.listdir(NEW) if f.endswith(".glb")}
 
-print("验收/models : %d 个 GLB, %.1f MB"
+print("assets/furnlib : %d 个 GLB, %.1f MB"
       % (len(acc_files), sum(os.path.getsize(p) for p in acc_files.values()) / 1048576.0))
 print("assets/furnlib: %d 个 GLB, %.1f MB"
       % (len(new_files), sum(os.path.getsize(p) for p in new_files.values()) / 1048576.0))
@@ -85,7 +85,7 @@ print("只在furnlib: %d  %s" % (len(only_new), sorted(only_new)[:10]))
 print()
 
 print("=== 内容不同的模型（三角面 / 材质 / 体积）===")
-print("%-22s %-34s %-34s" % ("id", "验收/models", "assets/furnlib"))
+print("%-22s %-34s %-34s" % ("id", "assets/furnlib", "assets/furnlib"))
 for k in diff[:30]:
     a = glb_stats(acc_files[k])
     b = glb_stats(new_files[k])

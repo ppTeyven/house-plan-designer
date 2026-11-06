@@ -22,7 +22,7 @@ import json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收")
+ACC = os.path.join(ROOT, "scripts", "dev", "_accept")
 CACHE = os.path.join(ROOT, "assets", "_asset_cache")
 
 

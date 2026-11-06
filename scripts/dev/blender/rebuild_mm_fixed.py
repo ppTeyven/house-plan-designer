@@ -3,7 +3,7 @@
 流程（与 rebuild_orient_fixed.py 一致）：
   1. 用修好的 builder 重新导出到 assets/_asset_cache/_geo_mm/
   2. 校验尺寸（与目录目标一致）+ 无被压扁的小部件
-  3. 校验通过才替换 验收/models/ 和 assets/furnlib/
+  3. 校验通过才替换 assets/furnlib/ 和 assets/furnlib/
   4. 旧文件备份到 assets/_asset_cache/glb_backup_mm_<时间戳>/
 
 用法：
@@ -21,7 +21,7 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 NEW = os.path.join(ROOT, "assets", "furnlib")
 OUT = os.path.join(ROOT, "assets", "_asset_cache", "_geo_mm")
 

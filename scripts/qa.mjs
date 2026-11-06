@@ -12,6 +12,7 @@ import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import { pageUrl } from './lib_serve.mjs';
 import os from 'os';
 
 const [, , FILE, OUTARG, ...flags] = process.argv;
@@ -33,6 +34,9 @@ fs.rmSync(OUT, { recursive: true, force: true }); for (const d of [SHOTS, DL]) f
 const exe = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome'].find(p => fs.existsSync(p));
 const b = await puppeteer.launch({ executablePath: exe, headless: 'new', protocolTimeout: 900000, defaultViewport: VW,
   args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows'] });
+// 用 http:// 打开：file:// 下 WebGL 会拒绝上传带跨源数据的贴图（furnlib/tex/*.jpg），
+// 所有 PBR 贴图都不生效，测出来的画面是假的
+const { url: URL, close: closeServer } = await pageUrl(FILE);
 const page = await b.newPage();
 const errs = [];
 page.on('pageerror', e => errs.push('pageerror: ' + e.message));
@@ -42,7 +46,7 @@ const cdp = await page.createCDPSession();
 await cdp.send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: DL }).catch(() => cdp.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: DL }));
 // 第一次打开前清掉本地保存的方案（同一会话里之后刷新不再清，用来测“保存 → 刷新还在”）
 await page.evaluateOnNewDocument(() => { try { if (sessionStorage.getItem('qa-init')) return; sessionStorage.setItem('qa-init', '1'); for (const k of Object.keys(localStorage)) if (k.startsWith('house-designer') || k.startsWith('hd-')) localStorage.removeItem(k); } catch { } });
-await page.goto(pathToFileURL(path.resolve(FILE)).href + '?debug', { waitUntil: 'load' });
+await page.goto(URL + '?debug', { waitUntil: 'load' });
 await page.waitForFunction(() => window.__designer, { timeout: 60000 });
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -641,10 +645,11 @@ await step('漫游：视高 / 视距 / 视角调节', async () => {
   await page.screenshot({ path: path.join(SHOTS, `${String(++shotN).padStart(3, '0')}_漫游跟随视角.png`) });
   await ev(() => { __designer.S3.setWalkCam({ eyeH: 1600, dist: 0, fov: 62 }); }); await sleep(500);
 });
-await step('720° 全景（漫游中）', async () => {
-  await click('#panoBtn'); must(await until(() => !!document.querySelector('.modal'), 60000), '全景预览没打开（等了 60 秒）'); await sleep(800);
-  const f = await expectDownload(() => ev(() => { const b = [...document.querySelectorAll('.modal button')].find(x => /下载|保存/.test(x.textContent)); if (!b) throw new Error('全景预览里没有下载按钮'); b.click(); })); await closeModals(); return f.join(',');
-}, { timeout: 90000 });
+// 720° 全景：功能已下线（产品里 #panoBtn 被 remove() 掉，CSS 里也隐藏），这里只确认没被误恢复
+await step('720° 全景（已下线，按钮不应存在）', async () => {
+  must(!(await ev(() => !!document.querySelector('#panoBtn'))), '#panoBtn 又冒出来了（功能已下线）');
+  return '按钮已移除，符合预期';
+});
 await closeModals();
 await step('3D 里点门 / 开关（射线点中可交互物体）', async () => {
   const r = await ev(async () => {
@@ -684,13 +689,35 @@ await step('漫游：夜里点位标记 + 空格开关灯', async () => {
   for (let k = 0; k < 4 && !sockets; k++) { await ev(k => { const S = __designer.S3; S.fp.yaw += Math.PI / 2 * (k ? 1 : 0); S.fp.pitch = -.15; }, k); await sleep(900); sockets = await ev(() => document.querySelectorAll('.pt-hud .pt-socket').length); }
   must(sockets > 0 || !(await ev(() => __designer.app.plan.elec.some(e => /^socket|^net$|^tv$/.test(e.kind)))), '漫游里看不到插座 / 网口标记');
   await ev(sw => { const S = __designer.S3; S.fp.yaw = Math.atan2(sw.y - S.fp.y, sw.x - S.fp.x); S.fp.pitch = Math.atan2(1.35 - 1.6, Math.max(.3, Math.hypot(sw.x - S.fp.x, sw.y - S.fp.y) / 1000)); }, sw); await sleep(1500);
-  const lv = () => ev(id => { const D = __designer, s = D.app.plan.elec.find(e => e.id === id); return Math.max(...s.links.map(l => D.S3.lampLevel.get(l) || 0)); }, sw.id);
+  // 对准目标开关：atCrosshair() 取的是屏幕中心最近的标记，常常是旁边另一个开关。
+  // 所以小范围扫 yaw/pitch，直到准星真的命中目标开关（sw.id）为止。
+  await ev(() => { const H = __designer.hudApi.hud; if (!H.on) H.on = true; });
+  let aimedId = null;
+  outer:
+  for (const dp of [0, -0.12, 0.12, -0.24, 0.24, -0.36]) {
+    for (const dy of [0, 0.06, -0.06, 0.12, -0.12, 0.2, -0.2]) {
+      await ev((sw, dp, dy) => {
+        const S = __designer.S3;
+        const d = Math.max(.3, Math.hypot(sw.x - S.fp.x, sw.y - S.fp.y) / 1000);
+        S.fp.yaw = Math.atan2(sw.y - S.fp.y, sw.x - S.fp.x) + dy;
+        S.fp.pitch = Math.atan2(1.35 - 1.6, d) + dp;
+      }, sw, dp, dy);
+      await sleep(500);
+      const hit = await ev(id => { const t = __designer.hudApi.atCrosshair(); return t && t.e ? t.e.id : null; }, sw.id);
+      if (hit === sw.id) { aimedId = hit; break outer; }
+    }
+  }
+  must(aimedId, '准星对不准目标开关（扫了 yaw/pitch 也没命中）');
+  const aimId = sw.id;
+  const lv = () => ev(id => { const D = __designer, s = D.app.plan.elec.find(e => e.id === id); if (!s) return 0; return Math.max(0, ...s.links.map(l => D.S3.lampLevel.get(l) || 0)); }, aimId);
   const aimed = await ev(() => !!document.querySelector('.pt.aim'));
   if (aimed) { await page.keyboard.press('Space'); await sleep(1500); }
   else { const b = await page.$('.pt-hud .pt-switch'); must(b, '附近没有开关标记'); await b.click(); await sleep(1500); }
-  must(await until(id => { const D = __designer, s = D.app.plan.elec.find(e => e.id === id); return s.links.some(l => (D.S3.lampLevel.get(l) || 0) > 0); }, 10000, sw.id) || (await lv()) > 0, `${aimed ? '按空格' : '点开关标记'}后灯没亮`);
+  must(await until(id => { const D = __designer, s = D.app.plan.elec.find(e => e.id === id); return s.links.some(l => (D.S3.lampLevel.get(l) || 0) > 0); }, 10000, aimId) || (await lv()) > 0, `${aimed ? '按空格' : '点开关标记'}后灯没亮`);
   await page.screenshot({ path: path.join(SHOTS, `${String(++shotN).padStart(3, '0')}_漫游夜里开关灯.png`) });
-  await page.keyboard.press('KeyT'); await sleep(400); must(await ev(() => document.querySelectorAll('.pt-hud .pt').length === 0), '按 T 没隐藏点位标记'); await page.keyboard.press('KeyT');
+  await page.keyboard.press('KeyT');
+  must(await until(() => document.querySelectorAll('.pt-hud .pt').length === 0, 3000), '按 T 没隐藏点位标记');
+  await page.keyboard.press('KeyT');
   await ev(() => { const S = __designer.S3; S.lighting.time = 15; S.setLighting(); });
 }, { timeout: 200000 });
 await step('退出漫游', async () => { await closeModals(); await page.keyboard.press('Escape'); must(await until(() => !__designer.S3.fp.active, 15000), '没退出'); await sleep(800); });
@@ -783,7 +810,7 @@ for (const [w, h] of [[1280, 720], [1366, 768], [1440, 900], [1920, 1080]]) awai
 await step('手机：直接用手机尺寸打开（平面在屏幕内、抽屉面板）', async () => {
   const m = await b.newPage(); const e0 = errs.length; m.on('pageerror', e => errs.push('pageerror(手机): ' + e.message));
   await m.emulate({ viewport: { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }, userAgent: 'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/120 Mobile Safari/537.36' });
-  await m.goto(pathToFileURL(path.resolve(FILE)).href + '?debug', { waitUntil: 'load' }); await m.waitForFunction(() => window.__designer, { timeout: 60000 }); await sleep(2500);
+  await m.goto(URL + '?debug', { waitUntil: 'load' }); await m.waitForFunction(() => window.__designer, { timeout: 60000 }); await sleep(2500);
   const r = await m.evaluate(() => { const D = __designer, v = D.view, c = document.querySelector('#c2d').getBoundingClientRect(), bb = D.app.geo.bounds; return { over: document.documentElement.scrollWidth > innerWidth + 2, x0: c.x + bb.x * v.s + v.ox, x1: c.x + bb.x1 * v.s + v.ox, W: innerWidth }; });
   await m.screenshot({ path: path.join(SHOTS, `${String(++shotN).padStart(3, '0')}_手机_打开.png`) });
   await m.evaluate(() => document.querySelector('#leftToggle').click()); await sleep(500); await m.screenshot({ path: path.join(SHOTS, `${String(++shotN).padStart(3, '0')}_手机_左面板.png`) });
@@ -805,4 +832,5 @@ fs.writeFileSync(path.join(OUT, 'report.md'), md);
 fs.writeFileSync(path.join(OUT, 'report.json'), JSON.stringify({ file: FILE, results, errors: errs }, null, 1));
 console.log(`\n${results.length - fail.length} / ${results.length} 通过` + (fail.length ? `\n失败：\n${fail.map(r => ' - ' + r.name + '：' + r.msg).join('\n')}` : ''));
 await b.close();
+await closeServer();
 process.exit(fail.length ? 2 : 0);

@@ -4,15 +4,18 @@ import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import { pageUrl } from './lib_serve.mjs';
 
 const [, , FILE, OUTARG] = process.argv;
 const OUT = path.resolve(OUTARG); fs.rmSync(OUT, { recursive: true, force: true }); fs.mkdirSync(OUT, { recursive: true });
 const exe = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome'].find(p => fs.existsSync(p));
 const b = await puppeteer.launch({ executablePath: exe, headless: 'new', protocolTimeout: 900000, defaultViewport: { width: 1600, height: 1000 }, args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', '--disable-background-timer-throttling', '--disable-renderer-backgrounding'] });
 const page = await b.newPage(); const errs = [];
-page.on('pageerror', e => errs.push(e.message)); page.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+page.on('pageerror', e => errs.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text() || '') && !/favicon/.test((m.location() && m.location().url) || '')) errs.push(m.text()); });
 await page.evaluateOnNewDocument(() => { try { for (const k of Object.keys(localStorage)) if (k.startsWith('house-designer') || k.startsWith('hd-')) localStorage.removeItem(k); } catch { } });
-await page.goto(pathToFileURL(path.resolve(FILE)).href + '?debug', { waitUntil: 'load' }); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const { url: PAGE_URL, close: closeServer } = await pageUrl(FILE);
+await page.goto(PAGE_URL + '?debug', { waitUntil: 'load' }); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 await sleep(1500);
 // 家具库全部加进来，记下名字

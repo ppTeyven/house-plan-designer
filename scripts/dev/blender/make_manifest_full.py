@@ -7,7 +7,7 @@
   所以 catalog.json 里 243 项是 file:null / status:"none" ——
   验收站点开是空的，等于"251 项没做完"。
 
-  本脚本：直接扫 验收/models/*.glb，按【款式 key】与目录 key 一一对应，
+  本脚本：直接扫 assets/furnlib/*.glb，按【款式 key】与目录 key 一一对应，
   逐件解析出真实尺寸/面数/材质/落地状态，生成 251 条 manifest。
 
 【验收标准（全部由真实几何判定，不凭感觉）】
@@ -27,7 +27,7 @@ from datetime import datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-MODELS = os.path.join(ROOT, "验收", "models")
+MODELS = os.path.join(ROOT, "assets", "furnlib")
 SIZES = os.path.join(ROOT, "reference", "catalog-sizes.json")
 sys.path.insert(0, HERE)
 

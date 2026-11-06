@@ -70,7 +70,8 @@ def node_local(n):
     for c in range(3):
         for row in range(3):
             out[c * 4 + row] = rot[c * 3 + row] * s[c]
-    out[3] = t[0]; out[7] = t[1]; out[11] = t[2]
+    # 列主序：平移在 [12,13,14]，[3,7,11] 必须是 0（底行）
+    out[12] = t[0]; out[13] = t[1]; out[14] = t[2]
     out[15] = 1.0
     return out
 

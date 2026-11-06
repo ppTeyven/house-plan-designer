@@ -39,34 +39,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 TEX = os.path.join(ROOT, "assets", "furnlib", "tex")
 
-# 角色 → 贴图前缀（与 fix_roles_pbr.py / template.html 的 __GLB_PBR_ROLE 一致）
-ROLE_TEX = {
-    "wood_oak": "role_wood_oak",
-    "wood_walnut": "role_wood_walnut",
-    "fabric_oat": "role_fabric_oat",
-    "fabric_oat_d": "role_fabric_oat_dark",
-    "fabric_cream": "role_fabric_cream",
-    "fabric_grey": "role_fabric_grey",
-    "metal_black": "role_metal_black",
-    "metal_steel": "role_metal_steel",
-    "metal_brass": "role_metal_brass",
-    "ceramic_white": "role_ceramic_white",
-    "stone_light": "role_stone_light",
-    "stone_dark": "role_stone_dark",
-    "leaf": "role_leaf",
-    "leaf_dark": "role_leaf",
-}
-
-# 各角色的物理金属度（用于 ORM 的 B 通道）
-ROLE_METAL = {
-    "wood_oak": 0.0, "wood_walnut": 0.0,
-    "fabric_oat": 0.0, "fabric_oat_d": 0.0,
-    "fabric_cream": 0.0, "fabric_grey": 0.0,
-    "metal_black": 0.85, "metal_steel": 0.92, "metal_brass": 0.95,
-    "ceramic_white": 0.0,
-    "stone_light": 0.0, "stone_dark": 0.0,
-    "leaf": 0.0, "leaf_dark": 0.0,
-}
+# 角色 → 贴图前缀 / 金属度：唯一真源在 roles.py
+# 【为什么这里不再维护副本】
+#   之前 pbr_pack.py 自己抄了一份 ROLE_TEX / ROLE_METAL，
+#   结果新增 role（如 grass）时只改了 roles.py，pbr_pack 拿不到 →
+#   build_role_maps('grass') 返回空 → 模型贴图贴不上（静默失败）。
+#   → 改为直接 import，杜绝第二真源。
+from roles import ROLE_TEX, ROLE_METAL  # noqa: E402,F401
 
 # 缓存：role -> {slot: bytes}
 _CACHE = {}
@@ -89,6 +68,20 @@ def _open_gray(path, size):
     return np.asarray(im, dtype=np.float32) / 255.0
 
 
+def _open_gray_any(path):
+    """读单通道图 → numpy float32 数组（0..1），【不改变尺寸】。
+
+    【为什么需要】
+      ORM 要和 baseColor/normal 同分辨率（它们都是 2048）。
+      如果 ORM 只有 1024，粗糙度采样频率就低一档 → 近景"颜色清晰、反光糊"。
+      所以这里保持源图原始尺寸，由 pack_orm 负责对齐。
+    """
+    if not path or not os.path.exists(path):
+        return None
+    im = Image.open(path).convert("L")
+    return np.asarray(im, dtype=np.float32) / 255.0
+
+
 def _encode_jpg(arr, quality=86):
     """numpy HxWx3 (0..1) → JPEG 字节。"""
     im = Image.fromarray((np.clip(arr, 0, 1) * 255).astype(np.uint8), mode="RGB")
@@ -106,16 +99,32 @@ def pack_orm(rough_path, metal_value, ao_path, size=1024):
     B = metalness（常量，来自 ROLE_METAL）
 
     返回 JPEG 字节；失败返回 None。
+
+    【size 的含义】
+      size=0 → 【跟随源图实际尺寸】（推荐）。
+        ORM 是从 rough/ao 源图降采样来的，如果源图是 2048 而 ORM 只有 1024，
+        采样频率与 baseColor/normal 不一致 → 粗糙度细节比颜色糊一档，
+        近景会看出"颜色清晰但反光糊"。
+      size>0 → 强制方形尺寸（旧行为，保留给玻璃等特例）。
     """
-    rough = _open_gray(rough_path, size)
-    ao = _open_gray(ao_path, size)
+    rough = _open_gray(rough_path, size) if size else _open_gray_any(rough_path)
+    ao = _open_gray(ao_path, size) if size else _open_gray_any(ao_path)
     if rough is None and ao is None:
         return None
     if rough is None:
-        rough = np.full((size, size), 0.7, dtype=np.float32)
+        rough = np.full(rough.shape if rough is not None else ao.shape,
+                        0.7, dtype=np.float32)
     if ao is None:
-        ao = np.ones((size, size), dtype=np.float32)
-    orm = np.zeros((size, size, 3), dtype=np.float32)
+        ao = np.ones(rough.shape if rough is not None else ao.shape,
+                     dtype=np.float32)
+    # 两张源图尺寸可能不同（rough 是 2048，ao 缺失时用 ones）→ 对齐到小的
+    h = min(rough.shape[0], ao.shape[0])
+    w = min(rough.shape[1], ao.shape[1])
+    if rough.shape[0] != h or rough.shape[1] != w:
+        rough = rough[:h, :w]
+    if ao.shape[0] != h or ao.shape[1] != w:
+        ao = ao[:h, :w]
+    orm = np.zeros((h, w, 3), dtype=np.float32)
     orm[:, :, 0] = ao
     orm[:, :, 1] = rough
     orm[:, :, 2] = float(metal_value)
@@ -150,7 +159,35 @@ def pack_glass_orm(size=256):
     return _encode_jpg(orm)
 
 
-def build_role_maps(role, size=1024):
+def pack_glass_basecolor(size=256):
+    """玻璃的 baseColor 底图（极淡的冷白，带极轻的竖向波纹）。
+
+    【为什么玻璃需要 baseColor】
+      玻璃【不贴表面扫描图】（扫描图会盖掉透明/折射），但 glTF 里
+      完全没有 baseColorTexture 的材质，three.js 会用
+      baseColorFactor（默认白）→ 渲染出来是一块【死白不透明板】，
+      看不出是玻璃。
+      → 给一张几乎全白、带轻微竖纹的底图：
+        配合 baseColorFactor 的 alpha，玻璃才有"有厚度的高光面"的感觉。
+
+    【注意】透明度由材质的 alphaMode/baseColorFactor 控制，
+      这张图只提供颜色与细微纹理，不承担透明。
+    """
+    if np is None:
+        return None
+    h = w = size
+    # 竖向波纹：模拟玻璃拉丝/水波，让高光有变化
+    xs = np.arange(w, dtype=np.float32)
+    wave = (np.sin(xs / w * np.pi * 12.0) * 0.5 + 0.5) * 0.035
+    base = 0.90 + wave[None, :]
+    rgb = np.zeros((h, w, 3), dtype=np.float32)
+    rgb[:, :, 0] = base * 0.97          # 略偏冷
+    rgb[:, :, 1] = base * 0.985
+    rgb[:, :, 2] = base
+    return _encode_jpg(rgb, quality=90)
+
+
+def build_role_maps(role, size=0):
     """返回该角色的四张贴图字节。
 
     {
@@ -160,6 +197,9 @@ def build_role_maps(role, size=1024):
       "ao":   jpeg bytes,     # 单通道 AO（独立 occlusionTexture 槽位）
     }
     缺哪张就少哪个 key（调用方跳过对应槽位）。
+
+    【size 默认 0 = 跟随源图尺寸】
+      role 贴图已升级到 2048，ORM 若固定 1024 会与颜色/法线采样频率不一致。
     """
     if role in _CACHE:
         return _CACHE[role]

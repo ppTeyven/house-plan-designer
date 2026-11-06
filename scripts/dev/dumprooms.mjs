@@ -3,11 +3,14 @@ import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import { pageUrl } from '../lib_serve.mjs';
 const [, , file, out] = process.argv;
 const exe = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find(p => fs.existsSync(p));
 const browser = await puppeteer.launch({ executablePath: exe, headless: true, args: ['--enable-unsafe-swiftshader', '--use-angle=swiftshader'] });
 const page = await browser.newPage();
-await page.goto(pathToFileURL(path.resolve(file)).href + '?debug', { waitUntil: 'load' });
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const pg = await pageUrl(file);
+await page.goto(pg.url + '?debug', { waitUntil: 'load' });
 await page.waitForFunction(() => window.__designer, { timeout: 15000 });
 await new Promise(r => setTimeout(r, 800));
 const data = await page.evaluate(() => {
@@ -18,5 +21,6 @@ const data = await page.evaluate(() => {
   return { rooms, walls, keys: Object.keys(app) };
 });
 fs.writeFileSync(out, JSON.stringify(data, null, 1));
-await browser.close();
+  await browser.close();
+  await pg.close();
 console.log('ok', data.rooms.length, data.walls.length, data.keys.join(','));

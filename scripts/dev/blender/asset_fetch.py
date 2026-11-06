@@ -97,14 +97,29 @@ def _http_get(url, dest=None, expect_md5=None, timeout=TIMEOUT):
 
 
 def _http_json(url, timeout=45):
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        raise FetchError("http_%d" % e.code, e.reason, url=url, status=e.code)
-    except Exception as e:
-        raise FetchError("network_error", str(e), url=url)
+    """取 JSON。失败抛 FetchError。
+
+    【为什么这里也要重试】
+      _http_get 有退避重试，但 _http_json 原来是一次性的。
+      实测 ambientCG API 偶发 `SSL: UNEXPECTED_EOF_WHILE_READING`
+      （对端提前断 TLS），一次失败就整个脚本崩 —— 探测 13 个 asset 时
+      第一个就挂，后面全跑不到。重试逻辑与 _http_get 保持一致。
+    """
+    last = None
+    for attempt in range(RETRY):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            last = FetchError("http_%d" % e.code, e.reason, url=url, status=e.code)
+            if e.code != 429 and 400 <= e.code < 500:
+                break
+        except Exception as e:
+            last = FetchError("network_error", str(e), url=url)
+        if attempt < RETRY - 1:
+            time.sleep(BACKOFF ** attempt * (0.7 + 0.6 * random.random()))
+    raise last or FetchError("unknown", "json fetch failed", url=url)
 
 
 # =====================================================================
@@ -143,6 +158,17 @@ def acg_download(asset_id, resolution="2K", fmt="JPG", dest_dir=None,
     """下载 ambientCG 材质包（zip）并解压。
 
     返回 (zip_path, {basename: 绝对路径})
+
+    【解压目录必须带分辨率】
+      原来解压到 <dest_dir>/<assetId>/，不区分分辨率。
+      实测后果：先下 4K 再下 2K 时，2K 的 zip 被解压到同一目录，
+      文件名【相同】（Wood096_4K-JPG_Color.jpg vs Wood096_2K-JPG_Color.jpg
+      其实不同，但 ambientCG 的 2K 包内文件名带 "2K-JPG"）——
+      更糟的是 has_files 判断只看"目录里有没有图"，
+      于是 4K 解压后，2K 请求直接复用 4K 的图 → 【拿到的是 4K 不是 2K】，
+      实测 2K 下载后量到的仍是 4096×4096。
+      → 解压目录改成 <dest_dir>/<assetId>_<resolution>_<fmt>/，
+        且【按目标文件名是否齐全】判断是否需要重新解压。
     """
     dest_dir = dest_dir or os.path.join(CACHE, "ambientcg")
     fname = "%s_%s-%s.zip" % (asset_id, resolution, fmt)
@@ -163,13 +189,20 @@ def acg_download(asset_id, resolution="2K", fmt="JPG", dest_dir=None,
         _http_get(url, dest)
     out = {}
     if extract:
-        outdir = os.path.join(dest_dir, asset_id)
-        # 【必须按"是否有实际文件"判断，不能只看目录存在】
+        # 【按分辨率隔离目录】—— 否则不同分辨率互相覆盖
+        outdir = os.path.join(dest_dir, "%s_%s_%s" % (asset_id, resolution, fmt))
+        # 【必须按"目标 zip 里是否真的有文件"判断，不能只看目录存在】
         # 否则上一轮解压后文件被取走，目录还在 → 永远不再解压 → 空目录
-        has_files = os.path.isdir(outdir) and any(
-            fn.lower().endswith((".jpg", ".png", ".exr"))
-            for fn in os.listdir(outdir))
-        if not has_files:
+        need = not os.path.isdir(outdir)
+        if not need:
+            with zipfile.ZipFile(dest) as z:
+                names = [n for n in z.namelist()
+                         if n.lower().endswith((".jpg", ".png", ".exr"))]
+            need = not names or not all(
+                os.path.exists(os.path.join(outdir, n)) for n in names)
+        if need:
+            if os.path.isdir(outdir):
+                shutil.rmtree(outdir, ignore_errors=True)
             os.makedirs(outdir, exist_ok=True)
             with zipfile.ZipFile(dest) as z:
                 z.extractall(outdir)

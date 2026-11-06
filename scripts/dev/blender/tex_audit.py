@@ -16,7 +16,7 @@ import struct
 import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 CT_JSON = 0x4E4F534A
 CT_BIN = 0x004E4942
 

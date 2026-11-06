@@ -25,7 +25,7 @@ v15 的结构修正（对齐原版实拍）：
      避免两个 Box 在角落硬碰
 
 【检测器可复现】
-  blender --background --python check_interpenetration.py -- 验收/models/sofa.glb 2.0
+  blender --background --python check_interpenetration.py -- assets/furnlib/sofa.glb 2.0
 """
 import bpy
 import math

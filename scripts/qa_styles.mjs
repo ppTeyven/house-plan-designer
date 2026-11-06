@@ -4,15 +4,18 @@ import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import { pageUrl } from './lib_serve.mjs';
 
 const [, , FILE, OUTARG] = process.argv;
 const OUT = path.resolve(OUTARG); fs.rmSync(OUT, { recursive: true, force: true }); fs.mkdirSync(OUT, { recursive: true });
 const exe = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome'].find(p => fs.existsSync(p));
 const b = await puppeteer.launch({ executablePath: exe, headless: 'new', protocolTimeout: 900000, defaultViewport: { width: 1600, height: 1000 }, args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', '--disable-background-timer-throttling', '--disable-renderer-backgrounding'] });
 const page = await b.newPage(); const errs = [];
-page.on('pageerror', e => errs.push(e.message)); page.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+page.on('pageerror', e => errs.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text() || '') && !/favicon/.test((m.location() && m.location().url) || '')) errs.push(m.text()); });
 await page.evaluateOnNewDocument(() => { try { for (const k of Object.keys(localStorage)) if (k.startsWith('house-designer') || k.startsWith('hd-')) localStorage.removeItem(k); } catch { } });
-const url = /^https?:/.test(FILE) ? FILE : pathToFileURL(path.resolve(FILE)).href;
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const pg = await pageUrl(FILE);
+const url = pg.url;
 await page.goto(url + (url.includes('?') ? '&' : '?') + 'debug', { waitUntil: 'load' }); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 await sleep(1500);
@@ -44,3 +47,4 @@ for (let r0 = 0; r0 < info.rows; r0++) for (let c0 = 0; c0 < info.cols; c0 += 5)
 }
 console.log(`${info.list.length} 件，页面报错：${errs.length ? errs.slice(0, 3).join(' | ') : '无'}`);
 await b.close();
+await pg.close();

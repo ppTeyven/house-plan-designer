@@ -113,7 +113,8 @@ def node_local(n):
     for c in range(3):
         for row in range(3):
             out[c * 4 + row] = rot[c * 3 + row] * s[c]
-    out[3] = t[0]; out[7] = t[1]; out[11] = t[2]; out[15] = 1.0
+    # 列主序：平移在 [12,13,14]，[3,7,11] 必须是 0（底行）
+    out[12] = t[0]; out[13] = t[1]; out[14] = t[2]; out[15] = 1.0
     return out
 
 
@@ -340,11 +341,12 @@ def apply_root_transform(js, mat):
     roots = scenes[0].get("nodes", list(range(len(nodes))))
 
     for r in roots:
+        local = node_local(nodes[r])
         nodes[r] = dict(nodes[r])
         nodes[r].pop("translation", None)
         nodes[r].pop("rotation", None)
         nodes[r].pop("scale", None)
-        nodes[r]["matrix"] = mat_mul(mat, node_local(nodes[r]))
+        nodes[r]["matrix"] = mat_mul(mat, local)
     return js
 
 

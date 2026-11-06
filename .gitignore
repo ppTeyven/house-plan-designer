@@ -20,26 +20,24 @@ scripts/dev/blender/_shots/
 scripts/dev/transition-rec/
 scripts/dev/transition-rec2/
 
-# 家具模型真源唯一化（2026-11-05）
-# assets/furnlib/ 是模型唯一真源；验收/models/ 下同名 .glb 只是给本地工具链
-# (analyze_*/audit_*/check_*) 用的工作副本，字节与真源相同，重复入库会让仓库多 66MB。
-# 需要同步副本时运行：python scripts/dev/blender/sync_furnlib_to_accept.py
-验收/models/*.glb
-验收/models/*.glb.new
-验收/models/_chk_*
-验收/models/_cmp_*
-验收/models/_render_log.json
-验收/models/sofa_preview.png
+# 验收站已于 2026-11-06 删除；下面这些是路径重映射后的新落点
+# （scripts/dev/remap_accept_paths.py 把 验收/xxx 改写成了这些目录）
+scripts/dev/_previews/
+scripts/dev/_logs/
+scripts/dev/_refs/
+scripts/dev/_accept/
+scripts/dev/_accept_*/
+
+# 本地 skill 打包副本（与仓库根 SKILL.md 重复，且带 node_modules）
+.cursor/
 
 # temp backups and debug screenshots
 *.py.bak
 scripts/dev/blender/shot_*.png
 scripts/dev/blender/*_shot*.png
 
-# 调试截图与临时参考图（验收证据在 验收/previews/ 下，不在 refs/）
+# 调试截图与临时参考图
 assets/dev/_shot*.jpg
 assets/dev/_ao_check.jpg
-验收/refs/_ref_*
-验收/refs/_zoom_*
-验收/refs/_sofa_ref_crop.jpg
 assets/dev/_tpl_module_check.mjs
+scripts/dev/_final_shots/

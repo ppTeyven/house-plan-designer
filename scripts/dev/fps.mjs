@@ -2,13 +2,16 @@
 // 用法：node dev/fps.mjs 设计器.html [房间内一点 x y]
 import puppeteer from 'puppeteer-core';
 import { pathToFileURL } from 'url';
+import { pageUrl } from '../lib_serve.mjs';
 const [, , FILE, RX = '13600', RY = '27900'] = process.argv;
 const b = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: 'new', defaultViewport: { width: 1400, height: 860 },
   args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows'] });
 const page = await b.newPage(); const errs = [];
 page.on('pageerror', e => errs.push(e.message)); page.on('console', m => { if (m.type() === 'error') errs.push(m.text().slice(0, 120)); });
 await page.evaluateOnNewDocument(() => { for (const k of Object.keys(localStorage)) if (k.startsWith('house-designer')) localStorage.removeItem(k); });
-await page.goto(pathToFileURL(FILE).href + '?debug' + (process.env.QS || '')); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
+// http:// 打开：file:// 下 WebGL 拒绝上传跨源贴图，PBR 材质在测试里全不生效
+const pg = await pageUrl(FILE);
+await page.goto(pg.url + '?debug' + (process.env.QS || '')); await page.waitForFunction(() => window.__designer, { timeout: 60000 });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const ev = (f, ...a) => page.evaluate(f, ...a);
 const fps = () => ev(() => new Promise(res => { let n = 0; const t0 = performance.now(); const f = () => { n++; if (performance.now() - t0 < 3000) requestAnimationFrame(f); else res(Math.round(n / 3 * 10) / 10); }; requestAnimationFrame(f); }));
@@ -25,3 +28,4 @@ out.walkDay = await fps();
 out.errs = [...new Set(errs)].slice(0, 4);
 console.log(JSON.stringify(out));
 await b.close();
+await pg.close();

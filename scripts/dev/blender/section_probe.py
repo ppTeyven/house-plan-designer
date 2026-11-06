@@ -20,7 +20,7 @@ from mathutils.bvhtree import BVHTree
 import bmesh
 
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
-GLB = args[0] if args else r"验收/models/sofa.glb"
+GLB = args[0] if args else r"assets/furnlib/sofa.glb"
 
 bpy.ops.import_scene.gltf(filepath=GLB)
 bpy.context.view_layer.update()

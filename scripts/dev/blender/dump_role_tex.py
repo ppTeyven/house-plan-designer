@@ -15,7 +15,7 @@ import struct
 import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-ACC = os.path.join(ROOT, "验收", "models")
+ACC = os.path.join(ROOT, "assets", "furnlib")
 OUT = os.path.join(ROOT, "assets", "_shots", "roletex")
 os.makedirs(OUT, exist_ok=True)
 CT_JSON = 0x4E4F534A

@@ -12,7 +12,7 @@
 import json, os, sys, math
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-ACC = os.path.join(ROOT, "验收")
+ACC = os.path.join(ROOT, "scripts", "dev", "_accept")
 MODELS = os.path.join(ACC, "models")
 sys.path.insert(0, os.path.join(ROOT, "scripts", "dev", "blender"))
 from inspect_glb import stats  # noqa: E402

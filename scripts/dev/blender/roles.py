@@ -49,6 +49,11 @@ ROLE_TEX = {
     "stone_dark": "role_stone_dark",
     "leaf": "role_leaf",
     "leaf_dark": "role_leaf",
+    # 草坪（地面草皮）—— 与 leaf（叶片）区分：
+    #   leaf  = 树叶/灌木（Leaf001 扫描叶片）
+    #   grass = 草皮地面（Grass004 草地）
+    # 两者纹理完全不同：叶片有叶脉与透光，草皮是密集短草。
+    "grass": "role_grass",
 }
 
 # 各角色的物理金属度（写进 ORM 的 B 通道）
@@ -60,6 +65,7 @@ ROLE_METAL = {
     "ceramic_white": 0.0,
     "stone_light": 0.0, "stone_dark": 0.0,
     "leaf": 0.0, "leaf_dark": 0.0,
+    "grass": 0.0,
 }
 
 # 不贴图的材质（玻璃靠折射，不能用表面扫描图）
@@ -167,6 +173,29 @@ _RULES = [
     ("tok", "wenge", "wood_walnut"),
     ("tok", "ash", "wood_oak"),          # 完整词元 'ash'（白蜡木）才算
     ("tok", "pine", "wood_oak"),
+    # --- 2a. 家具成品词（Polyhaven 整件资源名里没有材质词，只有品类词） ---
+    # vintage_cabinet_01_a / painted_wooden_cabinet_02 等：按品类兜底为木，
+    # 否则 role=None → 材质名保持原样 → 前端 kv() 只认 U_ 前缀而不给 PBR → 看着像贴图丢了。
+    # 【注意】只收"几乎一定是木"的柜类词；桌/椅/办公桌材质不定（木/金属/塑料都有），
+    # 必须留给上层按款式类型定，绝不能在这里硬判成木（metal_office_desk 就是反例）。
+    ("tok", "cabinet", "wood_walnut"),
+    ("tok", "wardrobe", "wood_walnut"),
+    ("tok", "closet", "wood_walnut"),
+    ("tok", "drawer", "wood_walnut"),
+    ("tok", "dresser", "wood_walnut"),
+    ("tok", "shelf", "wood_oak"),
+    ("tok", "shelves", "wood_oak"),
+    ("tok", "bookcase", "wood_walnut"),
+    ("tok", "sideboard", "wood_walnut"),
+    ("tok", "credenza", "wood_walnut"),
+    ("tok", "cupboard", "wood_walnut"),
+    ("tok", "nightstand", "wood_walnut"),
+    ("tok", "clock", "wood_walnut"),
+    ("tok", "heliophila", "leaf"),
+    ("tok", "flower", "leaf"),
+    ("tok", "heleo", "leaf"),
+    ("tok", "kettle", "metal_steel"),
+    ("tok", "heater", "metal_black"),
 
     # --- 2b. 画框 / 镜框：木框 ---
     # 【实测】wallArt 用的是 PolyHaven 的 fancy_picture_frame_01，
@@ -231,7 +260,8 @@ _RULES = [
     ("tok", "leaves", "leaf"),
     ("tok", "foliage", "leaf"),
     ("tok", "plant", "leaf"),
-    ("tok", "grass", "leaf"),
+    ("tok", "grass", "grass"),
+    ("tok", "lawn", "grass"),
     ("tok", "moss", "leaf"),
 
     # --- 7. 短语（多词，优先于单词） ---
@@ -298,7 +328,7 @@ if __name__ == "__main__":
         ("vintage_microwave_glass", "glass_clear"),
         ("basecolor_classic_chandelier_1", None),  # 猜不出就返回 None
         ("dining_table", "wood_walnut"),    # 短语 'dining table' → 木
-        ("GothicCabinet_01", None),
+        ("GothicCabinet_01", "wood_walnut"),  # 柜类词兜底 → 木（否则前端不给 PBR）
         ("WoodenChair_01", "wood_walnut"),
         ("CoffeeTable_01", "wood_walnut"),  # 短语 'coffee table' → 木
         ("side_table_01", "wood_walnut"),

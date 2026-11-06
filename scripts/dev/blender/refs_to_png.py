@@ -1,7 +1,7 @@
-"""把 验收/refs/ 下的所有官方 PDF 规格书转成 PNG，供验收站直接对照显示。
+"""把 scripts/dev/_refs/ 下的所有官方 PDF 规格书转成 PNG，供验收站直接对照显示。
 
 - 只转第 1 页（厂商规格书首页通常是尺寸图/产品图）
-- 输出到 验收/refs/<name>.png（同名不覆盖）
+- 输出到 scripts/dev/_refs/<name>.png（同名不覆盖）
 - 已经是图片的（png/jpg）跳过
 """
 import pathlib, sys, warnings
