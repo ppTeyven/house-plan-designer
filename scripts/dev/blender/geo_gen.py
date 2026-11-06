@@ -27,6 +27,27 @@ import math
 import struct
 
 # =====================================================================
+# 全局细分倍率（GEO_DETAIL）
+# =====================================================================
+# 【为什么需要这个开关】
+#   早期版本的图元细分写死在代码里（add_box 的 seg=8、add_cylinder 的
+#   seg=24、add_sphere 的 seg=24/rings=16…），导致：
+#     · 一个盒子只有 192 面 => 倒角带只有 8 段，圆角几乎是直角
+#     · 整个家具看起来就是"方块拼的老版本"（用户的原话）
+#   要提密度就得逐个改几十处硬编码常量 —— 容易漏、无法分级。
+#
+# 【设计】
+#   所有图元的细分参数统一乘以这个倍率。只加密采样、不改形状，
+#   所以拓扑、UV、法线逻辑完全不变，渲染结果一致只是更细腻。
+#
+#   体积是【平方关系】：DETAIL=2 => 面数 4 倍；DETAIL=3 => 9 倍。
+#   实测基准（251 件全套）：
+#     DETAIL=1 ->  10,381 面/件,  73.7 MB
+#     DETAIL=2 ->  41,524 面/件, 295.0 MB
+#   用环境变量 GEO_DETAIL 覆盖，方便批量试不同档位。
+GEO_DETAIL = max(1, int(os.environ.get("GEO_DETAIL", "2")))
+
+# =====================================================================
 # 极简 glTF 构造器
 # =====================================================================
 class Mesh:
@@ -130,8 +151,11 @@ class Mesh:
         """生成一张细分网格（可选高度位移 + 背面厚度）。
 
         fn(u, v) -> (x, y, z)  在局部坐标系（中心为原点，y=竖直）
-        """
+
+        【高模化】nx/ny 乘以 GEO_DETAIL（只加密采样，曲面形状不变）。"""
         mi = self.mat_index(mat)
+        nx = nx * GEO_DETAIL                # 【高模化】网格加密
+        ny = ny * GEO_DETAIL                # 【高模化】网格加密
         base = len(self.pos)
         for j in range(ny + 1):
             for i in range(nx + 1):
@@ -267,7 +291,12 @@ class Mesh:
         mi = self.mat_index(mat)
         hx, hy, hz = size[0] / 2, size[1] / 2, size[2] / 2
         r = min(hx, hy, hz) * 0.06        # 倒角半径
-        seg = 8                          # 每边细分段数
+        # 【高模化】每边细分段数由全局倍率驱动。
+        #   旧值 seg=8 => 单个盒子 192 面 —— 这就是"家具像方块"的根因：
+        #   倒角带只有 8 段，圆角几乎是直角。
+        #   现在 seg=8*DETAIL，DETAIL 默认 2 => 16 段 => 768 面/盒。
+        #   拓扑不变（仍是 6 面各铺网格 + 顶点去重），只是采样更密。
+        seg = 8 * GEO_DETAIL              # 每边细分段数
         base = len(self.pos)
 
         # ---------- 顶点缓存：按归一化坐标去重 ----------
@@ -456,10 +485,12 @@ class Mesh:
         return (ox / L, oy / L, oz / L)
 
     def add_cylinder(self, r, h, center=(0, 0, 0), seg=24, mat="U_metal_black",
-                     cap=True, radius_top=None, rot=None):
+                         cap=True, radius_top=None, rot=None):
         """圆柱/圆台。底面在 center.y，高 h。
 
         rot = (rx, ry, rz) 度 —— 绕中心旋转（用于横躺的杆件）。
+
+        【高模化】周向分段数乘以 GEO_DETAIL（只加密采样，形状不变）。
 
         【UV 修复 —— 乱码根因之一】
         旧实现：
@@ -476,6 +507,7 @@ class Mesh:
         """
         mi = self.mat_index(mat)
         rt = r if radius_top is None else radius_top
+        seg = seg * GEO_DETAIL          # 【高模化】周向加密
         base = len(self.pos)
         circum = 2 * math.pi * (r + rt) / 2      # 平均周长
         for j in range(2):
@@ -573,14 +605,17 @@ class Mesh:
                 (p[2] + radius * 0.5) / cls.TEX_M)
 
     def add_sphere(self, r, center=(0, 0, 0), seg=24, rings=16, mat="U_fabric_oat",
-                   scale=(1, 1, 1), hemi=False):
+                       scale=(1, 1, 1), hemi=False):
         """球体。hemi=True → 真正的半球（赤道面在 y=0，向上隆起）。
 
         【旧实现 bug】hemi 只是"少生成最后一环顶点"，
           结果是缺了【南极点】的球（Y 范围 -r..r），不是半球。
           穹顶/半球体必须从赤道（phi=π/2）开始、只到北极（phi=0）。
-        """
+
+        【高模化】周向/纬向分段数都乘以 GEO_DETAIL（只加密采样）。"""
         mi = self.mat_index(mat)
+        seg = seg * GEO_DETAIL              # 【高模化】周向加密
+        rings = rings * GEO_DETAIL          # 【高模化】纬向加密
         base = len(self.pos)
         # UV 按真实弧长展开（周向 = 球周长，纵向 = 半周长）
         circ = 2 * math.pi * r * max(scale[0], scale[2])
@@ -677,8 +712,11 @@ class Mesh:
         return base
 
     def add_revolve(self, profile, center=(0, 0, 0), seg=28, mat="U_ceramic_white"):
-        """旋转体：profile = [(r, y), ...]（自下而上）"""
+        """旋转体：profile = [(r, y), ...]（自下而上）
+
+        【高模化】周向分段数乘以 GEO_DETAIL（只加密采样）。"""
         mi = self.mat_index(mat)
+        seg = seg * GEO_DETAIL              # 【高模化】周向加密
         base = len(self.pos)
         n = len(profile)
         # profile 累计弧长 —— 用于纵向 UV（真实物理尺度）

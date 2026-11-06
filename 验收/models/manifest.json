@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-04T01:32:50",
+ "generated": "2026-11-06T06:43:58",
  "total": 251,
  "items": [
   {
@@ -9,10 +9,10 @@
    "type": "mirror",
    "group": "其他",
    "file": "mirror.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_glass_clear"
+    ""
    ],
    "dims_mm": [
     600.0,
@@ -35,7 +35,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "293,510 / ≥500"
     },
     {
      "level": "warn",
@@ -43,9 +43,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -53,7 +53,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 19230756,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "fan",
@@ -62,8 +68,8 @@
    "type": "fan",
    "group": "其他",
    "file": "fan.glb",
-   "tris": 192,
-   "verts": 98,
+   "tris": 384,
+   "verts": 386,
    "materials": [
     "U_wood_walnut"
    ],
@@ -106,7 +112,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6496
+   "bytes": 9572,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 17
   },
   {
    "key": "radiator",
@@ -115,8 +127,8 @@
    "type": "radiator",
    "group": "其他",
    "file": "radiator.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -159,7 +171,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 32780,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "trashBin",
@@ -175,7 +193,7 @@
    ],
    "dims_mm": [
     300.0,
-    606.7,
+    600.0,
     300.0
    ],
    "target_mm": [
@@ -183,13 +201,13 @@
     600,
     300
    ],
-   "size_error": 0.0112,
+   "size_error": 0.0,
    "status": "ok",
    "checks": [
     {
      "level": "ok",
      "text": "尺寸与目录目标一致",
-     "value": "300×606×300 mm / 目标 300×600×300 mm（偏差 1.12%）"
+     "value": "300×600×300 mm / 目标 300×600×300 mm（偏差 0.00%）"
     },
     {
      "level": "ok",
@@ -212,7 +230,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 4988504
+   "bytes": 4988468,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 376
   },
   {
    "key": "clothesRack",
@@ -221,10 +245,10 @@
    "type": "clothesRack",
    "group": "其他",
    "file": "clothesRack.glb",
-   "tris": 1968,
-   "verts": 469,
+   "tris": 3552,
+   "verts": 2024,
    "materials": [
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -247,7 +271,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,968 / ≥500"
+     "value": "292,210 / ≥500"
     },
     {
      "level": "warn",
@@ -255,9 +279,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -265,7 +289,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 39696
+   "bytes": 20430136,
+   "size": [
+    2,
+    0,
+    0
+   ],
+   "fileKB": 105
   },
   {
    "key": "catTree",
@@ -274,8 +304,8 @@
    "type": "catTree",
    "group": "其他",
    "file": "catTree.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -300,7 +330,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -318,7 +348,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32776
+   "bytes": 22632,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "petBed",
@@ -327,10 +363,10 @@
    "type": "petBed",
    "group": "其他",
    "file": "petBed.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_fabric_oat"
    ],
    "dims_mm": [
     700.0,
@@ -353,7 +389,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -371,7 +407,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 22636,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "mobileDisplay",
@@ -380,8 +422,8 @@
    "type": "mobileDisplay",
    "group": "办公",
    "file": "mobileDisplay.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -424,7 +466,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 32784,
+   "size": [
+    2,
+    2,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "printer",
@@ -433,8 +481,8 @@
    "type": "printer",
    "group": "办公",
    "file": "printer.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -477,7 +525,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 32784,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "counter",
@@ -486,11 +540,10 @@
    "type": "counter",
    "group": "卫浴",
    "file": "counter.glb",
-   "tris": 13824,
-   "verts": 5488,
+   "tris": 24576,
+   "verts": 24608,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2100.0,
@@ -513,17 +566,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "13,824 / ≥1,000"
+     "value": "282,243 / ≥1,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -531,7 +584,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 255148
+   "bytes": 14233840,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 673
   },
   {
    "key": "lCounter",
@@ -540,11 +599,10 @@
    "type": "lCounter",
    "group": "卫浴",
    "file": "lCounter.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -567,17 +625,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥1,000"
+     "value": "282,243 / ≥1,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -585,7 +643,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191752
+   "bytes": 14233840,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 505
   },
   {
    "key": "uCounter",
@@ -594,11 +658,10 @@
    "type": "uCounter",
    "group": "卫浴",
    "file": "uCounter.glb",
-   "tris": 13824,
-   "verts": 5488,
+   "tris": 24576,
+   "verts": 24608,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2700.0,
@@ -621,17 +684,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "13,824 / ≥1,000"
+     "value": "282,243 / ≥1,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -639,7 +702,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 255180
+   "bytes": 14233840,
+   "size": [
+    3,
+    1,
+    2
+   ],
+   "fileKB": 673
   },
   {
    "key": "toilet",
@@ -648,10 +717,10 @@
    "type": "toilet",
    "group": "卫浴",
    "file": "toilet.glb",
-   "tris": 2280,
-   "verts": 649,
+   "tris": 4176,
+   "verts": 2308,
    "materials": [
-    "U_ceramic_white"
+    ""
    ],
    "dims_mm": [
     400.0,
@@ -674,7 +743,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "2,280 / ≥1,000"
+     "value": "298,350 / ≥1,000"
     },
     {
      "level": "warn",
@@ -682,9 +751,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -692,7 +761,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 49232
+   "bytes": 18192096,
+   "size": [
+    0,
+    1,
+    1
+   ],
+   "fileKB": 122
   },
   {
    "key": "wallToilet",
@@ -701,10 +776,10 @@
    "type": "toilet",
    "group": "卫浴",
    "file": "wallToilet.glb",
-   "tris": 2280,
-   "verts": 649,
+   "tris": 4176,
+   "verts": 2308,
    "materials": [
-    "U_ceramic_white"
+    ""
    ],
    "dims_mm": [
     380.0,
@@ -727,7 +802,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "2,280 / ≥1,000"
+     "value": "290,074 / ≥1,000"
     },
     {
      "level": "warn",
@@ -735,9 +810,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -745,7 +820,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 49204
+   "bytes": 17537012,
+   "size": [
+    0,
+    0,
+    1
+   ],
+   "fileKB": 122
   },
   {
    "key": "squatToilet",
@@ -754,10 +835,10 @@
    "type": "squat",
    "group": "卫浴",
    "file": "squatToilet.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     450.0,
@@ -780,7 +861,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥1,000"
+     "value": "295,731 / ≥1,000"
     },
     {
      "level": "warn",
@@ -788,9 +869,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -798,7 +879,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 11313468,
+   "size": [
+    0,
+    0,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "vanity",
@@ -807,11 +894,10 @@
    "type": "vanity",
    "group": "卫浴",
    "file": "vanity.glb",
-   "tris": 6912,
-   "verts": 2744,
+   "tris": 12288,
+   "verts": 12304,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     800.0,
@@ -834,17 +920,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,912 / ≥1,000"
+     "value": "287,808 / ≥1,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -852,7 +938,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 128316
+   "bytes": 30757256,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 337
   },
   {
    "key": "mirrorCabinet",
@@ -861,10 +953,10 @@
    "type": "mirrorCabinet",
    "group": "卫浴",
    "file": "mirrorCabinet.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     800.0,
@@ -887,7 +979,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥1,000"
+     "value": "282,356 / ≥1,000"
     },
     {
      "level": "warn",
@@ -895,9 +987,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -905,7 +997,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 16051804,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "doubleVanity",
@@ -914,11 +1012,10 @@
    "type": "vanity",
    "group": "卫浴",
    "file": "doubleVanity.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1400.0,
@@ -941,17 +1038,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥1,000"
+     "value": "284,437 / ≥1,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -959,7 +1056,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191744
+   "bytes": 30641664,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 505
   },
   {
    "key": "pedestalSink",
@@ -968,10 +1071,10 @@
    "type": "pedestalSink",
    "group": "卫浴",
    "file": "pedestalSink.glb",
-   "tris": 560,
-   "verts": 308,
+   "tris": 1120,
+   "verts": 616,
    "materials": [
-    "U_ceramic_white"
+    ""
    ],
    "dims_mm": [
     500.0,
@@ -992,9 +1095,9 @@
      "value": "500×850×450 mm / 目标 500×850×450 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "560 / ≥1,000"
+     "value": "295,229 / ≥1,000"
     },
     {
      "level": "warn",
@@ -1002,9 +1105,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -1012,7 +1115,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 17648
+   "bytes": 13720880,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 33
   },
   {
    "key": "freeTub",
@@ -1021,10 +1130,10 @@
    "type": "freeTub",
    "group": "卫浴",
    "file": "freeTub.glb",
-   "tris": 3456,
-   "verts": 686,
+   "tris": 6144,
+   "verts": 3076,
    "materials": [
-    "U_ceramic_white"
+    ""
    ],
    "dims_mm": [
     1700.0,
@@ -1047,7 +1156,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥1,000"
+     "value": "286,736 / ≥1,000"
     },
     {
      "level": "warn",
@@ -1055,9 +1164,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -1065,7 +1174,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64496
+   "bytes": 42280008,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "shower",
@@ -1074,8 +1189,8 @@
    "type": "shower",
    "group": "卫浴",
    "file": "shower.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -1118,7 +1233,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 32780,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "showerScreen",
@@ -1127,8 +1248,8 @@
    "type": "showerScreen",
    "group": "卫浴",
    "file": "showerScreen.glb",
-   "tris": 2024,
-   "verts": 1066,
+   "tris": 7888,
+   "verts": 4050,
    "materials": [
     "U_glass_clear"
    ],
@@ -1171,7 +1292,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 59508
+   "bytes": 59508,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 220
   },
   {
    "key": "bathtub",
@@ -1180,10 +1307,10 @@
    "type": "bathtub",
    "group": "卫浴",
    "file": "bathtub.glb",
-   "tris": 3456,
-   "verts": 686,
+   "tris": 6144,
+   "verts": 3076,
    "materials": [
-    "U_ceramic_white"
+    ""
    ],
    "dims_mm": [
     1600.0,
@@ -1206,7 +1333,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥1,000"
+     "value": "281,403 / ≥1,000"
     },
     {
      "level": "warn",
@@ -1214,9 +1341,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -1224,7 +1351,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64496
+   "bytes": 16344384,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "showerSet",
@@ -1233,8 +1366,8 @@
    "type": "showerSet",
    "group": "卫浴",
    "file": "showerSet.glb",
-   "tris": 192,
-   "verts": 98,
+   "tris": 384,
+   "verts": 386,
    "materials": [
     "U_wood_walnut"
    ],
@@ -1277,7 +1410,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6500
+   "bytes": 9576,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 17
   },
   {
    "key": "towelWarmer",
@@ -1286,10 +1425,10 @@
    "type": "towelWarmer",
    "group": "卫浴",
    "file": "towelWarmer.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     500.0,
@@ -1312,7 +1451,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥1,000"
+     "value": "294,774 / ≥1,000"
     },
     {
      "level": "warn",
@@ -1320,9 +1459,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -1330,7 +1469,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 19212764,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "bathHeater",
@@ -1339,8 +1484,8 @@
    "type": "bathHeater",
    "group": "卫浴",
    "file": "bathHeater.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -1383,7 +1528,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 32784,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "laundrySink",
@@ -1392,11 +1543,10 @@
    "type": "laundrySink",
    "group": "卫浴",
    "file": "laundrySink.glb",
-   "tris": 6912,
-   "verts": 2744,
+   "tris": 12288,
+   "verts": 12304,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     700.0,
@@ -1419,17 +1569,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,912 / ≥1,000"
+     "value": "296,397 / ≥1,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -1437,7 +1587,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 128304
+   "bytes": 15999496,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 337
   },
   {
    "key": "urinal",
@@ -1446,8 +1602,8 @@
    "type": "urinal",
    "group": "卫浴",
    "file": "urinal.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -1490,7 +1646,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 32784,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "serviceSink",
@@ -1499,11 +1661,10 @@
    "type": "serviceSink",
    "group": "卫浴",
    "file": "serviceSink.glb",
-   "tris": 5184,
-   "verts": 2058,
+   "tris": 9216,
+   "verts": 9228,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     600.0,
@@ -1526,17 +1687,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "5,184 / ≥1,000"
+     "value": "294,103 / ≥1,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -1544,7 +1705,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 96584
+   "bytes": 25222440,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 253
   },
   {
    "key": "pantryCounter",
@@ -1553,11 +1720,10 @@
    "type": "counter",
    "group": "卫浴",
    "file": "pantryCounter.glb",
-   "tris": 8640,
-   "verts": 3430,
+   "tris": 15360,
+   "verts": 15380,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -1580,17 +1746,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,640 / ≥1,000"
+     "value": "293,119 / ≥1,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -1598,7 +1764,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 160024
+   "bytes": 14947288,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 421
   },
   {
    "key": "acWall",
@@ -1607,8 +1779,8 @@
    "type": "acWall",
    "group": "厨电",
    "file": "acWall.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_ceramic_white",
     "U_metal_steel"
@@ -1652,7 +1824,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64872
+   "bytes": 64872,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 169
   },
   {
    "key": "acFloor",
@@ -1661,10 +1839,10 @@
    "type": "acFloor",
    "group": "厨电",
    "file": "acFloor.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_steel"
    ],
    "dims_mm": [
     520.0,
@@ -1687,7 +1865,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥4,000"
+     "value": "768 / ≥4,000"
     },
     {
      "level": "warn",
@@ -1705,7 +1883,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 22636,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "waterHeater",
@@ -1714,8 +1898,8 @@
    "type": "waterHeater",
    "group": "厨电",
    "file": "waterHeater.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_metal_black",
     "U_metal_steel"
@@ -1759,7 +1943,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64868
+   "bytes": 64868,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 169
   },
   {
    "key": "miniHeater",
@@ -1771,8 +1961,8 @@
    "tris": 14838,
    "verts": 10237,
    "materials": [
-    "U_fabric_oat",
-    "U_glass_clear"
+    "U_glass_clear",
+    "U_metal_steel"
    ],
    "dims_mm": [
     380.0,
@@ -1813,7 +2003,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2969808
+   "bytes": 2969812,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 2900
   },
   {
    "key": "gasHeater",
@@ -1822,10 +2018,10 @@
    "type": "gasHeater",
    "group": "厨电",
    "file": "gasHeater.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_steel"
    ],
    "dims_mm": [
     360.0,
@@ -1848,7 +2044,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥4,000"
+     "value": "768 / ≥4,000"
     },
     {
      "level": "warn",
@@ -1866,7 +2062,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 22636,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "waterDispenser",
@@ -1875,8 +2077,8 @@
    "type": "waterDispenser",
    "group": "厨电",
    "file": "waterDispenser.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_metal_black",
     "U_metal_steel"
@@ -1920,7 +2122,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64872
+   "bytes": 64872,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 169
   },
   {
    "key": "purifier",
@@ -1929,8 +2137,8 @@
    "type": "purifier",
    "group": "厨电",
    "file": "purifier.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -1973,7 +2181,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 32780,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "dishwasher",
@@ -1982,8 +2196,8 @@
    "type": "dishwasher",
    "group": "厨电",
    "file": "dishwasher.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_metal_black",
     "U_metal_steel"
@@ -2009,7 +2223,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥4,000"
+     "value": "1,536 / ≥4,000"
     },
     {
      "level": "warn",
@@ -2027,7 +2241,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64864
+   "bytes": 44572,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "tallOven",
@@ -2036,8 +2256,8 @@
    "type": "tallOven",
    "group": "厨电",
    "file": "tallOven.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_glass_clear",
     "U_metal_black"
@@ -2081,7 +2301,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64896
+   "bytes": 64896,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "hood",
@@ -2090,8 +2316,8 @@
    "type": "hood",
    "group": "厨电",
    "file": "hood.glb",
-   "tris": 3456,
-   "verts": 686,
+   "tris": 6144,
+   "verts": 3076,
    "materials": [
     "U_metal_steel"
    ],
@@ -2134,7 +2360,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64496
+   "bytes": 64496,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "microwave",
@@ -2146,8 +2378,8 @@
    "tris": 8120,
    "verts": 5893,
    "materials": [
-    "U_fabric_oat",
-    "U_glass_clear"
+    "U_glass_clear",
+    "vintage_microwave"
    ],
    "dims_mm": [
     480.0,
@@ -2178,9 +2410,9 @@
      "value": "2 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: vintage_microwave"
     },
     {
      "level": "ok",
@@ -2188,7 +2420,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2120664
+   "bytes": 2120672,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 233
   },
   {
    "key": "washer",
@@ -2197,8 +2435,8 @@
    "type": "washer",
    "group": "厨电",
    "file": "washer.glb",
-   "tris": 1856,
-   "verts": 818,
+   "tris": 3328,
+   "verts": 3592,
    "materials": [
     "U_glass_clear",
     "U_metal_steel"
@@ -2242,7 +2480,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 36800
+   "bytes": 36800,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 96
   },
   {
    "key": "dryer",
@@ -2251,8 +2495,8 @@
    "type": "dryer",
    "group": "厨电",
    "file": "dryer.glb",
-   "tris": 1856,
-   "verts": 818,
+   "tris": 3328,
+   "verts": 3592,
    "materials": [
     "U_glass_clear",
     "U_metal_steel"
@@ -2278,7 +2522,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,856 / ≥4,000"
+     "value": "896 / ≥4,000"
     },
     {
      "level": "warn",
@@ -2296,7 +2540,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 36832
+   "bytes": 28732,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 96
   },
   {
    "key": "airPurifier",
@@ -2305,8 +2555,8 @@
    "type": "airPurifier",
    "group": "厨电",
    "file": "airPurifier.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -2349,7 +2599,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 32784,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "robotVac",
@@ -2358,8 +2614,8 @@
    "type": "robotVac",
    "group": "厨电",
    "file": "robotVac.glb",
-   "tris": 192,
-   "verts": 98,
+   "tris": 384,
+   "verts": 386,
    "materials": [
     "U_wood_walnut"
    ],
@@ -2402,7 +2658,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6532
+   "bytes": 9608,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 17
   },
   {
    "key": "fridge",
@@ -2411,11 +2673,10 @@
    "type": "fridge",
    "group": "厨电",
    "file": "fridge.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
-    "U_metal_black",
-    "U_metal_steel"
+    ""
    ],
    "dims_mm": [
     700.0,
@@ -2436,19 +2697,19 @@
      "value": "700×1850×700 mm / 目标 700×1850×700 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥4,000"
+     "value": "281,661 / ≥4,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -2456,7 +2717,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64868
+   "bytes": 20543852,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "fridgeDouble",
@@ -2465,11 +2732,10 @@
    "type": "fridge",
    "group": "厨电",
    "file": "fridgeDouble.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
-    "U_metal_black",
-    "U_metal_steel"
+    ""
    ],
    "dims_mm": [
     910.0,
@@ -2490,19 +2756,19 @@
      "value": "910×1780×720 mm / 目标 910×1780×720 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥4,000"
+     "value": "283,842 / ≥4,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -2510,7 +2776,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64872
+   "bytes": 16636780,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "fridgeFrench",
@@ -2519,11 +2791,10 @@
    "type": "fridge",
    "group": "厨电",
    "file": "fridgeFrench.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
-    "U_metal_black",
-    "U_metal_steel"
+    ""
    ],
    "dims_mm": [
     830.0,
@@ -2544,19 +2815,19 @@
      "value": "830×1900×700 mm / 目标 830×1900×700 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥4,000"
+     "value": "283,842 / ≥4,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -2564,7 +2835,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64872
+   "bytes": 16636780,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "freezer",
@@ -2573,11 +2850,10 @@
    "type": "freezer",
    "group": "厨电",
    "file": "freezer.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
-    "U_metal_black",
-    "U_metal_steel"
+    ""
    ],
    "dims_mm": [
     1000.0,
@@ -2598,19 +2874,19 @@
      "value": "1000×850×600 mm / 目标 1000×850×600 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥4,000"
+     "value": "287,683 / ≥4,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -2618,7 +2894,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64864
+   "bytes": 46879268,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "boiler",
@@ -2627,8 +2909,8 @@
    "type": "boiler",
    "group": "厨电",
    "file": "boiler.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -2671,7 +2953,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32788
+   "bytes": 32788,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "manifold",
@@ -2680,10 +2968,10 @@
    "type": "manifold",
    "group": "厨电",
    "file": "manifold.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_brass"
    ],
    "dims_mm": [
     800.0,
@@ -2706,7 +2994,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥4,000"
+     "value": "768 / ≥4,000"
     },
     {
      "level": "warn",
@@ -2724,7 +3012,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 22636,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "waterSoftener",
@@ -2733,11 +3027,10 @@
    "type": "waterSoftener",
    "group": "厨电",
    "file": "waterSoftener.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
-    "U_metal_black",
-    "U_metal_steel"
+    ""
    ],
    "dims_mm": [
     350.0,
@@ -2758,19 +3051,19 @@
      "value": "350×1100×450 mm / 目标 350×1100×450 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥4,000"
+     "value": "295,347 / ≥4,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -2778,7 +3071,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64872
+   "bytes": 25445988,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 169
   },
   {
    "key": "coffeeMachine",
@@ -2787,11 +3086,10 @@
    "type": "coffeeMachine",
    "group": "厨电",
    "file": "coffeeMachine.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
-    "U_metal_black",
-    "U_metal_steel"
+    ""
    ],
    "dims_mm": [
     450.0,
@@ -2812,19 +3110,19 @@
      "value": "450×550×450 mm / 目标 450×550×450 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥4,000"
+     "value": "292,996 / ≥4,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -2832,7 +3130,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64900
+   "bytes": 61065704,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 169
   },
   {
    "key": "wineFridge",
@@ -2841,11 +3145,10 @@
    "type": "fridge",
    "group": "厨电",
    "file": "wineFridge.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
-    "U_metal_black",
-    "U_metal_steel"
+    ""
    ],
    "dims_mm": [
     600.0,
@@ -2866,19 +3169,19 @@
      "value": "600×850×600 mm / 目标 600×850×600 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥4,000"
+     "value": "283,842 / ≥4,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -2886,7 +3189,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64864
+   "bytes": 16636780,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 169
   },
   {
    "key": "fishTank",
@@ -2895,8 +3204,8 @@
    "type": "fishTank",
    "group": "娱乐",
    "file": "fishTank.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_glass_clear",
     "U_stone_dark"
@@ -2922,7 +3231,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥5,000"
+     "value": "1,536 / ≥5,000"
     },
     {
      "level": "warn",
@@ -2940,7 +3249,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64868
+   "bytes": 44576,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 169
   },
   {
    "key": "piano",
@@ -2949,8 +3264,8 @@
    "type": "piano",
    "group": "娱乐",
    "file": "piano.glb",
-   "tris": 91584,
-   "verts": 36358,
+   "tris": 162816,
+   "verts": 163028,
    "materials": [
     "U_ceramic_white",
     "U_wood_walnut"
@@ -2976,7 +3291,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "91,584 / ≥5,000"
+     "value": "40,704 / ≥5,000"
     },
     {
      "level": "warn",
@@ -2994,7 +3309,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1682204
+   "bytes": 1144568,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 4456
   },
   {
    "key": "treadmill",
@@ -3003,8 +3324,8 @@
    "type": "treadmill",
    "group": "娱乐",
    "file": "treadmill.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -3047,7 +3368,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 32780,
+   "size": [
+    1,
+    1,
+    2
+   ],
+   "fileKB": 85
   },
   {
    "key": "billiards",
@@ -3056,10 +3383,10 @@
    "type": "billiards",
    "group": "娱乐",
    "file": "billiards.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_wood_oak"
    ],
    "dims_mm": [
     1600.0,
@@ -3082,7 +3409,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥5,000"
+     "value": "768 / ≥5,000"
     },
     {
      "level": "warn",
@@ -3100,7 +3427,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 22632,
+   "size": [
+    2,
+    1,
+    3
+   ],
+   "fileKB": 85
   },
   {
    "key": "mahjong",
@@ -3109,10 +3442,10 @@
    "type": "mahjong",
    "group": "娱乐",
    "file": "mahjong.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_wood_oak"
    ],
    "dims_mm": [
     950.0,
@@ -3135,7 +3468,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥5,000"
+     "value": "768 / ≥5,000"
     },
     {
      "level": "warn",
@@ -3153,7 +3486,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32788
+   "bytes": 22636,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "grandPiano",
@@ -3162,8 +3501,8 @@
    "type": "grandPiano",
    "group": "娱乐",
    "file": "grandPiano.glb",
-   "tris": 91584,
-   "verts": 36358,
+   "tris": 162816,
+   "verts": 163028,
    "materials": [
     "U_ceramic_white",
     "U_wood_walnut"
@@ -3189,7 +3528,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "91,584 / ≥5,000"
+     "value": "40,704 / ≥5,000"
     },
     {
      "level": "warn",
@@ -3207,7 +3546,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1682208
+   "bytes": 1144572,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 4456
   },
   {
    "key": "sauna",
@@ -3216,8 +3561,8 @@
    "type": "sauna",
    "group": "娱乐",
    "file": "sauna.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -3242,7 +3587,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥5,000"
+     "value": "768 / ≥5,000"
     },
     {
      "level": "warn",
@@ -3260,7 +3605,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 22636,
+   "size": [
+    2,
+    2,
+    2
+   ],
+   "fileKB": 85
   },
   {
    "key": "bike",
@@ -3269,8 +3620,8 @@
    "type": "bike",
    "group": "娱乐",
    "file": "bike.glb",
-   "tris": 1968,
-   "verts": 469,
+   "tris": 3552,
+   "verts": 2024,
    "materials": [
     "U_metal_black"
    ],
@@ -3295,7 +3646,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,968 / ≥5,000"
+     "value": "1,008 / ≥5,000"
     },
     {
      "level": "warn",
@@ -3313,7 +3664,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 39696
+   "bytes": 33392,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 105
   },
   {
    "key": "yogaMat",
@@ -3322,8 +3679,8 @@
    "type": "yogaMat",
    "group": "娱乐",
    "file": "yogaMat.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_fabric_grey"
    ],
@@ -3348,7 +3705,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥5,000"
+     "value": "768 / ≥5,000"
     },
     {
      "level": "warn",
@@ -3366,7 +3723,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32788
+   "bytes": 22640,
+   "size": [
+    1,
+    0,
+    2
+   ],
+   "fileKB": 85
   },
   {
    "key": "bed18",
@@ -3375,13 +3738,10 @@
    "type": "bed",
    "group": "床组",
    "file": "bed18.glb",
-   "tris": 17280,
-   "verts": 13720,
+   "tris": 30720,
+   "verts": 61520,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -3402,19 +3762,19 @@
      "value": "1800×1050×2100 mm / 目标 1800×1050×2100 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥30,000"
+     "value": "291,935 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3422,7 +3782,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 319324
+   "bytes": 16085952,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 842
   },
   {
    "key": "bed15",
@@ -3431,13 +3797,10 @@
    "type": "bed",
    "group": "床组",
    "file": "bed15.glb",
-   "tris": 17280,
-   "verts": 13720,
+   "tris": 30720,
+   "verts": 61520,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1500.0,
@@ -3458,19 +3821,19 @@
      "value": "1500×1000×2050 mm / 目标 1500×1000×2050 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥30,000"
+     "value": "288,696 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3478,7 +3841,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 319328
+   "bytes": 14815344,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 842
   },
   {
    "key": "bed12",
@@ -3487,13 +3856,10 @@
    "type": "bed",
    "group": "床组",
    "file": "bed12.glb",
-   "tris": 17280,
-   "verts": 13720,
+   "tris": 30720,
+   "verts": 61520,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -3514,19 +3880,19 @@
      "value": "1200×950×2000 mm / 目标 1200×950×2000 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥30,000"
+     "value": "296,661 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3534,7 +3900,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 319320
+   "bytes": 12295332,
+   "size": [
+    1,
+    1,
+    2
+   ],
+   "fileKB": 842
   },
   {
    "key": "bed20",
@@ -3543,13 +3915,10 @@
    "type": "bed",
    "group": "床组",
    "file": "bed20.glb",
-   "tris": 17280,
-   "verts": 13720,
+   "tris": 30720,
+   "verts": 61520,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -3570,19 +3939,19 @@
      "value": "2000×1050×2200 mm / 目标 2000×1050×2200 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥30,000"
+     "value": "290,366 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3590,7 +3959,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 319320
+   "bytes": 15919968,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 842
   },
   {
    "key": "roundBed",
@@ -3599,11 +3974,10 @@
    "type": "roundBed",
    "group": "床组",
    "file": "roundBed.glb",
-   "tris": 48896,
-   "verts": 19728,
+   "tris": 87040,
+   "verts": 88184,
    "materials": [
-    "U_fabric_cream",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2200.0,
@@ -3626,17 +4000,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "48,896 / ≥30,000"
+     "value": "284,815 / ≥30,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3644,7 +4018,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 903856
+   "bytes": 17442512,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 2399
   },
   {
    "key": "bunkBed",
@@ -3653,12 +4033,10 @@
    "type": "bunkBed",
    "group": "床组",
    "file": "bunkBed.glb",
-   "tris": 20736,
-   "verts": 12348,
+   "tris": 36864,
+   "verts": 55368,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1000.0,
@@ -3679,19 +4057,19 @@
      "value": "1000×1750×2000 mm / 目标 1000×1750×2000 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "20,736 / ≥30,000"
+     "value": "282,993 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3699,7 +4077,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 382400
+   "bytes": 20798112,
+   "size": [
+    1,
+    2,
+    2
+   ],
+   "fileKB": 1010
   },
   {
    "key": "crib",
@@ -3708,10 +4092,10 @@
    "type": "crib",
    "group": "床组",
    "file": "crib.glb",
-   "tris": 84672,
-   "verts": 16807,
+   "tris": 150528,
+   "verts": 75362,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1250.0,
@@ -3734,7 +4118,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "84,672 / ≥30,000"
+     "value": "297,199 / ≥30,000"
     },
     {
      "level": "warn",
@@ -3742,9 +4126,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3752,7 +4136,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1554980
+   "bytes": 16112984,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 4120
   },
   {
    "key": "tatami",
@@ -3761,11 +4151,10 @@
    "type": "tatami",
    "group": "床组",
    "file": "tatami.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
-    "U_fabric_oat",
-    "U_fabric_oat_d"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -3786,19 +4175,19 @@
      "value": "2000×400×2000 mm / 目标 2000×400×2000 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥30,000"
+     "value": "290,392 / ≥30,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3806,7 +4195,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64864
+   "bytes": 11855060,
+   "size": [
+    2,
+    0,
+    2
+   ],
+   "fileKB": 169
   },
   {
    "key": "nightstand",
@@ -3815,10 +4210,10 @@
    "type": "nightstand",
    "group": "床组",
    "file": "nightstand.glb",
-   "tris": 2756,
-   "verts": 3164,
+   "tris": 37172,
+   "verts": 20532,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     500.0,
@@ -3839,9 +4234,9 @@
      "value": "500×500×420 mm / 目标 500×500×420 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "2,756 / ≥30,000"
+     "value": "288,203 / ≥30,000"
     },
     {
      "level": "warn",
@@ -3849,9 +4244,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3859,7 +4254,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 504480
+   "bytes": 11836316,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 866
   },
   {
    "key": "bedBench",
@@ -3868,11 +4269,10 @@
    "type": "bedBench",
    "group": "床组",
    "file": "bedBench.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
-    "U_fabric_oat",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1400.0,
@@ -3893,19 +4293,19 @@
      "value": "1400×450×400 mm / 目标 1400×450×400 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥30,000"
+     "value": "280,628 / ≥30,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3913,7 +4313,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191724
+   "bytes": 11463388,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 505
   },
   {
    "key": "bayCushion",
@@ -3922,10 +4328,10 @@
    "type": "bayCushion",
    "group": "床组",
    "file": "bayCushion.glb",
-   "tris": 4752,
-   "verts": 2450,
+   "tris": 18720,
+   "verts": 9506,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -3946,9 +4352,9 @@
      "value": "1800×80×500 mm / 目标 1800×80×500 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "4,752 / ≥30,000"
+     "value": "291,476 / ≥30,000"
     },
     {
      "level": "warn",
@@ -3956,9 +4362,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -3966,7 +4372,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 136516
+   "bytes": 20046832,
+   "size": [
+    2,
+    0,
+    0
+   ],
+   "fileKB": 517
   },
   {
    "key": "diningBench",
@@ -3975,11 +4387,10 @@
    "type": "bedBench",
    "group": "床组",
    "file": "diningBench.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
-    "U_fabric_oat",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1400.0,
@@ -4000,19 +4411,19 @@
      "value": "1400×450×350 mm / 目标 1400×450×350 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥30,000"
+     "value": "295,861 / ≥30,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -4020,7 +4431,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191756
+   "bytes": 16061608,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 505
   },
   {
    "key": "kingBed",
@@ -4029,13 +4446,10 @@
    "type": "bed",
    "group": "床组",
    "file": "kingBed.glb",
-   "tris": 17280,
-   "verts": 13720,
+   "tris": 30720,
+   "verts": 61520,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2200.0,
@@ -4056,19 +4470,19 @@
      "value": "2200×1100×2200 mm / 目标 2200×1100×2200 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥30,000"
+     "value": "288,191 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -4076,7 +4490,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 319320
+   "bytes": 16360764,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 842
   },
   {
    "key": "kidsBed",
@@ -4085,13 +4505,10 @@
    "type": "bed",
    "group": "床组",
    "file": "kidsBed.glb",
-   "tris": 17280,
-   "verts": 13720,
+   "tris": 30720,
+   "verts": 61520,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1000.0,
@@ -4112,19 +4529,19 @@
      "value": "1000×900×1900 mm / 目标 1000×900×1900 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥30,000"
+     "value": "286,570 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -4132,7 +4549,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 319324
+   "bytes": 16221116,
+   "size": [
+    1,
+    1,
+    2
+   ],
+   "fileKB": 842
   },
   {
    "key": "car",
@@ -4141,10 +4564,10 @@
    "type": "car",
    "group": "庭院",
    "file": "car.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_black"
    ],
    "dims_mm": [
     1850.0,
@@ -4167,7 +4590,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -4185,7 +4608,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 22636,
+   "size": [
+    2,
+    1,
+    5
+   ],
+   "fileKB": 85
   },
   {
    "key": "suv",
@@ -4194,10 +4623,10 @@
    "type": "car",
    "group": "庭院",
    "file": "suv.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_black"
    ],
    "dims_mm": [
     1950.0,
@@ -4220,7 +4649,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -4238,7 +4667,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 22640,
+   "size": [
+    2,
+    2,
+    5
+   ],
+   "fileKB": 85
   },
   {
    "key": "carport",
@@ -4247,8 +4682,8 @@
    "type": "carport",
    "group": "庭院",
    "file": "carport.glb",
-   "tris": 1984,
-   "verts": 479,
+   "tris": 3584,
+   "verts": 2058,
    "materials": [
     "U_metal_black"
    ],
@@ -4291,7 +4726,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 40204
+   "bytes": 40204,
+   "size": [
+    3,
+    3,
+    6
+   ],
+   "fileKB": 107
   },
   {
    "key": "carport2",
@@ -4300,8 +4741,8 @@
    "type": "carport",
    "group": "庭院",
    "file": "carport2.glb",
-   "tris": 1984,
-   "verts": 479,
+   "tris": 3584,
+   "verts": 2058,
    "materials": [
     "U_metal_black"
    ],
@@ -4326,7 +4767,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,984 / ≥500"
+     "value": "1,024 / ≥500"
     },
     {
      "level": "warn",
@@ -4344,7 +4785,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 40204
+   "bytes": 34152,
+   "size": [
+    6,
+    3,
+    6
+   ],
+   "fileKB": 107
   },
   {
    "key": "bicycle",
@@ -4353,10 +4800,10 @@
    "type": "bicycle",
    "group": "庭院",
    "file": "bicycle.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_black"
    ],
    "dims_mm": [
     600.0,
@@ -4379,7 +4826,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -4397,7 +4844,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 22636,
+   "size": [
+    1,
+    1,
+    2
+   ],
+   "fileKB": 85
   },
   {
    "key": "pool",
@@ -4406,8 +4859,8 @@
    "type": "pool",
    "group": "庭院",
    "file": "pool.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_glass_clear",
     "U_stone_light"
@@ -4433,7 +4886,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥500"
+     "value": "1,536 / ≥500"
     },
     {
      "level": "warn",
@@ -4451,7 +4904,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64868
+   "bytes": 44576,
+   "size": [
+    4,
+    0,
+    8
+   ],
+   "fileKB": 169
   },
   {
    "key": "lawn",
@@ -4463,7 +4922,7 @@
    "tris": 101621,
    "verts": 59689,
    "materials": [
-    "U_fabric_oat"
+    "U_leaf"
    ],
    "dims_mm": [
     4000.0,
@@ -4486,7 +4945,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "101,621 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -4504,7 +4963,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 3847268
+   "bytes": 22628,
+   "size": [
+    2,
+    0,
+    1
+   ],
+   "fileKB": 2464
   },
   {
    "key": "stepStones",
@@ -4513,8 +4978,8 @@
    "type": "stepStones",
    "group": "庭院",
    "file": "stepStones.glb",
-   "tris": 640,
-   "verts": 336,
+   "tris": 1280,
+   "verts": 1296,
    "materials": [
     "U_stone_light"
    ],
@@ -4557,7 +5022,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 19512
+   "bytes": 29752,
+   "size": [
+    1,
+    0,
+    4
+   ],
+   "fileKB": 56
   },
   {
    "key": "tree",
@@ -4569,7 +5040,7 @@
    "tris": 82074,
    "verts": 49005,
    "materials": [
-    "U_fabric_oat"
+    "quiver_tree_02"
    ],
    "dims_mm": [
     2600.0,
@@ -4600,9 +5071,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: quiver_tree_02"
     },
     {
      "level": "ok",
@@ -4610,7 +5081,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 4547072
+   "bytes": 4547072,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 2013
   },
   {
    "key": "shrub",
@@ -4619,8 +5096,8 @@
    "type": "shrub",
    "group": "庭院",
    "file": "shrub.glb",
-   "tris": 944,
-   "verts": 508,
+   "tris": 3776,
+   "verts": 1960,
    "materials": [
     "U_leaf"
    ],
@@ -4663,7 +5140,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 28676
+   "bytes": 28676,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 106
   },
   {
    "key": "gazebo",
@@ -4672,10 +5155,10 @@
    "type": "gazebo",
    "group": "庭院",
    "file": "gazebo.glb",
-   "tris": 1984,
-   "verts": 479,
+   "tris": 3584,
+   "verts": 2058,
    "materials": [
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     3200.0,
@@ -4698,7 +5181,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,984 / ≥500"
+     "value": "292,388 / ≥500"
     },
     {
      "level": "warn",
@@ -4706,9 +5189,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -4716,7 +5199,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 40204
+   "bytes": 21072828,
+   "size": [
+    3,
+    3,
+    3
+   ],
+   "fileKB": 107
   },
   {
    "key": "parasol",
@@ -4725,8 +5214,8 @@
    "type": "parasol",
    "group": "庭院",
    "file": "parasol.glb",
-   "tris": 192,
-   "verts": 98,
+   "tris": 384,
+   "verts": 386,
    "materials": [
     "U_wood_walnut"
    ],
@@ -4769,7 +5258,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6496
+   "bytes": 9572,
+   "size": [
+    3,
+    2,
+    3
+   ],
+   "fileKB": 17
   },
   {
    "key": "sunLounger",
@@ -4778,10 +5273,10 @@
    "type": "sunLounger",
    "group": "庭院",
    "file": "sunLounger.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     700.0,
@@ -4804,7 +5299,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "296,517 / ≥500"
     },
     {
      "level": "warn",
@@ -4812,9 +5307,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -4822,7 +5317,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 12875948,
+   "size": [
+    1,
+    0,
+    2
+   ],
+   "fileKB": 85
   },
   {
    "key": "swing",
@@ -4831,10 +5332,10 @@
    "type": "swing",
    "group": "庭院",
    "file": "swing.glb",
-   "tris": 1968,
-   "verts": 469,
+   "tris": 3552,
+   "verts": 2024,
    "materials": [
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -4857,7 +5358,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,968 / ≥500"
+     "value": "289,004 / ≥500"
     },
     {
      "level": "warn",
@@ -4865,9 +5366,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -4875,7 +5376,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 39692
+   "bytes": 15644080,
+   "size": [
+    2,
+    2,
+    1
+   ],
+   "fileKB": 105
   },
   {
    "key": "bbq",
@@ -4884,10 +5391,10 @@
    "type": "bbq",
    "group": "庭院",
    "file": "bbq.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_black"
    ],
    "dims_mm": [
     1600.0,
@@ -4910,7 +5417,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -4928,7 +5435,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 22636,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "waterFeature",
@@ -4937,10 +5450,10 @@
    "type": "waterFeature",
    "group": "庭院",
    "file": "waterFeature.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_stone_light"
    ],
    "dims_mm": [
     1600.0,
@@ -4963,7 +5476,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -4981,7 +5494,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32776
+   "bytes": 22632,
+   "size": [
+    2,
+    2,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "fence",
@@ -4990,10 +5509,10 @@
    "type": "fence",
    "group": "庭院",
    "file": "fence.glb",
-   "tris": 22464,
-   "verts": 4459,
+   "tris": 39936,
+   "verts": 19994,
    "materials": [
-    "U_wood_walnut"
+    "U_wood_oak"
    ],
    "dims_mm": [
     2000.0,
@@ -5016,7 +5535,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "22,464 / ≥500"
+     "value": "9,984 / ≥500"
     },
     {
      "level": "warn",
@@ -5034,7 +5553,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 413336
+   "bytes": 281460,
+   "size": [
+    2,
+    1,
+    0
+   ],
+   "fileKB": 1093
   },
   {
    "key": "gate",
@@ -5043,10 +5568,10 @@
    "type": "gate",
    "group": "庭院",
    "file": "gate.glb",
-   "tris": 38016,
-   "verts": 7546,
+   "tris": 67584,
+   "verts": 33836,
    "materials": [
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     3000.0,
@@ -5069,7 +5594,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "38,016 / ≥500"
+     "value": "288,066 / ≥500"
     },
     {
      "level": "warn",
@@ -5077,9 +5602,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -5087,7 +5612,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 698748
+   "bytes": 14406584,
+   "size": [
+    3,
+    2,
+    0
+   ],
+   "fileKB": 1850
   },
   {
    "key": "outdoorSet",
@@ -5096,10 +5627,10 @@
    "type": "outdoorSet",
    "group": "庭院",
    "file": "outdoorSet.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_wood_oak"
    ],
    "dims_mm": [
     1600.0,
@@ -5122,7 +5653,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥500"
+     "value": "768 / ≥500"
     },
     {
      "level": "warn",
@@ -5140,7 +5671,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 22628,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 85
   },
   {
    "key": "stairU",
@@ -5149,10 +5686,10 @@
    "type": "stairU",
    "group": "建筑",
    "file": "stairU.glb",
-   "tris": 27648,
-   "verts": 5488,
+   "tris": 49152,
+   "verts": 24608,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     3300.0,
@@ -5175,7 +5712,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "27,648 / ≥1,000"
+     "value": "285,273 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5183,9 +5720,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -5193,7 +5730,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 508472
+   "bytes": 23719468,
+   "size": [
+    3,
+    3,
+    2
+   ],
+   "fileKB": 1346
   },
   {
    "key": "stairRun",
@@ -5202,10 +5745,10 @@
    "type": "stairRun",
    "group": "建筑",
    "file": "stairRun.glb",
-   "tris": 27648,
-   "verts": 5488,
+   "tris": 49152,
+   "verts": 24608,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1100.0,
@@ -5228,7 +5771,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "27,648 / ≥1,000"
+     "value": "299,805 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5236,9 +5779,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -5246,7 +5789,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 508468
+   "bytes": 47581580,
+   "size": [
+    1,
+    2,
+    3
+   ],
+   "fileKB": 1346
   },
   {
    "key": "stairLanding",
@@ -5255,10 +5804,10 @@
    "type": "stairRun",
    "group": "建筑",
    "file": "stairLanding.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1100.0,
@@ -5281,7 +5830,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥1,000"
+     "value": "298,556 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5289,9 +5838,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -5299,7 +5848,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 16968920,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "elevator",
@@ -5308,10 +5863,10 @@
    "type": "elevator",
    "group": "建筑",
    "file": "elevator.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_steel"
    ],
    "dims_mm": [
     910.0,
@@ -5332,9 +5887,9 @@
      "value": "910×2600×1160 mm / 目标 910×2600×1160 mm（偏差 0.00%）"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥1,000"
+     "value": "768 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5352,7 +5907,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 22636,
+   "size": [
+    1,
+    3,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "evCharger",
@@ -5361,10 +5922,10 @@
    "type": "evCharger",
    "group": "建筑",
    "file": "evCharger.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_metal_black"
    ],
    "dims_mm": [
     300.0,
@@ -5385,9 +5946,9 @@
      "value": "300×450×150 mm / 目标 300×450×150 mm（偏差 0.00%）"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥1,000"
+     "value": "768 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5405,7 +5966,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32784
+   "bytes": 22640,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "garageShelf",
@@ -5414,10 +5981,10 @@
    "type": "garageShelf",
    "group": "建筑",
    "file": "garageShelf.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -5440,7 +6007,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥1,000"
+     "value": "290,968 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5448,9 +6015,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -5458,7 +6025,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 14794476,
+   "size": [
+    2,
+    2,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "workbench",
@@ -5467,10 +6040,10 @@
    "type": "workbench",
    "group": "建筑",
    "file": "workbench.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -5493,7 +6066,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥1,000"
+     "value": "290,989 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5501,9 +6074,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -5511,7 +6084,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 16769772,
+   "size": [
+    2,
+    2,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "stage",
@@ -5520,8 +6099,8 @@
    "type": "stage",
    "group": "建筑",
    "file": "stage.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_fabric_grey",
     "U_wood_oak"
@@ -5547,7 +6126,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥1,000"
+     "value": "1,536 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5565,7 +6144,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64860
+   "bytes": 44568,
+   "size": [
+    6,
+    0,
+    2
+   ],
+   "fileKB": 169
   },
   {
    "key": "slidingBoard",
@@ -5574,8 +6159,8 @@
    "type": "slidingBoard",
    "group": "建筑",
    "file": "slidingBoard.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -5618,7 +6203,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 32780,
+   "size": [
+    4,
+    2,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "wifiAP",
@@ -5627,8 +6218,8 @@
    "type": "wifiAP",
    "group": "建筑",
    "file": "wifiAP.glb",
-   "tris": 192,
-   "verts": 98,
+   "tris": 384,
+   "verts": 386,
    "materials": [
     "U_wood_walnut"
    ],
@@ -5671,7 +6262,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6504
+   "bytes": 9580,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 17
   },
   {
    "key": "ceilingSpeaker",
@@ -5680,8 +6277,8 @@
    "type": "ceilingSpeaker",
    "group": "建筑",
    "file": "ceilingSpeaker.glb",
-   "tris": 192,
-   "verts": 98,
+   "tris": 384,
+   "verts": 386,
    "materials": [
     "U_wood_walnut"
    ],
@@ -5724,7 +6321,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6504
+   "bytes": 9576,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 17
   },
   {
    "key": "supplyVent",
@@ -5733,8 +6336,8 @@
    "type": "airVent",
    "group": "建筑",
    "file": "supplyVent.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
     "U_ceramic_white",
     "U_metal_steel"
@@ -5778,7 +6381,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191756
+   "bytes": 191756,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 505
   },
   {
    "key": "returnVent",
@@ -5787,8 +6396,8 @@
    "type": "airVent",
    "group": "建筑",
    "file": "returnVent.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
     "U_ceramic_white",
     "U_metal_steel"
@@ -5814,7 +6423,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥1,000"
+     "value": "4,608 / ≥1,000"
     },
     {
      "level": "warn",
@@ -5832,7 +6441,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191756
+   "bytes": 130888,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 505
   },
   {
    "key": "whiteboard",
@@ -5841,8 +6456,8 @@
    "type": "slidingBoard",
    "group": "建筑",
    "file": "whiteboard.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -5885,7 +6500,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 32780,
+   "size": [
+    2,
+    2,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "wardrobe",
@@ -5894,11 +6515,10 @@
    "type": "wardrobe",
    "group": "柜组",
    "file": "wardrobe.glb",
-   "tris": 61096,
-   "verts": 40730,
+   "tris": 49824,
+   "verts": 30540,
    "materials": [
-    "U_fabric_oat",
-    "U_glass_clear"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -5921,17 +6541,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "61,096 / ≥6,000"
+     "value": "293,149 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -5939,7 +6559,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2862740
+   "bytes": 12031264,
+   "size": [
+    2,
+    2,
+    1
+   ],
+   "fileKB": 1256
   },
   {
    "key": "chest",
@@ -5948,12 +6574,10 @@
    "type": "chest",
    "group": "柜组",
    "file": "chest.glb",
-   "tris": 25920,
-   "verts": 15435,
+   "tris": 46080,
+   "verts": 69210,
    "materials": [
-    "U_metal_brass",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     900.0,
@@ -5976,17 +6600,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "25,920 / ≥6,000"
+     "value": "299,823 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -5994,7 +6618,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 477512
+   "bytes": 13687632,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 1262
   },
   {
    "key": "coatRack",
@@ -6003,11 +6633,10 @@
    "type": "coatRack",
    "group": "柜组",
    "file": "coatRack.glb",
-   "tris": 352,
-   "verts": 384,
+   "tris": 704,
+   "verts": 1440,
    "materials": [
-    "U_metal_brass",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     500.0,
@@ -6028,19 +6657,19 @@
      "value": "500×1750×500 mm / 目标 500×1750×500 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "352 / ≥6,000"
+     "value": "298,734 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6048,7 +6677,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 11808
+   "bytes": 19311516,
+   "size": [
+    0,
+    2,
+    0
+   ],
+   "fileKB": 32
   },
   {
    "key": "dresser",
@@ -6057,13 +6692,10 @@
    "type": "dresser",
    "group": "柜组",
    "file": "dresser.glb",
-   "tris": 23256,
-   "verts": 19508,
+   "tris": 41520,
+   "verts": 86400,
    "materials": [
-    "U_glass_clear",
-    "U_metal_brass",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1000.0,
@@ -6086,17 +6718,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "23,256 / ≥6,000"
+     "value": "294,290 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6104,7 +6736,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 437368
+   "bytes": 22802272,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 1163
   },
   {
    "key": "fileCabinet",
@@ -6113,8 +6751,8 @@
    "type": "chest",
    "group": "柜组",
    "file": "fileCabinet.glb",
-   "tris": 15552,
-   "verts": 6174,
+   "tris": 27648,
+   "verts": 27684,
    "materials": [
     "U_metal_black",
     "U_metal_brass"
@@ -6158,7 +6796,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 286868
+   "bytes": 286868,
+   "size": [
+    0,
+    1,
+    1
+   ],
+   "fileKB": 758
   },
   {
    "key": "bookshelf",
@@ -6167,13 +6811,10 @@
    "type": "bookshelf",
    "group": "柜组",
    "file": "bookshelf.glb",
-   "tris": 51840,
-   "verts": 41160,
+   "tris": 92160,
+   "verts": 184560,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     900.0,
@@ -6196,17 +6837,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "51,840 / ≥6,000"
+     "value": "299,419 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6214,7 +6855,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 953576
+   "bytes": 11894424,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 2524
   },
   {
    "key": "tvCabinet",
@@ -6223,12 +6870,10 @@
    "type": "tvCabinet",
    "group": "柜组",
    "file": "tvCabinet.glb",
-   "tris": 15552,
-   "verts": 9261,
+   "tris": 49576,
+   "verts": 28019,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -6251,17 +6896,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "15,552 / ≥6,000"
+     "value": "291,241 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6269,7 +6914,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 287248
+   "bytes": 12550552,
+   "size": [
+    2,
+    1,
+    0
+   ],
+   "fileKB": 1175
   },
   {
    "key": "sideboard",
@@ -6278,12 +6929,10 @@
    "type": "sideboard",
    "group": "柜组",
    "file": "sideboard.glb",
-   "tris": 25920,
-   "verts": 15435,
+   "tris": 46080,
+   "verts": 69210,
    "materials": [
-    "U_metal_brass",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1600.0,
@@ -6306,17 +6955,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "25,920 / ≥6,000"
+     "value": "295,034 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6324,7 +6973,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 477508
+   "bytes": 15815032,
+   "size": [
+    2,
+    2,
+    0
+   ],
+   "fileKB": 1262
   },
   {
    "key": "wineCabinet",
@@ -6339,7 +6994,7 @@
     "U_wood_walnut"
    ],
    "dims_mm": [
-    899.0,
+    900.0,
     2000.0,
     450.0
    ],
@@ -6348,13 +7003,13 @@
     2000,
     450
    ],
-   "size_error": 0.0011,
+   "size_error": 0.0,
    "status": "ok",
    "checks": [
     {
      "level": "ok",
      "text": "尺寸与目录目标一致",
-     "value": "899×2000×450 mm / 目标 900×2000×450 mm（偏差 0.11%）"
+     "value": "900×2000×450 mm / 目标 900×2000×450 mm（偏差 0.00%）"
     },
     {
      "level": "warn",
@@ -6377,7 +7032,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1594200
+   "bytes": 1594232,
+   "size": [
+    1,
+    3,
+    1
+   ],
+   "fileKB": 41
   },
   {
    "key": "displayCabinet",
@@ -6386,8 +7047,8 @@
    "type": "displayCabinet",
    "group": "柜组",
    "file": "displayCabinet.glb",
-   "tris": 32832,
-   "verts": 32585,
+   "tris": 58368,
+   "verts": 146110,
    "materials": [
     "U_glass_clear",
     "U_metal_black",
@@ -6434,7 +7095,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 605108
+   "bytes": 605108,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 1599
   },
   {
    "key": "shoeCabinet",
@@ -6443,8 +7110,8 @@
    "type": "shoeCabinet",
    "group": "柜组",
    "file": "shoeCabinet.glb",
-   "tris": 29376,
-   "verts": 23324,
+   "tris": 52224,
+   "verts": 104584,
    "materials": [
     "U_metal_black",
     "U_metal_brass",
@@ -6490,7 +7157,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 541312
+   "bytes": 541312,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 1431
   },
   {
    "key": "hallCabinet",
@@ -6499,12 +7172,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "hallCabinet.glb",
-   "tris": 27712,
-   "verts": 16566,
+   "tris": 49280,
+   "verts": 74214,
    "materials": [
-    "U_metal_brass",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -6527,17 +7198,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "27,712 / ≥6,000"
+     "value": "281,588 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6545,7 +7216,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 511076
+   "bytes": 22062416,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 1352
   },
   {
    "key": "cabWardrobe",
@@ -6557,8 +7234,7 @@
    "tris": 61096,
    "verts": 40730,
    "materials": [
-    "U_fabric_oat",
-    "U_glass_clear"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -6581,17 +7257,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "61,096 / ≥6,000"
+     "value": "294,700 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6599,7 +7275,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2862756
+   "bytes": 12425096,
+   "size": [
+    2,
+    3,
+    1
+   ],
+   "fileKB": 1961
   },
   {
    "key": "cabSlide",
@@ -6608,12 +7290,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "cabSlide.glb",
-   "tris": 8640,
-   "verts": 5145,
+   "tris": 15360,
+   "verts": 23070,
    "materials": [
-    "U_glass_clear",
-    "U_metal_black",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -6636,17 +7316,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,640 / ≥6,000"
+     "value": "297,288 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6654,7 +7334,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 160404
+   "bytes": 19263640,
+   "size": [
+    2,
+    3,
+    1
+   ],
+   "fileKB": 422
   },
   {
    "key": "cabCorner",
@@ -6663,10 +7349,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "cabCorner.glb",
-   "tris": 3456,
-   "verts": 686,
+   "tris": 6144,
+   "verts": 3076,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -6687,9 +7373,9 @@
      "value": "2400×2600×1800 mm / 目标 2400×2600×1800 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,456 / ≥6,000"
+     "value": "288,666 / ≥6,000"
     },
     {
      "level": "warn",
@@ -6697,9 +7383,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6707,7 +7393,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64492
+   "bytes": 27686616,
+   "size": [
+    2,
+    3,
+    2
+   ],
+   "fileKB": 169
   },
   {
    "key": "cabShoe",
@@ -6716,13 +7408,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "cabShoe.glb",
-   "tris": 29376,
-   "verts": 23324,
+   "tris": 52224,
+   "verts": 104584,
    "materials": [
-    "U_metal_black",
-    "U_metal_brass",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -6745,17 +7434,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "29,376 / ≥6,000"
+     "value": "293,462 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "4 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "4 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6763,7 +7452,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 541312
+   "bytes": 10410700,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 1431
   },
   {
    "key": "cabSideboard",
@@ -6772,8 +7467,8 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "cabSideboard.glb",
-   "tris": 25920,
-   "verts": 15435,
+   "tris": 46080,
+   "verts": 69210,
    "materials": [
     "U_metal_brass",
     "U_wood_oak",
@@ -6818,7 +7513,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 477508
+   "bytes": 477508,
+   "size": [
+    2,
+    2,
+    0
+   ],
+   "fileKB": 1262
   },
   {
    "key": "cabTall",
@@ -6827,12 +7528,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "cabTall.glb",
-   "tris": 25920,
-   "verts": 15435,
+   "tris": 46080,
+   "verts": 69210,
    "materials": [
-    "U_metal_brass",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -6855,17 +7554,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "25,920 / ≥6,000"
+     "value": "296,672 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6873,7 +7572,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 477508
+   "bytes": 10354676,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 1262
   },
   {
    "key": "cabBase",
@@ -6882,11 +7587,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "cabBase.glb",
-   "tris": 8640,
-   "verts": 3430,
+   "tris": 15360,
+   "verts": 15380,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1600.0,
@@ -6909,17 +7613,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,640 / ≥6,000"
+     "value": "280,777 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6927,7 +7631,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 160024
+   "bytes": 12233480,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 421
   },
   {
    "key": "cabWall",
@@ -6936,11 +7646,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "cabWall.glb",
-   "tris": 6912,
-   "verts": 2744,
+   "tris": 12288,
+   "verts": 12304,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1600.0,
@@ -6963,17 +7672,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,912 / ≥6,000"
+     "value": "295,691 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -6981,7 +7690,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 128304
+   "bytes": 24247012,
+   "size": [
+    2,
+    1,
+    0
+   ],
+   "fileKB": 337
   },
   {
    "key": "cabTV",
@@ -6990,11 +7705,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "cabTV.glb",
-   "tris": 15552,
-   "verts": 6174,
+   "tris": 27648,
+   "verts": 27684,
    "materials": [
-    "U_metal_black",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -7017,17 +7731,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "15,552 / ≥6,000"
+     "value": "293,779 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7035,7 +7749,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 286876
+   "bytes": 10906760,
+   "size": [
+    2,
+    0,
+    0
+   ],
+   "fileKB": 757
   },
   {
    "key": "bathShelf",
@@ -7044,11 +7764,10 @@
    "type": "shelfRack",
    "group": "柜组",
    "file": "bathShelf.glb",
-   "tris": 13920,
-   "verts": 5596,
+   "tris": 24768,
+   "verts": 25004,
    "materials": [
-    "U_metal_brass",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     600.0,
@@ -7071,17 +7790,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "13,920 / ≥6,000"
+     "value": "288,666 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7089,7 +7808,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 258028
+   "bytes": 27686620,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 682
   },
   {
    "key": "plantShelf",
@@ -7142,7 +7867,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2776360
+   "bytes": 2776360,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 262
   },
   {
    "key": "wardrobe2",
@@ -7154,10 +7885,10 @@
    "tris": 966,
    "verts": 1048,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
-    998.9,
+    1000.0,
     2200.0,
     600.0
    ],
@@ -7166,18 +7897,18 @@
     2200,
     600
    ],
-   "size_error": 0.0011,
+   "size_error": 0.0,
    "status": "ok",
    "checks": [
     {
      "level": "ok",
      "text": "尺寸与目录目标一致",
-     "value": "998×2200×600 mm / 目标 1000×2200×600 mm（偏差 0.11%）"
+     "value": "1000×2200×600 mm / 目标 1000×2200×600 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "966 / ≥6,000"
+     "value": "280,372 / ≥6,000"
     },
     {
      "level": "warn",
@@ -7185,9 +7916,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7195,7 +7926,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1594196
+   "bytes": 15934928,
+   "size": [
+    1,
+    3,
+    1
+   ],
+   "fileKB": 41
   },
   {
    "key": "wardrobe3",
@@ -7207,8 +7944,7 @@
    "tris": 61096,
    "verts": 40730,
    "materials": [
-    "U_fabric_oat",
-    "U_glass_clear"
+    ""
    ],
    "dims_mm": [
     1500.0,
@@ -7231,17 +7967,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "61,096 / ≥6,000"
+     "value": "297,288 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7249,7 +7985,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2862756
+   "bytes": 19263640,
+   "size": [
+    2,
+    3,
+    1
+   ],
+   "fileKB": 1961
   },
   {
    "key": "toyCabinet",
@@ -7258,12 +8000,10 @@
    "type": "chest",
    "group": "柜组",
    "file": "toyCabinet.glb",
-   "tris": 12096,
-   "verts": 7203,
+   "tris": 21504,
+   "verts": 32298,
    "materials": [
-    "U_metal_brass",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     900.0,
@@ -7286,17 +8026,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "12,096 / ≥6,000"
+     "value": "286,626 / ≥6,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7304,7 +8044,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 223812
+   "bytes": 19255908,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 590
   },
   {
    "key": "bookshelfLow",
@@ -7313,11 +8059,10 @@
    "type": "bookshelf",
    "group": "柜组",
    "file": "bookshelfLow.glb",
-   "tris": 15552,
-   "verts": 6174,
+   "tris": 27648,
+   "verts": 27684,
    "materials": [
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -7340,17 +8085,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "15,552 / ≥6,000"
+     "value": "296,476 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7358,7 +8103,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 286860
+   "bytes": 15892852,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 757
   },
   {
    "key": "lockers",
@@ -7367,11 +8118,10 @@
    "type": "cabinet",
    "group": "柜组",
    "file": "lockers.glb",
-   "tris": 43200,
-   "verts": 17150,
+   "tris": 76800,
+   "verts": 76900,
    "materials": [
-    "U_metal_black",
-    "U_metal_brass"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -7394,17 +8144,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "43,200 / ≥6,000"
+     "value": "297,288 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7412,7 +8162,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 794276
+   "bytes": 19263640,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 2103
   },
   {
    "key": "kitchenTrolley",
@@ -7421,11 +8177,10 @@
    "type": "shelfRack",
    "group": "柜组",
    "file": "kitchenTrolley.glb",
-   "tris": 10640,
-   "verts": 4408,
+   "tris": 18976,
+   "verts": 19564,
    "materials": [
-    "U_metal_black",
-    "U_metal_brass"
+    ""
    ],
    "dims_mm": [
     450.0,
@@ -7448,17 +8203,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,640 / ≥6,000"
+     "value": "289,996 / ≥6,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7466,7 +8221,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 199680
+   "bytes": 15957604,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 529
   },
   {
    "key": "desk",
@@ -7475,12 +8236,10 @@
    "type": "desk",
    "group": "桌组",
    "file": "desk.glb",
-   "tris": 12096,
-   "verts": 7203,
+   "tris": 21504,
+   "verts": 32298,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -7503,17 +8262,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "12,096 / ≥8,000"
+     "value": "291,865 / ≥8,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7521,7 +8280,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 223808
+   "bytes": 25636228,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 590
   },
   {
    "key": "lDesk",
@@ -7530,11 +8295,10 @@
    "type": "lDesk",
    "group": "桌组",
    "file": "lDesk.glb",
-   "tris": 8640,
-   "verts": 3430,
+   "tris": 15360,
+   "verts": 15380,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1600.0,
@@ -7557,17 +8321,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,640 / ≥8,000"
+     "value": "290,378 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7575,7 +8339,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 160008
+   "bytes": 13232056,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 421
   },
   {
    "key": "kidsDesk",
@@ -7584,10 +8354,10 @@
    "type": "desk",
    "group": "桌组",
    "file": "kidsDesk.glb",
-   "tris": 6912,
-   "verts": 1372,
+   "tris": 12288,
+   "verts": 6152,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1000.0,
@@ -7608,9 +8378,9 @@
      "value": "1000×700×600 mm / 目标 1000×700×600 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,912 / ≥8,000"
+     "value": "298,266 / ≥8,000"
     },
     {
      "level": "warn",
@@ -7618,9 +8388,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7628,7 +8398,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 127936
+   "bytes": 14892792,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 337
   },
   {
    "key": "coffeeTable",
@@ -7637,10 +8413,10 @@
    "type": "coffeeTable",
    "group": "桌组",
    "file": "coffeeTable.glb",
-   "tris": 10404,
-   "verts": 6927,
+   "tris": 62800,
+   "verts": 43051,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -7663,7 +8439,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,404 / ≥8,000"
+     "value": "297,149 / ≥8,000"
     },
     {
      "level": "warn",
@@ -7671,9 +8447,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7681,7 +8457,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 956864
+   "bytes": 11874620,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 1720
   },
   {
    "key": "roundCoffee",
@@ -7693,7 +8475,7 @@
    "tris": 23836,
    "verts": 21890,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     900.0,
@@ -7716,7 +8498,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "23,836 / ≥8,000"
+     "value": "292,937 / ≥8,000"
     },
     {
      "level": "warn",
@@ -7724,9 +8506,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7734,7 +8516,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 3265900
+   "bytes": 11736416,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 825
   },
   {
    "key": "ovalCoffee",
@@ -7746,7 +8534,7 @@
    "tris": 10404,
    "verts": 6927,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1300.0,
@@ -7769,7 +8557,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,404 / ≥8,000"
+     "value": "295,129 / ≥8,000"
     },
     {
      "level": "warn",
@@ -7777,9 +8565,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7787,7 +8575,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 956864
+   "bytes": 12829616,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 387
   },
   {
    "key": "diningTable",
@@ -7796,10 +8590,10 @@
    "type": "diningTable",
    "group": "桌组",
    "file": "diningTable.glb",
-   "tris": 1048,
-   "verts": 772,
+   "tris": 17392,
+   "verts": 17949,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1600.0,
@@ -7820,9 +8614,9 @@
      "value": "1600×750×900 mm / 目标 1600×750×900 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,048 / ≥8,000"
+     "value": "296,613 / ≥8,000"
     },
     {
      "level": "warn",
@@ -7830,9 +8624,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7840,7 +8634,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2282720
+   "bytes": 15208184,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 680
   },
   {
    "key": "longTable",
@@ -7849,10 +8649,10 @@
    "type": "diningTable",
    "group": "桌组",
    "file": "longTable.glb",
-   "tris": 10368,
-   "verts": 2058,
+   "tris": 4608,
+   "verts": 2316,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -7875,7 +8675,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥8,000"
+     "value": "281,607 / ≥8,000"
     },
     {
      "level": "warn",
@@ -7883,9 +8683,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7893,7 +8693,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191348
+   "bytes": 11377320,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 127
   },
   {
    "key": "roundTable",
@@ -7905,7 +8711,7 @@
    "tris": 2508,
    "verts": 1992,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1300.0,
@@ -7926,9 +8732,9 @@
      "value": "1300×750×1300 mm / 目标 1300×750×1300 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "2,508 / ≥8,000"
+     "value": "288,648 / ≥8,000"
     },
     {
      "level": "warn",
@@ -7936,9 +8742,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7946,7 +8752,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1580464
+   "bytes": 15135468,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 78
   },
   {
    "key": "ovalTable",
@@ -7955,10 +8767,10 @@
    "type": "ovalTable",
    "group": "桌组",
    "file": "ovalTable.glb",
-   "tris": 600,
-   "verts": 686,
+   "tris": 11040,
+   "verts": 12324,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -7979,9 +8791,9 @@
      "value": "2400×750×1100 mm / 目标 2400×750×1100 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "600 / ≥8,000"
+     "value": "290,770 / ≥8,000"
     },
     {
      "level": "warn",
@@ -7989,9 +8801,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -7999,7 +8811,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1778668
+   "bytes": 17108956,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 323
   },
   {
    "key": "consoleTable",
@@ -8008,10 +8826,10 @@
    "type": "consoleTable",
    "group": "桌组",
    "file": "consoleTable.glb",
-   "tris": 10368,
-   "verts": 2058,
+   "tris": 18432,
+   "verts": 9228,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -8034,7 +8852,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥8,000"
+     "value": "288,051 / ≥8,000"
     },
     {
      "level": "warn",
@@ -8042,9 +8860,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8052,7 +8870,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191348
+   "bytes": 10787624,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 505
   },
   {
    "key": "kitchenIsland",
@@ -8061,11 +8885,10 @@
    "type": "kitchenIsland",
    "group": "桌组",
    "file": "kitchenIsland.glb",
-   "tris": 12096,
-   "verts": 4802,
+   "tris": 21504,
+   "verts": 21532,
    "materials": [
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -8088,17 +8911,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "12,096 / ≥8,000"
+     "value": "294,005 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8106,7 +8929,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 223440
+   "bytes": 15425096,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 589
   },
   {
    "key": "sideTable",
@@ -8118,7 +8947,7 @@
    "tris": 2756,
    "verts": 3164,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     500.0,
@@ -8139,9 +8968,9 @@
      "value": "500×550×500 mm / 目标 500×550×500 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "2,756 / ≥8,000"
+     "value": "286,270 / ≥8,000"
     },
     {
      "level": "warn",
@@ -8149,9 +8978,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8159,7 +8988,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 504476
+   "bytes": 13101644,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 116
   },
   {
    "key": "island",
@@ -8168,12 +9003,10 @@
    "type": "island",
    "group": "桌组",
    "file": "island.glb",
-   "tris": 8688,
-   "verts": 5223,
+   "tris": 15456,
+   "verts": 23364,
    "materials": [
-    "U_metal_brass",
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -8196,17 +9029,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,688 / ≥8,000"
+     "value": "299,088 / ≥8,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8214,7 +9047,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 161792
+   "bytes": 12198600,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 426
   },
   {
    "key": "teaTable",
@@ -8223,10 +9062,10 @@
    "type": "teaTable",
    "group": "桌组",
    "file": "teaTable.glb",
-   "tris": 12096,
-   "verts": 2401,
+   "tris": 21504,
+   "verts": 10766,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -8249,7 +9088,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "12,096 / ≥8,000"
+     "value": "287,705 / ≥8,000"
     },
     {
      "level": "warn",
@@ -8257,9 +9096,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8267,7 +9106,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 223060
+   "bytes": 21705524,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 589
   },
   {
    "key": "barCounter",
@@ -8276,12 +9121,10 @@
    "type": "barCounter",
    "group": "桌组",
    "file": "barCounter.glb",
-   "tris": 6912,
-   "verts": 4116,
+   "tris": 12288,
+   "verts": 18456,
    "materials": [
-    "U_metal_steel",
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -8302,19 +9145,19 @@
      "value": "2400×1100×650 mm / 目标 2400×1100×650 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,912 / ≥8,000"
+     "value": "286,940 / ≥8,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8322,7 +9165,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 128676
+   "bytes": 26028568,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 338
   },
   {
    "key": "trainingTable",
@@ -8331,11 +9180,10 @@
    "type": "trainingTable",
    "group": "桌组",
    "file": "trainingTable.glb",
-   "tris": 12096,
-   "verts": 4802,
+   "tris": 21504,
+   "verts": 21532,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -8358,17 +9206,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "12,096 / ≥8,000"
+     "value": "279,284 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8376,7 +9224,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 223436
+   "bytes": 12179260,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 589
   },
   {
    "key": "curveTrainingTable",
@@ -8385,11 +9239,10 @@
    "type": "curveTrainingTable",
    "group": "桌组",
    "file": "curveTrainingTable.glb",
-   "tris": 17280,
-   "verts": 6860,
+   "tris": 30720,
+   "verts": 30760,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     3000.0,
@@ -8412,17 +9265,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥8,000"
+     "value": "276,947 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8430,7 +9283,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 318632
+   "bytes": 12675636,
+   "size": [
+    3,
+    1,
+    1
+   ],
+   "fileKB": 842
   },
   {
    "key": "conferenceTable",
@@ -8439,10 +9298,10 @@
    "type": "diningTable",
    "group": "桌组",
    "file": "conferenceTable.glb",
-   "tris": 10368,
-   "verts": 2058,
+   "tris": 18432,
+   "verts": 9228,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     3600.0,
@@ -8465,7 +9324,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥8,000"
+     "value": "281,607 / ≥8,000"
     },
     {
      "level": "warn",
@@ -8473,9 +9332,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8483,7 +9342,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191348
+   "bytes": 11377324,
+   "size": [
+    4,
+    1,
+    1
+   ],
+   "fileKB": 505
   },
   {
    "key": "lectern",
@@ -8492,11 +9357,10 @@
    "type": "lectern",
    "group": "桌组",
    "file": "lectern.glb",
-   "tris": 13824,
-   "verts": 5488,
+   "tris": 24576,
+   "verts": 24608,
    "materials": [
-    "U_metal_black",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     900.0,
@@ -8519,17 +9383,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "13,824 / ≥8,000"
+     "value": "299,090 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8537,7 +9401,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 255184
+   "bytes": 13693792,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 673
   },
   {
    "key": "nestTables",
@@ -8546,12 +9416,10 @@
    "type": "roundTable",
    "group": "桌组",
    "file": "nestTables.glb",
-   "tris": 568,
-   "verts": 888,
+   "tris": 1136,
+   "verts": 3444,
    "materials": [
-    "U_metal_brass",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     600.0,
@@ -8572,19 +9440,19 @@
      "value": "600×450×600 mm / 目标 600×450×600 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "568 / ≥8,000"
+     "value": "285,413 / ≥8,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8592,7 +9460,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 18092
+   "bytes": 13332084,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 50
   },
   {
    "key": "diningTable4",
@@ -8601,10 +9475,10 @@
    "type": "diningTable",
    "group": "桌组",
    "file": "diningTable4.glb",
-   "tris": 10368,
-   "verts": 2058,
+   "tris": 4608,
+   "verts": 2316,
    "materials": [
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -8627,7 +9501,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥8,000"
+     "value": "279,936 / ≥8,000"
     },
     {
      "level": "warn",
@@ -8635,9 +9509,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8645,7 +9519,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191348
+   "bytes": 10459680,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 127
   },
   {
    "key": "diningTable6",
@@ -8657,7 +9537,7 @@
    "tris": 1048,
    "verts": 772,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -8678,9 +9558,9 @@
      "value": "1800×750×900 mm / 目标 1800×750×900 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,048 / ≥8,000"
+     "value": "289,204 / ≥8,000"
     },
     {
      "level": "warn",
@@ -8688,9 +9568,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8698,7 +9578,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2282724
+   "bytes": 11213596,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 32
   },
   {
    "key": "roundTable10",
@@ -8710,7 +9596,7 @@
    "tris": 23836,
    "verts": 21890,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -8733,7 +9619,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "23,836 / ≥8,000"
+     "value": "294,241 / ≥8,000"
     },
     {
      "level": "warn",
@@ -8741,9 +9627,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8751,7 +9637,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 3265900
+   "bytes": 11143832,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 825
   },
   {
    "key": "barTable",
@@ -8760,11 +9652,10 @@
    "type": "diningTable",
    "group": "桌组",
    "file": "barTable.glb",
-   "tris": 6912,
-   "verts": 2744,
+   "tris": 12288,
+   "verts": 12304,
    "materials": [
-    "U_metal_black",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1400.0,
@@ -8785,19 +9676,19 @@
      "value": "1400×1050×500 mm / 目标 1400×1050×500 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,912 / ≥8,000"
+     "value": "297,356 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8805,7 +9696,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 128300
+   "bytes": 16116264,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 337
   },
   {
    "key": "standingDesk",
@@ -8814,11 +9711,10 @@
    "type": "desk",
    "group": "桌组",
    "file": "standingDesk.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1400.0,
@@ -8841,17 +9737,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥8,000"
+     "value": "298,205 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8859,7 +9755,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191724
+   "bytes": 11855828,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 505
   },
   {
    "key": "officeDesk",
@@ -8871,7 +9773,7 @@
    "tris": 6898,
    "verts": 6070,
    "materials": [
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     1400.0,
@@ -8892,9 +9794,9 @@
      "value": "1400×750×700 mm / 目标 1400×750×700 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,898 / ≥8,000"
+     "value": "286,995 / ≥8,000"
     },
     {
      "level": "warn",
@@ -8902,9 +9804,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8912,7 +9814,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1602452
+   "bytes": 15550776,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 232
   },
   {
    "key": "deskBench2",
@@ -8921,11 +9829,10 @@
    "type": "trainingTable",
    "group": "桌组",
    "file": "deskBench2.glb",
-   "tris": 6912,
-   "verts": 2744,
+   "tris": 12288,
+   "verts": 12304,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -8946,19 +9853,19 @@
      "value": "2400×750×700 mm / 目标 2400×750×700 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,912 / ≥8,000"
+     "value": "289,734 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -8966,7 +9873,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 128296
+   "bytes": 11533060,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 337
   },
   {
    "key": "deskBench4",
@@ -8975,11 +9888,10 @@
    "type": "trainingTable",
    "group": "桌组",
    "file": "deskBench4.glb",
-   "tris": 6912,
-   "verts": 2744,
+   "tris": 12288,
+   "verts": 12304,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -9000,19 +9912,19 @@
      "value": "2400×750×1400 mm / 目标 2400×750×1400 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,912 / ≥8,000"
+     "value": "288,737 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9020,7 +9932,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 128296
+   "bytes": 13426264,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 337
   },
   {
    "key": "bossDesk",
@@ -9029,12 +9947,10 @@
    "type": "lDesk",
    "group": "桌组",
    "file": "bossDesk.glb",
-   "tris": 10368,
-   "verts": 6174,
+   "tris": 18432,
+   "verts": 27684,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2200.0,
@@ -9057,17 +9973,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥8,000"
+     "value": "288,737 / ≥8,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9075,7 +9991,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 192112
+   "bytes": 13426264,
+   "size": [
+    2,
+    1,
+    2
+   ],
+   "fileKB": 506
   },
   {
    "key": "roundMeeting",
@@ -9084,11 +10006,10 @@
    "type": "roundTable",
    "group": "桌组",
    "file": "roundMeeting.glb",
-   "tris": 3720,
-   "verts": 1644,
+   "tris": 6672,
+   "verts": 7216,
    "materials": [
-    "U_metal_black",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1000.0,
@@ -9109,19 +10030,19 @@
      "value": "1000×750×1000 mm / 目标 1000×750×1000 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,720 / ≥8,000"
+     "value": "283,956 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9129,7 +10050,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 72380
+   "bytes": 19826384,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 192
   },
   {
    "key": "reception",
@@ -9138,12 +10065,10 @@
    "type": "barCounter",
    "group": "桌组",
    "file": "reception.glb",
-   "tris": 24192,
-   "verts": 14406,
+   "tris": 43008,
+   "verts": 64596,
    "materials": [
-    "U_metal_brass",
-    "U_stone_light",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -9166,17 +10091,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "24,192 / ≥8,000"
+     "value": "298,051 / ≥8,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9184,7 +10109,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 445796
+   "bytes": 13085736,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 1178
   },
   {
    "key": "stool",
@@ -9193,10 +10124,10 @@
    "type": "stool",
    "group": "椅凳组",
    "file": "stool.glb",
-   "tris": 232,
-   "verts": 124,
+   "tris": 464,
+   "verts": 472,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     400.0,
@@ -9217,9 +10148,9 @@
      "value": "400×450×400 mm / 目标 400×450×400 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "232 / ≥8,000"
+     "value": "284,873 / ≥8,000"
     },
     {
      "level": "warn",
@@ -9227,9 +10158,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9237,7 +10168,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 7812
+   "bytes": 19546968,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 21
   },
   {
    "key": "officeChair",
@@ -9246,11 +10183,10 @@
    "type": "officeChair",
    "group": "椅凳组",
    "file": "officeChair.glb",
-   "tris": 15848,
-   "verts": 6494,
+   "tris": 28240,
+   "verts": 28892,
    "materials": [
-    "U_fabric_grey",
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     600.0,
@@ -9273,17 +10209,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "15,848 / ≥8,000"
+     "value": "285,873 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9291,7 +10227,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 295548
+   "bytes": 32510032,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 783
   },
   {
    "key": "gamingChair",
@@ -9300,11 +10242,10 @@
    "type": "officeChair",
    "group": "椅凳组",
    "file": "gamingChair.glb",
-   "tris": 17328,
-   "verts": 6912,
+   "tris": 30816,
+   "verts": 30956,
    "materials": [
-    "U_fabric_grey",
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     700.0,
@@ -9327,17 +10268,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,328 / ≥8,000"
+     "value": "279,828 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9345,7 +10286,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 320012
+   "bytes": 14400664,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 846
   },
   {
    "key": "chair",
@@ -9354,10 +10301,10 @@
    "type": "chair",
    "group": "椅凳组",
    "file": "chair.glb",
-   "tris": 11560,
-   "verts": 8888,
+   "tris": 42572,
+   "verts": 22852,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     460.0,
@@ -9380,7 +10327,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "11,560 / ≥8,000"
+     "value": "291,916 / ≥8,000"
     },
     {
      "level": "warn",
@@ -9388,9 +10335,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9398,7 +10345,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2357952
+   "bytes": 12198864,
+   "size": [
+    0,
+    1,
+    1
+   ],
+   "fileKB": 1032
   },
   {
    "key": "barStool",
@@ -9407,33 +10360,33 @@
    "type": "barStool",
    "group": "椅凳组",
    "file": "barStool.glb",
-   "tris": 14373,
-   "verts": 29091,
+   "tris": 736,
+   "verts": 2244,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
-    402.4,
+    400.0,
     750.0,
-    397.7
+    400.0
    ],
    "target_mm": [
     400,
     750,
     400
    ],
-   "size_error": 0.006,
+   "size_error": 0.0,
    "status": "ok",
    "checks": [
     {
      "level": "ok",
      "text": "尺寸与目录目标一致",
-     "value": "402×750×397 mm / 目标 400×750×400 mm（偏差 0.60%）"
+     "value": "400×750×400 mm / 目标 400×750×400 mm（偏差 0.00%）"
     },
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "14,373 / ≥8,000"
+     "value": "299,368 / ≥8,000"
     },
     {
      "level": "warn",
@@ -9441,9 +10394,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9451,7 +10404,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2811464
+   "bytes": 16586160,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 33
   },
   {
    "key": "entryBench",
@@ -9460,11 +10419,10 @@
    "type": "entryBench",
    "group": "椅凳组",
    "file": "entryBench.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
-    "U_fabric_oat",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     900.0,
@@ -9487,17 +10445,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥8,000"
+     "value": "292,227 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9505,7 +10463,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191728
+   "bytes": 12024028,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 505
   },
   {
    "key": "trainingChair",
@@ -9514,10 +10478,10 @@
    "type": "chair",
    "group": "椅凳组",
    "file": "trainingChair.glb",
-   "tris": 5072,
-   "verts": 3265,
+   "tris": 24576,
+   "verts": 36912,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     500.0,
@@ -9538,9 +10502,9 @@
      "value": "500×830×500 mm / 目标 500×830×500 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "5,072 / ≥8,000"
+     "value": "286,489 / ≥8,000"
     },
     {
      "level": "warn",
@@ -9548,9 +10512,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9558,7 +10522,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 483948
+   "bytes": 16171532,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 674
   },
   {
    "key": "armDiningChair",
@@ -9567,10 +10537,11 @@
    "type": "chair",
    "group": "椅凳组",
    "file": "armDiningChair.glb",
-   "tris": 5626,
-   "verts": 3758,
+   "tris": 27648,
+   "verts": 27684,
    "materials": [
-    "U_fabric_oat"
+    "U_fabric_oat",
+    "U_wood_walnut"
    ],
    "dims_mm": [
     560.0,
@@ -9593,17 +10564,17 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "5,626 / ≥8,000"
+     "value": "6,912 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "1 个 / ≥3"
+     "value": "2 个 / ≥3"
     },
     {
      "level": "ok",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "2 个主题材质"
     },
     {
      "level": "ok",
@@ -9611,7 +10582,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 768404
+   "bytes": 195596,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 758
   },
   {
    "key": "shoeBench",
@@ -9620,11 +10597,10 @@
    "type": "entryBench",
    "group": "椅凳组",
    "file": "shoeBench.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
-    "U_fabric_oat",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -9647,17 +10623,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥8,000"
+     "value": "295,861 / ≥8,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9665,7 +10641,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191724
+   "bytes": 16061608,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 505
   },
   {
    "key": "sofa",
@@ -9674,10 +10656,10 @@
    "type": "sofa",
    "group": "沙发组",
    "file": "sofa.glb",
-   "tris": 704,
-   "verts": 800,
+   "tris": 398379,
+   "verts": 258812,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     2200.0,
@@ -9698,9 +10680,9 @@
      "value": "2200×820×950 mm / 目标 2200×820×950 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "704 / ≥30,000"
+     "value": "290,302 / ≥30,000"
     },
     {
      "level": "warn",
@@ -9708,9 +10690,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9718,7 +10700,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1571272
+   "bytes": 15848000,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 9573
   },
   {
    "key": "lSofa",
@@ -9727,12 +10715,10 @@
    "type": "lSofa",
    "group": "沙发组",
    "file": "lSofa.glb",
-   "tris": 19008,
-   "verts": 11319,
+   "tris": 33792,
+   "verts": 50754,
    "materials": [
-    "U_fabric_oat",
-    "U_fabric_oat_d",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2800.0,
@@ -9753,19 +10739,19 @@
      "value": "2800×820×1700 mm / 目标 2800×820×1700 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "19,008 / ≥30,000"
+     "value": "298,678 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9773,7 +10759,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 350664
+   "bytes": 11089880,
+   "size": [
+    3,
+    1,
+    2
+   ],
+   "fileKB": 926
   },
   {
    "key": "loveseat",
@@ -9782,12 +10774,10 @@
    "type": "sofa",
    "group": "沙发组",
    "file": "loveseat.glb",
-   "tris": 20736,
-   "verts": 12348,
+   "tris": 36864,
+   "verts": 55368,
    "materials": [
-    "U_fabric_oat",
-    "U_fabric_oat_d",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1600.0,
@@ -9808,19 +10798,19 @@
      "value": "1600×820×900 mm / 目标 1600×820×900 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "20,736 / ≥30,000"
+     "value": "290,062 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9828,7 +10818,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 382404
+   "bytes": 19497032,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 1010
   },
   {
    "key": "uSofa",
@@ -9837,11 +10833,10 @@
    "type": "uSofa",
    "group": "沙发组",
    "file": "uSofa.glb",
-   "tris": 15552,
-   "verts": 6174,
+   "tris": 27648,
+   "verts": 27684,
    "materials": [
-    "U_fabric_oat",
-    "U_fabric_oat_d"
+    ""
    ],
    "dims_mm": [
     3200.0,
@@ -9862,19 +10857,19 @@
      "value": "3200×820×2000 mm / 目标 3200×820×2000 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "15,552 / ≥30,000"
+     "value": "296,620 / ≥30,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9882,7 +10877,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 286908
+   "bytes": 11865008,
+   "size": [
+    3,
+    1,
+    2
+   ],
+   "fileKB": 757
   },
   {
    "key": "curvedSofa",
@@ -9891,10 +10892,10 @@
    "type": "curvedSofa",
    "group": "沙发组",
    "file": "curvedSofa.glb",
-   "tris": 704,
-   "verts": 800,
+   "tris": 46080,
+   "verts": 46140,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     2600.0,
@@ -9915,9 +10916,9 @@
      "value": "2600×780×1100 mm / 目标 2600×780×1100 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "704 / ≥30,000"
+     "value": "294,158 / ≥30,000"
     },
     {
      "level": "warn",
@@ -9925,9 +10926,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9935,7 +10936,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1571268
+   "bytes": 14225188,
+   "size": [
+    3,
+    1,
+    1
+   ],
+   "fileKB": 1262
   },
   {
    "key": "bendSofa",
@@ -9944,11 +10951,10 @@
    "type": "bendSofa",
    "group": "沙发组",
    "file": "bendSofa.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
-    "U_fabric_oat",
-    "U_fabric_oat_d"
+    ""
    ],
    "dims_mm": [
     3200.0,
@@ -9969,19 +10975,19 @@
      "value": "3200×760×2200 mm / 目标 3200×760×2200 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥30,000"
+     "value": "298,926 / ≥30,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -9989,7 +10995,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191740
+   "bytes": 23285252,
+   "size": [
+    3,
+    1,
+    2
+   ],
+   "fileKB": 505
   },
   {
    "key": "chaise",
@@ -10001,7 +11013,7 @@
    "tris": 4101,
    "verts": 2708,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1700.0,
@@ -10022,9 +11034,9 @@
      "value": "1700×800×750 mm / 目标 1700×800×750 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "4,101 / ≥30,000"
+     "value": "292,603 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10032,9 +11044,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10042,7 +11054,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 517212
+   "bytes": 20911192,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 109
   },
   {
    "key": "beanbag",
@@ -10051,10 +11069,10 @@
    "type": "beanbag",
    "group": "沙发组",
    "file": "beanbag.glb",
-   "tris": 448,
-   "verts": 252,
+   "tris": 896,
+   "verts": 504,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     900.0,
@@ -10075,9 +11093,9 @@
      "value": "900×700×900 mm / 目标 900×700×900 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "448 / ≥30,000"
+     "value": "291,881 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10085,9 +11103,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10095,7 +11113,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 14508
+   "bytes": 12808156,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 27
   },
   {
    "key": "ottoman",
@@ -10107,7 +11131,7 @@
    "tris": 6324,
    "verts": 4846,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     550.0,
@@ -10128,9 +11152,9 @@
      "value": "550×420×550 mm / 目标 550×420×550 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,324 / ≥30,000"
+     "value": "286,518 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10138,9 +11162,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10148,7 +11172,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2267120
+   "bytes": 16013724,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 189
   },
   {
    "key": "rockingChair",
@@ -10157,11 +11187,10 @@
    "type": "rockingChair",
    "group": "沙发组",
    "file": "rockingChair.glb",
-   "tris": 29376,
-   "verts": 11662,
+   "tris": 52224,
+   "verts": 52292,
    "materials": [
-    "U_fabric_oat",
-    "U_wood_oak"
+    ""
    ],
    "dims_mm": [
     700.0,
@@ -10182,19 +11211,19 @@
      "value": "700×900×950 mm / 目标 700×900×950 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "29,376 / ≥30,000"
+     "value": "281,584 / ≥30,000"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10202,7 +11231,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 540560
+   "bytes": 14942536,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 1430
   },
   {
    "key": "hangingChair",
@@ -10211,12 +11246,10 @@
    "type": "hangingChair",
    "group": "沙发组",
    "file": "hangingChair.glb",
-   "tris": 288,
-   "verts": 468,
+   "tris": 576,
+   "verts": 1764,
    "materials": [
-    "U_fabric_grey",
-    "U_fabric_oat",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1000.0,
@@ -10237,19 +11270,19 @@
      "value": "1000×1900×1000 mm / 目标 1000×1900×1000 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "288 / ≥30,000"
+     "value": "298,888 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10257,7 +11290,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 10248
+   "bytes": 17112380,
+   "size": [
+    1,
+    2,
+    1
+   ],
+   "fileKB": 26
   },
   {
    "key": "armchair",
@@ -10266,10 +11305,10 @@
    "type": "armchair",
    "group": "沙发组",
    "file": "armchair.glb",
-   "tris": 8916,
-   "verts": 5851,
+   "tris": 24576,
+   "verts": 24608,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     850.0,
@@ -10290,9 +11329,9 @@
      "value": "850×800×850 mm / 目标 850×800×850 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,916 / ≥30,000"
+     "value": "281,735 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10300,9 +11339,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10310,7 +11349,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2696392
+   "bytes": 12278104,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 673
   },
   {
    "key": "booth",
@@ -10319,10 +11364,10 @@
    "type": "booth",
    "group": "沙发组",
    "file": "booth.glb",
-   "tris": 5826,
-   "verts": 4750,
+   "tris": 12288,
+   "verts": 12304,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -10343,9 +11388,9 @@
      "value": "1800×1000×600 mm / 目标 1800×1000×600 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "5,826 / ≥30,000"
+     "value": "282,189 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10353,9 +11398,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10363,7 +11408,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2099552
+   "bytes": 21097260,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 337
   },
   {
    "key": "lounge",
@@ -10375,7 +11426,7 @@
    "tris": 6148,
    "verts": 4203,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     700.0,
@@ -10396,9 +11447,9 @@
      "value": "700×800×750 mm / 目标 700×800×750 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,148 / ≥30,000"
+     "value": "294,980 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10406,9 +11457,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10416,7 +11467,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2086184
+   "bytes": 16546760,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 168
   },
   {
    "key": "theaterSofa",
@@ -10425,10 +11482,10 @@
    "type": "theaterSofa",
    "group": "沙发组",
    "file": "theaterSofa.glb",
-   "tris": 704,
-   "verts": 800,
+   "tris": 33792,
+   "verts": 33836,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     2600.0,
@@ -10449,9 +11506,9 @@
      "value": "2600×1000×1000 mm / 目标 2600×1000×1000 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "704 / ≥30,000"
+     "value": "293,225 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10459,9 +11516,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10469,7 +11526,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1571272
+   "bytes": 13566700,
+   "size": [
+    3,
+    1,
+    1
+   ],
+   "fileKB": 926
   },
   {
    "key": "fourSofa",
@@ -10481,7 +11544,7 @@
    "tris": 704,
    "verts": 800,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     2800.0,
@@ -10502,9 +11565,9 @@
      "value": "2800×820×1000 mm / 目标 2800×820×1000 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "704 / ≥30,000"
+     "value": "279,073 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10512,9 +11575,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10522,7 +11585,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1571272
+   "bytes": 12663028,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 30
   },
   {
    "key": "singleSofa",
@@ -10531,12 +11600,10 @@
    "type": "sofa",
    "group": "沙发组",
    "file": "singleSofa.glb",
-   "tris": 17280,
-   "verts": 10290,
+   "tris": 30720,
+   "verts": 46140,
    "materials": [
-    "U_fabric_oat",
-    "U_fabric_oat_d",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1000.0,
@@ -10557,19 +11624,19 @@
      "value": "1000×820×900 mm / 目标 1000×820×900 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥30,000"
+     "value": "290,745 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10577,7 +11644,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 318980
+   "bytes": 21737464,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 842
   },
   {
    "key": "chaiseSofa",
@@ -10586,12 +11659,10 @@
    "type": "lSofa",
    "group": "沙发组",
    "file": "chaiseSofa.glb",
-   "tris": 17280,
-   "verts": 10290,
+   "tris": 30720,
+   "verts": 46140,
    "materials": [
-    "U_fabric_oat",
-    "U_fabric_oat_d",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2600.0,
@@ -10612,19 +11683,19 @@
      "value": "2600×820×1600 mm / 目标 2600×820×1600 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "17,280 / ≥30,000"
+     "value": "284,432 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10632,7 +11703,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 318948
+   "bytes": 10898368,
+   "size": [
+    3,
+    1,
+    2
+   ],
+   "fileKB": 842
   },
   {
    "key": "readingChair",
@@ -10644,7 +11721,7 @@
    "tris": 11866,
    "verts": 10017,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     750.0,
@@ -10665,9 +11742,9 @@
      "value": "750×950×800 mm / 目标 750×950×800 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "11,866 / ≥30,000"
+     "value": "297,243 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10675,9 +11752,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10685,7 +11762,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 803988
+   "bytes": 28841320,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 383
   },
   {
    "key": "dayBed",
@@ -10694,12 +11777,10 @@
    "type": "chaise",
    "group": "沙发组",
    "file": "dayBed.glb",
-   "tris": 12096,
-   "verts": 7203,
+   "tris": 21504,
+   "verts": 32298,
    "materials": [
-    "U_fabric_cream",
-    "U_fabric_oat",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1900.0,
@@ -10720,19 +11801,19 @@
      "value": "1900×750×800 mm / 目标 1900×750×800 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "12,096 / ≥30,000"
+     "value": "299,022 / ≥30,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10740,7 +11821,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 223844
+   "bytes": 15348036,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 590
   },
   {
    "key": "officeSofa",
@@ -10752,7 +11839,7 @@
    "tris": 2728,
    "verts": 1828,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -10773,9 +11860,9 @@
      "value": "1800×780×800 mm / 目标 1800×780×800 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "2,728 / ≥30,000"
+     "value": "293,077 / ≥30,000"
     },
     {
      "level": "warn",
@@ -10783,9 +11870,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10793,7 +11880,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 425808
+   "bytes": 11234612,
+   "size": [
+    2,
+    1,
+    1
+   ],
+   "fileKB": 75
   },
   {
    "key": "floorLamp",
@@ -10802,11 +11895,10 @@
    "type": "floorLamp",
    "group": "灯具",
    "file": "floorLamp.glb",
-   "tris": 448,
-   "verts": 520,
+   "tris": 896,
+   "verts": 1416,
    "materials": [
-    "U_fabric_cream",
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     400.0,
@@ -10827,19 +11919,19 @@
      "value": "400×1650×400 mm / 目标 400×1650×400 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "448 / ≥1,500"
+     "value": "295,231 / ≥1,500"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10847,7 +11939,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 15132
+   "bytes": 23862732,
+   "size": [
+    0,
+    2,
+    0
+   ],
+   "fileKB": 34
   },
   {
    "key": "deskLamp",
@@ -10856,11 +11954,10 @@
    "type": "deskLamp",
    "group": "灯具",
    "file": "deskLamp.glb",
-   "tris": 364,
-   "verts": 428,
+   "tris": 728,
+   "verts": 1260,
    "materials": [
-    "U_metal_black",
-    "U_metal_brass"
+    ""
    ],
    "dims_mm": [
     250.0,
@@ -10881,19 +11978,19 @@
      "value": "250×450×250 mm / 目标 250×450×250 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "364 / ≥1,500"
+     "value": "292,042 / ≥1,500"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10901,7 +11998,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 12672
+   "bytes": 12537748,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 29
   },
   {
    "key": "lawnLamp",
@@ -10910,11 +12013,10 @@
    "type": "lawnLamp",
    "group": "灯具",
    "file": "lawnLamp.glb",
-   "tris": 21464,
-   "verts": 9240,
+   "tris": 38320,
+   "verts": 38928,
    "materials": [
-    "U_glass_clear",
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     200.0,
@@ -10937,17 +12039,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "21,464 / ≥1,500"
+     "value": "229,328 / ≥1,500"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -10955,7 +12057,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 406860
+   "bytes": 14030256,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 1058
   },
   {
    "key": "chandelier",
@@ -10967,8 +12075,7 @@
    "tris": 29301,
    "verts": 20046,
    "materials": [
-    "U_fabric_oat",
-    "U_glass_clear"
+    ""
    ],
    "dims_mm": [
     1200.0,
@@ -10991,17 +12098,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "29,301 / ≥1,500"
+     "value": "283,714 / ≥1,500"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -11009,7 +12116,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1362420
+   "bytes": 17828520,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 800
   },
   {
    "key": "arcLamp",
@@ -11018,11 +12131,10 @@
    "type": "floorLamp",
    "group": "灯具",
    "file": "arcLamp.glb",
-   "tris": 24600,
-   "verts": 10080,
+   "tris": 43824,
+   "verts": 44484,
    "materials": [
-    "U_metal_black",
-    "U_metal_brass"
+    ""
    ],
    "dims_mm": [
     450.0,
@@ -11045,17 +12157,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "24,600 / ≥1,500"
+     "value": "140,080 / ≥1,500"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -11063,7 +12175,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 457964
+   "bytes": 8683932,
+   "size": [
+    0,
+    2,
+    1
+   ],
+   "fileKB": 1210
   },
   {
    "key": "fireplace",
@@ -11072,12 +12190,10 @@
    "type": "fireplace",
    "group": "电器",
    "file": "fireplace.glb",
-   "tris": 5184,
-   "verts": 3087,
+   "tris": 9216,
+   "verts": 13842,
    "materials": [
-    "U_glass_clear",
-    "U_stone_dark",
-    "U_stone_light"
+    ""
    ],
    "dims_mm": [
     1400.0,
@@ -11100,17 +12216,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "5,184 / ≥2,000"
+     "value": "292,376 / ≥2,000"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "材质分区数",
-     "value": "3 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "3 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -11118,7 +12234,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 96956
+   "bytes": 13675908,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 253
   },
   {
    "key": "projScreen",
@@ -11127,8 +12249,8 @@
    "type": "projScreen",
    "group": "电器",
    "file": "projScreen.glb",
-   "tris": 1520,
-   "verts": 1642,
+   "tris": 5920,
+   "verts": 6318,
    "materials": [
     "U_fabric_cream",
     "U_metal_black"
@@ -11172,7 +12294,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 45968
+   "bytes": 45968,
+   "size": [
+    2,
+    2,
+    0
+   ],
+   "fileKB": 169
   },
   {
    "key": "speaker",
@@ -11181,8 +12309,8 @@
    "type": "speaker",
    "group": "电器",
    "file": "speaker.glb",
-   "tris": 1920,
-   "verts": 886,
+   "tris": 3456,
+   "verts": 3852,
    "materials": [
     "U_metal_black",
     "U_wood_walnut"
@@ -11208,7 +12336,7 @@
     {
      "level": "warn",
      "text": "三角面达到细分阈值",
-     "value": "1,920 / ≥2,000"
+     "value": "960 / ≥2,000"
     },
     {
      "level": "warn",
@@ -11226,7 +12354,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 38660
+   "bytes": 31588,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 102
   },
   {
    "key": "wallTV",
@@ -11235,8 +12369,8 @@
    "type": "wallTV",
    "group": "电器",
    "file": "wallTV.glb",
-   "tris": 5184,
-   "verts": 2058,
+   "tris": 9216,
+   "verts": 9228,
    "materials": [
     "U_glass_clear",
     "U_metal_black"
@@ -11280,7 +12414,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 96592
+   "bytes": 96592,
+   "size": [
+    1,
+    1,
+    0
+   ],
+   "fileKB": 253
   },
   {
    "key": "freeBox",
@@ -11289,10 +12429,10 @@
    "type": "free",
    "group": "自由体",
    "file": "freeBox.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    "U_wood_oak"
    ],
    "dims_mm": [
     1000.0,
@@ -11315,7 +12455,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥200"
+     "value": "768 / ≥200"
     },
     {
      "level": "warn",
@@ -11333,7 +12473,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32776
+   "bytes": 22628,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "freeRoundBox",
@@ -11342,8 +12488,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeRoundBox.glb",
-   "tris": 4096,
-   "verts": 729,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
     "U_wood_walnut"
    ],
@@ -11386,7 +12532,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 73564
+   "bytes": 73564,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 85
   },
   {
    "key": "freePlatform",
@@ -11395,8 +12547,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freePlatform.glb",
-   "tris": 5184,
-   "verts": 2058,
+   "tris": 9216,
+   "verts": 9228,
    "materials": [
     "U_wood_oak",
     "U_wood_walnut"
@@ -11440,7 +12592,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 96596
+   "bytes": 96596,
+   "size": [
+    2,
+    0,
+    2
+   ],
+   "fileKB": 253
   },
   {
    "key": "freeWallBlock",
@@ -11449,11 +12607,10 @@
    "type": "free",
    "group": "自由体",
    "file": "freeWallBlock.glb",
-   "tris": 15552,
-   "verts": 6174,
+   "tris": 27648,
+   "verts": 27684,
    "materials": [
-    "U_wood_oak",
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -11476,17 +12633,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "15,552 / ≥200"
+     "value": "295,686 / ≥200"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -11494,7 +12651,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 286888
+   "bytes": 13598644,
+   "size": [
+    2,
+    3,
+    0
+   ],
+   "fileKB": 758
   },
   {
    "key": "freeCeilBlock",
@@ -11503,8 +12666,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeCeilBlock.glb",
-   "tris": 10368,
-   "verts": 4116,
+   "tris": 18432,
+   "verts": 18456,
    "materials": [
     "U_ceramic_white",
     "U_metal_black"
@@ -11530,7 +12693,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "10,368 / ≥200"
+     "value": "4,608 / ≥200"
     },
     {
      "level": "warn",
@@ -11548,7 +12711,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 191728
+   "bytes": 130860,
+   "size": [
+    2,
+    0,
+    2
+   ],
+   "fileKB": 505
   },
   {
    "key": "freeCyl",
@@ -11557,8 +12726,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeCyl.glb",
-   "tris": 336,
-   "verts": 224,
+   "tris": 672,
+   "verts": 448,
    "materials": [
     "U_metal_steel"
    ],
@@ -11601,7 +12770,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 12264
+   "bytes": 12264,
+   "size": [
+    0,
+    3,
+    0
+   ],
+   "fileKB": 22
   },
   {
    "key": "freeRoundStage",
@@ -11610,8 +12785,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeRoundStage.glb",
-   "tris": 512,
-   "verts": 520,
+   "tris": 1024,
+   "verts": 2056,
    "materials": [
     "U_stone_light",
     "U_wood_oak"
@@ -11655,7 +12830,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 15892
+   "bytes": 15892,
+   "size": [
+    2,
+    0,
+    2
+   ],
+   "fileKB": 45
   },
   {
    "key": "freeHalfCyl",
@@ -11708,7 +12889,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 9852
+   "bytes": 9852,
+   "size": [
+    1,
+    3,
+    0
+   ],
+   "fileKB": 9
   },
   {
    "key": "freeTube",
@@ -11761,7 +12948,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 15400
+   "bytes": 15400,
+   "size": [
+    2,
+    2,
+    2
+   ],
+   "fileKB": 15
   },
   {
    "key": "freeSphere",
@@ -11770,8 +12963,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeSphere.glb",
-   "tris": 3072,
-   "verts": 1584,
+   "tris": 12288,
+   "verts": 6240,
    "materials": [
     "U_ceramic_white"
    ],
@@ -11814,7 +13007,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 88632
+   "bytes": 88632,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 340
   },
   {
    "key": "freeHemi",
@@ -11823,8 +13022,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeHemi.glb",
-   "tris": 2352,
-   "verts": 1201,
+   "tris": 9312,
+   "verts": 4705,
    "materials": [
     "U_stone_light"
    ],
@@ -11867,7 +13066,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 67728
+   "bytes": 67728,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 257
   },
   {
    "key": "freeCone",
@@ -11876,10 +13081,10 @@
    "type": "free",
    "group": "自由体",
    "file": "freeCone.glb",
-   "tris": 192,
-   "verts": 98,
+   "tris": 384,
+   "verts": 386,
    "materials": [
-    "U_wood_walnut"
+    "U_wood_oak"
    ],
    "dims_mm": [
     500.0,
@@ -11920,7 +13125,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6500
+   "bytes": 9572,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 17
   },
   {
    "key": "freePyramid",
@@ -11930,9 +13141,9 @@
    "group": "自由体",
    "file": "freePyramid.glb",
    "tris": 6,
-   "verts": 5,
+   "verts": 18,
    "materials": [
-    "U_wood_walnut"
+    "U_wood_oak"
    ],
    "dims_mm": [
     800.0,
@@ -11973,7 +13184,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1272
+   "bytes": 1692,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 1
   },
   {
    "key": "freeWedge",
@@ -11983,7 +13200,7 @@
    "group": "自由体",
    "file": "freeWedge.glb",
    "tris": 4,
-   "verts": 4,
+   "verts": 12,
    "materials": [
     "U_stone_light"
    ],
@@ -12026,7 +13243,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1216
+   "bytes": 1480,
+   "size": [
+    1,
+    0,
+    2
+   ],
+   "fileKB": 1
   },
   {
    "key": "freeArch",
@@ -12035,10 +13258,10 @@
    "type": "free",
    "group": "自由体",
    "file": "freeArch.glb",
-   "tris": 43200,
-   "verts": 8575,
+   "tris": 76800,
+   "verts": 38450,
    "materials": [
-    "U_stone_light"
+    ""
    ],
    "dims_mm": [
     1400.0,
@@ -12061,7 +13284,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "43,200 / ≥200"
+     "value": "294,533 / ≥200"
     },
     {
      "level": "warn",
@@ -12069,9 +13292,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12079,7 +13302,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 793916
+   "bytes": 70554892,
+   "size": [
+    1,
+    3,
+    0
+   ],
+   "fileKB": 2102
   },
   {
    "key": "freeArcWall",
@@ -12091,7 +13320,7 @@
    "tris": 452,
    "verts": 236,
    "materials": [
-    "U_stone_light"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -12114,7 +13343,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "452 / ≥200"
+     "value": "286,215 / ≥200"
     },
     {
      "level": "warn",
@@ -12122,9 +13351,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12132,7 +13361,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 14068
+   "bytes": 22282648,
+   "size": [
+    2,
+    3,
+    1
+   ],
+   "fileKB": 13
   },
   {
    "key": "freeSlats",
@@ -12141,8 +13376,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeSlats.glb",
-   "tris": 44928,
-   "verts": 17836,
+   "tris": 79872,
+   "verts": 79976,
    "materials": [
     "U_wood_oak",
     "U_wood_walnut"
@@ -12186,7 +13421,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 825968
+   "bytes": 825968,
+   "size": [
+    2,
+    3,
+    0
+   ],
+   "fileKB": 2187
   },
   {
    "key": "freeGlassScreen",
@@ -12195,11 +13436,10 @@
    "type": "free",
    "group": "自由体",
    "file": "freeGlassScreen.glb",
-   "tris": 8592,
-   "verts": 4574,
+   "tris": 19008,
+   "verts": 19322,
    "materials": [
-    "U_glass_clear",
-    "U_metal_black"
+    ""
    ],
    "dims_mm": [
     1500.0,
@@ -12222,17 +13462,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,592 / ≥200"
+     "value": "290,964 / ≥200"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12240,7 +13480,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 177744
+   "bytes": 18777080,
+   "size": [
+    2,
+    2,
+    0
+   ],
+   "fileKB": 526
   },
   {
    "key": "freeSteps",
@@ -12249,8 +13495,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeSteps.glb",
-   "tris": 5184,
-   "verts": 1029,
+   "tris": 9216,
+   "verts": 4614,
    "materials": [
     "U_stone_light"
    ],
@@ -12275,7 +13521,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "5,184 / ≥200"
+     "value": "2,304 / ≥200"
     },
     {
      "level": "warn",
@@ -12293,7 +13539,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 96212
+   "bytes": 65780,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 253
   },
   {
    "key": "freeTorus",
@@ -12346,7 +13598,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 72816
+   "bytes": 72816,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 71
   },
   {
    "key": "freeLightBox",
@@ -12355,8 +13613,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeLightBox.glb",
-   "tris": 3456,
-   "verts": 1372,
+   "tris": 6144,
+   "verts": 6152,
    "materials": [
     "U_glass_clear",
     "U_metal_black"
@@ -12400,7 +13658,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 64868
+   "bytes": 64868,
+   "size": [
+    2,
+    0,
+    0
+   ],
+   "fileKB": 169
   },
   {
    "key": "freeMirror",
@@ -12409,15 +13673,14 @@
    "type": "free",
    "group": "自由体",
    "file": "freeMirror.glb",
-   "tris": 8640,
-   "verts": 3430,
+   "tris": 15360,
+   "verts": 15380,
    "materials": [
-    "U_glass_clear",
-    "U_metal_brass"
+    ""
    ],
    "dims_mm": [
     900.0,
-    1820.0,
+    1800.0,
     20.0
    ],
    "target_mm": [
@@ -12425,28 +13688,28 @@
     1800,
     20
    ],
-   "size_error": 0.0111,
+   "size_error": 0.0,
    "status": "ok",
    "checks": [
     {
      "level": "ok",
      "text": "尺寸与目录目标一致",
-     "value": "900×1820×20 mm / 目标 900×1800×20 mm（偏差 1.11%）"
+     "value": "900×1800×20 mm / 目标 900×1800×20 mm（偏差 0.00%）"
     },
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,640 / ≥200"
+     "value": "296,049 / ≥200"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12454,7 +13717,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 160016
+   "bytes": 14254272,
+   "size": [
+    1,
+    2,
+    0
+   ],
+   "fileKB": 421
   },
   {
    "key": "freeVase",
@@ -12463,10 +13732,10 @@
    "type": "free",
    "group": "自由体",
    "file": "freeVase.glb",
-   "tris": 1120,
-   "verts": 616,
+   "tris": 2240,
+   "verts": 1232,
    "materials": [
-    "U_ceramic_white"
+    ""
    ],
    "dims_mm": [
     350.0,
@@ -12489,7 +13758,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,120 / ≥200"
+     "value": "282,223 / ≥200"
     },
     {
      "level": "warn",
@@ -12497,9 +13766,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12507,7 +13776,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 34284
+   "bytes": 29037036,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 65
   },
   {
    "key": "freeColumn",
@@ -12516,8 +13791,8 @@
    "type": "free",
    "group": "自由体",
    "file": "freeColumn.glb",
-   "tris": 1440,
-   "verts": 768,
+   "tris": 2880,
+   "verts": 1536,
    "materials": [
     "U_stone_light"
    ],
@@ -12560,7 +13835,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 42932
+   "bytes": 42928,
+   "size": [
+    0,
+    3,
+    0
+   ],
+   "fileKB": 82
   },
   {
    "key": "freeExtrude",
@@ -12613,7 +13894,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2204
+   "bytes": 2204,
+   "size": [
+    2,
+    0,
+    1
+   ],
+   "fileKB": 2
   },
   {
    "key": "screenDivider",
@@ -12622,10 +13909,10 @@
    "type": "screenDivider",
    "group": "软装",
    "file": "screenDivider.glb",
-   "tris": 1728,
-   "verts": 343,
+   "tris": 3072,
+   "verts": 1538,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -12648,7 +13935,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "1,728 / ≥800"
+     "value": "292,542 / ≥800"
     },
     {
      "level": "warn",
@@ -12656,9 +13943,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12666,7 +13953,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 32780
+   "bytes": 44669480,
+   "size": [
+    2,
+    2,
+    0
+   ],
+   "fileKB": 85
   },
   {
    "key": "rug",
@@ -12675,10 +13968,10 @@
    "type": "rug",
    "group": "软装",
    "file": "rug.glb",
-   "tris": 43620,
-   "verts": 22022,
+   "tris": 173640,
+   "verts": 87242,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -12701,7 +13994,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "43,620 / ≥800"
+     "value": "294,065 / ≥800"
     },
     {
      "level": "warn",
@@ -12709,9 +14002,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12719,7 +14012,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1229236
+   "bytes": 17246016,
+   "size": [
+    2,
+    0,
+    2
+   ],
+   "fileKB": 4762
   },
   {
    "key": "plant",
@@ -12731,7 +14030,7 @@
    "tris": 176226,
    "verts": 113951,
    "materials": [
-    "U_leaf"
+    ""
    ],
    "dims_mm": [
     500.0,
@@ -12754,7 +14053,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "176,226 / ≥800"
+     "value": "294,447 / ≥800"
     },
     {
      "level": "warn",
@@ -12762,9 +14061,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12772,7 +14071,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6322596
+   "bytes": 73809132,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 5224
   },
   {
    "key": "curtain",
@@ -12781,8 +14086,8 @@
    "type": "curtain",
    "group": "软装",
    "file": "curtain.glb",
-   "tris": 12192,
-   "verts": 6210,
+   "tris": 48320,
+   "verts": 24386,
    "materials": [
     "U_fabric_oat"
    ],
@@ -12825,7 +14130,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 346104
+   "bytes": 346104,
+   "size": [
+    2,
+    3,
+    0
+   ],
+   "fileKB": 1329
   },
   {
    "key": "sheer",
@@ -12834,8 +14145,8 @@
    "type": "curtain",
    "group": "软装",
    "file": "sheer.glb",
-   "tris": 12192,
-   "verts": 6210,
+   "tris": 48320,
+   "verts": 24386,
    "materials": [
     "U_fabric_cream"
    ],
@@ -12878,7 +14189,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 346120
+   "bytes": 346120,
+   "size": [
+    2,
+    3,
+    0
+   ],
+   "fileKB": 1329
   },
   {
    "key": "bigPlant",
@@ -12890,7 +14207,7 @@
    "tris": 176226,
    "verts": 113951,
    "materials": [
-    "U_leaf"
+    ""
    ],
    "dims_mm": [
     800.0,
@@ -12913,7 +14230,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "176,226 / ≥800"
+     "value": "297,730 / ≥800"
     },
     {
      "level": "warn",
@@ -12921,9 +14238,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12931,7 +14248,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 6322600
+   "bytes": 36062720,
+   "size": [
+    1,
+    1,
+    1
+   ],
+   "fileKB": 5224
   },
   {
    "key": "smallPlant",
@@ -12943,7 +14266,7 @@
    "tris": 8929,
    "verts": 5882,
    "materials": [
-    "U_leaf"
+    ""
    ],
    "dims_mm": [
     300.0,
@@ -12966,7 +14289,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,929 / ≥800"
+     "value": "283,115 / ≥800"
     },
     {
      "level": "warn",
@@ -12974,9 +14297,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -12984,7 +14307,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 2120556
+   "bytes": 41853612,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 240
   },
   {
    "key": "hangingPlant",
@@ -12993,11 +14322,10 @@
    "type": "hangingPlant",
    "group": "软装",
    "file": "hangingPlant.glb",
-   "tris": 368,
-   "verts": 420,
+   "tris": 736,
+   "verts": 1524,
    "materials": [
-    "U_ceramic_white",
-    "U_leaf"
+    ""
    ],
    "dims_mm": [
     400.0,
@@ -13018,19 +14346,19 @@
      "value": "400×600×400 mm / 目标 400×600×400 mm（偏差 0.00%）"
     },
     {
-     "level": "warn",
+     "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "368 / ≥800"
+     "value": "295,439 / ≥800"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -13038,7 +14366,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 12564
+   "bytes": 29529996,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 33
   },
   {
    "key": "floorVase",
@@ -13050,7 +14384,7 @@
    "tris": 6890,
    "verts": 3849,
    "materials": [
-    "U_metal_brass"
+    ""
    ],
    "dims_mm": [
     350.0,
@@ -13073,7 +14407,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "6,890 / ≥800"
+     "value": "293,221 / ≥800"
     },
     {
      "level": "warn",
@@ -13081,9 +14415,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -13091,7 +14425,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1829948
+   "bytes": 28865224,
+   "size": [
+    0,
+    1,
+    0
+   ],
+   "fileKB": 161
   },
   {
    "key": "wallPanel",
@@ -13100,10 +14440,10 @@
    "type": "wallPanel",
    "group": "软装",
    "file": "wallPanel.glb",
-   "tris": 15552,
-   "verts": 3087,
+   "tris": 27648,
+   "verts": 13842,
    "materials": [
-    "U_wood_walnut"
+    ""
    ],
    "dims_mm": [
     2400.0,
@@ -13126,7 +14466,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "15,552 / ≥800"
+     "value": "295,686 / ≥800"
     },
     {
      "level": "warn",
@@ -13134,9 +14474,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -13144,7 +14484,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 286488
+   "bytes": 13598644,
+   "size": [
+    2,
+    3,
+    0
+   ],
+   "fileKB": 757
   },
   {
    "key": "wallArt",
@@ -13156,7 +14502,8 @@
    "tris": 938,
    "verts": 635,
    "materials": [
-    "U_fabric_oat"
+    "U_fabric_cream",
+    "U_wood_walnut"
    ],
    "dims_mm": [
     900.0,
@@ -13184,12 +14531,12 @@
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "1 个 / ≥3"
+     "value": "2 个 / ≥3"
     },
     {
      "level": "ok",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "2 个主题材质"
     },
     {
      "level": "ok",
@@ -13197,7 +14544,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 739956
+   "bytes": 739960,
+   "size": [
+    1,
+    0,
+    0
+   ],
+   "fileKB": 27
   },
   {
    "key": "wallArt3",
@@ -13206,11 +14559,11 @@
    "type": "wallArt",
    "group": "软装",
    "file": "wallArt3.glb",
-   "tris": 8640,
-   "verts": 3430,
+   "tris": 15360,
+   "verts": 15380,
    "materials": [
     "U_fabric_cream",
-    "U_wood_walnut"
+    "U_wood_oak"
    ],
    "dims_mm": [
     1500.0,
@@ -13233,7 +14586,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "8,640 / ≥800"
+     "value": "3,840 / ≥800"
     },
     {
      "level": "warn",
@@ -13251,7 +14604,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 160016
+   "bytes": 109288,
+   "size": [
+    2,
+    1,
+    0
+   ],
+   "fileKB": 421
   },
   {
    "key": "wallClock",
@@ -13263,8 +14622,7 @@
    "tris": 3658,
    "verts": 3452,
    "materials": [
-    "U_fabric_oat",
-    "U_glass_clear"
+    ""
    ],
    "dims_mm": [
     400.0,
@@ -13287,17 +14645,17 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "3,658 / ≥800"
+     "value": "295,752 / ≥800"
     },
     {
      "level": "warn",
      "text": "材质分区数",
-     "value": "2 个 / ≥3"
+     "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "2 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -13305,7 +14663,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1561924
+   "bytes": 25957716,
+   "size": [
+    0,
+    0,
+    0
+   ],
+   "fileKB": 1525
   },
   {
    "key": "roundRug",
@@ -13314,10 +14678,10 @@
    "type": "rugRound",
    "group": "软装",
    "file": "roundRug.glb",
-   "tris": 43620,
-   "verts": 22022,
+   "tris": 173640,
+   "verts": 87242,
    "materials": [
-    "U_fabric_oat"
+    ""
    ],
    "dims_mm": [
     2000.0,
@@ -13340,7 +14704,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "43,620 / ≥800"
+     "value": "291,436 / ≥800"
     },
     {
      "level": "warn",
@@ -13348,9 +14712,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -13358,7 +14722,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 1229232
+   "bytes": 12562892,
+   "size": [
+    2,
+    0,
+    2
+   ],
+   "fileKB": 4762
   },
   {
    "key": "doormat",
@@ -13367,10 +14737,10 @@
    "type": "rug",
    "group": "软装",
    "file": "doormat.glb",
-   "tris": 9800,
-   "verts": 5002,
+   "tris": 38800,
+   "verts": 19602,
    "materials": [
-    "U_fabric_grey"
+    ""
    ],
    "dims_mm": [
     900.0,
@@ -13393,7 +14763,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "9,800 / ≥800"
+     "value": "294,707 / ≥800"
     },
     {
      "level": "warn",
@@ -13401,9 +14771,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -13411,7 +14781,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 278744
+   "bytes": 36036960,
+   "size": [
+    1,
+    0,
+    1
+   ],
+   "fileKB": 1068
   },
   {
    "key": "playMat",
@@ -13420,10 +14796,10 @@
    "type": "rug",
    "group": "软装",
    "file": "playMat.glb",
-   "tris": 32360,
-   "verts": 16362,
+   "tris": 128720,
+   "verts": 64722,
    "materials": [
-    "U_fabric_cream"
+    ""
    ],
    "dims_mm": [
     1800.0,
@@ -13446,7 +14822,7 @@
     {
      "level": "ok",
      "text": "三角面达到细分阈值",
-     "value": "32,360 / ≥800"
+     "value": "294,759 / ≥800"
     },
     {
      "level": "warn",
@@ -13454,9 +14830,9 @@
      "value": "1 个 / ≥3"
     },
     {
-     "level": "ok",
+     "level": "warn",
      "text": "U_<role> 规范材质",
-     "value": "1 个主题材质"
+     "value": "非规范: "
     },
     {
      "level": "ok",
@@ -13464,7 +14840,13 @@
      "value": "y=0.000 mm"
     }
    ],
-   "bytes": 913008
+   "bytes": 25565844,
+   "size": [
+    2,
+    0,
+    2
+   ],
+   "fileKB": 3532
   }
  ]
 }

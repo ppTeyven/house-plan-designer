@@ -1,0 +1,1511 @@
+{
+ "total": 251,
+ "rows": [
+  {
+   "group": "其他",
+   "key": "mirror",
+   "name": "穿衣镜",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "其他",
+   "key": "fan",
+   "name": "落地扇",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "其他",
+   "key": "radiator",
+   "name": "暖气片",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "其他",
+   "key": "trashBin",
+   "name": "垃圾桶",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "其他",
+   "key": "clothesRack",
+   "name": "升降晾衣架（吸顶）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "其他",
+   "key": "catTree",
+   "name": "猫爬架",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "其他",
+   "key": "petBed",
+   "name": "宠物窝",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "办公",
+   "key": "mobileDisplay",
+   "name": "移动会议平板",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "办公",
+   "key": "printer",
+   "name": "办公复合打印机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "counter",
+   "name": "一字橱柜（可定制）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "lCounter",
+   "name": "L 形橱柜（可定制）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "uCounter",
+   "name": "U 形橱柜（可定制）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "toilet",
+   "name": "马桶",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "wallToilet",
+   "name": "壁挂马桶",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "squatToilet",
+   "name": "蹲便器",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "vanity",
+   "name": "浴室柜（含镜）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "mirrorCabinet",
+   "name": "镜柜",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "doubleVanity",
+   "name": "双盆浴室柜",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "pedestalSink",
+   "name": "立柱盆",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "freeTub",
+   "name": "独立浴缸",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "shower",
+   "name": "淋浴房",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "showerScreen",
+   "name": "一字淋浴隔断",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "bathtub",
+   "name": "浴缸",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "showerSet",
+   "name": "嵌入式恒温淋浴",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "towelWarmer",
+   "name": "电热毛巾架",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "bathHeater",
+   "name": "风暖浴霸（吸顶）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "laundrySink",
+   "name": "洗衣池柜",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "urinal",
+   "name": "壁挂小便器",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "serviceSink",
+   "name": "清洁拖布池",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "卫浴",
+   "key": "pantryCounter",
+   "name": "茶水间台面（一字）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "acWall",
+   "name": "挂机空调",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "acFloor",
+   "name": "柜机空调",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "waterHeater",
+   "name": "电热水器",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "miniHeater",
+   "name": "小厨宝（台下储水式）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "gasHeater",
+   "name": "燃气热水器",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "waterDispenser",
+   "name": "饮水机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "purifier",
+   "name": "净水器（台下）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "dishwasher",
+   "name": "洗碗机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "tallOven",
+   "name": "电器高柜（蒸烤箱）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "hood",
+   "name": "油烟机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "microwave",
+   "name": "微波炉",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "washer",
+   "name": "洗衣机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "dryer",
+   "name": "烘干机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "airPurifier",
+   "name": "空气净化器",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "robotVac",
+   "name": "扫地机器人基站",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "fridge",
+   "name": "冰箱",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "fridgeDouble",
+   "name": "对开门冰箱",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "fridgeFrench",
+   "name": "法式多门冰箱",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "freezer",
+   "name": "冰柜",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "boiler",
+   "name": "壁挂炉（地暖 + 热水）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "manifold",
+   "name": "地暖分集水器",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "waterSoftener",
+   "name": "中央软水机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "coffeeMachine",
+   "name": "咖啡机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "厨电",
+   "key": "wineFridge",
+   "name": "红酒柜 / 嵌入冰吧",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "fishTank",
+   "name": "鱼缸",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "piano",
+   "name": "立式钢琴",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "treadmill",
+   "name": "跑步机",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "billiards",
+   "name": "台球桌",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "mahjong",
+   "name": "自动麻将桌",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "grandPiano",
+   "name": "三角钢琴",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "sauna",
+   "name": "桑拿房",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "bike",
+   "name": "动感单车",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "娱乐",
+   "key": "yogaMat",
+   "name": "瑜伽垫",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "床组",
+   "key": "bed18",
+   "name": "双人床 1.8m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "bed15",
+   "name": "双人床 1.5m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "bed12",
+   "name": "单人床 1.2m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "bed20",
+   "name": "双人床 2.0m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "roundBed",
+   "name": "圆床",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "bunkBed",
+   "name": "上下床",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "crib",
+   "name": "婴儿床",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "tatami",
+   "name": "榻榻米",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "nightstand",
+   "name": "床头柜（台灯可点亮）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "bedBench",
+   "name": "床尾凳",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "bayCushion",
+   "name": "飘窗垫",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "diningBench",
+   "name": "餐凳",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "kingBed",
+   "name": "双人床 2.2m（King）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "床组",
+   "key": "kidsBed",
+   "name": "儿童床 1.0m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "庭院",
+   "key": "car",
+   "name": "轿车",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "suv",
+   "name": "SUV",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "carport",
+   "name": "车棚（单车位）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "carport2",
+   "name": "车棚（双车位）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "bicycle",
+   "name": "自行车",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "pool",
+   "name": "泳池",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "lawn",
+   "name": "草坪",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "stepStones",
+   "name": "汀步 / 石板路",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "tree",
+   "name": "庭院乔木",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "shrub",
+   "name": "灌木球",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "gazebo",
+   "name": "凉亭",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "parasol",
+   "name": "遮阳伞 + 桌椅",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "sunLounger",
+   "name": "泳池躺椅",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "swing",
+   "name": "庭院秋千",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "bbq",
+   "name": "户外烧烤台",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "waterFeature",
+   "name": "叠水景墙",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "fence",
+   "name": "庭院围栏",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "gate",
+   "name": "庭院大门",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "庭院",
+   "key": "outdoorSet",
+   "name": "户外桌椅",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "stairU",
+   "name": "U 形三跑楼梯",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "stairRun",
+   "name": "直跑梯段",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "stairLanding",
+   "name": "楼梯平台",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "elevator",
+   "name": "家用电梯（漫游时可乘坐）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "evCharger",
+   "name": "充电桩（壁挂 7kW）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "garageShelf",
+   "name": "车库储物架",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "workbench",
+   "name": "工具台 + 洞洞板",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "stage",
+   "name": "培训室地台",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "slidingBoard",
+   "name": "上下升降黑板",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "wifiAP",
+   "name": "吸顶无线 AP",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "ceilingSpeaker",
+   "name": "嵌入式扬声器",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "supplyVent",
+   "name": "空调送风口 A/S",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "returnVent",
+   "name": "空调回风口 A/R",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "建筑",
+   "key": "whiteboard",
+   "name": "移动白板",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "柜组",
+   "key": "wardrobe",
+   "name": "衣柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "chest",
+   "name": "五斗柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "coatRack",
+   "name": "衣帽架",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "dresser",
+   "name": "梳妆台",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "fileCabinet",
+   "name": "文件柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "bookshelf",
+   "name": "书架",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "tvCabinet",
+   "name": "电视柜（电视可开关）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "sideboard",
+   "name": "餐边柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "wineCabinet",
+   "name": "酒柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "displayCabinet",
+   "name": "展示柜（玻璃门）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "shoeCabinet",
+   "name": "鞋柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "hallCabinet",
+   "name": "玄关柜（中空）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabWardrobe",
+   "name": "定制衣柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabSlide",
+   "name": "推拉门衣柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabCorner",
+   "name": "转角衣柜（L 形）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabShoe",
+   "name": "定制鞋柜（中空）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabSideboard",
+   "name": "定制餐边柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabTall",
+   "name": "书柜 / 高柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabBase",
+   "name": "地柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabWall",
+   "name": "吊柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "cabTV",
+   "name": "悬空电视柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "bathShelf",
+   "name": "置物架",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "plantShelf",
+   "name": "花架",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "wardrobe2",
+   "name": "两门衣柜 1.0m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "wardrobe3",
+   "name": "三门衣柜 1.5m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "toyCabinet",
+   "name": "儿童玩具柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "bookshelfLow",
+   "name": "矮书架",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "lockers",
+   "name": "储物柜 / 更衣柜",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "柜组",
+   "key": "kitchenTrolley",
+   "name": "厨房小推车",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "desk",
+   "name": "书桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "lDesk",
+   "name": "L 形书桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "kidsDesk",
+   "name": "儿童学习桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "coffeeTable",
+   "name": "茶几",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "roundCoffee",
+   "name": "圆茶几",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "ovalCoffee",
+   "name": "椭圆茶几",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "diningTable",
+   "name": "餐桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "longTable",
+   "name": "长餐桌（8 人）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "roundTable",
+   "name": "圆餐桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "ovalTable",
+   "name": "椭圆餐桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "consoleTable",
+   "name": "玄关桌 / 边桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "kitchenIsland",
+   "name": "中岛台",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "sideTable",
+   "name": "边几",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "island",
+   "name": "衣帽岛台",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "teaTable",
+   "name": "茶台",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "barCounter",
+   "name": "吧台（带水槽）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "trainingTable",
+   "name": "培训桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "curveTrainingTable",
+   "name": "弧形培训桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "conferenceTable",
+   "name": "会议桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "lectern",
+   "name": "可升降讲台",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "nestTables",
+   "name": "组合圆茶几（小）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "diningTable4",
+   "name": "四人餐桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "diningTable6",
+   "name": "六人餐桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "roundTable10",
+   "name": "圆餐桌（10 人）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "barTable",
+   "name": "吧台桌（高桌）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "standingDesk",
+   "name": "升降书桌 1.4m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "officeDesk",
+   "name": "办公桌 1.4m",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "deskBench2",
+   "name": "工位（两人位）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "deskBench4",
+   "name": "工位（四人位对坐）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "bossDesk",
+   "name": "大班台",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "roundMeeting",
+   "name": "圆形洽谈桌",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "桌组",
+   "key": "reception",
+   "name": "前台接待台",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "stool",
+   "name": "圆凳 / 化妆凳",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "officeChair",
+   "name": "办公椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "gamingChair",
+   "name": "电竞椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "chair",
+   "name": "餐椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "barStool",
+   "name": "吧椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "entryBench",
+   "name": "换鞋凳",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "trainingChair",
+   "name": "培训椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "armDiningChair",
+   "name": "扶手餐椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "椅凳组",
+   "key": "shoeBench",
+   "name": "穿鞋凳（长）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "sofa",
+   "name": "三人沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "lSofa",
+   "name": "L 形转角沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "loveseat",
+   "name": "双人沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "uSofa",
+   "name": "U 形沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "curvedSofa",
+   "name": "弧形沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "bendSofa",
+   "name": "异形组合沙发（曲线可调）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "chaise",
+   "name": "贵妃椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "beanbag",
+   "name": "懒人沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "ottoman",
+   "name": "圆脚凳 / 坐墩",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "rockingChair",
+   "name": "摇椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "hangingChair",
+   "name": "吊椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "armchair",
+   "name": "单人沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "booth",
+   "name": "卡座",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "lounge",
+   "name": "休闲椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "theaterSofa",
+   "name": "影院沙发（三连座）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "fourSofa",
+   "name": "四人沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "singleSofa",
+   "name": "单人位沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "chaiseSofa",
+   "name": "贵妃位沙发（2.6m）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "readingChair",
+   "name": "阅读椅",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "dayBed",
+   "name": "罗汉床 / 卧榻",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "沙发组",
+   "key": "officeSofa",
+   "name": "办公接待沙发",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "灯具",
+   "key": "floorLamp",
+   "name": "落地灯（可点亮）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "灯具",
+   "key": "deskLamp",
+   "name": "台灯（可点亮）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "灯具",
+   "key": "lawnLamp",
+   "name": "草坪灯（可点亮）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "灯具",
+   "key": "chandelier",
+   "name": "挑空水晶大吊灯",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "灯具",
+   "key": "arcLamp",
+   "name": "钓鱼灯（落地）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "电器",
+   "key": "fireplace",
+   "name": "电壁炉",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "电器",
+   "key": "projScreen",
+   "name": "投影幕布",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "电器",
+   "key": "speaker",
+   "name": "落地音箱",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "电器",
+   "key": "wallTV",
+   "name": "壁挂电视（可开关）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeBox",
+   "name": "立方体",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeRoundBox",
+   "name": "圆角方块",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freePlatform",
+   "name": "地台 / 榻榻米台",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeWallBlock",
+   "name": "背景墙凸块",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeCeilBlock",
+   "name": "吊顶造型块",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeCyl",
+   "name": "圆柱",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeRoundStage",
+   "name": "圆形地台",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeHalfCyl",
+   "name": "半圆柱 / 半圆墙垛",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeTube",
+   "name": "圆管 / 圆环隔断",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeSphere",
+   "name": "球体",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeHemi",
+   "name": "半球 / 穹顶",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeCone",
+   "name": "圆锥",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freePyramid",
+   "name": "四棱锥",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeWedge",
+   "name": "楔形 / 坡道",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeArch",
+   "name": "拱门造型",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeArcWall",
+   "name": "弧形墙 / 弧形隔断",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeSlats",
+   "name": "木格栅",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeGlassScreen",
+   "name": "长虹玻璃隔断",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeSteps",
+   "name": "台阶",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeTorus",
+   "name": "圆环 / 环形灯",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeLightBox",
+   "name": "发光灯带 / 灯箱",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeMirror",
+   "name": "镜面板",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeVase",
+   "name": "旋转体 · 花瓶",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeColumn",
+   "name": "旋转体 · 罗马柱",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "自由体",
+   "key": "freeExtrude",
+   "name": "拉伸体（画轮廓）",
+   "source": "保留程序化自建（不买）"
+  },
+  {
+   "group": "软装",
+   "key": "screenDivider",
+   "name": "屏风",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "rug",
+   "name": "地毯",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "plant",
+   "name": "绿植",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "软装",
+   "key": "curtain",
+   "name": "落地窗帘（可开合）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "sheer",
+   "name": "纱帘（可开合）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "bigPlant",
+   "name": "大型绿植",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "软装",
+   "key": "smallPlant",
+   "name": "小盆栽",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "软装",
+   "key": "hangingPlant",
+   "name": "吊兰（吸顶）",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  },
+  {
+   "group": "软装",
+   "key": "floorVase",
+   "name": "落地花瓶",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "wallPanel",
+   "name": "墙面造型板",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "wallArt",
+   "name": "装饰画",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "wallArt3",
+   "name": "装饰画（三联）",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "wallClock",
+   "name": "挂钟",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "roundRug",
+   "name": "圆地毯",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "doormat",
+   "name": "门口地垫",
+   "source": "Furnify Beta下真厂家GLB"
+  },
+  {
+   "group": "软装",
+   "key": "playMat",
+   "name": "儿童爬行垫",
+   "source": "保留现成（厨电/卫浴定制/庭院/建筑/娱乐/电器等）"
+  }
+ ]
+}

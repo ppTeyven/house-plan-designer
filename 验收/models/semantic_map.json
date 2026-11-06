@@ -1,0 +1,1764 @@
+{
+ "officeSofa": {
+  "name": "办公接待沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/loveseat/a-compact-twoseater-loveseat-featuring-a-channeltufted-zsta6d/"
+ },
+ "lSofa": {
+  "name": "L 形转角沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/sectional/an-lshaped-sectional-sofa-featuring-plush-channeltufted-9yt13p/"
+ },
+ "rockingChair": {
+  "name": "摇椅",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/armchair/a-tan-leather-lounge-chair-featuring-channeltufted-nu2yxb/"
+ },
+ "readingChair": {
+  "name": "阅读椅",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/armchair/a-contemporary-lounge-chair-featuring-deep-channelpadded-d0b52b/"
+ },
+ "loveseat": {
+  "name": "双人沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/loveseat/a-twoseater-settee-featuring-an-elaborately-carved-4qyj7r/"
+ },
+ "uSofa": {
+  "name": "U 形沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/sectional/a-large-ushaped-sectional-sofa-upholstered-in-otvc87/"
+ },
+ "curvedSofa": {
+  "name": "弧形沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/sectional/a-large-modern-and-organically-curved-sectional-8xsvr9/"
+ },
+ "bendSofa": {
+  "name": "异形组合沙发（曲线可调）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/sectional/a-lightcolored-curved-modular-sectional-sofa-with-6ov225/"
+ },
+ "singleSofa": {
+  "name": "单人位沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/armchair/a-compact-barrelshaped-accent-chair-upholstered-in-09kz51/"
+ },
+ "sofa": {
+  "name": "三人沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/sofa/a-contemporary-threeseater-modular-sofa-featuring-soft-b1i3a2/"
+ },
+ "armchair": {
+  "name": "单人沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/armchair/an-upholstered-accent-chair-in-a-light-7mp0wt/"
+ },
+ "lounge": {
+  "name": "休闲椅",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/armchair/an-organically-shaped-lounge-chair-upholstered-in-avodk7/"
+ },
+ "theaterSofa": {
+  "name": "影院沙发（三连座）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/sofa/a-twoseater-home-cinema-reclining-sofa-upholstered-kxtxfj/"
+ },
+ "fourSofa": {
+  "name": "四人沙发",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/sofas/sofa/a-contemporary-armless-curved-sofa-upholstered-in-4mpovj/",
+  "old_url": "https://furnimesh.com/library/sofas/sectional/a-threeseater-sectional-sofa-with-a-righthand-5zr55l/",
+  "sub": [
+   "sofas",
+   "sofa"
+  ],
+  "distort": 1.85
+ },
+ "chaiseSofa": {
+  "name": "贵妃位沙发（2.6m）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/sectional/an-lshaped-sectional-sofa-featuring-a-chaise-yn8owl/"
+ },
+ "armDiningChair": {
+  "name": "扶手餐椅",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/seating/dining-chair/an-elegant-dining-armchair-featuring-a-solid-euurqq/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "dayBed": {
+  "name": "罗汉床 / 卧榻",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-tufted-black-leather-daybed-with-a-k9l3p9/"
+ },
+ "doubleVanity": {
+  "name": "双盆浴室柜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/bathroom/vanity/a-double-sink-bathroom-vanity-with-a-0m1cni/",
+  "old_url": "https://furnimesh.com/library/bathroom/bathtub/a-modern-pet-washing-station-featuring-an-pawis2/",
+  "sub": [
+   "bathroom",
+   "vanity"
+  ],
+  "distort": 1.272
+ },
+ "displayCabinet": {
+  "name": "展示柜（玻璃门）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/cabinet/a-tall-rectangular-display-cabinet-in-a-o5x1g4/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "coffeeTable": {
+  "name": "茶几",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/coffee-table/a-coffee-table-featuring-a-circular-clear-1r857h/",
+  "old_url": "https://furnimesh.com/library/tables/bar-table/a-long-rectangular-bar-height-table-constructed-pjjgir/",
+  "sub": [
+   "tables",
+   "coffee-table"
+  ],
+  "distort": 2.0
+ },
+ "roundCoffee": {
+  "name": "圆茶几",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/coffee-table/a-traditional-round-coffee-table-crafted-from-yqdzho/"
+ },
+ "diningTable": {
+  "name": "餐桌",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/dining-table/a-round-dining-table-featuring-a-natural-gz5din/"
+ },
+ "roundTable": {
+  "name": "圆餐桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/dining-table/a-contemporary-round-dining-table-crafted-from-7j4izf/",
+  "old_url": "https://furnimesh.com/library/tables/side-table/a-round-accent-table-featuring-a-lightcolored-wxf7sv/",
+  "sub": [
+   "tables",
+   "dining-table"
+  ],
+  "distort": 1.023
+ },
+ "consoleTable": {
+  "name": "玄关桌 / 边桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/console-table/a-black-console-table-featuring-a-rectangular-fgxafe/",
+  "old_url": "https://furnimesh.com/library/tables/bar-table/a-rectangular-barheight-table-featuring-a-slatted-kuqg2q/",
+  "sub": [
+   "tables",
+   "console-table"
+  ],
+  "distort": 2.066
+ },
+ "curveTrainingTable": {
+  "name": "弧形培训桌",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/desk/a-vintage-executive-desk-featuring-a-curved-b9e8cc/"
+ },
+ "diningTable4": {
+  "name": "四人餐桌",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/dining-table/a-round-dining-table-crafted-from-dark-v3tz8w/"
+ },
+ "diningTable6": {
+  "name": "六人餐桌",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/dining-table/a-modern-round-dining-table-featuring-a-oyv8t3/"
+ },
+ "roundTable10": {
+  "name": "圆餐桌（10 人）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/dining-table/a-contemporary-round-dining-table-crafted-from-pj9oc0/",
+  "old_url": "https://furnimesh.com/library/tables/bar-table/a-modern-bar-height-dining-set-featuring-b3vbo3/",
+  "sub": [
+   "tables",
+   "dining-table"
+  ],
+  "distort": 1.285
+ },
+ "officeChair": {
+  "name": "办公椅",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/office-chair/an-armless-swivel-desk-chair-featuring-a-1oaqtu/"
+ },
+ "gamingChair": {
+  "name": "电竞椅",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/office-chair/a-highback-gaming-chair-featuring-a-black-yuqkeo/"
+ },
+ "entryBench": {
+  "name": "换鞋凳",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/bench/a-dark-brown-wooden-entryway-storage-bench-s50ca3/"
+ },
+ "chaise": {
+  "name": "贵妃椅",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/chaise-lounge/an-opulent-chaise-lounge-featuring-a-highly-s05u0w/"
+ },
+ "hangingChair": {
+  "name": "吊椅",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/bench/a-modern-hanging-swing-bench-featuring-a-s3crs0/"
+ },
+ "booth": {
+  "name": "卡座",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/bench/a-long-commercial-banquette-booth-featuring-dark-ff5iyr/"
+ },
+ "smallPlant": {
+  "name": "小盆栽",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/decor/plant/a-small-potted-plant-likely-a-peperomia-ezhiyc/"
+ },
+ "clothesRack": {
+  "name": "升降晾衣架（吸顶）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/other/coat-rack/a-contemporary-wallmounted-coat-rack-featuring-seven-o26ufn/"
+ },
+ "wallToilet": {
+  "name": "壁挂马桶",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/bathroom/toilet/a-contemporary-wallhung-toilet-featuring-a-white-cultlo/",
+  "old_url": "https://furnimesh.com/library/bathroom/bathtub/a-freestanding-bathtub-carved-from-natural-stone-votmle/",
+  "sub": [
+   "bathroom",
+   "toilet"
+  ],
+  "distort": 1.351
+ },
+ "pedestalSink": {
+  "name": "立柱盆",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/bathroom/sink/a-tall-freestanding-pedestal-sink-made-from-ztbx8u/"
+ },
+ "roundBed": {
+  "name": "圆床",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/beds/bed/a-contemporary-bed-frame-featuring-a-dark-d8gonv/"
+ },
+ "bedBench": {
+  "name": "床尾凳",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/beds/bed/a-contemporary-upholstered-platform-bed-featuring-a-cxldij/"
+ },
+ "outdoorSet": {
+  "name": "户外桌椅",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/sculpture/a-set-of-seven-outdoor-granite-sculptures-6cgo40/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "fileCabinet": {
+  "name": "文件柜",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/bookshelf/a-modern-dark-wood-ladder-bookshelf-featuring-bxdgk8/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "shoeCabinet": {
+  "name": "鞋柜",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/cabinet/a-compact-modern-white-shoe-cabinet-featuring-17t04y/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "cabSideboard": {
+  "name": "定制餐边柜",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/bookshelf/a-freestanding-modern-cube-storage-unit-rendered-46syhw/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "ovalCoffee": {
+  "name": "椭圆茶几",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/coffee-table/a-modern-coffee-table-with-an-oval-3topkf/"
+ },
+ "longTable": {
+  "name": "长餐桌（8 人）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/dining-table/a-long-narrow-dark-brown-wood-table-2sbpxr/"
+ },
+ "ovalTable": {
+  "name": "椭圆餐桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/dining-table/a-modern-dining-set-featuring-an-oval-jt2dkk/",
+  "old_url": "https://furnimesh.com/library/tables/side-table/a-sleek-contemporary-cshaped-table-crafted-entirely-s0ays5/",
+  "sub": [
+   "tables",
+   "dining-table"
+  ],
+  "distort": 1.494
+ },
+ "sideTable": {
+  "name": "边几",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/side-table/a-set-of-two-lighttoned-wooden-tables-x2al8j/"
+ },
+ "officeDesk": {
+  "name": "办公桌 1.4m",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-modern-office-desk-featuring-a-rectangular-kkvarz/",
+  "old_url": "https://furnimesh.com/library/seating/office-chair/a-modern-upholstered-desk-chair-featuring-a-12v1ux/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.105
+ },
+ "barStool": {
+  "name": "吧椅",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/bar-stool/an-upholstered-counterheight-bar-stool-featuring-a-c9f8hg/"
+ },
+ "beanbag": {
+  "name": "懒人沙发",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/ottoman/a-light-beige-structured-bean-bag-chair-i8aywh/"
+ },
+ "ottoman": {
+  "name": "圆脚凳 / 坐墩",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/ottoman/a-square-upholstered-ottoman-with-gently-rounded-rgdxf6/"
+ },
+ "floorLamp": {
+  "name": "落地灯（可点亮）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/lighting/floor-lamp/two-tall-sculptural-floor-lamps-crafted-from-g23dmg/"
+ },
+ "freeGlassScreen": {
+  "name": "长虹玻璃隔断",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/architecture/screen/a-contemporary-freestanding-screen-featuring-a-rectangular-1awwib/"
+ },
+ "wallPanel": {
+  "name": "墙面造型板",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/architecture/wall-panel/a-decorative-panel-composed-of-darkstained-wooden-d2cw76/",
+  "old_url": "https://furnimesh.com/library/decor/mirror/a-wallmounted-decorative-wooden-panel-featuring-an-jedowj/",
+  "sub": [
+   "architecture",
+   "wall-panel"
+  ],
+  "distort": 1.052
+ },
+ "wallClock": {
+  "name": "挂钟",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/decor/clock/this-is-an-ornate-circular-wall-clock-rppvv9/"
+ },
+ "mirror": {
+  "name": "穿衣镜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/decor/mirror/a-circular-mirror-with-a-matte-bluegrey-ugkasf/",
+  "old_url": "https://furnimesh.com/library/storage/dresser/an-opulent-highly-ornate-dresser-and-mirror-68gdxk/",
+  "sub": [
+   "decor",
+   "mirror"
+  ],
+  "distort": 2.447
+ },
+ "catTree": {
+  "name": "猫爬架",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/plant/a-slender-olive-tree-with-sparse-delicate-4ya4h8/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "counter": {
+  "name": "一字橱柜（可定制）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/kitchen/kitchen-cabinet/a-stainless-steel-commercial-sink-cabinet-featuring-qtq8pr/",
+  "old_url": "https://furnimesh.com/library/bathroom/sink/a-smooth-ovalshaped-countertop-sink-with-a-s1dnty/",
+  "sub": [
+   "kitchen",
+   "kitchen-cabinet"
+  ],
+  "distort": 2.15
+ },
+ "lCounter": {
+  "name": "L 形橱柜（可定制）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/kitchen/kitchen-cabinet/a-stainless-steel-commercial-sink-cabinet-featuring-qtq8pr/",
+  "old_url": "https://furnimesh.com/library/bathroom/sink/a-countertop-sink-with-a-semicircular-basin-3sog1v/",
+  "sub": [
+   "kitchen",
+   "kitchen-cabinet"
+  ],
+  "distort": 1.906
+ },
+ "uCounter": {
+  "name": "U 形橱柜（可定制）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/kitchen/kitchen-cabinet/a-stainless-steel-commercial-sink-cabinet-featuring-qtq8pr/",
+  "old_url": "https://furnimesh.com/library/seating/bar-stool/an-elegant-neoclassicalstyle-counter-stool-featuring-a-5j7vbd/",
+  "sub": [
+   "kitchen",
+   "kitchen-cabinet"
+  ],
+  "distort": 1.845
+ },
+ "toilet": {
+  "name": "马桶",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/bathroom/toilet/a-white-ceramic-toilet-with-a-tank-st8ynf/"
+ },
+ "squatToilet": {
+  "name": "蹲便器",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/bathroom/toilet/a-white-ceramic-toilet-with-a-modern-hs2kmz/"
+ },
+ "vanity": {
+  "name": "浴室柜（含镜）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/bathroom/vanity/a-wooden-vanity-unit-with-a-white-h06eam/"
+ },
+ "mirrorCabinet": {
+  "name": "镜柜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/bathroom/vanity/a-contemporary-wallmounted-bathroom-vanity-featuring-an-rrsnzg/",
+  "old_url": "https://furnimesh.com/library/kitchen/kitchen-cabinet/a-stainless-steel-commercial-sink-cabinet-featuring-qtq8pr/",
+  "sub": [
+   "bathroom",
+   "vanity"
+  ],
+  "distort": 1.811
+ },
+ "freeTub": {
+  "name": "独立浴缸",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/bathroom/bathtub/a-white-ovalshaped-freestanding-bathtub-with-a-g2kiar/"
+ },
+ "bathtub": {
+  "name": "浴缸",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/bathroom/bathtub/an-ovalshaped-bathtub-with-vertical-wooden-planks-22rbts/"
+ },
+ "pantryCounter": {
+  "name": "茶水间台面（一字）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-cabinet/a-modern-freestanding-kitchen-sink-cabinet-featuring-b4q9oz/"
+ },
+ "tallOven": {
+  "name": "电器高柜（蒸烤箱）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/other/a-tall-lightcolored-woven-wicker-or-rattan-dnz2af/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freezer": {
+  "name": "冰柜",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/appliances/refrigerator/a-silvercolored-twodoor-topfreezer-refrigerator-featuring-an-suxs7t/"
+ },
+ "coffeeMachine": {
+  "name": "咖啡机",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/kitchen/bar/a-contemporary-modular-coffee-bar-kiosk-featuring-9segcv/"
+ },
+ "bunkBed": {
+  "name": "上下床",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/beds/bunk-bed/a-wooden-bunk-bed-with-a-slatted-0swq4m/"
+ },
+ "nightstand": {
+  "name": "床头柜（台灯可点亮）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/nightstand/a-small-rectangular-wooden-nightstand-featuring-two-eijjjz/"
+ },
+ "diningBench": {
+  "name": "餐凳",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/seating/bench/a-contemporary-bench-crafted-entirely-from-green-ss3bbz/",
+  "old_url": "https://furnimesh.com/library/sofas/daybed/a-neoclassical-style-daybed-bench-featuring-a-uz7dry/",
+  "sub": [
+   "seating",
+   "bench"
+  ],
+  "distort": 1.201
+ },
+ "kingBed": {
+  "name": "双人床 2.2m（King）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/beds/bed/a-bed-featuring-an-upholstered-headboard-and-xlc20x/",
+  "old_url": "https://furnimesh.com/library/sofas/daybed/a-striking-postmodern-daybed-featuring-a-polished-76xauw/",
+  "sub": [
+   "beds",
+   "bed"
+  ],
+  "distort": 1.368
+ },
+ "gazebo": {
+  "name": "凉亭",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/architecture/gazebo/an-outdoor-pavilion-rendered-in-an-isometric-ub1e6p/"
+ },
+ "sunLounger": {
+  "name": "泳池躺椅",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/seating/chaise-lounge/a-contemporary-chaise-lounge-featuring-a-natural-i25q7f/",
+  "old_url": "https://furnimesh.com/library/seating/armchair/an-organic-modern-style-lounge-chair-featuring-27anjr/",
+  "sub": [
+   "seating",
+   "chaise-lounge"
+  ],
+  "distort": 1.515
+ },
+ "swing": {
+  "name": "庭院秋千",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/loveseat/a-contemporary-indoor-swing-loveseat-featuring-a-tbs2nq/"
+ },
+ "stairU": {
+  "name": "U 形三跑楼梯",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/architecture/staircase/a-striking-modern-spiral-staircase-featuring-a-ja2k2z/"
+ },
+ "stairRun": {
+  "name": "直跑梯段",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/architecture/staircase/a-striking-image-of-a-curved-staircase-jabd84/"
+ },
+ "stairLanding": {
+  "name": "楼梯平台",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/architecture/staircase/a-spiral-staircase-constructed-from-metal-it-6yu477/"
+ },
+ "slidingBoard": {
+  "name": "上下升降黑板",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/sideboard/an-elongated-low-credenza-featuring-a-light-mtlygw/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "wardrobe": {
+  "name": "衣柜",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/wardrobe/a-traditional-dark-wood-threedoor-wardrobe-featuring-vujlyh/"
+ },
+ "chest": {
+  "name": "五斗柜",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/dresser/a-traditional-queen-anne-style-highboy-chest-5fxcyq/"
+ },
+ "dresser": {
+  "name": "梳妆台",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/dresser/an-opulent-french-empire-style-commode-featuring-k4izxe/"
+ },
+ "bookshelf": {
+  "name": "书架",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/bookshelf/a-vertical-modular-shelving-unit-constructed-from-v83t7d/"
+ },
+ "tvCabinet": {
+  "name": "电视柜（电视可开关）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/tv-stand/a-contemporary-media-console-crafted-from-dark-w51z37/",
+  "old_url": "https://furnimesh.com/library/storage/sideboard/a-rustic-distressed-wood-sideboard-cabinet-with-zdvbl8/",
+  "sub": [
+   "storage",
+   "tv-stand"
+  ],
+  "distort": 1.304
+ },
+ "sideboard": {
+  "name": "餐边柜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/cabinet/a-contemporary-integrated-entryway-storage-unit-constructed-01r0wh/",
+  "old_url": "https://furnimesh.com/library/storage/tv-stand/a-modern-lowprofile-media-console-or-sideboard-861685/",
+  "sub": [
+   "storage",
+   "cabinet"
+  ],
+  "distort": 1.158
+ },
+ "wineCabinet": {
+  "name": "酒柜",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/sideboard/a-modern-ovalshaped-wood-sideboard-cabinet-featuring-gytvl9/"
+ },
+ "hallCabinet": {
+  "name": "玄关柜（中空）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/sideboard/a-long-rectangular-lowprofile-console-cabinet-or-nms7sm/"
+ },
+ "cabWardrobe": {
+  "name": "定制衣柜",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/wardrobe/a-large-multisection-wardrobe-featuring-a-contemporary-nxenex/"
+ },
+ "cabCorner": {
+  "name": "转角衣柜（L 形）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/shelving/a-tall-corner-shelving-unit-featuring-a-qabtfg/"
+ },
+ "cabShoe": {
+  "name": "定制鞋柜（中空）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/cabinet/a-compact-modern-white-shoe-cabinet-featuring-17t04y/",
+  "old_url": "https://furnimesh.com/library/storage/sideboard/a-long-low-wooden-cabinet-featuring-three-3g95yl/",
+  "sub": [
+   "storage",
+   "cabinet"
+  ],
+  "distort": 2.176
+ },
+ "cabTall": {
+  "name": "书柜 / 高柜",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/cabinet/a-tall-slender-white-storage-cabinet-featuring-ds4z6w/"
+ },
+ "cabWall": {
+  "name": "吊柜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/cabinet/a-long-low-cabinet-with-a-dark-bj344f/",
+  "old_url": "https://furnimesh.com/library/bathroom/vanity/a-contemporary-wallmounted-bathroom-vanity-cabinet-crafted-z2cn2y/",
+  "sub": [
+   "storage",
+   "cabinet"
+  ],
+  "distort": 1.443
+ },
+ "bathShelf": {
+  "name": "置物架",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/shelving/an-offwhite-cloudshaped-wall-shelf-designed-for-4qnfes/"
+ },
+ "plantShelf": {
+  "name": "花架",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/shelving/a-sleek-modern-white-wallmounted-shelf-specifically-7sjc72/"
+ },
+ "wardrobe2": {
+  "name": "两门衣柜 1.0m",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/wardrobe/a-dark-grey-wooden-wardrobe-featuring-two-1aec2f/"
+ },
+ "wardrobe3": {
+  "name": "三门衣柜 1.5m",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/wardrobe/a-contemporary-threedoor-wardrobe-featuring-a-central-j47eoj/",
+  "old_url": "https://furnimesh.com/library/storage/tv-stand/a-modern-minimalist-white-media-console-featuring-y23fui/",
+  "sub": [
+   "storage",
+   "wardrobe"
+  ],
+  "distort": 1.184
+ },
+ "toyCabinet": {
+  "name": "儿童玩具柜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/cabinet/a-curved-dark-wood-cabinet-featuring-five-kf3b1s/",
+  "old_url": "https://furnimesh.com/library/storage/sideboard/a-long-low-wooden-cabinet-featuring-four-pt24a9/",
+  "sub": [
+   "storage",
+   "cabinet"
+  ],
+  "distort": 1.219
+ },
+ "bookshelfLow": {
+  "name": "矮书架",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/bookshelf/a-tall-slender-storage-unit-featuring-three-3s30cl/"
+ },
+ "kitchenTrolley": {
+  "name": "厨房小推车",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/other/cart/a-contemporary-twotier-bar-cart-featuring-a-1dtkxt/",
+  "old_url": "https://furnimesh.com/library/kitchen/kitchen-cabinet/an-lshaped-modular-kitchen-cabinet-system-presented-op2535/",
+  "sub": [
+   "other",
+   "cart"
+  ],
+  "distort": 1.589
+ },
+ "kitchenIsland": {
+  "name": "中岛台",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/an-aerial-view-of-a-rectangular-kitchen-12zfll/"
+ },
+ "teaTable": {
+  "name": "茶台",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/tables/side-table/a-monolithic-ishaped-pedestal-table-crafted-from-93k0q3/"
+ },
+ "trainingTable": {
+  "name": "培训桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-rectangular-office-desk-featuring-a-light-hi7vjm/",
+  "old_url": "https://furnimesh.com/library/tables/side-table/a-lightcolored-wooden-table-featuring-a-round-1cdzdh/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.859
+ },
+ "conferenceTable": {
+  "name": "会议桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/dining-table/a-long-narrow-dark-brown-wood-table-2sbpxr/",
+  "old_url": "https://furnimesh.com/library/tables/side-table/a-contemporary-accent-table-featuring-a-distinctive-7o3ql6/",
+  "sub": [
+   "tables",
+   "dining-table"
+  ],
+  "distort": 1.551
+ },
+ "nestTables": {
+  "name": "组合圆茶几（小）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/coffee-table/a-modern-nesting-furniture-set-consisting-of-jtchmg/",
+  "old_url": "https://furnimesh.com/library/tables/dining-table/a-contemporary-round-dining-table-featuring-a-9ultqc/",
+  "sub": [
+   "tables",
+   "coffee-table"
+  ],
+  "distort": 1.723
+ },
+ "barTable": {
+  "name": "吧台桌（高桌）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/bar-table/a-rectangular-barheight-table-featuring-a-slatted-kuqg2q/",
+  "old_url": "https://furnimesh.com/library/tables/dining-table/a-compact-modern-dining-set-featuring-a-qb54o1/",
+  "sub": [
+   "tables",
+   "bar-table"
+  ],
+  "distort": 1.352
+ },
+ "roundMeeting": {
+  "name": "圆形洽谈桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/dining-table/a-complete-dining-set-featuring-a-rectangular-37hke3/",
+  "old_url": "https://furnimesh.com/library/tables/console-table/a-sophisticated-demilune-halfround-console-table-featuring-d5r4g5/",
+  "sub": [
+   "tables",
+   "dining-table"
+  ],
+  "distort": 1.315
+ },
+ "stool": {
+  "name": "圆凳 / 化妆凳",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/seating/bar-stool/a-tall-modern-bar-stool-featuring-a-5rhrwg/"
+ },
+ "chair": {
+  "name": "餐椅",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/seating/dining-chair/a-black-bentwoodstyle-dining-chair-featuring-a-5mw64s/",
+  "old_url": "https://furnimesh.com/library/sofas/sofa-bed/an-olive-green-armless-chair-designed-for-qfz5v0/",
+  "sub": [
+   "seating",
+   "dining-chair"
+  ],
+  "distort": 1.031
+ },
+ "trainingChair": {
+  "name": "培训椅",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/seating/office-chair/a-black-ergonomic-office-chair-featuring-a-c4iuxk/",
+  "old_url": "https://furnimesh.com/library/sofas/sofa-bed/a-white-upholstered-single-convertible-floor-chair-f11uq3/",
+  "sub": [
+   "seating",
+   "office-chair"
+  ],
+  "distort": 1.03
+ },
+ "shoeBench": {
+  "name": "穿鞋凳（长）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/seating/bench/a-contemporary-bench-crafted-entirely-from-green-ss3bbz/",
+  "old_url": "https://furnimesh.com/library/sofas/daybed/a-monolithic-daybed-or-bench-carved-from-jz9mll/",
+  "sub": [
+   "seating",
+   "bench"
+  ],
+  "distort": 1.18
+ },
+ "chandelier": {
+  "name": "挑空水晶大吊灯",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/lighting/chandelier/the-image-displays-a-contemporary-chandelier-featuring-svpk7m/"
+ },
+ "freeRoundBox": {
+  "name": "圆角方块",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-contemporary-outdoor-daybed-featuring-a-round-8q25mi/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeRoundStage": {
+  "name": "圆形地台",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-modern-freestanding-outdoor-hanging-daybed-featuring-3b67a6/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeArch": {
+  "name": "拱门造型",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/architecture/door/a-highly-ornate-arched-wooden-door-featuring-f0jruq/",
+  "old_url": "https://furnimesh.com/library/architecture/wall-panel/two-rectangular-panels-crafted-from-lighttoned-wood-gzzwmo/",
+  "sub": [
+   "architecture",
+   "door"
+  ],
+  "distort": 1.172
+ },
+ "freeArcWall": {
+  "name": "弧形墙 / 弧形隔断",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/architecture/wall-panel/a-vertical-arched-wallmounted-decorative-panel-featuring-wxzj39/"
+ },
+ "freeLightBox": {
+  "name": "发光灯带 / 灯箱",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/sideboard/a-rectangular-twodoor-sideboard-featuring-a-light-n22zq6/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "screenDivider": {
+  "name": "屏风",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/other/room-divider/an-abstract-room-divider-or-partition-screen-v3ynzs/"
+ },
+ "plant": {
+  "name": "绿植",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/decor/planter/a-white-cylindrical-planter-designed-to-resemble-nytgwk/"
+ },
+ "bigPlant": {
+  "name": "大型绿植",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/decor/planter/a-tall-rectangular-light-grey-concrete-or-d5cttu/"
+ },
+ "hangingPlant": {
+  "name": "吊兰（吸顶）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/decor/plant/a-3d-render-of-a-potted-palm-x6wua0/",
+  "old_url": "https://furnimesh.com/library/decor/planter/a-tall-cylindrical-floor-planter-featuring-a-ewoe4n/",
+  "sub": [
+   "decor",
+   "plant"
+  ],
+  "distort": 1.148
+ },
+ "floorVase": {
+  "name": "落地花瓶",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/decor/vase/a-decorative-urnshaped-vase-with-a-brushed-2fjvmt/",
+  "old_url": "https://furnimesh.com/library/decor/pillow/a-circular-thick-floor-cushion-upholstered-in-jg47hi/",
+  "sub": [
+   "decor",
+   "vase"
+  ],
+  "distort": 1.295
+ },
+ "roundRug": {
+  "name": "圆地毯",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/decor/rug/a-circular-rug-made-of-woven-natural-gvlckk/",
+  "old_url": "https://furnimesh.com/library/decor/pillow/a-set-of-four-round-dark-green-v4mtre/",
+  "sub": [
+   "decor",
+   "rug"
+  ],
+  "distort": 1.001
+ },
+ "fan": {
+  "name": "落地扇",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/plant/a-tall-fanshaped-travelers-palm-ravenala-madagascariensis-4lsl4z/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "showerSet": {
+  "name": "嵌入式恒温淋浴",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/bathroom/vanity/a-traditional-wooden-dressing-table-set-featuring-zb017i/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "bathHeater": {
+  "name": "风暖浴霸（吸顶）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/bathroom/vanity/a-wooden-bathroom-vanity-with-a-white-wdtiy0/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "laundrySink": {
+  "name": "洗衣池柜",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/bathroom/vanity/a-long-double-sink-bathroom-vanity-featuring-r2li2q/"
+ },
+ "serviceSink": {
+  "name": "清洁拖布池",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/bathroom/sink/a-commercialgrade-freestanding-doublebasin-sink-unit-made-buqv7r/",
+  "old_url": "https://furnimesh.com/library/bathroom/vanity/a-freestanding-singlesink-bathroom-vanity-featuring-a-z1ergg/",
+  "sub": [
+   "bathroom",
+   "sink"
+  ],
+  "distort": 1.963
+ },
+ "miniHeater": {
+  "name": "小厨宝（台下储水式）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/appliances/refrigerator/a-freestanding-refrigerator-with-a-minimalist-design-b9yrrg/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "airPurifier": {
+  "name": "空气净化器",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/seating/armchair/a-naturaltoned-woven-rattan-chair-with-a-g1ikp4/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "wineFridge": {
+  "name": "红酒柜 / 嵌入冰吧",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/appliances/refrigerator/a-tall-slender-builtin-wine-refrigerator-featuring-l00eis/"
+ },
+ "yogaMat": {
+  "name": "瑜伽垫",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/other/a-fluted-pedestal-with-a-matte-slightly-233utd/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "bed18": {
+  "name": "双人床 1.8m",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/beds/bed/a-light-gray-upholstered-bed-frame-featuring-5b4zcg/",
+  "old_url": "https://furnimesh.com/library/sofas/sofa-bed/an-ornate-multifunctional-wall-unit-featuring-an-pfuurr/",
+  "sub": [
+   "beds",
+   "bed"
+  ],
+  "distort": 1.11
+ },
+ "bed15": {
+  "name": "双人床 1.5m",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/beds/bed/a-complete-contemporary-bedroom-set-featuring-a-pq77il/",
+  "old_url": "https://furnimesh.com/library/sofas/sofa-bed/an-olive-green-upholstered-sofa-bed-with-mwa91s/",
+  "sub": [
+   "beds",
+   "bed"
+  ],
+  "distort": 1.8
+ },
+ "bed12": {
+  "name": "单人床 1.2m",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/beds/bed/a-contemporary-bed-frame-featuring-a-black-nvq4b4/",
+  "old_url": "https://furnimesh.com/library/sofas/sofa-bed/a-vibrant-blue-modular-sofa-upholstered-in-mv4hhw/",
+  "sub": [
+   "beds",
+   "bed"
+  ],
+  "distort": 2.31
+ },
+ "bed20": {
+  "name": "双人床 2.0m",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/beds/bed/a-contemporary-lowprofile-platform-bed-featuring-a-jl9cur/",
+  "old_url": "https://furnimesh.com/library/sofas/sofa-bed/a-twoseater-sofa-bed-with-a-contemporary-f0oueg/",
+  "sub": [
+   "beds",
+   "bed"
+  ],
+  "distort": 1.28
+ },
+ "crib": {
+  "name": "婴儿床",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/beds/crib/an-ovalshaped-baby-crib-featuring-blush-pink-4s9yq1/"
+ },
+ "bayCushion": {
+  "name": "飘窗垫",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/decor/pillow/a-decorative-cushion-featuring-a-complex-spherical-9bay0f/"
+ },
+ "kidsBed": {
+  "name": "儿童床 1.0m",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/beds/bunk-bed/a-modern-and-minimalist-bunk-bed-featuring-a0fsoi/",
+  "old_url": "https://furnimesh.com/library/sofas/sofa-bed/a-traditional-japanese-futon-mattress-set-comprising-6ko2v9/",
+  "sub": [
+   "beds",
+   "bunk-bed"
+  ],
+  "distort": 1.558
+ },
+ "car": {
+  "name": "轿车",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/architecture/door/an-intricately-carved-wooden-door-featuring-an-7p18eq/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "gate": {
+  "name": "庭院大门",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/architecture/gate/an-ornate-black-wrought-iron-gate-with-08hbv0/",
+  "old_url": "https://furnimesh.com/library/storage/dresser/an-antiquestyle-bombe-commode-featuring-a-variegated-odecqr/",
+  "sub": [
+   "architecture",
+   "gate"
+  ],
+  "distort": 1.602
+ },
+ "coatRack": {
+  "name": "衣帽架",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/other/coat-rack/a-dark-brown-wooden-leaning-ladderstyle-towel-izefnf/",
+  "old_url": "https://furnimesh.com/library/storage/shelving/a-minimalist-freestanding-garment-rack-made-of-xwttgh/",
+  "sub": [
+   "other",
+   "coat-rack"
+  ],
+  "distort": 1.076
+ },
+ "cabSlide": {
+  "name": "推拉门衣柜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/wardrobe/a-contemporary-threedoor-wardrobe-featuring-a-central-j47eoj/",
+  "old_url": "https://furnimesh.com/library/storage/sideboard/a-long-low-wooden-cabinet-featuring-a-sx5uep/",
+  "sub": [
+   "storage",
+   "wardrobe"
+  ],
+  "distort": 1.338
+ },
+ "cabBase": {
+  "name": "地柜",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/sideboard/a-long-low-sideboard-cabinet-featuring-a-6asshu/"
+ },
+ "cabTV": {
+  "name": "悬空电视柜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/tv-stand/a-long-low-offwhite-media-console-featuring-nals3e/",
+  "old_url": "https://furnimesh.com/library/storage/sideboard/a-long-low-rectangular-cabinet-with-a-6djfdw/",
+  "sub": [
+   "storage",
+   "tv-stand"
+  ],
+  "distort": 1.566
+ },
+ "desk": {
+  "name": "书桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-highly-ornate-black-lacquered-writing-desk-ug1p9j/",
+  "old_url": "https://furnimesh.com/library/beds/bunk-bed/a-loft-bed-designed-with-integrated-desk-pdd61f/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.201
+ },
+ "lDesk": {
+  "name": "L 形书桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-minimalist-wooden-desk-likely-constructed-from-wzdi0x/",
+  "old_url": "https://furnimesh.com/library/bathroom/vanity/a-modern-vanity-desk-featuring-a-sleek-wycxko/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.464
+ },
+ "kidsDesk": {
+  "name": "儿童学习桌",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-contemporary-desk-and-integrated-display-system-690ugt/",
+  "old_url": "https://furnimesh.com/library/bathroom/vanity/a-contemporary-vanity-set-featuring-a-deskstyle-efzxtf/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.713
+ },
+ "barCounter": {
+  "name": "吧台（带水槽）",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/kitchen/bar/an-ornate-deep-purple-and-gold-counter-b8o09k/"
+ },
+ "standingDesk": {
+  "name": "升降书桌 1.4m",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-modern-electric-heightadjustable-standing-desk-featuring-gniq0b/",
+  "old_url": "https://furnimesh.com/library/bathroom/vanity/a-contemporary-vanity-desk-constructed-from-lighttoned-9z39v0/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.142
+ },
+ "deskBench2": {
+  "name": "工位（两人位）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-contemporary-desk-constructed-from-dark-brown-udt7x1/",
+  "old_url": "https://furnimesh.com/library/tables/console-table/a-black-console-table-featuring-a-rectangular-fgxafe/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.534
+ },
+ "deskBench4": {
+  "name": "工位（四人位对坐）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-contemporary-executive-desk-featuring-an-lshaped-3zme96/",
+  "old_url": "https://furnimesh.com/library/tables/coffee-table/a-square-twotiered-coffee-table-made-of-0shv0h/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.236
+ },
+ "bossDesk": {
+  "name": "大班台",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-contemporary-executive-desk-featuring-an-lshaped-3zme96/",
+  "old_url": "https://furnimesh.com/library/tables/coffee-table/a-modern-square-coffee-table-made-of-e80plg/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.831
+ },
+ "deskLamp": {
+  "name": "台灯（可点亮）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/lighting/table-lamp/a-sleek-modern-desk-lamp-crafted-from-m2bede/",
+  "old_url": "https://furnimesh.com/library/lighting/wall-lamp/a-modern-wallmounted-lighting-fixture-featuring-a-7wvwai/",
+  "sub": [
+   "lighting",
+   "table-lamp"
+  ],
+  "distort": 1.746
+ },
+ "lawnLamp": {
+  "name": "草坪灯（可点亮）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/lighting/floor-lamp/a-tall-black-outdoor-post-lamp-featuring-sbgr4l/",
+  "old_url": "https://furnimesh.com/library/lighting/table-lamp/a-tiffanystyle-table-lamp-featuring-a-domeshaped-pr88kt/",
+  "sub": [
+   "lighting",
+   "floor-lamp"
+  ],
+  "distort": 2.388
+ },
+ "arcLamp": {
+  "name": "钓鱼灯（落地）",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/lighting/floor-lamp/a-modern-and-minimalist-floor-lamp-featuring-esuqn2/",
+  "old_url": "https://furnimesh.com/library/lighting/table-lamp/a-modern-table-lamp-featuring-a-polished-y3jthz/",
+  "sub": [
+   "lighting",
+   "floor-lamp"
+  ],
+  "distort": 1.204
+ },
+ "freeBox": {
+  "name": "立方体",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/appliances/refrigerator/a-modern-twodoor-topfreezer-refrigerator-manufactured-by-41i0o7/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freePlatform": {
+  "name": "地台 / 榻榻米台",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/appliances/refrigerator/a-freestanding-fourdoor-refrigerator-with-a-predominantly-o2mr3a/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeWallBlock": {
+  "name": "背景墙凸块",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/architecture/wall-panel/a-decorative-panel-composed-of-darkstained-wooden-d2cw76/",
+  "old_url": "https://furnimesh.com/library/decor/sculpture/an-intricately-carved-wooden-wall-panel-featuring-yrnr9h/",
+  "sub": [
+   "architecture",
+   "wall-panel"
+  ],
+  "distort": 1.052
+ },
+ "freeCeilBlock": {
+  "name": "吊顶造型块",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/appliances/refrigerator/a-freestanding-fourdoor-refrigerator-with-a-builtin-998m15/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeCyl": {
+  "name": "圆柱",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/sideboard/a-contemporary-threedoor-sideboard-crafted-from-darkstained-b695lo/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeHalfCyl": {
+  "name": "半圆柱 / 半圆墙垛",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/cabinet/a-modern-twodoor-storage-cabinet-featuring-a-bqwtyp/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeTube": {
+  "name": "圆管 / 圆环隔断",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/sofa/a-threeseater-outdoor-sofa-featuring-a-natural-010lro/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeSphere": {
+  "name": "球体",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/sectional/an-outdoor-living-area-featuring-a-bohemian-ugl6uj/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeHemi": {
+  "name": "半球 / 穹顶",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/sectional/an-aerial-view-of-an-outdoor-living-ildntq/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeCone": {
+  "name": "圆锥",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/sectional/a-twoseater-outdoor-sectional-sofa-component-featuring-8xgq1r/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freePyramid": {
+  "name": "四棱锥",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/loveseat/a-twoseater-outdoor-loveseat-with-a-dark-r7t90s/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeWedge": {
+  "name": "楔形 / 坡道",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/loveseat/a-light-grey-woven-outdoor-loveseat-featuring-xti17t/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeSlats": {
+  "name": "木格栅",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-vibrant-green-outdoor-pod-daybed-featuring-cds1hp/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeSteps": {
+  "name": "台阶",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-robust-outdoor-daybed-featuring-a-dark-ofy0vi/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeTorus": {
+  "name": "圆环 / 环形灯",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-modern-suspended-outdoor-daybed-featuring-a-lu02oy/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeMirror": {
+  "name": "镜面板",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/decor/mirror/a-tall-freestanding-mirror-with-an-oval-9vx47a/"
+ },
+ "freeVase": {
+  "name": "旋转体 · 花瓶",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/decor/vase/a-brown-glazed-ceramic-vase-featuring-an-2piiu1/",
+  "old_url": "https://furnimesh.com/library/sofas/daybed/a-modern-outdoor-daybed-featuring-a-semicircular-ekfn5k/",
+  "sub": [
+   "decor",
+   "vase"
+  ],
+  "distort": 1.38
+ },
+ "freeColumn": {
+  "name": "旋转体 · 罗马柱",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-modern-outdoor-canopy-daybed-featuring-a-03epic/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "freeExtrude": {
+  "name": "拉伸体（画轮廓）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-contemporary-outdoor-daybed-featuring-an-organic-q046aq/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "rug": {
+  "name": "地毯",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/decor/rug/an-overhead-shot-of-a-light-sage-iwzwvo/"
+ },
+ "wallArt": {
+  "name": "装饰画",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/vase/a-deep-amethystcolored-art-glass-vase-featuring-xa6ua2/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "wallArt3": {
+  "name": "装饰画（三联）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/vase/a-clear-glass-vase-containing-an-artificial-stbftx/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "playMat": {
+  "name": "儿童爬行垫",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/decor/rug/a-circular-rug-with-a-braided-texture-xtmjvl/",
+  "old_url": "https://furnimesh.com/library/decor/vase/a-minimalist-decorative-arrangement-featuring-a-matte-x8rzbf/",
+  "sub": [
+   "decor",
+   "rug"
+  ],
+  "distort": 1.197
+ },
+ "radiator": {
+  "name": "暖气片",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/three-vertically-oriented-panels-forming-a-room-auae86/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "trashBin": {
+  "name": "垃圾桶",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-vertical-panel-constructed-from-numerous-individual-kwc2x9/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "petBed": {
+  "name": "宠物窝",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-twopanel-room-divider-featuring-a-light-ld7rfi/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "mobileDisplay": {
+  "name": "移动会议平板",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/shelving/a-white-metal-display-shelving-unit-with-8yglwi/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "printer": {
+  "name": "办公复合打印机",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/sofa-bed/a-singleseater-upholstered-armchair-designed-to-convert-yt0uh7/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "shower": {
+  "name": "淋浴房",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/bathroom/vanity/a-wooden-bathroom-vanity-featuring-a-rich-34n2cb/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "showerScreen": {
+  "name": "一字淋浴隔断",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-threepanel-room-divider-screen-featuring-a-7yegiz/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "towelWarmer": {
+  "name": "电热毛巾架",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/other/coat-rack/a-modern-freestanding-towel-rack-constructed-from-x8lc63/"
+ },
+ "urinal": {
+  "name": "壁挂小便器",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/bathroom/vanity/a-white-vanity-unit-with-a-light-dcidq5/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "acWall": {
+  "name": "挂机空调",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-rattan-daybed-with-a-woven-geometric-gjr6qv/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "acFloor": {
+  "name": "柜机空调",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/sofa-bed/a-contemporary-floorlevel-futon-sofa-designed-for-zg3sdv/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "waterHeater": {
+  "name": "电热水器",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-contemporary-daybed-constructed-with-a-woven-uz5lvm/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "gasHeater": {
+  "name": "燃气热水器",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/seating/bar-stool/a-small-round-handwoven-stool-made-from-9z17w3/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "waterDispenser": {
+  "name": "饮水机",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/seating/armchair/a-naturalcolored-armchair-constructed-from-tightly-woven-88u92l/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "purifier": {
+  "name": "净水器（台下）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-rectangular-wooden-kitchen-island-with-a-qihhne/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "dishwasher": {
+  "name": "洗碗机",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-modern-kitchen-island-with-a-marblepatterned-2xzi3q/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "hood": {
+  "name": "油烟机",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-modern-kitchen-island-with-a-curved-x700h3/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "microwave": {
+  "name": "微波炉",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-modern-curved-kitchen-island-featuring-a-ytxtk0/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "washer": {
+  "name": "洗衣机",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-mobile-kitchen-island-featuring-a-white-e6pxj2/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "dryer": {
+  "name": "烘干机",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-lighttoned-pine-wood-rolling-kitchen-island-jtpdc3/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "robotVac": {
+  "name": "扫地机器人基站",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-kitchen-island-with-a-lightcolored-wood-qcn98l/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "fridge": {
+  "name": "冰箱",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/appliances/refrigerator/a-modern-lg-instaview-sidebyside-refrigerator-is-ov39zt/",
+  "old_url": "https://furnimesh.com/library/kitchen/kitchen-island/a-kitchen-island-featuring-a-white-painted-4suo1v/",
+  "sub": [
+   "appliances",
+   "refrigerator"
+  ],
+  "distort": 2.342
+ },
+ "fridgeDouble": {
+  "name": "对开门冰箱",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/appliances/refrigerator/a-creamcolored-fourdoor-refrigerator-with-long-vertical-cfg4nx/",
+  "old_url": "https://furnimesh.com/library/sofas/loveseat/an-elegant-doublesided-loveseat-featuring-a-unique-cmczuh/",
+  "sub": [
+   "appliances",
+   "refrigerator"
+  ],
+  "distort": 1.719
+ },
+ "fridgeFrench": {
+  "name": "法式多门冰箱",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/appliances/refrigerator/a-creamcolored-fourdoor-refrigerator-with-long-vertical-cfg4nx/",
+  "old_url": "https://furnimesh.com/library/sofas/loveseat/a-french-provincial-style-loveseat-featuring-a-mah26h/",
+  "sub": [
+   "appliances",
+   "refrigerator"
+  ],
+  "distort": 1.603
+ },
+ "boiler": {
+  "name": "壁挂炉（地暖 + 热水）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-dark-brown-mobile-kitchen-island-featuring-rxhgt5/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "manifold": {
+  "name": "地暖分集水器",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-island/a-contemporary-kitchen-island-featuring-a-marble-3b1utd/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "waterSoftener": {
+  "name": "中央软水机",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/kitchen/kitchen-cabinet/a-set-of-white-kitchen-cabinets-featuring-j0vby3/"
+ },
+ "fishTank": {
+  "name": "鱼缸",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/tables/coffee-table/a-lowprofile-coffee-table-featuring-a-thick-bkjjdj/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "piano": {
+  "name": "立式钢琴",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/storage/shelving/a-compact-modern-tabletop-shelving-unit-crafted-qhewpx/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "treadmill": {
+  "name": "跑步机",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/seating/bar-stool/a-light-wood-heightadjustable-artist-stool-featuring-z23h7s/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "billiards": {
+  "name": "台球桌",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-threepanel-folding-room-divider-featuring-a-8guvmb/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "mahjong": {
+  "name": "自动麻将桌",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-tall-rectangular-thin-black-panel-featuring-npaqjm/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "grandPiano": {
+  "name": "三角钢琴",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-tall-narrow-wooden-room-divider-consisting-zjkiq2/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "sauna": {
+  "name": "桑拿房",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-set-of-three-decorative-room-divider-11o2sg/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "bike": {
+  "name": "动感单车",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-sculptural-room-divider-made-of-brass-czp8ws/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "tatami": {
+  "name": "榻榻米",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/sofas/sofa-bed/a-striped-sofa-bed-in-a-folded-o5amm2/"
+ },
+ "suv": {
+  "name": "SUV",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/an-elongated-seating-unit-featuring-a-minimalist-hqx2m9/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "carport": {
+  "name": "车棚（单车位）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-contemporary-outdoor-circular-daybed-featuring-a-y11pd7/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "carport2": {
+  "name": "车棚（双车位）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-contemporary-outdoor-cabana-daybed-featuring-a-veqh87/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "bicycle": {
+  "name": "自行车",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-contemporary-hanging-daybed-designed-for-outdoor-ry42yw/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "pool": {
+  "name": "泳池",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/sofas/daybed/a-contemporary-circular-or-ovalshaped-outdoor-daybed-ow9xpu/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "lawn": {
+  "name": "草坪",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/seating/bench/a-modern-outdoor-bench-featuring-a-dark-2ki4tn/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "stepStones": {
+  "name": "汀步 / 石板路",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/seating/bench/a-minimalist-upholstered-bench-with-an-elongated-6sc72p/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "tree": {
+  "name": "庭院乔木",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/other/room-divider/a-decorative-metal-screen-serving-as-a-2iqrpx/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "shrub": {
+  "name": "灌木球",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/sculpture/an-elongated-abstract-sculpture-made-from-what-lhe5uv/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "parasol": {
+  "name": "遮阳伞 + 桌椅",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/sculpture/a-horizontal-elongated-piece-of-wall-art-b932kf/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "bbq": {
+  "name": "户外烧烤台",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/rug/an-elongated-runner-rug-with-a-distinctive-fhrn4f/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "waterFeature": {
+  "name": "叠水景墙",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/kitchen/bar/this-image-features-a-vintagestyle-cafe-service-aentsz/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "fence": {
+  "name": "庭院围栏",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/pillow/an-elongated-irregularly-curved-upholstered-cushion-designed-mu7alt/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "elevator": {
+  "name": "家用电梯（漫游时可乘坐）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/sculpture/a-rectangular-white-decorative-wall-panel-featuring-g7mvv8/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "evCharger": {
+  "name": "充电桩（壁挂 7kW）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/mirror/an-elongated-octagonal-wall-mirror-featuring-a-z1atcd/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "garageShelf": {
+  "name": "车库储物架",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/shelving/a-single-light-brown-wooden-shelf-with-iz5ff3/"
+ },
+ "workbench": {
+  "name": "工具台 + 洞洞板",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/desk/a-dark-brown-wood-veneer-console-desk-itk5dh/",
+  "old_url": "https://furnimesh.com/library/architecture/wall-panel/a-single-squareshaped-decorative-wall-panel-featuring-o40pyp/",
+  "sub": [
+   "tables",
+   "desk"
+  ],
+  "distort": 1.813
+ },
+ "stage": {
+  "name": "培训室地台",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/architecture/wall-panel/a-rectangular-wallmounted-decorative-panel-crafted-from-wdyw9h/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "wifiAP": {
+  "name": "吸顶无线 AP",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/architecture/wall-panel/a-rectangular-vertically-oriented-decorative-panel-featuring-bx402q/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "ceilingSpeaker": {
+  "name": "嵌入式扬声器",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/lighting/chandelier/a-multitiered-ceiling-light-fixture-suspended-by-1ca6of/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "supplyVent": {
+  "name": "空调送风口 A/S",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/architecture/wall-panel/a-rectangular-offwhite-decorative-wall-panel-featuring-52mp21/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "returnVent": {
+  "name": "空调回风口 A/R",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/architecture/wall-panel/a-rectangular-decorative-wall-panel-featuring-an-hd00df/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "whiteboard": {
+  "name": "移动白板",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/architecture/wall-panel/a-rectangular-decorative-panel-featuring-a-threedimensional-065e07/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "lockers": {
+  "name": "储物柜 / 更衣柜",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/storage/wardrobe/a-contemporary-threedoor-wardrobe-featuring-a-central-j47eoj/",
+  "old_url": "https://furnimesh.com/library/storage/tv-stand/a-modern-media-console-featuring-a-long-bntoaj/",
+  "sub": [
+   "storage",
+   "wardrobe"
+  ],
+  "distort": 1.363
+ },
+ "island": {
+  "name": "衣帽岛台",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/kitchen/kitchen-island/a-dark-brown-mobile-kitchen-island-featuring-rxhgt5/",
+  "old_url": "https://furnimesh.com/library/storage/tv-stand/a-modern-lowprofile-media-console-constructed-from-dkhjhr/",
+  "sub": [
+   "kitchen",
+   "kitchen-island"
+  ],
+  "distort": 1.222
+ },
+ "lectern": {
+  "name": "可升降讲台",
+  "status": "ok",
+  "url": "https://furnimesh.com/library/storage/cabinet/a-modern-lectern-also-known-as-a-g2e87k/"
+ },
+ "reception": {
+  "name": "前台接待台",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/tables/console-table/a-console-table-crafted-entirely-from-dark-ra87tz/",
+  "old_url": "https://furnimesh.com/library/storage/tv-stand/a-modern-long-and-lowprofile-media-console-vm92ib/",
+  "sub": [
+   "tables",
+   "console-table"
+  ],
+  "distort": 1.388
+ },
+ "fireplace": {
+  "name": "电壁炉",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/architecture/fireplace/a-freestanding-electric-fireplace-console-featuring-a-211gcw/",
+  "old_url": "https://furnimesh.com/library/decor/rug/a-rectangular-rug-made-of-woven-fibers-4adwnz/",
+  "sub": [
+   "architecture",
+   "fireplace"
+  ],
+  "distort": 1.708
+ },
+ "projScreen": {
+  "name": "投影幕布",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/rug/a-rectangular-flatwoven-area-rug-featuring-a-0o5na9/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "speaker": {
+  "name": "落地音箱",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/rug/a-circular-rug-made-of-woven-natural-gvlckk/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "wallTV": {
+  "name": "壁挂电视（可开关）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/pillow/a-squareshaped-cushion-with-a-textured-woven-02w7ln/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "curtain": {
+  "name": "落地窗帘（可开合）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/vase/an-irregular-organicshaped-vase-crafted-from-translucent-pse42y/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "sheer": {
+  "name": "纱帘（可开合）",
+  "status": "legacy",
+  "url": "https://furnimesh.com/library/decor/vase/an-antiqued-brass-decorative-urn-featuring-a-k7u6f6/",
+  "note": "FurniMesh 无此品类，保留旧程序化模型"
+ },
+ "doormat": {
+  "name": "门口地垫",
+  "status": "fixed",
+  "new_url": "https://furnimesh.com/library/decor/rug/a-rectangular-area-rug-featuring-a-prominent-h74akj/",
+  "old_url": "https://furnimesh.com/library/decor/vase/an-ancientinspired-urnshaped-vase-crafted-from-bronze-ip0k4v/",
+  "sub": [
+   "decor",
+   "rug"
+  ],
+  "distort": 1.185
+ }
+}
