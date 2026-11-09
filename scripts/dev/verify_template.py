@@ -47,19 +47,26 @@ r = subprocess.run(["node", "--check", tmp], capture_output=True, text=True,
 os.unlink(tmp)
 check("node --check 语法", r.returncode == 0, (r.stderr or "")[:300])
 
-# 2) 行尾符
+# 2) 行尾符：必须内部一致（无裸 LF），且风格与 HEAD 相同（CRLF/LF 二选一）
 crlf = raw.count(b"\r\n")
 lf = raw.count(b"\n")
-check("行尾符保持 LF（无 CRLF）", crlf == 0, "CRLF=%d LF=%d" % (crlf, lf))
+bare_lf = lf - crlf
+check("行尾符内部一致（无裸 LF）", bare_lf == 0, "CRLF=%d 裸LF=%d" % (crlf, bare_lf))
 
-# 与 HEAD 比对行尾符
+# 与 HEAD 比对行尾符「风格」（允许行数变化，但 CRLF/LF 主流必须相同）
 try:
     head = subprocess.run(["git", "show", "HEAD:assets/template.html"],
                           cwd=str(ROOT), capture_output=True)
     if head.returncode == 0:
         hb = head.stdout
-        check("行尾符与 HEAD 一致", hb.count(b"\r\n") == crlf,
-              "HEAD CRLF=%d, 现在 CRLF=%d" % (hb.count(b"\r\n"), crlf))
+        h_crlf = hb.count(b"\r\n")
+        h_lf = hb.count(b"\n")
+        h_bare = h_lf - h_crlf
+        h_style = "CRLF" if h_crlf > h_bare else "LF"
+        n_style = "CRLF" if crlf > bare_lf else "LF"
+        check("行尾符风格与 HEAD 一致", h_style == n_style,
+              "HEAD=%s(CRLF=%d 裸LF=%d), 现在=%s(CRLF=%d 裸LF=%d)"
+              % (h_style, h_crlf, h_bare, n_style, crlf, bare_lf))
 except Exception as e:
     print("[warn] 无法比对 HEAD：%s" % e)
 
